@@ -1,11 +1,20 @@
 #import "MWLedDeviceViewController.h"
+#include "../../Libraries/OSCPack/osc/OscOutboundPacketStream.h"
+#include "../../Libraries/OSCPack/ip/IpEndpointName.h"
+#include "../../Libraries/OSCPack/ip/UdpSocket.h"
+#include <arpa/inet.h>
+using namespace osc;
+
+@interface MWLedDeviceViewController ()
+	UdpSocket* sock;
+@end
 
 @implementation MWLedDeviceViewController
 @synthesize redSlider, greenSlider, blueSlider, graySlider, modeSwitch, useAccelerometer, adSwitch;
 
 - (void) setDeviceService:(NSNetService*)service {
-	if(port!=nil) {
-		[port release];
+	if(sock!=0) {
+		delete sock;
 	}
 	
 	// Lookup the address
@@ -18,15 +27,19 @@
 		return;
 	}
 	
-	struct sockaddr* address = (struct sockaddr*)[data bytes];
-	port = [[OSCPort oscPortWithAddress:address] retain];
+	struct sockaddr_in* address = (struct sockaddr_in*)[data bytes];
+	sock = new UdpSocket();
+	sock->Connect(IpEndpointName(ntohl(address->sin_addr.s_addr), [service port]));
 	
 	[self.navigationItem setTitle:[service name]];
 }
 
 - (IBAction) reset: (id)sender {
-	if(port!=nil) {
-		[port sendTo:"reset" types:""];
+	if(sock!=NULL) {
+		char buffer[1024];
+		OutboundPacketStream ops(buffer,1023);
+		ops << osc::BeginMessage("reset") << osc::EndMessage;
+		sock->Send(ops.Data(), ops.Size());
 	}
 }
 
@@ -72,19 +85,25 @@ float clamp(float v, float lower, float upper) {
 }
 
 - (IBAction) valueChanged:(id)sender {
-	if(port!=nil) {
+	if(sock!=NULL) {
 		float d = [graySlider value];
 		int r = (int)([redSlider value]*255.0f*d);
 		int g = (int)([greenSlider value]*255.0f*d);
 		int b = (int)([blueSlider value]*255.0f*d);
 		
+		char buffer[1024];
+		OutboundPacketStream ops(buffer,1023);
+		
+		
 		switch([modeSwitch selectedSegmentIndex]) {
 			case 1:
-				[port sendTo:"set" types:"iii", r, g, b];
+				ops << osc::BeginMessage("set") << (int32)r << (int32)g << (int32)b << osc::EndMessage;
+				sock->Send(ops.Data(), ops.Size());
 				break;
 				
 			case 2:
-				[port sendTo:"fade" types:"iii", r, g, b];
+				ops << osc::BeginMessage("fade") << (int32)r << (int32)g << (int32)b << osc::EndMessage;
+				sock->Send(ops.Data(), ops.Size());
 				break;
 				
 			case 0:
@@ -109,7 +128,7 @@ float clamp(float v, float lower, float upper) {
 }
 
 - (void)dealloc {
-	[port release];
+	delete sock;
 	[redSlider release];
 	[greenSlider release];
 	[blueSlider release];

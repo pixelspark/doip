@@ -8,7 +8,6 @@
 	UISlider* graySlider;
 	UISegmentedControl* modeSwitch;
 	UISwitch* useAccelerometer;
-	OSCPort* port;
 	UISegmentedControl* adSwitch;
 }
 
