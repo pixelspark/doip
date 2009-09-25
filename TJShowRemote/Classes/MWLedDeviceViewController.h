@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "OSCPort.h"
 
 @interface MWLedDeviceViewController : UIViewController <UIAccelerometerDelegate> {
 	UISlider* redSlider;

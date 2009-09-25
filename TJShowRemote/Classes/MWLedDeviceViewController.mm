@@ -97,12 +97,12 @@ float clamp(float v, float lower, float upper) {
 		
 		switch([modeSwitch selectedSegmentIndex]) {
 			case 1:
-				ops << osc::BeginMessage("set") << (int32)r << (int32)g << (int32)b << osc::EndMessage;
+				ops << osc::BeginMessage("/tj/ep/color/set") << (int32)r << (int32)g << (int32)b << osc::EndMessage;
 				sock->Send(ops.Data(), ops.Size());
 				break;
 				
 			case 2:
-				ops << osc::BeginMessage("fade") << (int32)r << (int32)g << (int32)b << osc::EndMessage;
+				ops << osc::BeginMessage("/tj/ep/color/fade") << (int32)r << (int32)g << (int32)b << osc::EndMessage;
 				sock->Send(ops.Data(), ops.Size());
 				break;
 				
