@@ -1,10 +1,12 @@
 #include "../include/tjfabricgroup.h"
 #include "../include/tjfabricutil.h"
 #include "connections/tjoscudpconnection.h"
+#include "connections/tjdnssddiscovery.h"
 using namespace tj::shared;
 using namespace tj::fabric;
 
 ref<ConnectionDefinitionFactory> ConnectionDefinitionFactory::_instance;
+ref<DiscoveryDefinitionFactory> DiscoveryDefinitionFactory::_instance;
 
 /** ConnectionDefinition **/
 ConnectionDefinition::~ConnectionDefinition() {
@@ -42,6 +44,46 @@ void ConnectionDefinitionFactory::Save(strong<ConnectionDefinition> c, TiXmlElem
 tj::shared::strong<ConnectionDefinitionFactory> ConnectionDefinitionFactory::Instance() {
 	if(!_instance) {
 		_instance = GC::Hold(new ConnectionDefinitionFactory());
+	}
+	return _instance;
+}
+
+/** DiscoveryDefinition **/
+DiscoveryDefinition::~DiscoveryDefinition() {
+}
+
+DiscoveryDefinition::DiscoveryDefinition(const std::wstring& type): _type(type) {
+}
+
+std::wstring DiscoveryDefinition::GetType() const {
+	return _type;
+}
+
+/** DiscoveryDefinitionFactory **/
+DiscoveryDefinitionFactory::DiscoveryDefinitionFactory() {
+	RegisterPrototype(L"dnssd", GC::Hold(new SubclassedPrototype<connections::DNSSDDiscoveryDefinition, DiscoveryDefinition>(L"DNS-SD/mDNS discovery")));
+}
+
+DiscoveryDefinitionFactory::~DiscoveryDefinitionFactory() {
+}
+
+ref<DiscoveryDefinition> DiscoveryDefinitionFactory::Load(TiXmlElement* me) {
+	std::wstring type = LoadAttributeSmall<std::wstring>(me, "type", L"");
+	ref<DiscoveryDefinition> cd = CreateObjectOfType(type);
+	if(cd) {
+		cd->Load(me);
+	}
+	return cd;
+}
+
+void DiscoveryDefinitionFactory::Save(strong<DiscoveryDefinition> c, TiXmlElement* me) {
+	SaveAttributeSmall(me, "type", c->GetType());
+	c->Save(me);
+}
+
+tj::shared::strong<DiscoveryDefinitionFactory> DiscoveryDefinitionFactory::Instance() {
+	if(!_instance) {
+		_instance = GC::Hold(new DiscoveryDefinitionFactory());
 	}
 	return _instance;
 }
@@ -85,6 +127,18 @@ void Group::Save(TiXmlElement* me) {
 		++rit;
 	}
 	
+	// Save discovery definitions
+	std::deque< ref<DiscoveryDefinition> >::iterator dit = _discoveries.begin();
+	while(dit!=_discoveries.end()) {
+		ref<DiscoveryDefinition> cd = *dit;
+		if(cd) {
+			TiXmlElement connElement("discover");
+			DiscoveryDefinitionFactory::Instance()->Save(cd, &connElement);
+			me->InsertEndChild(connElement);
+		}
+		++dit;
+	}
+	
 	// Save filter patterns
 	std::deque<String>::const_iterator it = _filter.begin();
 	while(it!=_filter.end()) {
@@ -117,6 +171,20 @@ void Group::Load(TiXmlElement* me) {
 			Log::Write(L"TJFabric/Group", std::wstring(L"A connection could not be loaded (probably because the type is not supported). Type was '")+type+std::wstring(L"'."));
 		}
 		connection = connection->NextSiblingElement("connection");
+	}
+	
+	// Load discovery definitions
+	TiXmlElement* disco = me->FirstChildElement("discover");
+	while(disco!=0) {
+		ref<DiscoveryDefinition> cd = DiscoveryDefinitionFactory::Instance()->Load(disco);
+		if(cd) {
+			_discoveries.push_back(cd);
+		}
+		else {
+			std::wstring type = LoadAttributeSmall<std::wstring>(disco, "type", L"");
+			Log::Write(L"TJFabric/Group", std::wstring(L"A discovery definition could not be loaded (probably because the type is not supported). Type was '")+type+std::wstring(L"'."));
+		}
+		disco = disco->NextSiblingElement("disco");
 	}
 	
 	// Load filter definitions

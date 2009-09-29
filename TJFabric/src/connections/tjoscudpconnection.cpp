@@ -43,7 +43,7 @@ NetworkAddress::NetworkAddress(const String& s, bool passive): _family(AddressFa
 			}
 		}
 		else {
-			std::cout << gai_strerror(r) << std::endl;
+			Log::Write(L"TJNP/NetworkAddress", L"getaddrinfo() failed: " + Wcs(std::string(gai_strerror(r))));
 		}
 	}
 }
@@ -98,59 +98,59 @@ OSCOverUDPConnection::~OSCOverUDPConnection() {
 	}
 }
 
+void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short port, Direction direction) {
+	// Create outgoing socket
+	if((direction & DirectionOutbound)!=0) {
+		_toAddress = NetworkAddress(address);
+		_toPort = port;
+		int on = 1;
+		_outSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+		if(_outSocket==-1) {
+			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not create UDP socket");
+		}
+		
+		setsockopt(_outSocket,SOL_SOCKET,SO_BROADCAST,(const char*)&on, sizeof(int));
+		setsockopt(_outSocket,SOL_SOCKET,SO_REUSEADDR,(const char*)&on, sizeof(int));
+		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+Stringify(address)+L":"+Stringify(port)+L")");
+	}
+	
+	// Create server socket and thread
+	if((direction & DirectionInbound)!=0) {
+		_inSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+		
+		// Fill in the interface information
+		in6_addr any = IN6ADDR_ANY_INIT;
+		sockaddr_in6 addr;
+		addr.sin6_family = AF_INET6;
+		addr.sin6_port = htons(port);
+		addr.sin6_addr = any;
+		
+		int on = 1;
+		setsockopt(_inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
+		
+		int err = bind(_inSocket, (sockaddr*)&addr, sizeof(addr));
+		if(err==-1) {
+			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind server socket, error="+Stringify(errno));
+			return;
+		}
+		
+		// try to make us member of the multicast group
+		struct ipv6_mreq mreq;
+		inet_pton(AF_INET6, Mbs(address).c_str(), &(mreq.ipv6mr_multiaddr));
+		mreq.ipv6mr_interface = 0;
+		setsockopt(_inSocket, IPPROTO_IPV6, IPV6_JOIN_GROUP, (char*)&mreq, sizeof(mreq));
+		
+		_listenerThread = GC::Hold(new SocketListenerThread(_inSocket, this));
+		_listenerThread->Start();
+	}	
+}
+
 void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverUDPConnectionDefinition>()) {
 		ref<OSCOverUDPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
 			_def = cd;
-			
-			// Create outgoing socket
-			if((direction & DirectionOutbound)!=0) {
-				_toAddress = NetworkAddress(cd->_address);
-				int on = 1;
-				_outSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-				if(_outSocket==-1) {
-					Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not create UDP socket");
-				}
-				
-				setsockopt(_outSocket,SOL_SOCKET,SO_BROADCAST,(const char*)&on, sizeof(int));
-				setsockopt(_outSocket,SOL_SOCKET,SO_REUSEADDR,(const char*)&on, sizeof(int));
-				Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+Stringify(_def->_address)+L":"+Stringify(_def->_port)+L")");
-			}
-			
-			// Create server socket and thread
-			if((direction & DirectionInbound)!=0) {
-				_inSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-				
-				// Fill in the interface information
-				/*sockaddr_in addr;
-				addr.sin_family = AF_INET;
-				addr.sin_port = htons(cd->_port);
-				addr.sin_addr.s_addr = INADDR_ANY;*/
-				in6_addr any = IN6ADDR_ANY_INIT;
-				sockaddr_in6 addr;
-				addr.sin6_family = AF_INET6;
-				addr.sin6_port = htons(cd->_port);
-				addr.sin6_addr = any;
-							
-				int on = 1;
-				setsockopt(_inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
-				
-				int err = bind(_inSocket, (sockaddr*)&addr, sizeof(addr));
-				if(err==-1) {
-					Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind server socket, error="+Stringify(errno));
-					return;
-				}
-				
-				// try to make us member of the multicast group
-				struct ipv6_mreq mreq;
-				inet_pton(AF_INET6, Mbs(_def->_address).c_str(), &(mreq.ipv6mr_multiaddr));
-				mreq.ipv6mr_interface = 0;
-				setsockopt(_inSocket, IPPROTO_IPV6, IPV6_JOIN_GROUP, (char*)&mreq, sizeof(mreq));
-				
-				_listenerThread = GC::Hold(new SocketListenerThread(_inSocket, this));
-				_listenerThread->Start();
-			}
+			Create(cd->_address, cd->_port, direction);
 		}
 	}
 	else {
@@ -219,7 +219,7 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 	
 	sockaddr_in6 addr;
 	_toAddress.GetSocketAddress(&addr);
-	addr.sin6_port = htons(_def->_port);
+	addr.sin6_port = htons(_toPort);
 	char* buffer[2048];
 	osc::OutboundPacketStream outPacket((char*)buffer, 2047);
 	

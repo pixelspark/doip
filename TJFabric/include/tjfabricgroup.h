@@ -37,6 +37,29 @@ namespace tj {
 				static tj::shared::ref<ConnectionDefinitionFactory> _instance;
 		};
 		
+		class DiscoveryDefinition: public virtual tj::shared::Object, public tj::shared::Serializable {
+			public:
+				virtual ~DiscoveryDefinition();
+				virtual std::wstring GetType() const;
+				
+			protected:
+				DiscoveryDefinition(const std::wstring& type);
+				std::wstring _type;
+		};
+		
+		class DiscoveryDefinitionFactory: public tj::shared::PrototypeBasedFactory<DiscoveryDefinition> {
+			public:
+				virtual ~DiscoveryDefinitionFactory();
+				virtual tj::shared::ref<DiscoveryDefinition> Load(TiXmlElement* me);
+				virtual void Save(tj::shared::strong<DiscoveryDefinition> c, TiXmlElement* me);
+				
+				static tj::shared::strong<DiscoveryDefinitionFactory> Instance();
+				
+			protected:
+				DiscoveryDefinitionFactory();
+				static tj::shared::ref<DiscoveryDefinitionFactory> _instance;
+		};
+		
 		class Group: public virtual tj::shared::Object, public tj::shared::Serializable {
 			friend class ConnectedGroup;
 			
@@ -55,6 +78,7 @@ namespace tj {
 				std::wstring _id;
 				Direction _direction;
 				std::deque< tj::shared::ref<ConnectionDefinition> > _connections;
+				std::deque< tj::shared::ref<DiscoveryDefinition> > _discoveries;
 				std::deque< tj::shared::String > _filter;
 		};
 	}

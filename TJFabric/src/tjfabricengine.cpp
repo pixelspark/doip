@@ -7,6 +7,7 @@
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::np;
+using namespace tj::scout;
 
 FabricEngine::FabricEngine(): _fabric(GC::Hold(new Fabric())) {
 }
@@ -19,6 +20,7 @@ void FabricEngine::OnCreated() {
 	
 	// TODO: make port number configurable
 	_webServer = GC::Hold(new WebServer(7961));
+	_serviceRegistration = ServiceRegistrationFactory::Instance()->CreateServiceRegistration(ServiceDiscoveryDNSSD, L"_dashboard._tcp", L"Dashboard", 7961);
 }
 
 strong<Fabric> FabricEngine::GetFabric() {

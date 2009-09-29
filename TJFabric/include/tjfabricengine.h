@@ -3,6 +3,7 @@
 
 #include "../../TJShared/include/tjshared.h"
 #include "../../TJNP/include/tjwebserver.h"
+#include "../../TJScout/include/tjservice.h"
 #include "tjfabric.h"
 #include "tjfabricconnection.h"
 
@@ -31,6 +32,7 @@ namespace tj {
 				tj::shared::ref<Fabric> _fabric;
 				tj::shared::ref<Queue> _queue;
 				tj::shared::ref<tj::np::WebServer> _webServer;
+				tj::shared::ref< tj::scout::ServiceRegistration > _serviceRegistration;
 				std::map< tj::shared::ref<Group>, tj::shared::ref<ConnectedGroup> > _groups;
 		};
 	}

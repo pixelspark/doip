@@ -6,6 +6,7 @@
 #include "../../include/tjfabricgroup.h"
 #include "../../../TJNP/include/tjsocketutil.h"
 #include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"
+#include "../../../TJScout/include/tjservice.h"
 #include <arpa/inet.h>
 
 namespace tj {
@@ -53,6 +54,7 @@ namespace tj {
 					OSCOverUDPConnection();
 					virtual ~OSCOverUDPConnection();
 					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d);
+					virtual void Create(const std::wstring& address, unsigned short port, Direction d);
 					virtual void Send(tj::shared::strong< Message > msg);
 					virtual void OnReceive(tj::np::NativeSocket ns);
 					virtual void OnReceiveBundle(osc::ReceivedBundle rb);
@@ -63,8 +65,10 @@ namespace tj {
 					tj::np::NativeSocket _outSocket;
 					tj::np::NativeSocket _inSocket;
 					NetworkAddress _toAddress;
+					unsigned short _toPort;
 					tj::shared::ref< tj::np::SocketListenerThread> _listenerThread;
 					tj::shared::ref<OSCOverUDPConnectionDefinition> _def;
+					tj::shared::ref< tj::scout::ServiceRegistration > _serviceRegistration;
 			};
 		}
 	}

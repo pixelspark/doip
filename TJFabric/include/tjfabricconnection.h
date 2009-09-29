@@ -35,18 +35,48 @@ namespace tj {
 				static tj::shared::ref< ConnectionFactory > _instance;
 		};
 		
-		class ConnectedGroup: public virtual tj::shared::Object, public tj::shared::Listener<MessageNotification> {
+		struct DiscoveryNotification {
+			DiscoveryNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Connection> m, bool add);
+			
+			tj::shared::Timestamp when;
+			tj::shared::strong<Connection> connection;
+			bool added;
+		};
+		
+		class Discovery: public virtual tj::shared::Object {
+			public:
+				virtual ~Discovery();
+				virtual void Create(tj::shared::strong<DiscoveryDefinition> def) = 0;
+				
+				tj::shared::Listenable<DiscoveryNotification> EventDiscovered;
+		};
+		
+		class DiscoveryFactory: public virtual tj::shared::PrototypeBasedFactory< Discovery > {
+			public:
+				virtual ~DiscoveryFactory();
+				virtual tj::shared::ref<Discovery> CreateFromDefinition(tj::shared::strong<DiscoveryDefinition> cd);
+				static tj::shared::strong< DiscoveryFactory > Instance();
+				
+			protected:
+				DiscoveryFactory();
+				static tj::shared::ref< DiscoveryFactory > _instance;
+		};
+		
+		class ConnectedGroup: public virtual tj::shared::Object, public tj::shared::Listener<MessageNotification>, public tj::shared::Listener<DiscoveryNotification>  {
 			public:
 				ConnectedGroup(tj::shared::strong<Group> g);
 				virtual ~ConnectedGroup();
 				virtual void Connect(bool t);
 				virtual void Send(tj::shared::strong<Message> m);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const MessageNotification& data);
+				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const DiscoveryNotification& data);
 				tj::shared::Listenable<MessageNotification> EventMessageReceived;
 			
 			protected:
 				tj::shared::strong<Group> _group;
 				std::map< tj::shared::ref<ConnectionDefinition>, tj::shared::ref<Connection> > _connections;
+				std::deque< tj::shared::ref<Connection> > _discoveredConnections;
+				std::map< tj::shared::ref<DiscoveryDefinition>, tj::shared::ref<Discovery> > _discoveries;
 		};
 	}
 }
