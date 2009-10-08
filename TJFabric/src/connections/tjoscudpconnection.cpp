@@ -7,10 +7,17 @@
 #include "../../../Libraries/OSCPack/osc/OscPrintReceivedElements.h"
 
 #include <errno.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <arpa/inet.h>
+
+#ifdef TJ_OS_POSIX
+	#include <sys/types.h>
+	#include <sys/socket.h>
+	#include <netdb.h>
+	#include <arpa/inet.h>
+#endif
+
+#ifdef TJ_OS_WIN
+	#include <Winsock2.h>
+#endif
 
 using namespace tj::shared;
 using namespace tj::fabric;
@@ -43,7 +50,14 @@ NetworkAddress::NetworkAddress(const String& s, bool passive): _family(AddressFa
 			}
 		}
 		else {
-			Log::Write(L"TJNP/NetworkAddress", L"getaddrinfo() failed: " + Wcs(std::string(gai_strerror(r))));
+			#ifdef TJ_OS_POSIX
+				std::wstring error = Wcs(std::string(gai_strerror(r)));
+			#endif
+
+			#ifdef TJ_OS_WIN
+				std::wstring error = std::wstring(gai_strerror(r));
+			#endif
+			Log::Write(L"TJNP/NetworkAddress", L"getaddrinfo() failed: " + error);
 		}
 	}
 }
@@ -62,7 +76,7 @@ std::wstring NetworkAddress::ToString() const {
 	
 	char buffer[255];
 	memset(buffer, 0, sizeof(char)*255);
-	std::string friendlyAddress = inet_ntop(AF_INET6, &(_address.sin6_addr), buffer, 255);
+	std::string friendlyAddress = inet_ntop(AF_INET6, (void*)&(_address.sin6_addr), buffer, 255);
 	return Wcs(friendlyAddress);
 }
 
@@ -89,12 +103,24 @@ OSCOverUDPConnection::OSCOverUDPConnection(): _outSocket(-1), _inSocket(-1), _to
 
 OSCOverUDPConnection::~OSCOverUDPConnection() {
 	if(_outSocket!=-1) {
-		close(_outSocket);
+		#ifdef TJ_OS_POSIX
+			close(_outSocket);
+		#endif
+
+		#ifdef TJ_OS_WIN
+			closesocket(_outSocket);
+		#endif	
 	}
 	
 	if(_inSocket!=-1) {
 		_listenerThread->Stop();
-		close(_inSocket);
+		#ifdef TJ_OS_POSIX
+			close(_inSocket);
+		#endif
+
+		#ifdef TJ_OS_WIN
+			closesocket(_inSocket);
+		#endif
 	}
 }
 
@@ -252,7 +278,7 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 		};
 	}
 	outPacket << osc::EndMessage;
-	if(sendto(_outSocket, buffer, outPacket.Size(), 0, (const sockaddr*)&addr, sizeof(sockaddr_in6))==-1) {
+	if(sendto(_outSocket, (const char*)buffer, outPacket.Size(), 0, (const sockaddr*)&addr, sizeof(sockaddr_in6))==-1) {
 		Log::Write(L"TJFabric/OSCOverUDPConnection", L"sendto() failed, error="+Stringify(errno));
 	}
 	std::cout << osc::ReceivedPacket((const char*)buffer, outPacket.Size());

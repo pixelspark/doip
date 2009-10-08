@@ -1,4 +1,5 @@
 #include "tjoscutil.h"
+#include <limits>
 using namespace tj::shared;
 using namespace tj::fabric::connections;
 using namespace osc;

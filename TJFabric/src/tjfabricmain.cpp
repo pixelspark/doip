@@ -34,7 +34,14 @@ int main(int argc, char** argv) {
 		ref<Queue> q = fe->GetQueue();
 		ref<Message> msg = GC::Hold(new Message(L"init"));
 		msg->SetParameter(0,Any(12));
-		sleep(1);
+
+		#ifdef TJ_OS_POSIX
+			sleep(1);
+		#endif
+
+		#ifdef TJ_OS_WIN
+			Sleep(1000);
+		#endif
 		q->Add(msg);
 		
 		q->WaitForCompletion();

@@ -7,7 +7,14 @@
 #include "../../../TJNP/include/tjsocketutil.h"
 #include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"
 #include "../../../TJScout/include/tjservice.h"
-#include <arpa/inet.h>
+
+#ifdef TJ_OS_POSIX
+	#include <arpa/inet.h>
+#endif
+
+#ifdef TJ_OS_WIN
+	#include <Winsock2.h>
+#endif
 
 namespace tj {
 	namespace fabric {
