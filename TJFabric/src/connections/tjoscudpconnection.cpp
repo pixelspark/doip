@@ -240,12 +240,14 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 	ThreadLock lock(&_lock);
 	
 	if(_outSocket==-1) {
+		Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not send message, outgoing socket is invalid");
 		return;
 	}
 	
 	sockaddr_in6 addr;
 	_toAddress.GetSocketAddress(&addr);
 	addr.sin6_port = htons(_toPort);
+	Log::Write(L"TJFabric/OSCOverUDPConnection", L"Address is "+_toAddress.ToString());
 	char* buffer[2048];
 	osc::OutboundPacketStream outPacket((char*)buffer, 2047);
 	

@@ -4,6 +4,7 @@
 #include "../include/tjfabricgroup.h"
 #include "../include/tjfabricconnection.h"
 #include "../include/tjfabricmessage.h"
+#include "../include/tjfabricserver.h"
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::np;
@@ -20,6 +21,7 @@ void FabricEngine::OnCreated() {
 	
 	// TODO: make port number configurable
 	_webServer = GC::Hold(new WebServer(7961));
+	_webServer->AddResolver(L"/ep/definition", ref<FileRequestResolver>(GC::Hold(new FabricDefinitionResolver(_fabric))));
 	_serviceRegistration = ServiceRegistrationFactory::Instance()->CreateServiceRegistration(ServiceDiscoveryDNSSD, L"_dashboard._tcp", L"Dashboard", 7961);
 }
 
