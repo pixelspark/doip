@@ -1,4 +1,6 @@
 #include "../include/tjfabricserver.h" 
+#include "../include/tjfabricmessage.h"
+#include "../include/tjfabricqueue.h"
 using namespace tj::shared;
 using namespace tj::np;
 using namespace tj::fabric;
@@ -25,8 +27,8 @@ FileRequestResolver::Resolution FabricDefinitionResolver::Resolve(ref<FileReques
 	TiXmlDocument doc;
 	TiXmlDeclaration decl("1.0", "", "no");
 	doc.InsertEndChild(decl);
-	TiXmlElement dashboardElement("device");
-	_fabric->Save(&dashboardElement);
+	TiXmlElement dashboardElement("endpoint");
+	_fabric->SaveEndpointDefinition(&dashboardElement);
 	doc.InsertEndChild(dashboardElement);
 	
 	std::ostringstream xos;
@@ -39,4 +41,22 @@ FileRequestResolver::Resolution FabricDefinitionResolver::Resolve(ref<FileReques
 	*data = nd;
 	
 	return FileRequestResolver::ResolutionData;
+}
+
+FabricMessageResolver::FabricMessageResolver(ref<FabricEngine> model, const std::wstring& prefix): _fabric(model), _prefix(prefix) {
+}
+
+FabricMessageResolver::~FabricMessageResolver() {
+}
+
+FileRequestResolver::Resolution FabricMessageResolver::Resolve(ref<FileRequest> frq, std::wstring& file, std::wstring& error, char** data, unsigned int& dataLength) {
+	if(!_fabric) {
+		error = L"No fabric engine in FabricMessageResolver!";
+		return FileRequestResolver::ResolutionNone;
+	}
+
+	std::wstring path = frq->GetPath();
+	strong<Message> msg = GC::Hold(new Message(path.substr(_prefix.length())));
+	_fabric->GetQueue()->Add(msg);
+	return FileRequestResolver::ResolutionEmpty;
 }

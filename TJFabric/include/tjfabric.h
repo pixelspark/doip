@@ -17,6 +17,7 @@ namespace tj {
 				virtual ~Fabric();
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
+				virtual void SaveEndpointDefinition(TiXmlElement* me);
 				virtual void Clone();
 				virtual void Clear();
 				virtual tj::shared::String GetTitle() const;

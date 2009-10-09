@@ -153,6 +153,7 @@ void QueueThread::Run() {
 	Log::Write(L"TJFabric/QueueThread", L"Queue processing thread started");
 	while(_running) {
 		_signal.Wait();
+		_signal.Reset();
 		if(!_running) {
 			Log::Write(L"TJFabric/QueueThread", L"Thread was stopped");
 			return;

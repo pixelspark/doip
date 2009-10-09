@@ -53,10 +53,34 @@ void Fabric::Load(TiXmlElement* me) {
 	}
 }
 
+void Fabric::SaveEndpointDefinition(TiXmlElement* me) {
+	ThreadLock lock(&_lock);
+	SaveAttributeSmall(me, "id", _id);
+	SaveAttributeSmall(me, "version", _version);
+	SaveAttributeSmall(me, "class", std::wstring(L"dynamic"));
+	SaveAttributeSmall(me, "friendly-name", _title);
+
+	if(_rules.size()>0) {
+		TiXmlElement rules("methods");
+		std::deque< ref<Rule> >::iterator it = _rules.begin();
+		while(it!=_rules.end()) {
+			ref<Rule> rule = *it;
+			if(rule && rule->IsEnabled() && rule->IsPublic()) {
+				TiXmlElement ruleElement("method");
+				rule->SaveEndpointMethodDefinition(&ruleElement);
+				rules.InsertEndChild(ruleElement);
+			}
+			++it;
+		}
+		me->InsertEndChild(rules);
+	}
+}
+
 void Fabric::Save(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	++_version;
-	
+	SaveAttributeSmall(me, "id", _id);
+
 	TiXmlElement infoElement("info");
 	SaveAttribute(&infoElement, "author", _author);
 	SaveAttribute(&infoElement, "title", _title);

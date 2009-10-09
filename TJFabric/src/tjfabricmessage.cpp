@@ -29,7 +29,8 @@ Any Message::GetParameter(unsigned int i) const {
 	if(it!=_parameters.end()) {
 		return it->second;
 	}
-	Throw(L"Invalid parameter index", ExceptionTypeError);
+
+	Throw(L"Invalid parameter index: ", ExceptionTypeError);
 }
 
 tj::shared::String Message::ToString() const {

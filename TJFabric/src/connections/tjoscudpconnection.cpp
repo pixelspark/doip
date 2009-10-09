@@ -77,7 +77,7 @@ std::wstring NetworkAddress::ToString() const {
 	char buffer[255];
 	memset(buffer, 0, sizeof(char)*255);
 	std::string friendlyAddress = inet_ntop(AF_INET6, (void*)&(_address.sin6_addr), buffer, 255);
-	return Wcs(friendlyAddress);
+	return Wcs(friendlyAddress)+L" scope="+StringifyHex(_address.sin6_scope_id);
 }
 
 /** OSCOverUDPConnectionDefinition **/

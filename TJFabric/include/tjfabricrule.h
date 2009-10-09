@@ -11,11 +11,13 @@ namespace tj {
 				virtual ~Rule();
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
+				virtual void SaveEndpointMethodDefinition(TiXmlElement* me);
 				virtual void Clone();
 				virtual bool Matches(const std::wstring& msg) const;
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetScriptSource() const;
 				virtual bool IsEnabled() const;
+				virtual bool IsPublic() const;
 				virtual tj::shared::String ToString() const;
 			
 			protected:
@@ -23,6 +25,8 @@ namespace tj {
 				std::set<tj::shared::String> _patterns;
 				std::wstring _script;
 				bool _isEnabled;
+				bool _isPublic;
+				std::wstring _name;
 		};
 	}
 }

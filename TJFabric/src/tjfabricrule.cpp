@@ -3,17 +3,32 @@
 using namespace tj::shared;
 using namespace tj::fabric;
 
-Rule::Rule(): _isEnabled(true) {
+Rule::Rule(): _isEnabled(true), _isPublic(true) {
 	Clone();
 }
 
 Rule::~Rule() {
 }
 
+void Rule::SaveEndpointMethodDefinition(TiXmlElement* me) {
+	SaveAttributeSmall(me, "id", _id);
+	SaveAttributeSmall(me, "friendly-name", _name);
+
+	std::set<String>::const_iterator it = _patterns.begin();
+	while(it!=_patterns.end()) {
+		TiXmlElement pattern("pattern");
+		pattern.InsertEndChild(TiXmlText(Mbs(*it).c_str()));
+		me->InsertEndChild(pattern);
+		++it;
+	}
+}
+
 void Rule::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall<std::wstring>(me, "id", L"");
 	_script = LoadAttribute<std::wstring>(me, "script", L"");
-	_isEnabled = LoadAttributeSmall<std::wstring>(me, "enabled", Bool::KTrue)==Bool::KTrue;
+	_name = LoadAttributeSmall<std::wstring>(me, "name", L"");
+	_isEnabled = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "enabled", Bool::ToString(true)).c_str());
+	_isPublic = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "public", Bool::ToString(true)).c_str());
 	
 	TiXmlElement* pattern = me->FirstChildElement("pattern");
 	while(pattern!=0) {
@@ -28,7 +43,9 @@ void Rule::Load(TiXmlElement* me) {
 void Rule::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "id", _id);
 	SaveAttribute(me, "script", _script);
-	SaveAttributeSmall<std::wstring>(me, "enabled", _isEnabled ? Bool::KTrue : Bool::KFalse);
+	SaveAttributeSmall<std::wstring>(me, "name", _name);
+	SaveAttributeSmall<std::wstring>(me, "public", Bool::ToString(_isPublic));
+	SaveAttributeSmall<std::wstring>(me, "enabled", Bool::ToString(_isEnabled));
 	
 	std::set<String>::const_iterator it = _patterns.begin();
 	while(it!=_patterns.end()) {
@@ -49,6 +66,10 @@ void Rule::Clone() {
 
 bool Rule::IsEnabled() const {
 	return _isEnabled;
+}
+
+bool Rule::IsPublic() const {
+	return _isPublic;
 }
 
 String Rule::GetScriptSource() const {

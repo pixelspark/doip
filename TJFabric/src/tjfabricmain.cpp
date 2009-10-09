@@ -12,6 +12,7 @@ using namespace tj::script;
 
 int main(int argc, char** argv) {
 	try {
+		Log::SetLogToConsole(true);
 		Log::Write(L"TJFabric/Main", std::wstring(L"Starting up at ")+Timestamp(true).ToString());
 		
 		std::string fabricFile;
@@ -40,7 +41,7 @@ int main(int argc, char** argv) {
 		#endif
 
 		#ifdef TJ_OS_WIN
-			Sleep(1000);
+			Sleep(10000);
 		#endif
 		q->Add(msg);
 		

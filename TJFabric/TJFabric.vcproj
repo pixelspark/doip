@@ -132,6 +132,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="$(SolutionDir)\Release\tjshared.lib $(SolutionDir)\Release\tjscript.lib $(SolutionDir)\Release\tjscout.lib $(SolutionDir)\Release\tjnp.lib $(SolutionDir)\Libraries\TinyXML\build\Release\tinyxml.lib $(SolutionDir)\Libraries\OSCPack\build\Release\oscpack.lib ws2_32.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -207,12 +208,24 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\tjfabricserver.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\tjfabricutil.cpp"
 				>
 			</File>
 			<Filter
 				Name="connections"
 				>
+				<File
+					RelativePath=".\src\connections\tjdnssddiscovery.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\connections\tjdnssddiscovery.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\connections\tjoscudpconnection.cpp"
 					>
@@ -269,6 +282,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\tjfabricserver.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\tjfabricutil.h"
 				>
 			</File>
@@ -279,6 +296,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<File
+			RelativePath="..\Release\default.fabric"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
