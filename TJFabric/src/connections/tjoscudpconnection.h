@@ -71,6 +71,7 @@ namespace tj {
 					tj::shared::CriticalSection _lock;
 					tj::np::NativeSocket _outSocket;
 					tj::np::NativeSocket _inSocket;
+					tj::np::NativeSocket _in4Socket;
 					NetworkAddress _toAddress;
 					unsigned short _toPort;
 					tj::shared::ref< tj::np::SocketListenerThread> _listenerThread;

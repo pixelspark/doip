@@ -98,7 +98,7 @@ void OSCOverUDPConnectionDefinition::Load(TiXmlElement* me) {
 }
 
 /** OSCOverUDPConnection **/
-OSCOverUDPConnection::OSCOverUDPConnection(): _outSocket(-1), _inSocket(-1), _toAddress(L"") {
+OSCOverUDPConnection::OSCOverUDPConnection(): _outSocket(-1), _inSocket(-1), _in4Socket(-1), _toAddress(L"") {
 }
 
 OSCOverUDPConnection::~OSCOverUDPConnection() {
@@ -116,10 +116,12 @@ OSCOverUDPConnection::~OSCOverUDPConnection() {
 		_listenerThread->Stop();
 		#ifdef TJ_OS_POSIX
 			close(_inSocket);
+			close(_in4Socket);
 		#endif
 
 		#ifdef TJ_OS_WIN
 			closesocket(_inSocket);
+			closesocket(_in4Socket);
 		#endif
 	}
 }
@@ -143,30 +145,56 @@ void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short po
 	// Create server socket and thread
 	if((direction & DirectionInbound)!=0) {
 		_inSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+		_in4Socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 		
-		// Fill in the interface information
+		// Fill in the interface information for the IPv6 listener socket
 		in6_addr any = IN6ADDR_ANY_INIT;
 		sockaddr_in6 addr;
 		addr.sin6_family = AF_INET6;
 		addr.sin6_port = htons(port);
 		addr.sin6_addr = any;
 		
+		// Addresses for the IPv4 listener socket
+		sockaddr_in addr4;
+		memset(&addr4, 0, sizeof(addr4));
+		addr4.sin_family = AF_INET;
+		addr4.sin_port = htons(port);
+		addr4.sin_addr.s_addr = INADDR_ANY;
+		addr4.sin_len = sizeof(sockaddr_in);
+		
 		int on = 1;
 		setsockopt(_inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
+		setsockopt(_in4Socket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
 		
+		// Bind IPv6 socket
 		int err = bind(_inSocket, (sockaddr*)&addr, sizeof(addr));
 		if(err==-1) {
-			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind server socket, error="+Stringify(errno));
+			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
 			return;
 		}
 		
-		// try to make us member of the multicast group
+		// Bind IPv4 socket
+		err = bind(_in4Socket, (sockaddr*)&addr4, sizeof(addr4));
+		if(err==-1) {
+			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
+			return;
+		}
+		
+		// try to make us member of the multicast group (IPv6)
 		struct ipv6_mreq mreq;
 		inet_pton(AF_INET6, Mbs(address).c_str(), &(mreq.ipv6mr_multiaddr));
 		mreq.ipv6mr_interface = 0;
 		setsockopt(_inSocket, IPPROTO_IPV6, IPV6_JOIN_GROUP, (char*)&mreq, sizeof(mreq));
 		
-		_listenerThread = GC::Hold(new SocketListenerThread(_inSocket, this));
+		// try to make us member of the multicast group (IPv4)
+		struct ip_mreq mreq4;
+		mreq4.imr_interface.s_addr = INADDR_ANY;
+		mreq4.imr_multiaddr.s_addr = addr4.sin_addr.s_addr;
+		setsockopt(_in4Socket, IPPROTO_IPV4, IP_ADD_MEMBERSHIP, (char*)&mreq4, sizeof(mreq4));
+		
+		_listenerThread = GC::Hold(new SocketListenerThread());
+		_listenerThread->AddListener(_inSocket, this);
+		_listenerThread->AddListener(_in4Socket, this);
 		_listenerThread->Start();
 	}	
 }
@@ -187,10 +215,8 @@ void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction di
 void OSCOverUDPConnection::OnReceive(NativeSocket ns) {
 	ThreadLock lock(&_lock);
 	
-	sockaddr_in from;
-	socklen_t size = (int)sizeof(from);
-	char receiveBuffer[2048];
-	int ret = recvfrom(_inSocket, receiveBuffer, 2048-1, 0, (sockaddr*)&from, &size);
+	char receiveBuffer[4096];
+	int ret = recvfrom(ns, receiveBuffer, 4096-1, 0, NULL, 0);
 	if(ret==-1) {
 		// Something was wrong
 		return;
@@ -247,28 +273,34 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 	sockaddr_in6 addr;
 	_toAddress.GetSocketAddress(&addr);
 	addr.sin6_port = htons(_toPort);
-	Log::Write(L"TJFabric/OSCOverUDPConnection", L"Address is "+_toAddress.ToString());
 	char* buffer[2048];
 	osc::OutboundPacketStream outPacket((char*)buffer, 2047);
-	
 	outPacket << osc::BeginMessage(Mbs(msg->GetPath()).c_str());
+	
+	std::wostringstream wos;
+	wos << msg->GetPath() << L",";
+	
 	for(unsigned int a=0;a<msg->GetParameterCount();a++) {
 		Any value = msg->GetParameter(a);
 		switch(value.GetType()) {
 			case Any::TypeBool:
 				outPacket << (bool)value;
+				wos << L'b';
 				break;
 				
 			case Any::TypeDouble:
 				outPacket << (double)value;
+				wos << L'd';
 				break;
 				
 			case Any::TypeInteger:
 				outPacket << (osc::int32)(int)value;
+				wos << L'i';
 				break;
 				
 			case Any::TypeString:
 				outPacket << Mbs(value.ToString()).c_str();
+				wos << L's';
 				break;
 				
 			default:
@@ -276,6 +308,7 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 			case Any::TypeTuple:
 			case Any::TypeNull:
 				outPacket << osc::Nil;
+				wos << L'0';
 				break;
 		};
 	}
@@ -283,5 +316,7 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 	if(sendto(_outSocket, (const char*)buffer, outPacket.Size(), 0, (const sockaddr*)&addr, sizeof(sockaddr_in6))==-1) {
 		Log::Write(L"TJFabric/OSCOverUDPConnection", L"sendto() failed, error="+Stringify(errno));
 	}
-	std::cout << osc::ReceivedPacket((const char*)buffer, outPacket.Size());
+	
+	wos << L" => " << _toAddress.ToString();
+	Log::Write(L"TJFabric/OSCOverUDPConnection", wos.str());
 }
