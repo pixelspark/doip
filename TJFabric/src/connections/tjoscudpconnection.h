@@ -46,7 +46,9 @@ namespace tj {
 					NetworkAddress(const tj::shared::String& spec, bool passive = false);
 					~NetworkAddress();
 					std::wstring ToString() const;
-					void GetSocketAddress(sockaddr_in6* addr) const;
+					AddressFamily GetAddressFamily() const;
+					bool GetIPv6SocketAddress(sockaddr_in6* addr) const;
+					bool GetIPv4SocketAddress(sockaddr_in* addr) const;
 					
 				
 				protected:

@@ -31,8 +31,8 @@ NetworkAddress::NetworkAddress(const String& s, bool passive): _family(AddressFa
 		addrinfo* firstResult;
 		addrinfo hints;
 		memset(&hints, 0, sizeof(addrinfo));
-		hints.ai_family = AF_INET6;
-		hints.ai_flags = AI_V4MAPPED|(passive ? AI_PASSIVE : 0);
+		hints.ai_family = PF_UNSPEC;
+		hints.ai_flags = AI_V4MAPPED|(passive ? AI_PASSIVE : 0)|AI_ADDRCONFIG;
 		hints.ai_socktype = 0;
 		hints.ai_protocol = 0;
 		
@@ -46,6 +46,11 @@ NetworkAddress::NetworkAddress(const String& s, bool passive): _family(AddressFa
 					memcpy(&_address, firstResult->ai_addr, sizeof(sockaddr_in6));
 					success = true;
 				}
+				else if(firstResult->ai_family==AF_INET) {
+					_family = AddressFamilyIPv4;
+					memcpy(&_v4address, firstResult->ai_addr, sizeof(sockaddr_in));
+					success = true;
+				}
 				freeaddrinfo(firstResult);
 			}
 		}
@@ -57,6 +62,7 @@ NetworkAddress::NetworkAddress(const String& s, bool passive): _family(AddressFa
 			#ifdef TJ_OS_WIN
 				std::wstring error = std::wstring(gai_strerror(r));
 			#endif
+			
 			Log::Write(L"TJNP/NetworkAddress", L"getaddrinfo() failed: " + error);
 		}
 	}
@@ -65,19 +71,43 @@ NetworkAddress::NetworkAddress(const String& s, bool passive): _family(AddressFa
 NetworkAddress::~NetworkAddress() {
 }
 
-void NetworkAddress::GetSocketAddress(sockaddr_in6* addr) const {
-	memcpy(addr, &_address, sizeof(_address));
+AddressFamily NetworkAddress::GetAddressFamily() const {
+	return _family;
+}
+
+bool NetworkAddress::GetIPv6SocketAddress(sockaddr_in6* addr) const {
+	if(_family==AddressFamilyIPv6) {
+		memcpy(addr, &_address, sizeof(_address));
+		return true;
+	}
+	return false;
+}
+
+bool NetworkAddress::GetIPv4SocketAddress(sockaddr_in* addr) const {
+	if(_family==AddressFamilyIPv4) {
+		memcpy(addr, &_v4address, sizeof(_v4address));
+		return true;
+	}
+	return false;
 }
 
 std::wstring NetworkAddress::ToString() const {
 	if(_family==AddressFamilyNone) {
 		return L"";
 	}
-	
-	char buffer[255];
-	memset(buffer, 0, sizeof(char)*255);
-	std::string friendlyAddress = inet_ntop(AF_INET6, (void*)&(_address.sin6_addr), buffer, 255);
-	return Wcs(friendlyAddress)+L" scope="+StringifyHex(_address.sin6_scope_id);
+	else if(_family==AddressFamilyIPv6) {
+		char buffer[255];
+		memset(buffer, 0, sizeof(char)*255);
+		std::string friendlyAddress = inet_ntop(AF_INET6, (void*)&(_address.sin6_addr), buffer, 255);
+		return Wcs(friendlyAddress)+L'%'+StringifyHex(_address.sin6_scope_id);
+	}
+	else if(_family==AddressFamilyIPv4) {
+		char buffer[255];
+		memset(buffer, 0, sizeof(char)*255);
+		std::string friendlyAddress = inet_ntop(AF_INET, (void*)&(_v4address.sin_addr), buffer, 255);
+		return Wcs(friendlyAddress);
+	}
+	return L"[???]";
 }
 
 /** OSCOverUDPConnectionDefinition **/
@@ -132,7 +162,7 @@ void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short po
 		_toAddress = NetworkAddress(address);
 		_toPort = port;
 		int on = 1;
-		_outSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+		_outSocket = socket((_toAddress.GetAddressFamily()==AddressFamilyIPv6) ? AF_INET6 : AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 		if(_outSocket==-1) {
 			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not create UDP socket");
 		}
@@ -196,6 +226,8 @@ void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short po
 		_listenerThread->AddListener(_inSocket, this);
 		_listenerThread->AddListener(_in4Socket, this);
 		_listenerThread->Start();
+		
+		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected inbound OSC-over-UDP (")+Stringify(address)+L":"+Stringify(port)+L")");
 	}	
 }
 
@@ -270,9 +302,6 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 		return;
 	}
 	
-	sockaddr_in6 addr;
-	_toAddress.GetSocketAddress(&addr);
-	addr.sin6_port = htons(_toPort);
 	char* buffer[2048];
 	osc::OutboundPacketStream outPacket((char*)buffer, 2047);
 	outPacket << osc::BeginMessage(Mbs(msg->GetPath()).c_str());
@@ -313,7 +342,26 @@ void OSCOverUDPConnection::Send(strong<Message> msg) {
 		};
 	}
 	outPacket << osc::EndMessage;
-	if(sendto(_outSocket, (const char*)buffer, outPacket.Size(), 0, (const sockaddr*)&addr, sizeof(sockaddr_in6))==-1) {
+	
+	void* toAddress = 0;
+	unsigned int toAddressSize = 0;
+	sockaddr_in6 addr6;
+	sockaddr_in addr4;
+	
+	if(_toAddress.GetAddressFamily()==AddressFamilyIPv6) {
+		_toAddress.GetIPv6SocketAddress(&addr6);
+		addr6.sin6_port = htons(_toPort);
+		toAddress = reinterpret_cast<void*>(&addr6);
+		toAddressSize = sizeof(sockaddr_in6);
+	}
+	else if(_toAddress.GetAddressFamily()==AddressFamilyIPv4) {
+		_toAddress.GetIPv4SocketAddress(&addr4);
+		addr4.sin_port = htons(_toPort);
+		toAddress = reinterpret_cast<void*>(&addr4);
+		toAddressSize = sizeof(sockaddr_in);
+	}
+		
+	if(sendto(_outSocket, (const char*)buffer, outPacket.Size(), 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
 		Log::Write(L"TJFabric/OSCOverUDPConnection", L"sendto() failed, error="+Stringify(errno));
 	}
 	
