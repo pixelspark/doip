@@ -5,6 +5,7 @@
 #include "../../include/tjfabricconnection.h"
 #include "../../include/tjfabricgroup.h"
 #include "../../../TJNP/include/tjsocketutil.h"
+#include "../../../TJNP/include/tjnetworkaddress.h"
 #include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"
 #include "../../../TJScout/include/tjservice.h"
 
@@ -35,29 +36,6 @@ namespace tj {
 					unsigned short _port;
 			};
 			
-			enum AddressFamily {
-				AddressFamilyNone = 0,
-				AddressFamilyIPv4,
-				AddressFamilyIPv6,
-			};
-			
-			class NetworkAddress {
-				public:
-					NetworkAddress(const tj::shared::String& spec, bool passive = false);
-					~NetworkAddress();
-					std::wstring ToString() const;
-					AddressFamily GetAddressFamily() const;
-					bool GetIPv6SocketAddress(sockaddr_in6* addr) const;
-					bool GetIPv4SocketAddress(sockaddr_in* addr) const;
-					
-				
-				protected:
-					AddressFamily _family;
-					sockaddr_in6 _address;
-					sockaddr_in _v4address;
-					
-			};
-			
 			class OSCOverUDPConnection: public Connection, public tj::np::SocketListener {
 				public:
 					OSCOverUDPConnection();
@@ -74,7 +52,7 @@ namespace tj {
 					tj::np::NativeSocket _outSocket;
 					tj::np::NativeSocket _inSocket;
 					tj::np::NativeSocket _in4Socket;
-					NetworkAddress _toAddress;
+					tj::np::NetworkAddress _toAddress;
 					unsigned short _toPort;
 					tj::shared::ref< tj::np::SocketListenerThread> _listenerThread;
 					tj::shared::ref<OSCOverUDPConnectionDefinition> _def;

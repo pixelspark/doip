@@ -20,8 +20,8 @@
 			B4D0F34A106D0C4E0053A1BA /* tjfabricengine.cpp:55 */,
 			B4D0F34F106D0C8D0053A1BA /* tjfabricengine.cpp:50 */,
 			B4D0F3CB106D11400053A1BA /* objc_exception_throw */,
-			B423B9DA106E872E00147974 /* tjoscudpconnection.cpp:65 */,
-			B423B9E6106E879F00147974 /* tjoscudpconnection.cpp:39 */,
+			B423B9DA106E872E00147974 /* tjoscudpconnection.cpp:25 */,
+			B423B9E6106E879F00147974 /* tjoscudpconnection.cpp:25 */,
 			B4C595B61072B513000A3E6E /* tjdnssddiscovery.cpp:38 */,
 			B4C595B81072B517000A3E6E /* tjdnssddiscovery.cpp:30 */,
 			B4C595BA1072B518000A3E6E /* tjdnssddiscovery.cpp:32 */,
@@ -842,7 +842,7 @@
 		path = /Developer/SDKs/MacOSX10.6.sdk/usr/include/netinet/in.h;
 		sourceTree = "<absolute>";
 	};
-	B423B9DA106E872E00147974 /* tjoscudpconnection.cpp:65 */ = {
+	B423B9DA106E872E00147974 /* tjoscudpconnection.cpp:25 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -854,13 +854,13 @@
 		functionName = "NetworkAddress::ToString()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 65;
+		lineNumber = 25;
 		location = TJFabric;
 		modificationTime = 276681448.7791761;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
-	B423B9E6106E879F00147974 /* tjoscudpconnection.cpp:39 */ = {
+	B423B9E6106E879F00147974 /* tjoscudpconnection.cpp:25 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -872,7 +872,7 @@
 		functionName = "NetworkAddress::NetworkAddress(const String& s)";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 39;
+		lineNumber = 25;
 		location = TJFabric;
 		modificationTime = 276681448.7904;
 		originalNumberOfMultipleMatches = 1;
@@ -954,7 +954,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 226";
 		rLen = 61;
-		rLoc = 8459;
+		rLoc = 6115;
 		rType = 0;
 		vrLen = 1061;
 		vrLoc = 5853;
@@ -964,7 +964,7 @@
 		fRef = B4D0F268106CD55A0053A1BA /* tjoscudpconnection.h */;
 		name = "tjoscudpconnection.h: 74";
 		rLen = 0;
-		rLoc = 1067;
+		rLoc = 998;
 		rType = 0;
 		vrLen = 1339;
 		vrLoc = 1096;
@@ -975,7 +975,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 367;
+		rLoc = 281;
 		rType = 1;
 	};
 	B4260E0D1080D126009F328C /* PBXTextBookmark */ = {
@@ -983,7 +983,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 314";
 		rLen = 0;
-		rLoc = 10739;
+		rLoc = 8395;
 		rType = 0;
 		vrLen = 1126;
 		vrLoc = 8056;
@@ -993,7 +993,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 314";
 		rLen = 0;
-		rLoc = 9823;
+		rLoc = 7479;
 		rType = 0;
 		vrLen = 941;
 		vrLoc = 8295;
@@ -1003,7 +1003,7 @@
 		fRef = B4D0F268106CD55A0053A1BA /* tjoscudpconnection.h */;
 		name = "tjoscudpconnection.h: 49";
 		rLen = 0;
-		rLoc = 1275;
+		rLoc = 998;
 		rType = 0;
 		vrLen = 997;
 		vrLoc = 521;
@@ -1014,7 +1014,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 110;
+		rLoc = 24;
 		rType = 1;
 	};
 	B4260E231080D5A6009F328C /* PBXTextBookmark */ = {
@@ -1022,7 +1022,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 106";
 		rLen = 0;
-		rLoc = 2864;
+		rLoc = 670;
 		rType = 0;
 		vrLen = 1295;
 		vrLoc = 2313;
@@ -1032,7 +1032,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 168";
 		rLen = 0;
-		rLoc = 4626;
+		rLoc = 2282;
 		rType = 0;
 		vrLen = 1278;
 		vrLoc = 3924;
@@ -1042,7 +1042,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 228";
 		rLen = 0;
-		rLoc = 6953;
+		rLoc = 4609;
 		rType = 0;
 		vrLen = 1454;
 		vrLoc = 5984;
@@ -1309,7 +1309,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 251";
 		rLen = 0;
-		rLoc = 8970;
+		rLoc = 6626;
 		rType = 0;
 		vrLen = 1365;
 		vrLoc = 3204;
@@ -1319,7 +1319,7 @@
 		fRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */;
 		name = "tjoscudpconnection.cpp: 227";
 		rLen = 61;
-		rLoc = 8459;
+		rLoc = 6115;
 		rType = 0;
 		vrLen = 1024;
 		vrLoc = 5855;
@@ -1378,7 +1378,7 @@
 		fRef = B4D0F268106CD55A0053A1BA /* tjoscudpconnection.h */;
 		name = "tjoscudpconnection.h: 68";
 		rLen = 0;
-		rLoc = 1067;
+		rLoc = 998;
 		rType = 0;
 		vrLen = 1366;
 		vrLoc = 949;
@@ -1635,16 +1635,16 @@
 	};
 	B4D0F268106CD55A0053A1BA /* tjoscudpconnection.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 1170}}";
-			sepNavSelRange = "{1275, 0}";
-			sepNavVisRange = "{521, 997}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 832}}";
+			sepNavSelRange = "{1692, 0}";
+			sepNavVisRange = "{678, 1310}";
 		};
 	};
 	B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1062, 4498}}";
-			sepNavSelRange = "{6953, 0}";
-			sepNavVisRange = "{5984, 1454}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 3978}}";
+			sepNavSelRange = "{7611, 56}";
+			sepNavVisRange = "{7062, 913}";
 		};
 	};
 	B4D0F2A0106D050F0053A1BA /* tjfabricconnection.cpp:4 */ = {
