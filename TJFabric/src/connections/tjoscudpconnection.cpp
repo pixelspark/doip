@@ -104,7 +104,10 @@ void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short po
 		addr4.sin_family = AF_INET;
 		addr4.sin_port = htons(port);
 		addr4.sin_addr.s_addr = INADDR_ANY;
-		addr4.sin_len = sizeof(sockaddr_in);
+
+		#ifdef TJ_OS_POSIX
+			addr4.sin_len = sizeof(sockaddr_in);
+		#endif
 		
 		int on = 1;
 		setsockopt(_inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
