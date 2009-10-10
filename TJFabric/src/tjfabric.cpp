@@ -134,13 +134,13 @@ unsigned int Fabric::GetVersion() const {
 	return _version;
 }
 
-void Fabric::GetAllMatchingRules(const tj::shared::String& msg, std::deque< ref<Rule> >& results) {
+void Fabric::GetAllMatchingRules(const String& msg, const String& tags, std::deque< ref<Rule> >& results) {
 	ThreadLock lock(&_lock);
 	std::deque< ref<Rule> >::iterator it = _rules.begin();
 	while(it!=_rules.end()) {
 		ref<Rule> rule = *it;
 		if(rule) {
-			if(rule->IsEnabled() && rule->Matches(msg)) {
+			if(rule->IsEnabled() && rule->Matches(msg, tags)) {
 				results.push_back(rule);
 			}
 		}

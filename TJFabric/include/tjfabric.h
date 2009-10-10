@@ -25,7 +25,7 @@ namespace tj {
 				virtual tj::shared::String GetID() const;
 				virtual unsigned int GetVersion() const;
 				virtual tj::shared::ref<Rule> GetFirstMatchingRule(const tj::shared::String& msg);
-				virtual void GetAllMatchingRules(const tj::shared::String& path, std::deque< tj::shared::ref<Rule> >& results);
+				virtual void GetAllMatchingRules(const tj::shared::String& path, const tj::shared::String& tags, std::deque< tj::shared::ref<Rule> >& results);
 			
 				static void LoadRecursive(const std::string& path, tj::shared::strong<Fabric> f);
 			

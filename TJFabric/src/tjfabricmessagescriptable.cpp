@@ -14,12 +14,23 @@ void MessageScriptable::Initialize() {
 	Bind(L"setParameter", &MessageScriptable::SSetParameter);
 	Bind(L"path", &MessageScriptable::SPath);
 	Bind(L"get", &MessageScriptable::SGet);
+	Bind(L"parameterTypes", &MessageScriptable::SParameterTypes);
+	Bind(L"parameterCount", &MessageScriptable::SParameterCount);
 	Bind(L"toString", &MessageScriptable::SToString);
 }
 
 ref<Scriptable> MessageScriptable::SToString(ref<ParameterList> p) {
 	return GC::Hold(new ScriptString(_message->ToString()));
 }
+
+ref<Scriptable> MessageScriptable::SParameterTypes(ref<ParameterList> p) {
+	return GC::Hold(new ScriptString(_message->GetParameterTags()));
+}
+
+ref<Scriptable> MessageScriptable::SParameterCount(ref<ParameterList> p) {
+	return GC::Hold(new ScriptInt(_message->GetParameterCount()));
+}
+
 
 ref<Scriptable> MessageScriptable::SSetPath(ref<ParameterList> p) {
 	static Parameter<std::wstring> PPath(L"path", 0);

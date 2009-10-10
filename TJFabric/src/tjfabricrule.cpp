@@ -21,6 +21,14 @@ void Rule::SaveEndpointMethodDefinition(TiXmlElement* me) {
 		me->InsertEndChild(pattern);
 		++it;
 	}
+	
+	std::set<String>::const_iterator pit = _parameterTags.begin();
+	while(pit!=_parameterTags.end()) {
+		TiXmlElement tag("tag");
+		tag.InsertEndChild(TiXmlText(Mbs(*pit).c_str()));
+		me->InsertEndChild(tag);
+		++pit;
+	}
 }
 
 void Rule::Load(TiXmlElement* me) {
@@ -38,6 +46,18 @@ void Rule::Load(TiXmlElement* me) {
 		}
 		pattern = pattern->NextSiblingElement("pattern");
 	}
+	
+	TiXmlElement* tag = me->FirstChildElement("tag");
+	while(tag!=0) {
+		TiXmlNode* nd = tag->FirstChild();
+		if(nd!=0) {
+			_parameterTags.insert(Wcs(nd->Value()));
+		}
+		else {
+			_parameterTags.insert(L"");
+		}
+		tag = tag->NextSiblingElement("tag");
+	}
 }
 
 void Rule::Save(TiXmlElement* me) {
@@ -53,6 +73,14 @@ void Rule::Save(TiXmlElement* me) {
 		pattern.InsertEndChild(TiXmlText(Mbs(*it).c_str()));
 		me->InsertEndChild(pattern);
 		++it;
+	}
+	
+	std::set<String>::const_iterator pit = _parameterTags.begin();
+	while(pit!=_parameterTags.end()) {
+		TiXmlElement tag("tag");
+		tag.InsertEndChild(TiXmlText(Mbs(*pit).c_str()));
+		me->InsertEndChild(tag);
+		++pit;
 	}
 }
 
@@ -88,6 +116,25 @@ String Rule::ToString() const {
 		}
 	}
 	return wos.str();
+}
+
+bool Rule::Matches(const std::wstring& msg, const std::wstring& tags) const {
+	if(Matches(msg)) {
+		if(_parameterTags.size()<1) {
+			return true;
+		}
+		else {
+			std::set<String>::const_iterator it = _parameterTags.begin();
+			while(it!=_parameterTags.end()) {
+				if(*it==tags) {
+					return true;
+				}
+				++it;
+			}
+		}
+	}
+	
+	return false;
 }
 
 bool Rule::Matches(const std::wstring& msg) const {

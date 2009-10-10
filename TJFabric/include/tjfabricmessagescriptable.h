@@ -16,6 +16,8 @@ namespace tj {
 				virtual tj::shared::ref<tj::script::Scriptable> SGet(tj::shared::ref<tj::script::ParameterList> p);
 				virtual tj::shared::ref<tj::script::Scriptable> SSetParameter(tj::shared::ref<tj::script::ParameterList> p);
 				virtual tj::shared::ref<tj::script::Scriptable> SToString(tj::shared::ref<tj::script::ParameterList> p);
+				virtual tj::shared::ref<tj::script::Scriptable> SParameterTypes(tj::shared::ref<tj::script::ParameterList> p);
+				virtual tj::shared::ref<tj::script::Scriptable> SParameterCount(tj::shared::ref<tj::script::ParameterList> p);
 				virtual tj::shared::strong<Message> GetMessage();
 			
 			protected:

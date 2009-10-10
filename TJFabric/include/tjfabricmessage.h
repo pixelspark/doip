@@ -15,6 +15,7 @@ namespace tj {
 				virtual tj::shared::Any GetParameter(unsigned int i) const;
 				virtual unsigned int GetParameterCount() const;
 				virtual tj::shared::String ToString() const;
+				virtual tj::shared::String GetParameterTags() const;
 			
 			protected:
 				tj::shared::String _path;

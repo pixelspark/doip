@@ -12,6 +12,52 @@ const tj::shared::String& Message::GetPath() const {
 	return _path;
 }
 
+String Message::GetParameterTags() const {
+	std::wostringstream wos;
+	std::map<unsigned int, Any>::const_iterator it = _parameters.begin();
+	while(it!=_parameters.end()) {
+		const Any& val = it->second;
+		switch(val.GetType()) {
+			case Any::TypeBool: {
+				if((bool)val) {
+					wos << L'T';
+				}
+				else {
+					wos << L'F';
+				}
+				break;
+			}
+		
+			case Any::TypeDouble:
+				wos << L'd';
+				break;
+				
+			case Any::TypeInteger:
+				wos << L'i';
+				break;
+				
+			case Any::TypeNull:
+				wos << L'N';
+				break;
+				
+			case Any::TypeObject:
+				wos << L'b';
+				break;
+				
+			case Any::TypeString:
+				wos << L's';
+				break;
+				
+			default:
+			case Any::TypeTuple:
+				wos << L'?';
+				break;
+		}
+		++it;
+	}
+	return wos.str();
+}
+
 void Message::SetPath(const tj::shared::String& m) {
 	_path = m;
 }

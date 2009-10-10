@@ -14,6 +14,7 @@ namespace tj {
 				virtual void SaveEndpointMethodDefinition(TiXmlElement* me);
 				virtual void Clone();
 				virtual bool Matches(const std::wstring& msg) const;
+				virtual bool Matches(const std::wstring& msg, const std::wstring& tags) const;
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetScriptSource() const;
 				virtual bool IsEnabled() const;
@@ -23,6 +24,7 @@ namespace tj {
 			protected:
 				tj::shared::String _id;
 				std::set<tj::shared::String> _patterns;
+				std::set<tj::shared::String> _parameterTags;
 				std::wstring _script;
 				bool _isEnabled;
 				bool _isPublic;

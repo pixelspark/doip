@@ -83,7 +83,7 @@ void Queue::ProcessMessage(strong<Message> m) {
 		if(fe) {
 			ref<Fabric> f = fe->GetFabric();
 			if(f) {
-				f->GetAllMatchingRules(m->GetPath(), matchingRules);
+				f->GetAllMatchingRules(m->GetPath(), m->GetParameterTags(), matchingRules);
 				std::deque< ref<Rule> >::iterator it = matchingRules.begin();
 				while(it!=matchingRules.end()) {
 					ref<Rule> rule = *it;
