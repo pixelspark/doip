@@ -96,6 +96,22 @@ Group::Group(): _direction(DirectionNone) {
 Group::~Group() {
 }
 
+void Group::SaveEndpointDefinition(TiXmlElement* transports) {
+	if((_direction & DirectionInbound)!=0) {
+		// Export connection definitions
+		std::deque< ref<ConnectionDefinition> >::iterator rit = _connections.begin();
+		while(rit!=_connections.end()) {
+			ref<ConnectionDefinition> cd = *rit;
+			if(cd) {
+				TiXmlElement connElement("transport");
+				ConnectionDefinitionFactory::Instance()->Save(cd, &connElement);
+				transports->InsertEndChild(connElement);
+			}
+			++rit;
+		}
+	}
+}
+
 void Group::Save(TiXmlElement* me) {
 	SaveAttributeSmall<std::wstring>(me, "id", _id);
 	

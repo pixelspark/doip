@@ -5,6 +5,7 @@
     UIWindow *window;
 	UIViewController* tabController;
 	UITableViewController* servicesController;
+	UITableViewController* endpointsController;
 	bool startingUp;
 	
 	
@@ -20,6 +21,7 @@
 @property (nonatomic, retain) IBOutlet UIView* splashBackground;
 @property (nonatomic, retain) IBOutlet UIView* splashThrobber;
 @property (nonatomic, retain) IBOutlet UITableViewController* servicesController;
+@property (nonatomic, retain) IBOutlet UITableViewController* endpointsController;
 
 @end
 

@@ -4,13 +4,17 @@
 
 @interface MWClient : NSObject {
 	NSNetServiceBrowser* browser;
+	NSNetServiceBrowser* endpointsBrowser;
 	NSMutableSet* services;
 	NSMutableArray* resolvedServices;
+	NSMutableArray* resolvedEndpoints;
 	id<MWClientDelegate> delegate;
 }
 
 + (MWClient*)sharedInstance;
 - (NSMutableArray*) resolvedServices;
+- (NSMutableArray*)resolvedEndpoints;
+
 @property (nonatomic, retain) id<MWClientDelegate> delegate;
 
 @end

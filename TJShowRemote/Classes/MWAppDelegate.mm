@@ -3,7 +3,7 @@
 
 @implementation MWAppDelegate
 @synthesize window;
-@synthesize tabController, servicesController;
+@synthesize tabController, servicesController, endpointsController;
 @synthesize splashThrobber, splashBackground, regularBackground;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
@@ -17,6 +17,7 @@
 
 - (void)client:(MWClient*)c foundServiceRemoved:(NSNetService*)s {
 	[servicesController.tableView reloadData];
+	[endpointsController.tableView reloadData];
 }
 
 - (void)client:(MWClient*)c foundService:(NSNetService*)s {
@@ -33,6 +34,7 @@
 	}
 	
 	[servicesController.tableView reloadData];
+	[endpointsController.tableView reloadData];
 }
 
 - (void)dealloc {

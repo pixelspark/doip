@@ -18,12 +18,12 @@ FabricEngine::~FabricEngine() {
 
 void FabricEngine::OnCreated() {
 	_queue = GC::Hold(new Queue(this)); 
-	
-	// TODO: make web server configurable through fabric file
-	_webServer = GC::Hold(new WebServer(7961));
-	_webServer->AddResolver(L"/ep/definition", ref<FileRequestResolver>(GC::Hold(new FabricDefinitionResolver(_fabric))));
-	_webServer->AddResolver(L"/ep/message", ref<FileRequestResolver>(GC::Hold(new FabricMessageResolver(this, L"/ep/message"))));
-	_serviceRegistration = ServiceRegistrationFactory::Instance()->CreateServiceRegistration(ServiceDiscoveryDNSSD, L"_dashboard._tcp", L"Dashboard", 7961);
+}
+
+void FabricEngine::RegisterEndpointService() {
+	std::map<std::wstring, std::wstring> attributes;
+	attributes[L"EPDefinitionPath"] = L"/ep/definition";
+	_serviceRegistration = ServiceRegistrationFactory::Instance()->CreateServiceRegistration(ServiceDiscoveryDNSSD, L"_ep._tcp", _fabric->GetTitle(), 7961, attributes);	
 }
 
 strong<Fabric> FabricEngine::GetFabric() {
@@ -66,6 +66,16 @@ void FabricEngine::Notify(ref<Object> source, const MessageNotification& data) {
 
 void FabricEngine::Connect(bool t) {
 	if(t) {
+		// Start up the web server that serves the endpoint definition file and HTTP interface
+		// TODO: make web server configurable through fabric file
+		_webServer = GC::Hold(new WebServer(7961));
+		_webServer->AddResolver(L"/ep/definition", ref<FileRequestResolver>(GC::Hold(new FabricDefinitionResolver(_fabric))));
+		_webServer->AddResolver(L"/ep/message", ref<FileRequestResolver>(GC::Hold(new FabricMessageResolver(this, L"/ep/message"))));
+		
+		// Register the endpoint service
+		RegisterEndpointService();
+		
+		// Iterate through all groups and connect them
 		std::map< ref<Group>, ref<ConnectedGroup> > newGroups;
 		
 		std::deque< ref<Group> >::iterator it = _fabric->_groups.begin();
@@ -94,5 +104,7 @@ void FabricEngine::Connect(bool t) {
 		/* No need to call Connect(false) on each group, a ConnectedGroup will
 		automatically disconnect when it is destroyed. */
 		_groups.clear();
+		_serviceRegistration = null;
+		_webServer = null;
 	}
 }

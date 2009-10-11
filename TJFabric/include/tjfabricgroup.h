@@ -68,6 +68,7 @@ namespace tj {
 				virtual ~Group();
 				virtual void Save(TiXmlElement* me);
 				virtual void Load(TiXmlElement* me);
+				virtual void SaveEndpointDefinition(TiXmlElement* transports);
 				virtual void Clone();
 				virtual void Clear();
 				virtual std::wstring GetID() const;

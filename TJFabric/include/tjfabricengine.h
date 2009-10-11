@@ -27,6 +27,7 @@ namespace tj {
 			protected:
 				virtual void OnCreated();
 				virtual void Clear();
+				virtual void RegisterEndpointService();
 			
 				tj::shared::CriticalSection _lock;
 				tj::shared::ref<Fabric> _fabric;

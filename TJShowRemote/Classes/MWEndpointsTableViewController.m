@@ -1,0 +1,67 @@
+#import "MWEndpointsTableViewController.h"
+#include "MWClient.h"
+#include "MWEndpoint.h"
+#import <UIKit/UITableViewController.h>
+#import <UIKit/UITableViewCell.h>
+
+@implementation MWEndpointsTableViewController
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidUnload {
+}
+
+- (void)viewWillAppear:(BOOL)a {
+	[self.tableView reloadData];
+	[self.tableView setSeparatorColor:[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:0.4f]];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	MWClient* client = [MWClient sharedInstance];
+    return [[client resolvedEndpoints] count];
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+	MWClient* client = [MWClient sharedInstance];
+	MWEndpoint* ep = [[client resolvedEndpoints] objectAtIndex:indexPath.row];
+	cell.textLabel.text = [ep name];
+	cell.textLabel.textColor = [UIColor whiteColor];
+	
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	/*MWClient* client = [MWClient sharedInstance];
+	if(indexPath.row<[[client resolvedEndpoints] count]) {
+		NSNetService* service = [[client resolvedEndpoints] objectAtIndex:indexPath.row];
+		[ledController setDeviceService:service];
+		[self.navigationController pushViewController:ledController animated:YES];
+	}
+	else {
+		[self.tableView reloadData];
+	}*/
+}
+
+- (void)dealloc {
+    [super dealloc];
+}
+
+
+@end
+

@@ -59,6 +59,19 @@ void Fabric::SaveEndpointDefinition(TiXmlElement* me) {
 	SaveAttributeSmall(me, "version", _version);
 	SaveAttributeSmall(me, "class", std::wstring(L"dynamic"));
 	SaveAttributeSmall(me, "friendly-name", _title);
+	
+	if(_groups.size()>0) {
+		TiXmlElement transports("transports");
+		std::deque< ref<Group> >::iterator it = _groups.begin();
+		while(it!=_groups.end()) {
+			ref<Group> group = *it;
+			if(group && (group->GetDirection() & DirectionInbound)!=0) {
+				group->SaveEndpointDefinition(&transports);
+			}
+			++it;
+		}
+		me->InsertEndChild(transports);
+	}
 
 	if(_rules.size()>0) {
 		TiXmlElement rules("methods");
