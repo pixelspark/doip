@@ -110,6 +110,7 @@
 		B423B7F0106E0E4200147974 /* tjfabricutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricutil.cpp; path = src/tjfabricutil.cpp; sourceTree = "<group>"; };
 		B423B830106E13F500147974 /* tjoscutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjoscutil.h; path = src/connections/tjoscutil.h; sourceTree = "<group>"; };
 		B423B831106E144F00147974 /* tjoscutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjoscutil.cpp; path = src/connections/tjoscutil.cpp; sourceTree = "<group>"; };
+		B46AC5D11083431600EAE42C /* EndpointDefinition.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = EndpointDefinition.xsd; path = ../Docs/EP/EndpointDefinition.xsd; sourceTree = SOURCE_ROOT; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		08FB7794FE84155DC02AAC07 /* TJFabric */ = {
 			isa = PBXGroup;
 			children = (
+				B46AC5D0108342F000EAE42C /* EP Specification */,
 				B40225F61068E8D600137628 /* include */,
 				B40225F51068E8D200137628 /* src */,
 				B40225E41068E8AA00137628 /* TJNPFramework.xcodeproj */,
@@ -238,6 +240,14 @@
 				B402276210691E1E00137628 /* TJScriptFramework.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B46AC5D0108342F000EAE42C /* EP Specification */ = {
+			isa = PBXGroup;
+			children = (
+				B46AC5D11083431600EAE42C /* EndpointDefinition.xsd */,
+			);
+			name = "EP Specification";
 			sourceTree = "<group>";
 		};
 		B491077D1070C87600279D29 /* Products */ = {

@@ -69,6 +69,7 @@ DiscoveryDefinitionFactory::~DiscoveryDefinitionFactory() {
 
 ref<DiscoveryDefinition> DiscoveryDefinitionFactory::Load(TiXmlElement* me) {
 	std::wstring type = LoadAttributeSmall<std::wstring>(me, "type", L"");
+	std::wstring format = LoadAttributeSmall<std::wstring>(me, "format", L"osc");
 	ref<DiscoveryDefinition> cd = CreateObjectOfType(type);
 	if(cd) {
 		cd->Load(me);

@@ -32,6 +32,7 @@ namespace tj {
 					virtual void Load(TiXmlElement* me);
 				
 				protected:
+					std::wstring _format;
 					std::wstring _address;
 					unsigned short _port;
 			};

@@ -6,6 +6,8 @@
 	UIViewController* tabController;
 	UITableViewController* servicesController;
 	UITableViewController* endpointsController;
+	UINavigationController* servicesNavigationController;
+	UINavigationController* endpointsNavigationController;
 	bool startingUp;
 	
 	
@@ -22,6 +24,8 @@
 @property (nonatomic, retain) IBOutlet UIView* splashThrobber;
 @property (nonatomic, retain) IBOutlet UITableViewController* servicesController;
 @property (nonatomic, retain) IBOutlet UITableViewController* endpointsController;
+@property (nonatomic, retain) IBOutlet UINavigationController* servicesNavigationController;
+@property (nonatomic, retain) IBOutlet UINavigationController* endpointsNavigationController;
 
 @end
 

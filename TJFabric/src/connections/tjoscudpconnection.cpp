@@ -25,7 +25,7 @@ using namespace tj::fabric::connections;
 using namespace tj::np;
 
 /** OSCOverUDPConnectionDefinition **/
-OSCOverUDPConnectionDefinition::OSCOverUDPConnectionDefinition(): ConnectionDefinition(L"udp") {
+OSCOverUDPConnectionDefinition::OSCOverUDPConnectionDefinition(): ConnectionDefinition(L"udp"), _format(L"osc") {
 }
 
 OSCOverUDPConnectionDefinition::~OSCOverUDPConnectionDefinition() {
@@ -34,11 +34,13 @@ OSCOverUDPConnectionDefinition::~OSCOverUDPConnectionDefinition() {
 void OSCOverUDPConnectionDefinition::Save(TiXmlElement* me) {
 	SaveAttributeSmall<std::wstring>(me, "address", _address);
 	SaveAttributeSmall<int>(me, "port", int(_port));
+	SaveAttributeSmall<std::wstring>(me, "format", _format);
 }
 
 void OSCOverUDPConnectionDefinition::Load(TiXmlElement* me) {
 	_address = LoadAttributeSmall<std::wstring>(me, "address", _address);
 	_port = (unsigned short)LoadAttributeSmall<int>(me, "port", (int)_port);
+	_format = LoadAttributeSmall<std::wstring>(me, "format", _format);
 }
 
 /** OSCOverUDPConnection **/

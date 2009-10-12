@@ -1,10 +1,10 @@
 #import "MWEndpointsTableViewController.h"
 #include "MWClient.h"
-#include "MWEndpoint.h"
 #import <UIKit/UITableViewController.h>
 #import <UIKit/UITableViewCell.h>
 
 @implementation MWEndpointsTableViewController
+@synthesize methodViewController = _methodViewController;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -47,15 +47,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	/*MWClient* client = [MWClient sharedInstance];
+	MWClient* client = [MWClient sharedInstance];
 	if(indexPath.row<[[client resolvedEndpoints] count]) {
-		NSNetService* service = [[client resolvedEndpoints] objectAtIndex:indexPath.row];
-		[ledController setDeviceService:service];
-		[self.navigationController pushViewController:ledController animated:YES];
+		MWEndpoint* endpoint = [[client resolvedEndpoints] objectAtIndex:indexPath.row];
+		[_methodViewController setEndpoint:endpoint];
+		[self.navigationController pushViewController:_methodViewController animated:YES];
 	}
 	else {
 		[self.tableView reloadData];
-	}*/
+	}
 }
 
 - (void)dealloc {

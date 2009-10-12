@@ -4,6 +4,7 @@
 @implementation MWAppDelegate
 @synthesize window;
 @synthesize tabController, servicesController, endpointsController;
+@synthesize endpointsNavigationController, servicesNavigationController;
 @synthesize splashThrobber, splashBackground, regularBackground;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
@@ -13,6 +14,11 @@
     [window makeKeyAndVisible];
 	MWClient* client = [MWClient sharedInstance];
 	client.delegate = self;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+	[servicesNavigationController popToRootViewControllerAnimated:YES];
+	[endpointsNavigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)client:(MWClient*)c foundServiceRemoved:(NSNetService*)s {
@@ -40,6 +46,10 @@
 - (void)dealloc {
     [window release];
     [super dealloc];
+	[servicesController release];
+	[endpointsController release];
+	[servicesNavigationController release];
+	[endpointsNavigationController release];
 }
 
 @end
