@@ -42,6 +42,7 @@
 		char* xmlDataString = new char[xmlDataLength+1];
 		[xmlData getBytes:(void*)xmlDataString length:xmlDataLength];
 		xmlDataString[xmlDataLength] = '\0';
+		[xmlData release];
 		doc.Parse(xmlDataString, NULL, TIXML_ENCODING_UTF8);
 		
 		TiXmlElement* root = doc.FirstChildElement("endpoint");
