@@ -1,3 +1,6 @@
+#ifndef MW_ENDPOINT_H
+#define MW_ENDPOINT_H
+
 #import <CoreFoundation/CoreFoundation.h>
 #import "MWMethod.h"
 
@@ -25,3 +28,5 @@ typedef class UdpSocket;
 @property (nonatomic, readonly) NSMutableSet* methods;
 
 @end
+
+#endif

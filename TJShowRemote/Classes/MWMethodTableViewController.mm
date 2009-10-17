@@ -56,8 +56,7 @@
     }
     
 	MWMethod* method = [[[self.endpoint methods] allObjects] objectAtIndex:indexPath.row];
-	cell.textLabel.text = [method friendlyName];
-	cell.textLabel.textColor = [UIColor whiteColor];
+	[method setupCell:cell];
     return cell;
 }
 

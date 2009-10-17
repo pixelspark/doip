@@ -47,7 +47,7 @@ ref<Scriptable> MessageScriptable::SGet(ref<ParameterList> p) {
 	static Parameter<int> PKey(L"key", 0);
 	int idx = PKey.Require(p,-1);
 	if(idx>=0) {
-		_message->GetParameter(idx);
+		return GC::Hold(new ScriptValue<Any>(_message->GetParameter(idx)));
 	}
 	return ScriptConstants::Null;
 }

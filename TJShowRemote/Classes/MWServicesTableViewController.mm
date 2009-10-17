@@ -40,8 +40,11 @@
     
 	MWClient* client = [MWClient sharedInstance];
 	NSNetService* service = [[client resolvedServices] objectAtIndex:indexPath.row];
-	cell.textLabel.text = [service name];
-	cell.textLabel.textColor = [UIColor whiteColor];
+	
+	if(service!=nil) {
+		cell.textLabel.text = [service name];
+		cell.textLabel.textColor = [UIColor whiteColor];
+	}
 	
     return cell;
 }

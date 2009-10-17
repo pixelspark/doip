@@ -11,23 +11,26 @@ Rule::~Rule() {
 }
 
 void Rule::SaveEndpointMethodDefinition(TiXmlElement* me) {
-	SaveAttributeSmall(me, "id", _id);
-	SaveAttributeSmall(me, "friendly-name", _name);
-
+	// Only the first pattern is put in the definition as the message path
 	std::set<String>::const_iterator it = _patterns.begin();
-	while(it!=_patterns.end()) {
-		TiXmlElement pattern("pattern");
+	if(it!=_patterns.end()) {
+		SaveAttributeSmall(me, "id", _id);
+		SaveAttributeSmall(me, "friendly-name", _name);
+		
+		TiXmlElement pattern("path");
 		pattern.InsertEndChild(TiXmlText(Mbs(*it).c_str()));
 		me->InsertEndChild(pattern);
-		++it;
-	}
-	
-	std::set<String>::const_iterator pit = _parameterTags.begin();
-	while(pit!=_parameterTags.end()) {
-		TiXmlElement tag("tag");
-		tag.InsertEndChild(TiXmlText(Mbs(*pit).c_str()));
-		me->InsertEndChild(tag);
-		++pit;
+		
+		std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
+		while(pit!=_parameters.end()) {
+			ref<Parameter> param = *pit;
+			if(param) {
+				TiXmlElement tag("parameter");
+				param->Save(&tag);
+				me->InsertEndChild(tag);
+			}
+			++pit;
+		}
 	}
 }
 
@@ -47,16 +50,12 @@ void Rule::Load(TiXmlElement* me) {
 		pattern = pattern->NextSiblingElement("pattern");
 	}
 	
-	TiXmlElement* tag = me->FirstChildElement("tag");
+	TiXmlElement* tag = me->FirstChildElement("parameter");
 	while(tag!=0) {
-		TiXmlNode* nd = tag->FirstChild();
-		if(nd!=0) {
-			_parameterTags.insert(Wcs(nd->Value()));
-		}
-		else {
-			_parameterTags.insert(L"");
-		}
-		tag = tag->NextSiblingElement("tag");
+		ref<Parameter> param = GC::Hold(new Parameter());
+		param->Load(tag);
+		_parameters.push_back(param);
+		tag = tag->NextSiblingElement("parameter");
 	}
 }
 
@@ -75,11 +74,15 @@ void Rule::Save(TiXmlElement* me) {
 		++it;
 	}
 	
-	std::set<String>::const_iterator pit = _parameterTags.begin();
-	while(pit!=_parameterTags.end()) {
-		TiXmlElement tag("tag");
-		tag.InsertEndChild(TiXmlText(Mbs(*pit).c_str()));
-		me->InsertEndChild(tag);
+	std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
+	while(pit!=_parameters.end()) {
+		ref<Parameter> param = *pit;
+		if(param) {
+			TiXmlElement tag("parameter");
+			param->Save(&tag);
+			me->InsertEndChild(tag);
+		}
+		
 		++pit;
 	}
 }
@@ -120,18 +123,19 @@ String Rule::ToString() const {
 
 bool Rule::Matches(const std::wstring& msg, const std::wstring& tags) const {
 	if(Matches(msg)) {
-		if(_parameterTags.size()<1) {
-			return true;
-		}
-		else {
-			std::set<String>::const_iterator it = _parameterTags.begin();
-			while(it!=_parameterTags.end()) {
-				if(*it==tags) {
-					return true;
-				}
-				++it;
+		// Create the tag that belongs to these parameters
+		std::wostringstream tagStream;
+		
+		std::deque< ref<Parameter> >::const_iterator it = _parameters.begin();
+		while(it!=_parameters.end()) {
+			ref<Parameter> param = *it;
+			if(param) {
+				tagStream << param->GetValueTypeTag();
 			}
+			++it;
 		}
+		
+		return tagStream.str() == tags;
 	}
 	
 	return false;
@@ -146,4 +150,97 @@ bool Rule::Matches(const std::wstring& msg) const {
 		++it;
 	}
 	return false;
+}
+
+/** Parameter **/
+Parameter::Parameter() {
+}
+
+Parameter::~Parameter() {
+}
+
+void Parameter::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "friendly-name", _friendly);
+	SaveAttributeSmall(me, "type", _type);
+	SaveAttributeSmall(me, "min", _min);
+	SaveAttributeSmall(me, "max", _max);
+	SaveAttributeSmall(me, "default", _default);
+}
+
+void Parameter::Load(TiXmlElement* me) {
+	_friendly = LoadAttributeSmall<std::wstring>(me, "friendly-name", _friendly);
+	_type = LoadAttributeSmall<std::wstring>(me, "type", _type);
+	_min = LoadAttributeSmall<std::wstring>(me, "min", _min);
+	_max = LoadAttributeSmall<std::wstring>(me, "max", _max);
+	_default = LoadAttributeSmall<std::wstring>(me, "default", _default);
+}
+
+std::wstring Parameter::GetFriendlyName() const {
+	return _friendly;
+}
+
+std::wstring Parameter::GetType() const {
+	return _type;
+}
+
+Any Parameter::GetMinimum() const {
+	return Any(_min).Force(GetValueType());
+}
+
+Any Parameter::GetMaximum() const {
+	return Any(_max).Force(GetValueType());
+}
+
+Any Parameter::GetDefault() const {
+	return Any(_default).Force(GetValueType());
+}
+
+wchar_t Parameter::GetValueTypeTag() const {
+	Any::Type type = GetValueType();
+	switch(type) {
+		case Any::TypeString:
+			return L's';
+			break;
+			
+		case Any::TypeObject:
+			return L'o';
+			break;
+			
+		case Any::TypeInteger:
+			return L'i';
+			break;
+			
+		case Any::TypeDouble:
+			return L'd';
+			break;
+			
+		case Any::TypeBool:
+			return L'T';
+			break;
+			
+		case Any::TypeNull:
+		default:
+			return L'N';
+	}
+}
+
+Any::Type Parameter::GetValueType() const {
+	if(_type==L"string") {
+		return Any::TypeString;
+	}
+	else if(_type==L"bool") {
+		return Any::TypeBool;
+	}
+	else if(_type==L"int32") {
+		return Any::TypeInteger;
+	}
+	else if(_type==L"double") {
+		return Any::TypeDouble;
+	}
+	else if(_type==L"null") {
+		return Any::TypeNull;
+	}
+	else {
+		return Any::TypeNull;
+	}
 }

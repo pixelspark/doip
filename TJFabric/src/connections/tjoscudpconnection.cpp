@@ -154,8 +154,13 @@ void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction di
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverUDPConnectionDefinition>()) {
 		ref<OSCOverUDPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
-			_def = cd;
-			Create(cd->_address, cd->_port, direction);
+			if(cd->_format==L"osc") {
+				_def = cd;
+				Create(cd->_address, cd->_port, direction);
+			}
+			else {
+				Throw(L"Invalid format type for UDP connection", ExceptionTypeError);
+			}
 		}
 	}
 	else {

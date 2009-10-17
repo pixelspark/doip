@@ -195,7 +195,7 @@ void QueueGlobalScriptable::Initialize() {
 }
 
 ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {
-	static Parameter<std::wstring> PToGroupID(L"group", 0);
+	static script::Parameter<std::wstring> PToGroupID(L"group", 0);
 	std::wstring gid = PToGroupID.Require(p, L"");
 	
 	ref<Scriptable> ms = p->Get(L"message");
@@ -217,7 +217,7 @@ ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {
 }
 
 ref<Scriptable> QueueGlobalScriptable::SPrint(ref<ParameterList> p) {
-	static Parameter<std::wstring> PMessage(L"message", 0);
+	static script::Parameter<std::wstring> PMessage(L"message", 0);
 	std::wstring msg = PMessage.Require(p, L"");
 	Log::Write(L"TJFabric/Script", msg);
 	return ScriptConstants::Null;

@@ -32,6 +32,24 @@ using namespace osc;
 		char buffer[4096];
 		OutboundPacketStream ops(buffer,1023);
 		ops << osc::BeginMessage([[method pattern] UTF8String]);
+		
+		// Enumerate parameters and send values
+		for (MWParameter* parameter in method.parameters) {
+			NSLog(@"Parameter");
+			if([parameter.type isEqualToString:@"int32"]) {
+				NSNumber* value = (NSNumber*)parameter.value;
+				if(value!=nil) {
+					ops << (osc::int32)[value intValue];
+				}
+			}
+			else if([parameter.type isEqualToString:@"bool"]) {
+				NSNumber* value = (NSNumber*)parameter.value;
+				if(value!=nil) {
+					ops << (bool)[value boolValue];
+				}
+			}
+		}
+		
 		ops << osc::EndMessage;
 		_socket->Send(ops.Data(), ops.Size());
 	}
@@ -48,6 +66,8 @@ using namespace osc;
 	else {
 		_socket->Connect(IpEndpointName([[_service hostName] UTF8String], _transportPort));
 	}
+	
+	NSLog(@"Connected");
 }
 
 - (void)netService:(NSNetService*)service didUpdateTXTRecordData:(NSData*)data {
@@ -116,15 +136,24 @@ using namespace osc;
 			if(methods!=0) {
 				TiXmlElement* method = methods->FirstChildElement("method");
 				while(method!=0) {
-					TiXmlElement* firstPattern = method->FirstChildElement("pattern");
-					TiXmlElement* firstTag = method->FirstChildElement("tag");
+					TiXmlElement* firstPattern = method->FirstChildElement("path");
+					
 					if(firstPattern!=0) {
 						TiXmlNode* firstPatternText = firstPattern->FirstChild();
-						TiXmlNode* firstTagText = (firstTag==0) ? 0 :firstTag->FirstChild();
 						
 						if(firstPatternText!=0) {
-							MWMethod* mt = [[MWMethod alloc] initWithPattern:[NSString stringWithUTF8String:firstPatternText->Value()] parameters:(firstTagText==0) ? @"" : [NSString stringWithUTF8String:firstTagText->Value()] friendlyName:[NSString stringWithUTF8String:method->Attribute("friendly-name")]];
+							MWMethod* mt = [[MWMethod alloc] initWithPattern:[NSString stringWithUTF8String:firstPatternText->Value()] friendlyName:[NSString stringWithUTF8String:method->Attribute("friendly-name")] endpoint:self];
 							[_methods addObject:mt];
+							
+							// Load parameters
+							TiXmlElement* firstParameter = method->FirstChildElement("parameter");
+							while(firstParameter!=0) {
+								MWParameter* param = [[MWParameter alloc] initFromDefinition:firstParameter inMethod:mt];
+								[mt.parameters addObject:param];
+								[param release];
+								firstParameter = firstParameter->NextSiblingElement("parameter");
+							}
+							
 							[mt release];
 						}
 					}

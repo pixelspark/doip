@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="99"/>
+			<integer value="94"/>
 			<integer value="107"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -463,8 +463,8 @@
 				</object>
 				<reference key="IBUISimulatedStatusBarMetrics" ref="158990248"/>
 			</object>
-			<object class="IBUITableViewController" id="1041558358">
-				<object class="IBUITableView" key="IBUIView" id="510245592">
+			<object class="IBUITableViewController" id="370445989">
+				<object class="IBUITableView" key="IBUIView" id="377511583">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
 					<string key="NSFrameSize">{320, 480}</string>
@@ -487,7 +487,7 @@
 					<float key="IBUISectionHeaderHeight">22</float>
 					<float key="IBUISectionFooterHeight">22</float>
 				</object>
-				<object class="IBUINavigationItem" key="IBUINavigationItem" id="287906145">
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="411077645">
 					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Methods</string>
 				</object>
@@ -728,16 +728,16 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="510245592"/>
-						<reference key="destination" ref="1041558358"/>
+						<reference key="source" ref="377511583"/>
+						<reference key="destination" ref="370445989"/>
 					</object>
 					<int key="connectionID">108</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
-						<reference key="source" ref="510245592"/>
-						<reference key="destination" ref="1041558358"/>
+						<reference key="source" ref="377511583"/>
+						<reference key="destination" ref="370445989"/>
 					</object>
 					<int key="connectionID">109</int>
 				</object>
@@ -745,7 +745,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">methodViewController</string>
 						<reference key="source" ref="340871265"/>
-						<reference key="destination" ref="1041558358"/>
+						<reference key="destination" ref="370445989"/>
 					</object>
 					<int key="connectionID">116</int>
 				</object>
@@ -1039,23 +1039,23 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">106</int>
-						<reference key="object" ref="1041558358"/>
+						<reference key="object" ref="370445989"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="510245592"/>
-							<reference ref="287906145"/>
+							<reference ref="377511583"/>
+							<reference ref="411077645"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">107</int>
-						<reference key="object" ref="510245592"/>
-						<reference key="parent" ref="1041558358"/>
+						<reference key="object" ref="377511583"/>
+						<reference key="parent" ref="370445989"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">114</int>
-						<reference key="object" ref="287906145"/>
-						<reference key="parent" ref="1041558358"/>
+						<reference key="object" ref="411077645"/>
+						<reference key="parent" ref="370445989"/>
 					</object>
 				</object>
 			</object>
@@ -1182,7 +1182,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">118</int>
+			<int key="maxID">131</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
