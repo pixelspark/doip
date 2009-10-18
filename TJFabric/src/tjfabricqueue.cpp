@@ -20,6 +20,8 @@ namespace tj {
 				static void Initialize();
 				virtual ref<Scriptable> SPrint(ref<ParameterList> p);
 				virtual ref<Scriptable> SSend(ref<ParameterList> p);
+				virtual ref<Scriptable> SDefer(ref<ParameterList> p);
+				virtual ref<Scriptable> STry(ref<ParameterList> p);
 			
 			protected:
 				weak<Queue> _queue;
@@ -39,6 +41,7 @@ void Queue::Clear() {
 	ThreadLock lock(&_lock);
 	_scriptCache.clear();
 	_queue.clear();
+	_global = GC::Hold(new ScriptScope());
 }
 
 void Queue::Add(strong<Message> m) {
@@ -65,6 +68,7 @@ void Queue::ExecuteScript(strong<Rule> r, strong<CompiledScript> cs, strong<Mess
 	if(!r->IsEnabled()) Throw(L"Cannot execute the script of a rule that is disabled", ExceptionTypeError);
 	try {
 		ref<ScriptScope> sc = GC::Hold(new ScriptScope()); // TODO persist with rule?
+		sc->Set(L"globals", _global);
 		sc->Set(L"message", GC::Hold(new MessageScriptable(m)));
 		//_context->SetDebug(true);
 		_context->Execute(cs, sc);
@@ -96,6 +100,9 @@ void Queue::ProcessMessage(strong<Message> m) {
 			else {
 				Log::Write(L"TJFabric/Queue", L"Dropping message, no fabric");
 			}
+		}
+		else {
+			Log::Write(L"TJFabric/Queue", L"Dropping message, no fabric engine");
 		}
 	}
 	catch(const Exception& e) {
@@ -192,6 +199,39 @@ QueueGlobalScriptable::~QueueGlobalScriptable() {
 void QueueGlobalScriptable::Initialize() {
 	Bind(L"print", &QueueGlobalScriptable::SPrint);
 	Bind(L"send", &QueueGlobalScriptable::SSend);
+	Bind(L"defer", &QueueGlobalScriptable::SDefer);
+	Bind(L"try", &QueueGlobalScriptable::STry);
+}
+
+ref<Scriptable> QueueGlobalScriptable::STry(ref<ParameterList> p) {
+	ref<Scriptable> ms = p->Get(L"0");
+	
+	if(ms && ms.IsCastableTo<ScriptDelegate>()) {
+		ref<Queue> q = _queue;
+		if(q) {
+			ref<ScriptDelegate> dgate = ms;
+			try {
+				p->Set(L"globals", q->_global);
+				q->_context->Execute(dgate->GetScript(), p);
+			}
+			catch(const Exception& e) {
+				Log::Write(L"TJFabric/Queue", L"Try-block exception: "+e.GetMsg());
+			}
+			catch(const std::exception& e) {
+				Log::Write(L"TJFabric/Queue", L"Try-block standard exception: "+Wcs(e.what()));
+			}
+			catch(...) {
+				Log::Write(L"TJFabric/Queue", L"Unknown exception in try-block");
+			}
+			return ScriptConstants::Null;
+		}
+	}
+	Throw(L"Invalid argument to defer; should be a delegate!", ExceptionTypeError);
+	
+}
+
+ref<Scriptable> QueueGlobalScriptable::SDefer(ref<ParameterList> p) {
+	return null; // Not implemented yet
 }
 
 ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {

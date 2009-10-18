@@ -1,11 +1,13 @@
 #import <UIKit/UIKit.h>
 #import "MWClient.h"
 
+@class MWEndpointsTableViewController;
+
 @interface MWAppDelegate : NSObject <UIApplicationDelegate, MWClientDelegate> {
     UIWindow *window;
 	UIViewController* tabController;
 	UITableViewController* servicesController;
-	UITableViewController* endpointsController;
+	MWEndpointsTableViewController* endpointsController;
 	UINavigationController* servicesNavigationController;
 	UINavigationController* endpointsNavigationController;
 	bool startingUp;
@@ -23,7 +25,7 @@
 @property (nonatomic, retain) IBOutlet UIView* splashBackground;
 @property (nonatomic, retain) IBOutlet UIView* splashThrobber;
 @property (nonatomic, retain) IBOutlet UITableViewController* servicesController;
-@property (nonatomic, retain) IBOutlet UITableViewController* endpointsController;
+@property (nonatomic, retain) IBOutlet MWEndpointsTableViewController* endpointsController;
 @property (nonatomic, retain) IBOutlet UINavigationController* servicesNavigationController;
 @property (nonatomic, retain) IBOutlet UINavigationController* endpointsNavigationController;
 

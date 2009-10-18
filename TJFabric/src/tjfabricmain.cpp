@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 		// For testing
 		ref<Queue> q = fe->GetQueue();
 		ref<Message> msg = GC::Hold(new Message(L"init"));
-		msg->SetParameter(0,Any(12));
+		q->Add(msg);
 
 		#ifdef TJ_OS_POSIX
 			sleep(1);
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 		#ifdef TJ_OS_WIN
 			Sleep(10000);
 		#endif
-		q->Add(msg);
+		
 		
 		q->WaitForCompletion();
 	}

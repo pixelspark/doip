@@ -17,7 +17,7 @@ using namespace osc;
 - (id) initWithService:(NSNetService*)service {
 	if(self = [super init]) {
 		_service = service;
-		_methods = [[NSMutableSet alloc] init];
+		_methods = [[NSMutableArray alloc] init];
 		[_service retain];
 		
 		// Get properties
@@ -66,8 +66,6 @@ using namespace osc;
 	else {
 		_socket->Connect(IpEndpointName([[_service hostName] UTF8String], _transportPort));
 	}
-	
-	NSLog(@"Connected");
 }
 
 - (void)netService:(NSNetService*)service didUpdateTXTRecordData:(NSData*)data {
@@ -82,13 +80,12 @@ using namespace osc;
 	pathBuff[dataLen] = '\0';
 	NSString* path = [NSString stringWithUTF8String:pathBuff];
 	free(pathBuff);
-	//NSLog(@"Definition path: %@", path);
 	
 	// Start fetching the definition file
 	NSURL* url = [[NSURL alloc] initWithScheme:@"http" host:[NSString stringWithFormat:@"%@:%d",[_service hostName], [_service port]] path:path];
 	//NSLog(@"URL is %@", url);
 	NSData* xmlData = [NSData dataWithContentsOfURL:url];
-	if([xmlData length]>0) {
+	if(xmlData!=nil && [xmlData length]>0) {
 		TiXmlDocument doc;
 		unsigned int xmlDataLength = [xmlData length];
 		char* xmlDataString = new char[xmlDataLength+1];

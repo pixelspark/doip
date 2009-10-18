@@ -13,7 +13,7 @@ typedef class UdpSocket;
 	NSString* _transportType;
 	NSString* _transportFormat;
 	int _transportPort;
-	NSMutableSet* _methods;
+	NSMutableArray* _methods;
 	UdpSocket* _socket;
 }
 
@@ -25,7 +25,7 @@ typedef class UdpSocket;
 @property (nonatomic, retain) NSString* transportAddress;
 @property (nonatomic, retain) NSString* transportType;
 @property (nonatomic, retain) NSString* transportFormat;
-@property (nonatomic, readonly) NSMutableSet* methods;
+@property (nonatomic, readonly) NSMutableArray* methods;
 
 @end
 

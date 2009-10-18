@@ -124,18 +124,26 @@ String Rule::ToString() const {
 bool Rule::Matches(const std::wstring& msg, const std::wstring& tags) const {
 	if(Matches(msg)) {
 		// Create the tag that belongs to these parameters
-		std::wostringstream tagStream;
+		std::wostringstream positiveTagStream, negativeTagStream;
 		
+		// TODO make this more efficient by simply iterating over both strings and bailing out when not equal
 		std::deque< ref<Parameter> >::const_iterator it = _parameters.begin();
 		while(it!=_parameters.end()) {
 			ref<Parameter> param = *it;
 			if(param) {
-				tagStream << param->GetValueTypeTag();
+				if(param->GetType()==Parameter::KTypeBoolean) {
+					positiveTagStream << L"T";
+					negativeTagStream << L"F";
+				}
+				else {
+					positiveTagStream << param->GetValueTypeTag();
+					negativeTagStream << param->GetValueTypeTag();
+				}
 			}
 			++it;
 		}
 		
-		return tagStream.str() == tags;
+		return (positiveTagStream.str() == tags) || (negativeTagStream.str() == tags);
 	}
 	
 	return false;
@@ -153,6 +161,12 @@ bool Rule::Matches(const std::wstring& msg) const {
 }
 
 /** Parameter **/
+const wchar_t* Parameter::KTypeBoolean = L"bool";
+const wchar_t* Parameter::KTypeString = L"string";
+const wchar_t* Parameter::KTypeDouble = L"double";
+const wchar_t* Parameter::KTypeInt32 = L"int32";
+const wchar_t* Parameter::KTypeNull = L"null";
+
 Parameter::Parameter() {
 }
 

@@ -5,6 +5,7 @@
 
 @implementation MWEndpointsTableViewController
 @synthesize methodViewController = _methodViewController;
+@synthesize selected = _selected;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -51,6 +52,7 @@
 	if(indexPath.row<[[client resolvedEndpoints] count]) {
 		MWEndpoint* endpoint = [[client resolvedEndpoints] objectAtIndex:indexPath.row];
 		[_methodViewController setEndpoint:endpoint];
+		_selected = endpoint;
 		[self.navigationController pushViewController:_methodViewController animated:YES];
 	}
 	else {

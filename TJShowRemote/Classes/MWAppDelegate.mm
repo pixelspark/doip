@@ -1,5 +1,6 @@
 #import "MWAppDelegate.h"
 #import "MWClient.h"
+#import "MWEndpointsTableViewController.h"
 
 @implementation MWAppDelegate
 @synthesize window;
@@ -24,6 +25,10 @@
 - (void)client:(MWClient*)c foundServiceRemoved:(NSNetService*)s {
 	[servicesController.tableView reloadData];
 	[endpointsController.tableView reloadData];
+	
+	if([endpointsController.selected.service isEqual:s]) {
+		[endpointsNavigationController popToRootViewControllerAnimated:YES];
+	}
 }
 
 - (void)client:(MWClient*)c foundService:(NSNetService*)s {

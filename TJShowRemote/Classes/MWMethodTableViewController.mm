@@ -55,14 +55,14 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	MWMethod* method = [[[self.endpoint methods] allObjects] objectAtIndex:indexPath.row];
+	MWMethod* method = [[self.endpoint methods] objectAtIndex:indexPath.row];
 	[method setupCell:cell];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.row<[[self.endpoint methods] count]) {
-		MWMethod* method = [[[self.endpoint methods] allObjects] objectAtIndex:[indexPath row]];
+		MWMethod* method = [[self.endpoint methods] objectAtIndex:[indexPath row]];
 		[self.endpoint executeMethod:method];
 	}
 	else {
