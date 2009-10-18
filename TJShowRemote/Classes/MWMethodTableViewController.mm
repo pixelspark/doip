@@ -1,7 +1,9 @@
 #import "MWMethodTableViewController.h"
+#import "MWParameterTableViewController.h"
 
 @implementation MWMethodTableViewController
 @dynamic endpoint;
+@synthesize _parameterViewController;
 
 - (MWEndpoint*) endpoint {
 	return _endpoint;
@@ -63,7 +65,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.row<[[self.endpoint methods] count]) {
 		MWMethod* method = [[self.endpoint methods] objectAtIndex:[indexPath row]];
-		[self.endpoint executeMethod:method];
+		if([method.parameters count]==0) {
+			[self.endpoint executeMethod:method];
+		}
+		else if([method parametersFitInCell]) {
+			// Nothing, the control will start the execution
+		}
+		else {
+			_parameterViewController.method = method;
+			[self.navigationController pushViewController:_parameterViewController animated:YES];
+		}
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 	else {
 		[self.tableView reloadData];
@@ -72,6 +84,7 @@
 
 - (void)dealloc {
 	[_endpoint release];
+	[_parameterViewController release];
     [super dealloc];
 }
 

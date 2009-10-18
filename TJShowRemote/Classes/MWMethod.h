@@ -6,7 +6,7 @@
 @class MWMethod;
 class TiXmlElement;
 
-@interface MWParameter: NSObject {
+@interface MWParameter: NSObject <UITextFieldDelegate> {
 	NSString* _friendly;
 	NSString* _id;
 	NSString* _type;
@@ -18,7 +18,7 @@ class TiXmlElement;
 }
 
 - (id) initFromDefinition:(TiXmlElement*)def inMethod:(MWMethod*)m;
-- (UIView*) createView:(CGRect)rect;
+- (UIView*) createView:(CGRect)rect immediate:(BOOL)imm;
 
 @property (nonatomic, retain) NSString* friendlyName;
 @property (nonatomic, retain) NSString* minimumValue;
@@ -45,6 +45,7 @@ class TiXmlElement;
 
 - (id) initWithPattern: (NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)e;
 - (void) setupCell: (UITableViewCell*)cell;
+- (bool) parametersFitInCell;
 - (void) execute;
 
 @end

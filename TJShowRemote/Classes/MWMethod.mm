@@ -12,24 +12,37 @@
 @synthesize value = _value;
 @synthesize identifier = _id;
 
+- (void) textValueChanged: (UIView*)view event:(UIEvent*)evt {
+	self.value = [(UITextField*)view text];
+}
+
 - (void) sliderValueChanged: (UIView*)slider event:(UIEvent*)evt {
 	self.value = [NSNumber numberWithFloat:((UISlider*)slider).value];
-	[self.parent execute];
 };
 
 - (void) switchValueChanged: (UISwitch*)sw event:(UIEvent*)evt {
 	self.value = [NSNumber numberWithBool:((UISwitch*)sw).on];
+}
+
+- (void) executeHandler: (UIView*)vw event:(UIEvent*)evt {
 	[self.parent execute];
 }
 
-- (UIView*) createView: (CGRect)rect {
-	NSLog(@"createView type=%@", _type);
-	if([_type isEqualToString:@"int32"]) {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return YES;
+}
+
+- (UIView*) createView: (CGRect)rect immediate:(BOOL)imm {
+	if([_type isEqualToString:@"int32"] || [_type isEqualToString:@"double"]) {
 		UISlider* slider = [[UISlider alloc] initWithFrame:rect];
 		[slider setMinimumValue:[_min floatValue]];
 		[slider setMaximumValue:[_max floatValue]];
 		[slider setValue:[_default floatValue]];
 		[slider addTarget:self action:@selector(sliderValueChanged:event:) forControlEvents:UIControlEventValueChanged];
+		if(imm) {
+			[slider addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventValueChanged];
+		}
 		[slider autorelease];
 		return slider;
 	}
@@ -38,7 +51,20 @@
 		[sw setOn:[_default boolValue]];
 		[sw autorelease];
 		[sw addTarget:self action:@selector(switchValueChanged:event:) forControlEvents:UIControlEventValueChanged];
+		if(imm) {
+			[sw addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventValueChanged];
+		}
 		return sw;
+	}
+	else if([_type isEqualToString:@"string"]) {
+		UITextField* field = [[UITextField alloc] initWithFrame:rect];
+		[field setBorderStyle:UITextBorderStyleRoundedRect];
+		[field setDelegate:self];
+		if(imm) {
+			[field addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventEditingDidEnd];
+		}
+		[field autorelease];
+		return field;
 	}
 	return nil;
 }
@@ -96,22 +122,32 @@
 	[self.parent executeMethod:self];
 }
 
+- (bool) parametersFitInCell {
+	return [_parameters count]==1;
+}
+
 - (void) setupCell:(UITableViewCell *)cell {
 	cell.textLabel.text = [self friendlyName];
 	cell.textLabel.textColor = [UIColor whiteColor];
 	[[cell.contentView viewWithTag:1337] removeFromSuperview];
 	
 	// Add buttons, sliders, etc to the view
-	if([_parameters count]==1) {
+	if([_parameters count]==0) {
+		// Do nothing
+	}
+	else if([self parametersFitInCell]) {
 		MWParameter* firstParameter = [_parameters objectAtIndex:0];
 		if(firstParameter!=nil) {
-			CGRect rect = CGRectMake(180, 8, 130, 28);
-			UIView* pv = [firstParameter createView:rect];
+			CGRect rect = CGRectMake(160, 8, 150, 28);
+			UIView* pv = [firstParameter createView:rect immediate:YES];
 			if(pv!=nil) {
 				pv.tag = 1337;
 				[cell.contentView addSubview:pv];
 			}
 		}
+	}
+	else {
+		[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 	}
 }
 

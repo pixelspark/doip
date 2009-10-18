@@ -115,6 +115,7 @@ void Group::SaveEndpointDefinition(TiXmlElement* transports) {
 
 void Group::Save(TiXmlElement* me) {
 	SaveAttributeSmall<std::wstring>(me, "id", _id);
+	SaveAttributeSmall<std::wstring>(me, "prefix", _prefix);
 	
 	std::wstring dirValue = L"none";
 	switch(_direction) {
@@ -168,6 +169,7 @@ void Group::Save(TiXmlElement* me) {
 
 void Group::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall<std::wstring>(me, "id", _id);
+	_prefix = LoadAttributeSmall<std::wstring>(me, "prefix", _prefix);
 	std::wstring dirValue = LoadAttributeSmall<std::wstring>(me, "direction", L"");
 	if(dirValue==L"in") {
 		_direction = DirectionInbound;
@@ -238,8 +240,12 @@ void Group::Clear() {
 	_filter.clear();
 }
 
-std::wstring Group::GetID() const {
+String Group::GetID() const {
 	return _id;
+}
+
+String Group::GetPrefix() const {
+	return _prefix;
 }
 
 Direction Group::GetDirection() const {

@@ -71,16 +71,18 @@ namespace tj {
 				virtual void SaveEndpointDefinition(TiXmlElement* transports);
 				virtual void Clone();
 				virtual void Clear();
-				virtual std::wstring GetID() const;
+				virtual tj::shared::String GetID() const;
 				virtual Direction GetDirection() const;
+				virtual tj::shared::String GetPrefix() const;
 				virtual bool PassesFilter(const tj::shared::String& path) const;
 			
 			protected:
-				std::wstring _id;
+				tj::shared::String _id;
 				Direction _direction;
 				std::deque< tj::shared::ref<ConnectionDefinition> > _connections;
 				std::deque< tj::shared::ref<DiscoveryDefinition> > _discoveries;
 				std::deque< tj::shared::String > _filter;
+				tj::shared::String _prefix;
 		};
 	}
 }

@@ -79,14 +79,16 @@ void ConnectedGroup::Send(strong<Message> m) {
 
 void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data) {
 	if(_group->PassesFilter(data.message->GetPath())) {
-		Log::Write(L"TJFabric/ConnectedGroup", std::wstring(L"Message received: ")+data.message->GetPath());
+		ref<Message> message = data.message;
+		
+		// Add prefix
+		message->SetPath(_group->GetPrefix()+message->GetPath());
 		EventMessageReceived.Fire(this, data);
 	}
 }
 
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
 	if(data.added) {
-		Log::Write(L"TJFabric/ConnectedGroup", std::wstring(L"Connection discovered"));
 		_discoveredConnections.push_back(data.connection);
 	}
 	else {
