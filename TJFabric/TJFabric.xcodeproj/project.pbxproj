@@ -22,6 +22,12 @@
 		B423B7F1106E0E4200147974 /* tjfabricutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B7F0106E0E4200147974 /* tjfabricutil.cpp */; };
 		B423B832106E144F00147974 /* tjoscutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B831106E144F00147974 /* tjoscutil.cpp */; };
 		B46AD43A107DD2A000806748 /* tjfabricserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B46AD439107DD2A000806748 /* tjfabricserver.cpp */; };
+		B4720EEC108C69DE002DEC9F /* TJNPFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B40225EE1068E8AA00137628 /* TJNPFramework.framework */; };
+		B4720EED108C69E6002DEC9F /* TJScoutFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B49107851070C87600279D29 /* TJScoutFramework.framework */; };
+		B4720EEE108C69E6002DEC9F /* TinyXMLFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B40225E31068E8A100137628 /* TinyXMLFramework.framework */; };
+		B4720EEF108C69E6002DEC9F /* TJScriptFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B402276210691E1E00137628 /* TJScriptFramework.framework */; };
+		B4720EF0108C69E6002DEC9F /* OSCPackFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B40225DD1068E88E00137628 /* OSCPackFramework.framework */; };
+		B4720EF1108C69E6002DEC9F /* TJSharedFramework.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B40225D41068E88100137628 /* TJSharedFramework.framework */; };
 		B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */; };
 		B491078E1070C88300279D29 /* TJScoutFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49107851070C87600279D29 /* TJScoutFramework.framework */; };
 		B4C5948E1071F597000A3E6E /* tjdnssddiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4C5948D1071F597000A3E6E /* tjdnssddiscovery.cpp */; };
@@ -65,6 +71,48 @@
 			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJScriptFramework;
 		};
+		B4720EFA108C6A18002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B40225DE1068E8A100137628 /* TinyXMLFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TinyXMLFramework */;
+			remoteInfo = TinyXMLFramework;
+		};
+		B4720EFC108C6A18002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B491077C1070C87600279D29 /* TJScoutFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScoutFramework */;
+			remoteInfo = TJScoutFramework;
+		};
+		B4720EFE108C6A18002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B40225CF1068E88100137628 /* TJSharedFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJSharedFramework */;
+			remoteInfo = TJSharedFramework;
+		};
+		B4720F00108C6A18002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B40225D51068E88E00137628 /* OSCPackFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OSCPackFramework */;
+			remoteInfo = OSCPackFramework;
+		};
+		B4720F02108C6A18002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B402275910691E1E00137628 /* TJScriptFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScriptFramework */;
+			remoteInfo = TJScriptFramework;
+		};
+		B4720F04108C6A18002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B40225E41068E8AA00137628 /* TJNPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJNPFramework */;
+			remoteInfo = TJNPFramework;
+		};
 		B49107841070C87600279D29 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B491077C1070C87600279D29 /* TJScoutFramework.xcodeproj */;
@@ -75,14 +123,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+		B4720F10108C6A23002DEC9F /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
 			files = (
+				B4720EEC108C69DE002DEC9F /* TJNPFramework.framework in Copy Frameworks */,
+				B4720EED108C69E6002DEC9F /* TJScoutFramework.framework in Copy Frameworks */,
+				B4720EEE108C69E6002DEC9F /* TinyXMLFramework.framework in Copy Frameworks */,
+				B4720EEF108C69E6002DEC9F /* TJScriptFramework.framework in Copy Frameworks */,
+				B4720EF0108C69E6002DEC9F /* OSCPackFramework.framework in Copy Frameworks */,
+				B4720EF1108C69E6002DEC9F /* TJSharedFramework.framework in Copy Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -113,6 +168,7 @@
 		B46AC5D11083431600EAE42C /* EndpointDefinition.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = EndpointDefinition.xsd; path = ../Docs/EP/EndpointDefinition.xsd; sourceTree = SOURCE_ROOT; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
+		B4720F61108C6BF5002DEC9F /* TJFabricApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TJFabricApplication-Info.plist"; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
 		B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricgroup.cpp; path = src/tjfabricgroup.cpp; sourceTree = "<group>"; };
 		B491077C1070C87600279D29 /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -154,6 +210,7 @@
 				B40225D51068E88E00137628 /* OSCPackFramework.xcodeproj */,
 				B40225CF1068E88100137628 /* TJSharedFramework.xcodeproj */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				B4720F61108C6BF5002DEC9F /* TJFabricApplication-Info.plist */,
 			);
 			name = TJFabric;
 			sourceTree = "<group>";
@@ -278,13 +335,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "TJFabric" */;
 			buildPhases = (
+				B4720F10108C6A23002DEC9F /* Copy Frameworks */,
 				8DD76F640486A84900D96B5E /* Sources */,
 				8DD76F660486A84900D96B5E /* Frameworks */,
-				8DD76F690486A84900D96B5E /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B4720EFB108C6A18002DEC9F /* PBXTargetDependency */,
+				B4720EFD108C6A18002DEC9F /* PBXTargetDependency */,
+				B4720EFF108C6A18002DEC9F /* PBXTargetDependency */,
+				B4720F01108C6A18002DEC9F /* PBXTargetDependency */,
+				B4720F03108C6A18002DEC9F /* PBXTargetDependency */,
+				B4720F05108C6A18002DEC9F /* PBXTargetDependency */,
 			);
 			name = TJFabric;
 			productInstallPath = "$(HOME)/bin";
@@ -404,6 +467,39 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B4720EFB108C6A18002DEC9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TinyXMLFramework;
+			targetProxy = B4720EFA108C6A18002DEC9F /* PBXContainerItemProxy */;
+		};
+		B4720EFD108C6A18002DEC9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJScoutFramework;
+			targetProxy = B4720EFC108C6A18002DEC9F /* PBXContainerItemProxy */;
+		};
+		B4720EFF108C6A18002DEC9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJSharedFramework;
+			targetProxy = B4720EFE108C6A18002DEC9F /* PBXContainerItemProxy */;
+		};
+		B4720F01108C6A18002DEC9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OSCPackFramework;
+			targetProxy = B4720F00108C6A18002DEC9F /* PBXContainerItemProxy */;
+		};
+		B4720F03108C6A18002DEC9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJScriptFramework;
+			targetProxy = B4720F02108C6A18002DEC9F /* PBXContainerItemProxy */;
+		};
+		B4720F05108C6A18002DEC9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJNPFramework;
+			targetProxy = B4720F04108C6A18002DEC9F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB923208733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -429,8 +525,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/bin;
+				INSTALL_PATH = .;
 				PRODUCT_NAME = TJFabric;
 				SYMROOT = ../build;
 			};
