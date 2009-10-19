@@ -3,10 +3,19 @@
 #import <Foundation/NSPathUtilities.h>
 
 @implementation MainViewController
-@synthesize _logField, _fabricFileField, _runningButton, _stoppedButton, _runItem, _stopItem;
-@synthesize task = _task;
+@synthesize _logField, _fabricFileField, _runningButton, _stoppedButton, _runItem, _stopItem, _statusLabel;
+@synthesize _chooseFabricButton;
+@synthesize _app;
+
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+		_outLock = [[NSLock alloc] init];
+	}
+	return self;
+}
 
 - (void)errorOutputAvailable: (NSNotification *)aNotification {
+	[_outLock lock];
 	NSData *taskData;
 	NSString *newOutput;
 	
@@ -20,11 +29,13 @@
 		[_logField scrollToEndOfDocument:nil];
 		[as release];
 		[newOutput release];
-		[[[self.task standardOutput] fileHandleForReading] readInBackgroundAndNotify];
+		[[[_app.task standardOutput] fileHandleForReading] readInBackgroundAndNotify];
 	}
+	[_outLock unlock];
 }
 
 - (void)outputAvailable: (NSNotification *)aNotification {
+	[_outLock lock];
 	NSData *taskData;
 	NSString *newOutput;
 	
@@ -38,38 +49,47 @@
 		[_logField scrollToEndOfDocument:nil];
 		[as release];
 		[newOutput release];
-		[[[self.task standardOutput] fileHandleForReading] readInBackgroundAndNotify];
+		[[[_app.task standardOutput] fileHandleForReading] readInBackgroundAndNotify];
 	}
+	[_outLock unlock];
 }
 
 - (BOOL) validateToolbarItem:(NSToolbarItem *)theItem {
 	if(theItem.tag==1) {
-		return _task==nil;
+		return _app.task==nil;
 	}
 	else if(theItem.tag==2) {
-		return _task!=nil;
+		return _app.task!=nil;
 	}
-	return FALSE;
+	return YES;
 }
 
 - (void) updateView {
-	if(self.task && [_task isRunning]) {
+	if(_app.task && [_app.task isRunning]) {
+		[_statusLabel setTitleWithMnemonic:@"Server is running"];
 		[_stoppedButton setHidden:YES];
 		[_runningButton setHidden:NO];
+		[_chooseFabricButton setEnabled:FALSE];
 	}
 	else {
+		[_statusLabel setTitleWithMnemonic:@""];
 		[_stoppedButton setHidden:NO];
 		[_runningButton setHidden:YES];
+		[_chooseFabricButton setEnabled:TRUE];
 	}
 };
 
 - (void) processEnded: (NSNotification*)nt {
 	[self updateView];
-	self.task = nil;
+	_app.task = nil;
+}
+
+- (IBAction) clearLog: (id)sender {
+	[_logField.textStorage replaceCharactersInRange:NSMakeRange(0, [_logField.textStorage length]) withString:@""];
 }
 
 - (IBAction) chooseFabricFile: (id)sender {
-	if(self.task==nil) {
+	if(_app.task==nil) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 		[openDlg setCanChooseFiles:YES];
 		[openDlg setAllowsMultipleSelection:NO];
@@ -81,34 +101,34 @@
 }
 
 - (IBAction) startServer: (id)sender {
-	if(!self.task) {
+	if(!_app.task) {
 		NSMutableArray* args = [[NSMutableArray alloc] init];
 		[args addObject:_fabricFileField.stringValue];
-		self.task = [[NSTask alloc] init];
+		_app.task = [[NSTask alloc] init];
 		
 		// Get path to the TJFabric executable
 		NSBundle* mb = [NSBundle mainBundle];
 		NSString* fabricBinaryPath = [mb pathForAuxiliaryExecutable:@"TJFabric"];
 		NSString* fabricCD = [fabricBinaryPath stringByDeletingLastPathComponent];
-		[self.task setLaunchPath:fabricBinaryPath];
-		[self.task setArguments:args];
-		[self.task setCurrentDirectoryPath:fabricCD];
+		[_app.task setLaunchPath:fabricBinaryPath];
+		[_app.task setArguments:args];
+		[_app.task setCurrentDirectoryPath:fabricCD];
 		
 		NSPipe* outPipe = [[NSPipe alloc] init];
 		NSPipe* errorPipe = [[NSPipe alloc] init];
 		NSFileHandle* readOutPipe = [outPipe fileHandleForReading];
 		NSFileHandle* readErrorPipe = [errorPipe fileHandleForReading];
-		[self.task setStandardOutput:outPipe];
-		[self.task setStandardError:errorPipe];
+		[_app.task setStandardOutput:outPipe];
+		[_app.task setStandardError:errorPipe];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputAvailable:) name:NSFileHandleReadCompletionNotification object:readOutPipe];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(errorOutputAvailable:) name:NSFileHandleReadCompletionNotification object:readErrorPipe];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEnded:) name:NSTaskDidTerminateNotification object:self.task];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEnded:) name:NSTaskDidTerminateNotification object:_app.task];
 		
 		[readOutPipe readInBackgroundAndNotify];
 		[readErrorPipe readInBackgroundAndNotify];
 		
-		[self.task launch];
+		[_app.task launch];
 		[args release];
 		[outPipe release];
 		[errorPipe release];
@@ -117,10 +137,10 @@
 }
 
 - (IBAction) stopServer: (id)sender {
-	if(_task!=nil) {
-		[_task interrupt];
-		[_task waitUntilExit];
-		self.task = nil;
+	if(_app!=nil) {
+		[_app.task interrupt];
+		[_app.task waitUntilExit];
+		_app.task = nil;
 	}
 	
 	[self updateView];
@@ -128,12 +148,15 @@
 
 - (void) dealloc {
 	[self stopServer:nil];
+	[_statusLabel release];
+	[_chooseFabricButton release];
 	[_runItem release];
 	[_stopItem release];
 	[_runningButton release];
 	[_stoppedButton release];
 	[_logField release];
 	[_fabricFileField release];
+	[_outLock release];
 	[super dealloc];
 }
 

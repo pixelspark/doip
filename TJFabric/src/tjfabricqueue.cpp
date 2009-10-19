@@ -37,6 +37,10 @@ Queue::Queue(ref<FabricEngine> f): _engine(f) {
 Queue::~Queue() {
 }
 
+void Queue::Stop() {
+	_thread->Stop();
+}
+
 void Queue::Clear() {
 	ThreadLock lock(&_lock);
 	_scriptCache.clear();

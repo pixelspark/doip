@@ -6,11 +6,21 @@
 
 #include <iomanip>
 #include <sstream>
+#include <signal.h>
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::script;
 
+ref<Queue> _globalQueue;
+ref<FabricEngine> _globalEngine;
+
+void handler(int s) {
+	_globalQueue->Stop();
+}
+
 int main(int argc, char** argv) {
+	signal(SIGINT, handler);
+	
 	try {
 		Log::SetLogToConsole(true);
 		Log::Write(L"TJFabric/Main", std::wstring(L"Starting up at ")+Timestamp(true).ToString());
@@ -24,28 +34,21 @@ int main(int argc, char** argv) {
 			fabricFile = argv[1];
 		}
 		
-		ref<FabricEngine> fe = GC::Hold(new FabricEngine());
-		strong<Fabric> fabric = fe->GetFabric();
+		_globalEngine = GC::Hold(new FabricEngine());
+		strong<Fabric> fabric = _globalEngine->GetFabric();
 
 		/** Load the fabric configuration file **/
 		Fabric::LoadRecursive(fabricFile, fabric);
-		fe->Connect(true);
+		_globalEngine->Connect(true);
 		
 		// For testing
-		ref<Queue> q = fe->GetQueue();
+		_globalQueue = _globalEngine->GetQueue();
 		ref<Message> msg = GC::Hold(new Message(L"init"));
-		q->Add(msg);
-
-		#ifdef TJ_OS_POSIX
-			sleep(1);
-		#endif
-
-		#ifdef TJ_OS_WIN
-			Sleep(10000);
-		#endif
-		
-		
-		q->WaitForCompletion();
+		_globalQueue->Add(msg);
+		_globalQueue->WaitForCompletion();
+		_globalQueue = null;
+		_globalEngine = null;
+		Log::Write(L"TJFabric/Main", L"Graceful shutdown");
 	}
 	catch(const ScriptException& e) {
 		std::wcerr << L"Script exception: " << e.GetMsg() << std::endl;

@@ -3,11 +3,13 @@
 
 #import <CoreFoundation/CoreFoundation.h>
 #import "MWMethod.h"
+#include "MWDownload.h"
 
 typedef class UdpSocket;
 
-@interface MWEndpoint : NSObject {
+@interface MWEndpoint : NSObject <MWDownloadDelegate> {
 	NSNetService* _service;
+	MWDownload* _download;
 	NSData* _definitionFileData;
 	NSString* _transportAddress;
 	NSString* _transportType;
@@ -26,6 +28,7 @@ typedef class UdpSocket;
 @property (nonatomic, retain) NSString* transportType;
 @property (nonatomic, retain) NSString* transportFormat;
 @property (nonatomic, readonly) NSMutableArray* methods;
+@property (nonatomic, retain) MWDownload* download;
 
 @end
 

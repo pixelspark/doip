@@ -13,6 +13,7 @@ using namespace osc;
 @synthesize methods = _methods;
 @synthesize transportFormat = _transportFormat;
 @synthesize transportType = _transportType;
+@synthesize download = _download;
 
 - (id) initWithService:(NSNetService*)service {
 	if(self = [super init]) {
@@ -69,7 +70,6 @@ using namespace osc;
 }
 
 - (void)netService:(NSNetService*)service didUpdateTXTRecordData:(NSData*)data {
-	
 	// Parse the properties and get the EP definition file path
 	[_service stopMonitoring];
 	NSDictionary* props = [NSNetService dictionaryFromTXTRecordData:data];
@@ -83,8 +83,10 @@ using namespace osc;
 	
 	// Start fetching the definition file
 	NSURL* url = [[NSURL alloc] initWithScheme:@"http" host:[NSString stringWithFormat:@"%@:%d",[_service hostName], [_service port]] path:path];
-	//NSLog(@"URL is %@", url);
-	NSData* xmlData = [NSData dataWithContentsOfURL:url];
+	self.download = [[MWDownload alloc] initWithURL:url delegate:self];
+}
+
+- (void) download:(MWDownload*)d completed:(NSData*)xmlData {
 	if(xmlData!=nil && [xmlData length]>0) {
 		TiXmlDocument doc;
 		unsigned int xmlDataLength = [xmlData length];
@@ -99,8 +101,7 @@ using namespace osc;
 		if(root!=0) {
 			int version = 0;
 			root->Attribute("version", &version);
-			//NSLog(@"Endpoint id=%s class=%s friendly=%s version=%d", root->Attribute("id"),root->Attribute("class"), root->Attribute("friendly-name"), version);
-			
+		
 			// Find a UDP4 transport mechanism that we can use
 			TiXmlElement* transports = root->FirstChildElement("transports");
 			if(transports!=0) {
@@ -111,10 +112,10 @@ using namespace osc;
 					
 					if([_transportType isEqualToString:@"udp"] && [_transportFormat isEqualToString:@"osc"]) {
 						const char* address = transport->Attribute("address");
-											
+						
 						// If no address is specified, use the host address for this service (when an address is specified, this is multicast)
 						if(address==0) {
-							self.transportAddress = [service hostName];
+							self.transportAddress = [self.service hostName];
 						}
 						else {
 							self.transportAddress = [NSString stringWithUTF8String:address];
@@ -162,6 +163,7 @@ using namespace osc;
 		
 		delete[] xmlDataString;
 	}
+	
 }
 
 - (NSNetService*) service {
@@ -179,6 +181,7 @@ using namespace osc;
 	[_transportFormat release];
 	[_transportType release];
 	[_methods release];
+	[_download release];
 	delete _socket;
 	[super dealloc];
 }

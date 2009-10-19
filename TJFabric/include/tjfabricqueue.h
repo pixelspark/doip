@@ -32,6 +32,7 @@ namespace tj {
 				virtual void Clear();
 				virtual void Add(tj::shared::strong<Message> m);
 				virtual void WaitForCompletion();
+				virtual void Stop();
 			
 			protected:
 				virtual void ProcessMessage(tj::shared::strong<Message> m);
