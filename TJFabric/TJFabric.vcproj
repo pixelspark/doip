@@ -227,11 +227,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\src\connections\tjoscudpconnection.cpp"
+					RelativePath=".\src\connections\tjoscipconnection.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\src\connections\tjoscudpconnection.h"
+					RelativePath=".\src\connections\tjoscipconnection.h"
 					>
 				</File>
 				<File
