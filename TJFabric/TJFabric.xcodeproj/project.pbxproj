@@ -32,7 +32,7 @@
 		B491078E1070C88300279D29 /* TJScoutFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49107851070C87600279D29 /* TJScoutFramework.framework */; };
 		B4C5948E1071F597000A3E6E /* tjdnssddiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4C5948D1071F597000A3E6E /* tjdnssddiscovery.cpp */; };
 		B4D0F24B106CB5530053A1BA /* tjfabricconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */; };
-		B4D0F26A106CD55A0053A1BA /* tjoscudpconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */; };
+		B4D0F26A106CD55A0053A1BA /* tjoscipconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4D0F269106CD55A0053A1BA /* tjoscipconnection.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,8 +176,8 @@
 		B4C5948D1071F597000A3E6E /* tjdnssddiscovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjdnssddiscovery.cpp; path = src/connections/tjdnssddiscovery.cpp; sourceTree = "<group>"; };
 		B4D0F249106CB3FB0053A1BA /* tjfabricconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricconnection.h; path = include/tjfabricconnection.h; sourceTree = "<group>"; };
 		B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricconnection.cpp; path = src/tjfabricconnection.cpp; sourceTree = "<group>"; };
-		B4D0F268106CD55A0053A1BA /* tjoscudpconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjoscudpconnection.h; path = src/connections/tjoscudpconnection.h; sourceTree = "<group>"; };
-		B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjoscudpconnection.cpp; path = src/connections/tjoscudpconnection.cpp; sourceTree = "<group>"; };
+		B4D0F268106CD55A0053A1BA /* tjoscipconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjoscipconnection.h; path = src/connections/tjoscipconnection.h; sourceTree = "<group>"; };
+		B4D0F269106CD55A0053A1BA /* tjoscipconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjoscipconnection.cpp; path = src/connections/tjoscipconnection.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,8 +320,8 @@
 			children = (
 				B4C5948D1071F597000A3E6E /* tjdnssddiscovery.cpp */,
 				B4C594881071F4E6000A3E6E /* tjdnssddiscovery.h */,
-				B4D0F268106CD55A0053A1BA /* tjoscudpconnection.h */,
-				B4D0F269106CD55A0053A1BA /* tjoscudpconnection.cpp */,
+				B4D0F268106CD55A0053A1BA /* tjoscipconnection.h */,
+				B4D0F269106CD55A0053A1BA /* tjoscipconnection.cpp */,
 				B423B830106E13F500147974 /* tjoscutil.h */,
 				B423B831106E144F00147974 /* tjoscutil.cpp */,
 			);
@@ -457,7 +457,7 @@
 				B40229A41069653500137628 /* tjfabricmessagescriptable.cpp in Sources */,
 				B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */,
 				B4D0F24B106CB5530053A1BA /* tjfabricconnection.cpp in Sources */,
-				B4D0F26A106CD55A0053A1BA /* tjoscudpconnection.cpp in Sources */,
+				B4D0F26A106CD55A0053A1BA /* tjoscipconnection.cpp in Sources */,
 				B423B7F1106E0E4200147974 /* tjfabricutil.cpp in Sources */,
 				B423B832106E144F00147974 /* tjoscutil.cpp in Sources */,
 				B4C5948E1071F597000A3E6E /* tjdnssddiscovery.cpp in Sources */,

@@ -1,5 +1,5 @@
 #include "tjdnssddiscovery.h"
-#include "tjoscudpconnection.h"
+#include "tjoscipconnection.h"
 #include "../../../TJScout/include/tjscout.h"
 using namespace tj::shared;
 using namespace tj::fabric;

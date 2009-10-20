@@ -1,6 +1,6 @@
 #include "../include/tjfabricgroup.h"
 #include "../include/tjfabricutil.h"
-#include "connections/tjoscudpconnection.h"
+#include "connections/tjoscipconnection.h"
 #include "connections/tjdnssddiscovery.h"
 using namespace tj::shared;
 using namespace tj::fabric;
@@ -22,6 +22,7 @@ std::wstring ConnectionDefinition::GetType() const {
 /** ConnectionDefinitionFactory **/
 ConnectionDefinitionFactory::ConnectionDefinitionFactory() {
 	RegisterPrototype(L"udp", GC::Hold(new SubclassedPrototype<connections::OSCOverUDPConnectionDefinition, ConnectionDefinition>(L"OSC-over-UDP")));
+	RegisterPrototype(L"tcp", GC::Hold(new SubclassedPrototype<connections::OSCOverTCPConnectionDefinition, ConnectionDefinition>(L"OSC-over-TCP")));
 }
 
 ConnectionDefinitionFactory::~ConnectionDefinitionFactory() {

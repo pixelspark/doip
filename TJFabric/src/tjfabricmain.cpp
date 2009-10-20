@@ -37,14 +37,16 @@ int main(int argc, char** argv) {
 		_globalEngine = GC::Hold(new FabricEngine());
 		strong<Fabric> fabric = _globalEngine->GetFabric();
 
-		/** Load the fabric configuration file **/
+		// Load the fabric configuration file
 		Fabric::LoadRecursive(fabricFile, fabric);
 		_globalEngine->Connect(true);
 		
-		// For testing
+		// Initialize fabric with init message
 		_globalQueue = _globalEngine->GetQueue();
 		ref<Message> msg = GC::Hold(new Message(L"init"));
 		_globalQueue->Add(msg);
+		
+		// Wait for completion (interruption with SIGINT will stop the queue thread)
 		_globalQueue->WaitForCompletion();
 		_globalQueue = null;
 		_globalEngine = null;

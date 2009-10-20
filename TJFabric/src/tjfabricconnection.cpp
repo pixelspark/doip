@@ -1,6 +1,6 @@
 #include "../include/tjfabricmessage.h"
 #include "../include/tjfabricconnection.h"
-#include "connections/tjoscudpconnection.h"
+#include "connections/tjoscipconnection.h"
 #include "connections/tjdnssddiscovery.h"
 using namespace tj::shared;
 using namespace tj::fabric;
@@ -18,6 +18,7 @@ MessageNotification::MessageNotification(const Timestamp& ts, strong<Message> m)
 /** ConnectionFactory **/
 ConnectionFactory::ConnectionFactory() {
 	RegisterPrototype(L"udp", GC::Hold(new SubclassedPrototype<connections::OSCOverUDPConnection, Connection>(L"OSC-over-UDP")));
+	RegisterPrototype(L"tcp", GC::Hold(new SubclassedPrototype<connections::OSCOverTCPConnection, Connection>(L"OSC-over-TCP")));
 }
 
 ConnectionFactory::~ConnectionFactory() {
