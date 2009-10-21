@@ -3,8 +3,8 @@
 #import <Foundation/NSPathUtilities.h>
 
 @implementation MainViewController
-@synthesize _logField, _fabricFileField, _runningButton, _stoppedButton, _runItem, _stopItem, _statusLabel;
-@synthesize _chooseFabricButton;
+@synthesize _logField, _fabrics, _runningButton, _stoppedButton, _runItem, _stopItem, _statusLabel;
+@synthesize _addFabricButton;
 @synthesize _app;
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -23,7 +23,7 @@
 	if([taskData length]) {
 		newOutput = [[NSString alloc] initWithData:taskData encoding:NSMacOSRomanStringEncoding];
 		
-		NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Lucida Console" size:10.0], NSFontAttributeName, [NSColor redColor], NSForegroundColorAttributeName, nil];
+		NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Lucida Console" size:8.0], NSFontAttributeName, [NSColor redColor], NSForegroundColorAttributeName, nil];
 		NSAttributedString* as = [[NSAttributedString alloc] initWithString:newOutput attributes:options];
 		[_logField.textStorage insertAttributedString:as atIndex:[_logField.textStorage length]];
 		[_logField scrollToEndOfDocument:nil];
@@ -43,7 +43,7 @@
 	if([taskData length]) {
 		newOutput = [[NSString alloc] initWithData:taskData encoding:NSMacOSRomanStringEncoding];
 		
-		NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Lucida Console" size:10.0], NSFontAttributeName, nil];
+		NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont fontWithName:@"Lucida Console" size:8.0], NSFontAttributeName, nil];
 		NSAttributedString* as = [[NSAttributedString alloc] initWithString:newOutput attributes:options];
 		[_logField.textStorage insertAttributedString:as atIndex:[_logField.textStorage length]];
 		[_logField scrollToEndOfDocument:nil];
@@ -69,13 +69,13 @@
 		[_statusLabel setTitleWithMnemonic:@"Server is running"];
 		[_stoppedButton setHidden:YES];
 		[_runningButton setHidden:NO];
-		[_chooseFabricButton setEnabled:FALSE];
+		//[_addFabricButton setEnabled:FALSE];
 	}
 	else {
 		[_statusLabel setTitleWithMnemonic:@""];
 		[_stoppedButton setHidden:NO];
 		[_runningButton setHidden:YES];
-		[_chooseFabricButton setEnabled:TRUE];
+		//[_addFabricButton setEnabled:TRUE];
 	}
 };
 
@@ -95,7 +95,12 @@
 		[openDlg setAllowsMultipleSelection:NO];
 		
 		if ([openDlg runModal] == NSOKButton) {
-			_fabricFileField.stringValue = [openDlg filename];
+			NSMutableDictionary* obj = [[NSMutableDictionary alloc] init];
+			NSString* fn = [openDlg filename];
+			[obj setObject:fn forKey:@"Path"];
+			[obj setObject:[fn lastPathComponent] forKey:@"Name"];
+			[_fabrics addObject:obj];
+			[obj release];
 		}
 	}
 }
@@ -103,7 +108,10 @@
 - (IBAction) startServer: (id)sender {
 	if(!_app.task) {
 		NSMutableArray* args = [[NSMutableArray alloc] init];
-		[args addObject:_fabricFileField.stringValue];
+		//[args addObject:_fabricFileField.stringValue];
+		for (NSMutableDictionary* obj in [_fabrics arrangedObjects]) {
+			[args addObject:[obj valueForKey:@"Path"]];
+		}
 		_app.task = [[NSTask alloc] init];
 		
 		// Get path to the TJFabric executable
@@ -149,13 +157,13 @@
 - (void) dealloc {
 	[self stopServer:nil];
 	[_statusLabel release];
-	[_chooseFabricButton release];
+	[_addFabricButton release];
 	[_runItem release];
 	[_stopItem release];
 	[_runningButton release];
 	[_stoppedButton release];
 	[_logField release];
-	[_fabricFileField release];
+	[_fabrics release];
 	[_outLock release];
 	[super dealloc];
 }

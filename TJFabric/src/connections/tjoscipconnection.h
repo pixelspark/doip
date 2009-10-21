@@ -87,7 +87,7 @@ namespace tj {
 				public:
 					OSCOverTCPConnection();
 					virtual ~OSCOverTCPConnection();
-					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d);
+					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe);
 					virtual void Create(const std::wstring& address, unsigned short port, Direction d);
 					virtual void OnReceive(tj::np::NativeSocket ns);
 				
@@ -116,7 +116,7 @@ namespace tj {
 				public:
 					OSCOverUDPConnection();
 					virtual ~OSCOverUDPConnection();
-					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d);
+					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe);
 					virtual void Create(const std::wstring& address, unsigned short port, Direction d);
 					virtual void OnReceive(tj::np::NativeSocket ns);
 					

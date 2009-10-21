@@ -432,7 +432,7 @@ void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short po
 	}	
 }
 
-void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction) {
+void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction, strong<FabricEngine> fe) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverUDPConnectionDefinition>()) {
 		ref<OSCOverUDPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
@@ -626,7 +626,7 @@ void OSCOverTCPConnection::Create(const std::wstring& address, unsigned short po
 	}
 }
 
-void OSCOverTCPConnection::Create(strong<ConnectionDefinition> def, Direction direction) {
+void OSCOverTCPConnection::Create(strong<ConnectionDefinition> def, Direction direction, strong<FabricEngine> fe) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverTCPConnectionDefinition>()) {
 		ref<OSCOverTCPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {

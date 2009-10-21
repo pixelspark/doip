@@ -38,7 +38,9 @@ Queue::~Queue() {
 }
 
 void Queue::Stop() {
-	_thread->Stop();
+	if(_thread) {
+		_thread->Stop();
+	}
 }
 
 void Queue::Clear() {
@@ -51,6 +53,11 @@ void Queue::Clear() {
 void Queue::Add(strong<Message> m) {
 	ThreadLock lock(&_lock);
 	_queue.push_back(m);
+	
+	if(!_thread) {
+		_thread = GC::Hold(new QueueThread(this));
+		_thread->Start();
+	}
 	_thread->SignalWorkAdded();
 }
 
@@ -58,13 +65,12 @@ void Queue::OnCreated() {
 	_global = GC::Hold(new ScriptScope());
 	_context = GC::Hold(new ScriptContext(GC::Hold(new QueueGlobalScriptable(this))));
 	_context->AddType(L"Message", GC::Hold(new MessageScriptType()));
-	
-	_thread = GC::Hold(new QueueThread(this));
-	_thread->Start();
 }
 
 void Queue::WaitForCompletion() {
-	_thread->WaitForCompletion();
+	if(_thread) {
+		_thread->WaitForCompletion();
+	}
 }
 
 void Queue::ExecuteScript(strong<Rule> r, strong<CompiledScript> cs, strong<Message> m) {
@@ -162,6 +168,14 @@ void QueueThread::Stop() {
 
 void QueueThread::Run() {
 	Log::Write(L"TJFabric/QueueThread", L"Queue processing thread started");
+	// Init message
+	{
+		ref<Queue> q = _queue;
+		if(q) {
+			q->ProcessMessage(GC::Hold(new Message(L"init")));
+		}
+	}
+	
 	while(_running) {
 		_signal.Wait();
 		_signal.Reset();

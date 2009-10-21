@@ -7,6 +7,7 @@
 namespace tj {
 	namespace fabric {
 		class Message;
+		class FabricEngine;
 		
 		struct MessageNotification {
 			MessageNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Message> m);
@@ -18,7 +19,7 @@ namespace tj {
 		class Connection: public virtual tj::shared::Object {
 			public:
 				virtual ~Connection();
-				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d) = 0;
+				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> engine) = 0;
 				virtual void Send(tj::shared::strong< Message > msg) = 0;
 			
 				tj::shared::Listenable<MessageNotification> EventMessageReceived;
@@ -27,7 +28,7 @@ namespace tj {
 		class ConnectionFactory: public virtual tj::shared::PrototypeBasedFactory< Connection > {
 			public:
 				virtual ~ConnectionFactory();
-				virtual tj::shared::ref<Connection> CreateFromDefinition(tj::shared::strong<ConnectionDefinition> cd, Direction d);
+				virtual tj::shared::ref<Connection> CreateFromDefinition(tj::shared::strong<ConnectionDefinition> cd, Direction d, tj::shared::strong<FabricEngine> engine);
 				static tj::shared::strong< ConnectionFactory > Instance();
 			
 			protected:
@@ -66,7 +67,7 @@ namespace tj {
 			public:
 				ConnectedGroup(tj::shared::strong<Group> g);
 				virtual ~ConnectedGroup();
-				virtual void Connect(bool t);
+				virtual void Connect(bool t, tj::shared::strong<FabricEngine> fe);
 				virtual void Send(tj::shared::strong<Message> m);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const MessageNotification& data);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const DiscoveryNotification& data);

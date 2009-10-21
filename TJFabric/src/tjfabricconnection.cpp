@@ -1,12 +1,8 @@
 #include "../include/tjfabricmessage.h"
 #include "../include/tjfabricconnection.h"
-#include "connections/tjoscipconnection.h"
-#include "connections/tjdnssddiscovery.h"
+#include "../include/tjfabricengine.h"
 using namespace tj::shared;
 using namespace tj::fabric;
-
-ref<ConnectionFactory> ConnectionFactory::_instance;
-ref<DiscoveryFactory> DiscoveryFactory::_instance;
 
 /** Connection **/
 Connection::~Connection() {
@@ -16,19 +12,14 @@ MessageNotification::MessageNotification(const Timestamp& ts, strong<Message> m)
 }
 
 /** ConnectionFactory **/
-ConnectionFactory::ConnectionFactory() {
-	RegisterPrototype(L"udp", GC::Hold(new SubclassedPrototype<connections::OSCOverUDPConnection, Connection>(L"OSC-over-UDP")));
-	RegisterPrototype(L"tcp", GC::Hold(new SubclassedPrototype<connections::OSCOverTCPConnection, Connection>(L"OSC-over-TCP")));
-}
-
 ConnectionFactory::~ConnectionFactory() {
 }
 
-ref<Connection> ConnectionFactory::CreateFromDefinition(strong<ConnectionDefinition> cd, Direction d) {
+ref<Connection> ConnectionFactory::CreateFromDefinition(strong<ConnectionDefinition> cd, Direction d, strong<FabricEngine> fe) {
 	std::wstring type = cd->GetType();
 	ref<Connection> conn = CreateObjectOfType(type);
 	if(conn) {
-		conn->Create(cd, d);
+		conn->Create(cd, d, fe);
 	}
 	return conn;
 }
@@ -106,7 +97,7 @@ void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& dat
 	}
 }
 
-void ConnectedGroup::Connect(bool t) {
+void ConnectedGroup::Connect(bool t, strong<FabricEngine> fe) {
 	if(t) {
 		{
 			// Create connections from definitions in Group
@@ -120,7 +111,7 @@ void ConnectedGroup::Connect(bool t) {
 						newConnections[cd] = eit->second;
 					}
 					else {
-						ref<Connection> conn = ConnectionFactory::Instance()->CreateFromDefinition(cd, _group->GetDirection());
+						ref<Connection> conn = ConnectionFactory::Instance()->CreateFromDefinition(cd, _group->GetDirection(), fe);
 						
 						if(conn) {
 							conn->EventMessageReceived.AddListener(ref<ConnectedGroup>(this));
@@ -180,10 +171,6 @@ DiscoveryNotification::DiscoveryNotification(const Timestamp& ts, strong<Connect
 }
 
 /** DiscoveryFactory **/
-DiscoveryFactory::DiscoveryFactory() {
-	RegisterPrototype(L"dnssd", GC::Hold(new SubclassedPrototype<connections::DNSSDDiscovery, Discovery>(L"DNS-SD/mDNS discovery")));
-}
-
 DiscoveryFactory::~DiscoveryFactory() {
 }
 

@@ -11,59 +11,57 @@ using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::script;
 
-ref<Queue> _globalQueue;
-ref<FabricEngine> _globalEngine;
+Event _globalStop;
 
-void handler(int s) {
-	_globalQueue->Stop();
+void sigIntHandler(int s) {
+	if(s==SIGINT) {
+		_globalStop.Signal();
+	}
 }
 
 int main(int argc, char** argv) {
-	signal(SIGINT, handler);
+	signal(SIGINT, sigIntHandler);
 	
 	try {
 		Log::SetLogToConsole(true);
 		Log::Write(L"TJFabric/Main", std::wstring(L"Starting up at ")+Timestamp(true).ToString());
 		
-		std::string fabricFile;
+		std::map<std::string, ref<FabricEngine> > fabrics;
 		if(argc<2) {
 			Log::Write(L"TJFabric/Main", L"No fabric configuration file given, using ./default.fabric");
-			fabricFile = "./default.fabric";
+			std::string fabricFile = "./default.fabric";
 		}
 		else {
-			fabricFile = argv[1];
+			for(int a=1; a < argc; a++) {
+				ref<FabricEngine> engine = GC::Hold(new FabricEngine());
+				strong<Fabric> fabric = engine->GetFabric();
+				Fabric::LoadRecursive(argv[a], fabric);
+				engine->Connect(true);
+				fabrics[argv[1]] = engine;
+			}
 		}
 		
-		_globalEngine = GC::Hold(new FabricEngine());
-		strong<Fabric> fabric = _globalEngine->GetFabric();
-
-		// Load the fabric configuration file
-		Fabric::LoadRecursive(fabricFile, fabric);
-		_globalEngine->Connect(true);
-		
-		// Initialize fabric with init message
-		_globalQueue = _globalEngine->GetQueue();
-		ref<Message> msg = GC::Hold(new Message(L"init"));
-		_globalQueue->Add(msg);
-		
-		// Wait for completion (interruption with SIGINT will stop the queue thread)
-		_globalQueue->WaitForCompletion();
-		_globalQueue = null;
-		_globalEngine = null;
-		Log::Write(L"TJFabric/Main", L"Graceful shutdown");
+		// Wait for stop (interruption with SIGINT will signal _globalStop)
+		_globalStop.Wait();
+		fabrics.clear();
 	}
 	catch(const ScriptException& e) {
 		std::wcerr << L"Script exception: " << e.GetMsg() << std::endl;
+		return -1;
 	}
 	catch(const Exception& e) {
 		std::wcerr << L"Exception: " << e.GetMsg() << std::endl;
+		return -1;
 	}
 	catch(std::exception& e) {
 		std::cerr << "Standard Exception: " << e.what() << std::endl;
+		return -1;
 	}
 	catch(...) {
 		std::wcerr << L"Unknown exception occurred" << std::endl;
+		return -1;
 	}
 	
+	Log::Write(L"TJFabric/Main", L"Graceful shutdown");
 	return 0;
 }

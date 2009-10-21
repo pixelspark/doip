@@ -3,14 +3,15 @@
 
 @interface MainViewController : NSViewController {
 	NSTextView* _logField;
-	NSTextField* _fabricFileField;
+	NSArrayController* _fabrics;
 	NSButton* _runningButton;
 	NSButton* _stoppedButton;
-	NSButton* _chooseFabricButton;
+	NSButton* _addFabricButton;
 	NSToolbarItem* _runItem, *_stopItem;
 	NSTextField* _statusLabel;
 	FrontendAppDelegate* _app;
 	NSLock* _outLock;
+	
 }
 
 - (IBAction) chooseFabricFile: (id)sender;
@@ -19,13 +20,13 @@
 - (IBAction) clearLog: (id)sender;
 
 @property (nonatomic, retain) IBOutlet NSTextView* _logField;
-@property (nonatomic, retain) IBOutlet NSTextField* _fabricFileField;
+@property (nonatomic, retain) IBOutlet NSButton* _addFabricButton;
 @property (nonatomic, retain) IBOutlet NSButton* _runningButton;
 @property (nonatomic, retain) IBOutlet NSButton* _stoppedButton;
 @property (nonatomic, retain) IBOutlet NSToolbarItem* _runItem;
 @property (nonatomic, retain) IBOutlet NSToolbarItem* _stopItem;
 @property (nonatomic, retain) IBOutlet NSTextField* _statusLabel;
-@property (nonatomic, retain) IBOutlet NSButton* _chooseFabricButton;
+@property (nonatomic, retain) IBOutlet NSArrayController* _fabrics;
 @property (nonatomic, assign) IBOutlet FrontendAppDelegate* _app;
 
 @end

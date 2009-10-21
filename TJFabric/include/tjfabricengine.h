@@ -27,13 +27,10 @@ namespace tj {
 			protected:
 				virtual void OnCreated();
 				virtual void Clear();
-				virtual void RegisterEndpointService();
 			
 				tj::shared::CriticalSection _lock;
 				tj::shared::ref<Fabric> _fabric;
 				tj::shared::ref<Queue> _queue;
-				tj::shared::ref<tj::np::WebServer> _webServer;
-				tj::shared::ref< tj::scout::ServiceRegistration > _serviceRegistration;
 				std::map< tj::shared::ref<Group>, tj::shared::ref<ConnectedGroup> > _groups;
 		};
 	}

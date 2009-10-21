@@ -283,7 +283,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>7</integer>
 									<integer>4</integer>
 									<integer>3</integer>
 									<integer>0</integer>
@@ -325,7 +325,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>B40226201068F01300137628</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>tjoscipconnection.cpp</string>
+								<string>client.fabric</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -333,11 +333,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B40226211068F01300137628</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>tjoscipconnection.cpp</string>
+										<string>client.fabric</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B46A19E5108E43B700B5A89E</string>
+										<string>B4E3ECB9108F6043008B42D7</string>
 										<key>history</key>
 										<array>
 											<string>B402274C10691D6500137628</string>
@@ -407,17 +407,17 @@
 											<string>B46A1967108E39ED00B5A89E</string>
 											<string>B46A1968108E39ED00B5A89E</string>
 											<string>B46A196A108E39ED00B5A89E</string>
-											<string>B46A196E108E39ED00B5A89E</string>
 											<string>B46A1988108E3A8C00B5A89E</string>
-											<string>B46A19A0108E3E6D00B5A89E</string>
 											<string>B46A19A1108E3E6D00B5A89E</string>
-											<string>B46A19B8108E41E400B5A89E</string>
 											<string>B46A19B9108E41E400B5A89E</string>
 											<string>B46A19BB108E41E400B5A89E</string>
 											<string>B46A19BC108E41E400B5A89E</string>
 											<string>B46A19BD108E41E400B5A89E</string>
 											<string>B46A19D8108E42CB00B5A89E</string>
-											<string>B46A19D9108E42CB00B5A89E</string>
+											<string>B46A19E6108E480400B5A89E</string>
+											<string>B46A19E7108E480400B5A89E</string>
+											<string>B46A19E9108E487100B5A89E</string>
+											<string>B46A19F0108E54BB00B5A89E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -431,18 +431,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1033, 594}}</string>
+								<string>{{0, 0}, {1033, 588}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 94 1280 905 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>594pt</string>
+							<string>588pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>265pt</string>
+							<string>271pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -456,7 +456,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1033, 233}}</string>
+										<string>{{10, 27}, {1033, 244}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 94 1280 905 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -511,8 +513,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1033, 238}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 94 1280 905 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -540,11 +540,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B46A1975108E39F400B5A89E</string>
+				<string>B4E3ECBA108F6043008B42D7</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B46A1976108E39F400B5A89E</string>
+				<string>B4E3ECBB108F6043008B42D7</string>
 				<string>B40226201068F01300137628</string>
-				<string>B46A1977108E39F400B5A89E</string>
+				<string>B4E3ECBC108F6043008B42D7</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -737,8 +737,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B46A197E108E39F400B5A89E</string>
-		<string>B46A197F108E39F400B5A89E</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/TJFabric/TJFabric.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
