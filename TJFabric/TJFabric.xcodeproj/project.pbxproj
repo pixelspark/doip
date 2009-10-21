@@ -170,7 +170,6 @@
 		B46AC5D11083431600EAE42C /* EndpointDefinition.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = EndpointDefinition.xsd; path = ../Docs/EP/EndpointDefinition.xsd; sourceTree = SOURCE_ROOT; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
-		B4720F61108C6BF5002DEC9F /* TJFabricApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TJFabricApplication-Info.plist"; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
 		B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricgroup.cpp; path = src/tjfabricgroup.cpp; sourceTree = "<group>"; };
 		B491077C1070C87600279D29 /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -215,7 +214,6 @@
 				B40225D51068E88E00137628 /* OSCPackFramework.xcodeproj */,
 				B40225CF1068E88100137628 /* TJSharedFramework.xcodeproj */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				B4720F61108C6BF5002DEC9F /* TJFabricApplication-Info.plist */,
 			);
 			name = TJFabric;
 			sourceTree = "<group>";

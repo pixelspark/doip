@@ -280,8 +280,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
-									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -331,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4E3EDEE108F94D8008B42D7</string>
+										<string>B4E3EE7B108FBF1E008B42D7</string>
 										<key>history</key>
 										<array>
 											<string>B4720FE9108C772D002DEC9F</string>
@@ -345,7 +343,7 @@
 											<string>B4E3ED5B108F8A95008B42D7</string>
 											<string>B4E3ED89108F901F008B42D7</string>
 											<string>B4E3EDEC108F94D8008B42D7</string>
-											<string>B4E3EDED108F94D8008B42D7</string>
+											<string>B4E3EE7A108FBF1E008B42D7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -359,18 +357,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 530}}</string>
+								<string>{{0, 0}, {1073, 522}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 96 1280 906 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>530pt</string>
+							<string>522pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>330pt</string>
+							<string>338pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -384,7 +382,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 303}}</string>
+										<string>{{10, 27}, {1073, 311}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 96 1280 906 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -439,8 +439,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1073, 303}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 96 1280 906 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -468,11 +466,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4E3ED5E108F8A95008B42D7</string>
+				<string>B4E3EE7C108FBF1E008B42D7</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B4E3ED5F108F8A95008B42D7</string>
+				<string>B4E3EE7D108FBF1E008B42D7</string>
 				<string>B4720CF4108C4A75002DEC9F</string>
-				<string>B4E3ED60108F8A95008B42D7</string>
+				<string>B4E3EE7E108FBF1E008B42D7</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -663,8 +661,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B4E3ED73108F8E71008B42D7</string>
-		<string>B4E3ED74108F8E71008B42D7</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/TJFabric/Frontend/Frontend.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
