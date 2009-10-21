@@ -1,5 +1,6 @@
 #include "tjoscipconnection.h"
 #include "../../include/tjfabricmessage.h"
+#include "../../include/tjfabricengine.h"
 #include "tjoscutil.h"
 #include "../../../Libraries/OSCPack/osc/OscOutboundPacketStream.h"
 #include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"

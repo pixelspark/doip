@@ -3,6 +3,7 @@
 
 #include "../../TJShared/include/tjshared.h"
 #include "tjfabricgroup.h"
+#include "tjfabricmessage.h"
 
 namespace tj {
 	namespace fabric {

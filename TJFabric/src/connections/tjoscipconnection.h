@@ -4,7 +4,7 @@
 #include "../../../TJShared/include/tjshared.h"
 #include "../../include/tjfabricconnection.h"
 #include "../../include/tjfabricgroup.h"
-#include "../../../TJNP/include/tjsocketutil.h"
+#include "../../../TJNP/include/tjsocket.h"
 #include "../../../TJNP/include/tjnetworkaddress.h"
 #include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"
 #include "../../../TJScout/include/tjservice.h"

@@ -219,11 +219,23 @@
 				Name="connections"
 				>
 				<File
+					RelativePath=".\src\connections\tjconnectionsregistry.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\connections\tjdnssddiscovery.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\src\connections\tjdnssddiscovery.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\connections\tjepconnection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\connections\tjepconnection.h"
 					>
 				</File>
 				<File
