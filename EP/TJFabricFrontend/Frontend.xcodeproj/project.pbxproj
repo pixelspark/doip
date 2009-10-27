@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		256AC3DA0F4B6AC300CF3369 /* FrontendAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* FrontendAppDelegate.m */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B4720D60108C50AC002DEC9F /* Fabric.icns in Resources */ = {isa = PBXBuildFile; fileRef = B4720D5F108C50AC002DEC9F /* Fabric.icns */; };
+		B4720D97108C5650002DEC9F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4720D96108C5650002DEC9F /* MainViewController.m */; };
+		B4720F98108C6D8D002DEC9F /* TJScoutFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D3C108C4B31002DEC9F /* TJScoutFramework.framework */; };
+		B4720F99108C6D8D002DEC9F /* OSCPackFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D36108C4B25002DEC9F /* OSCPackFramework.framework */; };
+		B4720F9A108C6D8D002DEC9F /* TinyXMLFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D30108C4B1B002DEC9F /* TinyXMLFramework.framework */; };
+		B4720F9B108C6D8D002DEC9F /* TJNPFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D2A108C4B0E002DEC9F /* TJNPFramework.framework */; };
+		B4720F9C108C6D8D002DEC9F /* TJScriptFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D24108C4B04002DEC9F /* TJScriptFramework.framework */; };
+		B4720F9D108C6D8D002DEC9F /* TJSharedFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D1E108C4AF6002DEC9F /* TJSharedFramework.framework */; };
+		B4720FCB108C71CA002DEC9F /* Start.png in Resources */ = {isa = PBXBuildFile; fileRef = B4720FCA108C71CA002DEC9F /* Start.png */; };
+		B4720FCD108C726E002DEC9F /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = B4720FCC108C726E002DEC9F /* Stop.png */; };
+		B4720FD3108C73D5002DEC9F /* Running.png in Resources */ = {isa = PBXBuildFile; fileRef = B4720FD2108C73D5002DEC9F /* Running.png */; };
+		B4720FD5108C74A3002DEC9F /* Stopped.png in Resources */ = {isa = PBXBuildFile; fileRef = B4720FD4108C74A3002DEC9F /* Stopped.png */; };
+		B48DBFA0108CAB46002AB313 /* Clear.png in Resources */ = {isa = PBXBuildFile; fileRef = B48DBF9F108CAB46002AB313 /* Clear.png */; };
+		B48DC1C7108CBFE0002AB313 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58150DA1D0A300B32029 /* MainMenu.xib */; };
+		B4977779109782B200FA1B69 /* TJFabric in Copy Executables */ = {isa = PBXBuildFile; fileRef = B49777071097794A00FA1B69 /* TJFabric */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B4720D1D108C4AF6002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720D19108C4AF6002DEC9F /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJSharedFramework;
+		};
+		B4720D23108C4B04002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720D1F108C4B04002DEC9F /* TJScriptFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJScriptFramework;
+		};
+		B4720D29108C4B0E002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720D25108C4B0E002DEC9F /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJNPFramework;
+		};
+		B4720D2F108C4B1B002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720D2B108C4B1B002DEC9F /* TinyXMLFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TinyXMLFramework;
+		};
+		B4720D35108C4B25002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720D31108C4B25002DEC9F /* OSCPackFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = OSCPackFramework;
+		};
+		B4720D3B108C4B31002DEC9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720D37108C4B31002DEC9F /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJScoutFramework;
+		};
+		B49777061097794A00FA1B69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DD76F6C0486A84900D96B5E /* TJFabric */;
+			remoteInfo = TJFabric;
+		};
+		B49777081097796A00FA1B69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DD76F620486A84900D96B5E /* TJFabric */;
+			remoteInfo = TJFabric;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B4720D15108C4AD6002DEC9F /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4720D16108C4AD6002DEC9F /* Copy Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				B4977779109782B200FA1B69 /* TJFabric in Copy Executables */,
+				B4720F98108C6D8D002DEC9F /* TJScoutFramework.framework in Copy Executables */,
+				B4720F99108C6D8D002DEC9F /* OSCPackFramework.framework in Copy Executables */,
+				B4720F9A108C6D8D002DEC9F /* TinyXMLFramework.framework in Copy Executables */,
+				B4720F9B108C6D8D002DEC9F /* TJNPFramework.framework in Copy Executables */,
+				B4720F9C108C6D8D002DEC9F /* TJScriptFramework.framework in Copy Executables */,
+				B4720F9D108C6D8D002DEC9F /* TJSharedFramework.framework in Copy Executables */,
+			);
+			name = "Copy Executables";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		256AC3D80F4B6AC300CF3369 /* FrontendAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrontendAppDelegate.h; sourceTree = "<group>"; };
+		256AC3D90F4B6AC300CF3369 /* FrontendAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrontendAppDelegate.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Frontend-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Frontend-Info.plist"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frontend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJFabric.xcodeproj; path = ../TJFabric/TJFabric.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D19108C4AF6002DEC9F /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D1F108C4B04002DEC9F /* TJScriptFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScriptFramework.xcodeproj; path = ../../TJScript/TJScriptFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D25108C4B0E002DEC9F /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D2B108C4B1B002DEC9F /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D31108C4B25002DEC9F /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D37108C4B31002DEC9F /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4720D5F108C50AC002DEC9F /* Fabric.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fabric.icns; sourceTree = "<group>"; };
+		B4720D95108C5650002DEC9F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		B4720D96108C5650002DEC9F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		B4720FCA108C71CA002DEC9F /* Start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Start.png; sourceTree = "<group>"; };
+		B4720FCC108C726E002DEC9F /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
+		B4720FD2108C73D5002DEC9F /* Running.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Running.png; sourceTree = "<group>"; };
+		B4720FD4108C74A3002DEC9F /* Stopped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stopped.png; sourceTree = "<group>"; };
+		B48DBF9F108CAB46002AB313 /* Clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clear.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D95108C5650002DEC9F /* MainViewController.h */,
+				B4720D96108C5650002DEC9F /* MainViewController.m */,
+				256AC3D80F4B6AC300CF3369 /* FrontendAppDelegate.h */,
+				256AC3D90F4B6AC300CF3369 /* FrontendAppDelegate.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Frontend.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Frontend */ = {
+			isa = PBXGroup;
+			children = (
+				B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Frontend;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* MainMenu.xib */,
+				B48DBF9F108CAB46002AB313 /* Clear.png */,
+				B4720FD4108C74A3002DEC9F /* Stopped.png */,
+				B4720FD2108C73D5002DEC9F /* Running.png */,
+				B4720FCC108C726E002DEC9F /* Stop.png */,
+				B4720FCA108C71CA002DEC9F /* Start.png */,
+				B4720D5F108C50AC002DEC9F /* Fabric.icns */,
+				8D1107310486CEB800E47090 /* Frontend-Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D37108C4B31002DEC9F /* TJScoutFramework.xcodeproj */,
+				B4720D31108C4B25002DEC9F /* OSCPackFramework.xcodeproj */,
+				B4720D2B108C4B1B002DEC9F /* TinyXMLFramework.xcodeproj */,
+				B4720D25108C4B0E002DEC9F /* TJNPFramework.xcodeproj */,
+				B4720D1F108C4B04002DEC9F /* TJScriptFramework.xcodeproj */,
+				B4720D19108C4AF6002DEC9F /* TJSharedFramework.xcodeproj */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B4720D1A108C4AF6002DEC9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D1E108C4AF6002DEC9F /* TJSharedFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4720D20108C4B04002DEC9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D24108C4B04002DEC9F /* TJScriptFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4720D26108C4B0E002DEC9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D2A108C4B0E002DEC9F /* TJNPFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4720D2C108C4B1B002DEC9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D30108C4B1B002DEC9F /* TinyXMLFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4720D32108C4B25002DEC9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D36108C4B25002DEC9F /* OSCPackFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4720D38108C4B31002DEC9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4720D3C108C4B31002DEC9F /* TJScoutFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B49777031097794A00FA1B69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49777071097794A00FA1B69 /* TJFabric */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Fabric Server */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Fabric Server" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				B4720D15108C4AD6002DEC9F /* Copy Frameworks */,
+				B4720D16108C4AD6002DEC9F /* Copy Executables */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B49777091097796A00FA1B69 /* PBXTargetDependency */,
+			);
+			name = "Fabric Server";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Frontend;
+			productReference = 8D1107320486CEB800E47090 /* Frontend.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Frontend" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Dutch,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Frontend */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B4720D32108C4B25002DEC9F /* Products */;
+					ProjectRef = B4720D31108C4B25002DEC9F /* OSCPackFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4720D2C108C4B1B002DEC9F /* Products */;
+					ProjectRef = B4720D2B108C4B1B002DEC9F /* TinyXMLFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B49777031097794A00FA1B69 /* Products */;
+					ProjectRef = B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */;
+				},
+				{
+					ProductGroup = B4720D26108C4B0E002DEC9F /* Products */;
+					ProjectRef = B4720D25108C4B0E002DEC9F /* TJNPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4720D38108C4B31002DEC9F /* Products */;
+					ProjectRef = B4720D37108C4B31002DEC9F /* TJScoutFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4720D20108C4B04002DEC9F /* Products */;
+					ProjectRef = B4720D1F108C4B04002DEC9F /* TJScriptFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4720D1A108C4AF6002DEC9F /* Products */;
+					ProjectRef = B4720D19108C4AF6002DEC9F /* TJSharedFramework.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Fabric Server */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B4720D1E108C4AF6002DEC9F /* TJSharedFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJSharedFramework.framework;
+			remoteRef = B4720D1D108C4AF6002DEC9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4720D24108C4B04002DEC9F /* TJScriptFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJScriptFramework.framework;
+			remoteRef = B4720D23108C4B04002DEC9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4720D2A108C4B0E002DEC9F /* TJNPFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJNPFramework.framework;
+			remoteRef = B4720D29108C4B0E002DEC9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4720D30108C4B1B002DEC9F /* TinyXMLFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TinyXMLFramework.framework;
+			remoteRef = B4720D2F108C4B1B002DEC9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4720D36108C4B25002DEC9F /* OSCPackFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OSCPackFramework.framework;
+			remoteRef = B4720D35108C4B25002DEC9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4720D3C108C4B31002DEC9F /* TJScoutFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJScoutFramework.framework;
+			remoteRef = B4720D3B108C4B31002DEC9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49777071097794A00FA1B69 /* TJFabric */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = TJFabric;
+			remoteRef = B49777061097794A00FA1B69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				B48DC1C7108CBFE0002AB313 /* MainMenu.xib in Resources */,
+				B4720D60108C50AC002DEC9F /* Fabric.icns in Resources */,
+				B4720FCB108C71CA002DEC9F /* Start.png in Resources */,
+				B4720FCD108C726E002DEC9F /* Stop.png in Resources */,
+				B4720FD3108C73D5002DEC9F /* Running.png in Resources */,
+				B4720FD5108C74A3002DEC9F /* Stopped.png in Resources */,
+				B48DBFA0108CAB46002AB313 /* Clear.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				256AC3DA0F4B6AC300CF3369 /* FrontendAppDelegate.m in Sources */,
+				B4720D97108C5650002DEC9F /* MainViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B49777091097796A00FA1B69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJFabric;
+			targetProxy = B49777081097796A00FA1B69 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Frontend-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Frontend;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Frontend-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Frontend;
+				SYMROOT = ../../build;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Fabric Server" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Frontend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
