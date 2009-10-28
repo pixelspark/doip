@@ -204,6 +204,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\tjfabricregistry.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\tjfabricrule.cpp"
 				>
 			</File>
@@ -218,6 +222,14 @@
 			<Filter
 				Name="connections"
 				>
+				<File
+					RelativePath=".\src\connections\tjbetweenfabricconnection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\connections\tjbetweenfabricconnection.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\connections\tjconnectionsregistry.cpp"
 					>
@@ -287,6 +299,10 @@
 			</File>
 			<File
 				RelativePath=".\include\tjfabricqueue.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\tjfabricregistry.h"
 				>
 			</File>
 			<File
