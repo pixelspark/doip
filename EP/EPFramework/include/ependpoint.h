@@ -3,6 +3,9 @@
 
 #include "internal/tjep.h"
 
+#pragma warning (push)
+#pragma warning (disable: 4251 4275)
+
 namespace tj {
 	namespace ep {
 		typedef tj::shared::String EPPath;
@@ -139,4 +142,5 @@ namespace tj {
 	}
 }
 
+#pragma warning(pop)
 #endif

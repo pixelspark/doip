@@ -5,6 +5,9 @@
 #include "ependpoint.h"
 #include "../../../TJNP/include/tjhttp.h"
 
+#pragma warning (push)
+#pragma warning (disable: 4251 4275)
+
 namespace tj {
 	namespace ep {
 		class EP_EXPORTED EPDownloadedDefinition: public tj::np::Download {
@@ -26,4 +29,5 @@ namespace tj {
 	}
 }
 
+#pragma warning(pop)
 #endif

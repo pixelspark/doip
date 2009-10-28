@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="TJFabric"
-	ProjectGUID="{F32C634F-2E32-4703-A7EA-718A66E7CA03}"
-	RootNamespace="TJFabric"
+	Name="EPFramework"
+	ProjectGUID="{73AE0204-60CE-4E75-A8F7-37AC2A4C1273}"
+	RootNamespace="EPFramework"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -20,7 +20,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="1"
 			>
 			<Tool
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EPFRAMEWORK_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -62,7 +62,7 @@
 				Name="VCLinkerTool"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -91,7 +91,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -114,7 +114,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EPFRAMEWORK_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -132,10 +132,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(SolutionDir)\Release\tjshared.lib $(SolutionDir)\Release\tjscript.lib $(SolutionDir)\Release\tjscout.lib $(SolutionDir)\Release\tjnp.lib $(SolutionDir)\Release\epframework.lib $(SolutionDir)\Libraries\TinyXML\build\Release\tinyxml.lib $(SolutionDir)\Libraries\OSCPack\build\Release\oscpack.lib ws2_32.lib"
+				AdditionalDependencies="$(SolutionDir)\Release\tjshared.lib $(SolutionDir)\Release\tjnp.lib $(SolutionDir)\Libraries\TinyXML\build\Release\tinyxml.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -172,109 +172,13 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\tjfabric.cpp"
+				RelativePath=".\src\epdownload.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\tjfabricconnection.cpp"
+				RelativePath=".\src\ependpoint.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\src\tjfabricengine.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricgroup.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricmain.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricmessage.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricmessagescriptable.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricqueue.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricregistry.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricrule.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricserver.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\tjfabricutil.cpp"
-				>
-			</File>
-			<Filter
-				Name="connections"
-				>
-				<File
-					RelativePath=".\src\connections\tjbetweenfabricconnection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjbetweenfabricconnection.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjconnectionsregistry.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjdnssddiscovery.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjdnssddiscovery.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepconnection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepconnection.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepdisovery.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepdisovery.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscipconnection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscipconnection.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscutil.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscutil.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -282,49 +186,21 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\include\tjfabric.h"
+				RelativePath=".\include\epdownload.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\tjfabricconnection.h"
+				RelativePath=".\include\ependpoint.h"
 				>
 			</File>
-			<File
-				RelativePath=".\include\tjfabricengine.h"
+			<Filter
+				Name="internal"
 				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricgroup.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricmessage.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricmessagescriptable.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricqueue.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricregistry.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricrule.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricserver.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricutil.h"
-				>
-			</File>
+				<File
+					RelativePath=".\include\internal\tjep.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -332,10 +208,6 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
-		<File
-			RelativePath="..\Release\default.fabric"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
