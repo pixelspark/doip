@@ -9,6 +9,8 @@ namespace tj {
 	namespace fabric {
 		namespace connections {
 			class DNSSDDiscoveryDefinition: public DiscoveryDefinition {
+				friend class DNSSDDiscovery;
+				
 				public:
 					DNSSDDiscoveryDefinition();
 					virtual ~DNSSDDiscoveryDefinition();
@@ -16,6 +18,7 @@ namespace tj {
 					virtual void Save(TiXmlElement* me);
 				
 				protected:
+					DNSSDDiscoveryDefinition(const std::wstring& type, const std::wstring& defaultServiceType);
 					std::wstring _serviceType;
 			};
 			

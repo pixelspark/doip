@@ -3,6 +3,9 @@
 #include "../include/tjfabricqueue.h"
 #include "../include/tjfabricmessage.h"
 #include "../../../TJScript/include/tjscript.h"
+#include "../../../TJNP/include/tjnetworkaddress.h"
+#include "../../../TJNP/include/tjsocket.h"
+#include "../../../TJNP/include/tjhttp.h"
 
 #include <iomanip>
 #include <sstream>
@@ -10,6 +13,7 @@
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::script;
+using namespace tj::np;
 
 Event _globalStop;
 
@@ -24,12 +28,16 @@ int main(int argc, char** argv) {
 	
 	try {
 		Log::SetLogToConsole(true);
-		Log::Write(L"TJFabric/Main", std::wstring(L"Starting up at ")+Timestamp(true).ToString());
+		Log::Write(L"TJFabric/Main", std::wstring(L"Starting at t=")+Timestamp(true).ToString());
 		
 		std::map<std::string, ref<FabricEngine> > fabrics;
 		if(argc<2) {
 			Log::Write(L"TJFabric/Main", L"No fabric configuration file given, using ./default.fabric");
-			std::string fabricFile = "./default.fabric";
+			ref<FabricEngine> engine = GC::Hold(new FabricEngine());
+			strong<Fabric> fabric = engine->GetFabric();
+			Fabric::LoadRecursive("./default.fabric", fabric);
+			engine->Connect(true);
+			fabrics[""] = engine;
 		}
 		else {
 			for(int a=1; a < argc; a++) {

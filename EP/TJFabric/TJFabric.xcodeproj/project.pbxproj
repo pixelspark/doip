@@ -18,6 +18,8 @@
 		B423B832106E144F00147974 /* tjoscutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B831106E144F00147974 /* tjoscutil.cpp */; };
 		B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4461F7B10979C500061A082 /* tjfabricregistry.cpp */; };
 		B462ACF3109839C500484C29 /* tjbetweenfabricconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */; };
+		B462AF1D1098E0E700484C29 /* EPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B462AF1C1098E0E100484C29 /* EPFramework.framework */; };
+		B462AF6E1098E45F00484C29 /* tjepdisovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AF6D1098E45F00484C29 /* tjepdisovery.cpp */; };
 		B46AD43A107DD2A000806748 /* tjfabricserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B46AD439107DD2A000806748 /* tjfabricserver.cpp */; };
 		B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */; };
 		B49776A91097789400FA1B69 /* OSCPackFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49776721097776300FA1B69 /* OSCPackFramework.framework */; };
@@ -34,6 +36,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B462AF1B1098E0E100484C29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B462AF171098E0E100484C29 /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* EPFramework.framework */;
+			remoteInfo = EPFramework;
+		};
+		B462AF1E1098E0EE00484C29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B462AF171098E0E100484C29 /* EPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* EPFramework */;
+			remoteInfo = EPFramework;
+		};
 		B49776711097776300FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497765E1097776300FA1B69 /* OSCPackFramework.xcodeproj */;
@@ -156,6 +172,9 @@
 		B4461F7B10979C500061A082 /* tjfabricregistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricregistry.cpp; path = src/tjfabricregistry.cpp; sourceTree = "<group>"; };
 		B462ACF1109839C500484C29 /* tjbetweenfabricconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjbetweenfabricconnection.h; path = src/connections/tjbetweenfabricconnection.h; sourceTree = "<group>"; };
 		B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjbetweenfabricconnection.cpp; path = src/connections/tjbetweenfabricconnection.cpp; sourceTree = "<group>"; };
+		B462AF171098E0E100484C29 /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EPFramework/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B462AF6C1098E45F00484C29 /* tjepdisovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjepdisovery.h; path = src/connections/tjepdisovery.h; sourceTree = "<group>"; };
+		B462AF6D1098E45F00484C29 /* tjepdisovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjepdisovery.cpp; path = src/connections/tjepdisovery.cpp; sourceTree = "<group>"; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
@@ -182,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B462AF1D1098E0E700484C29 /* EPFramework.framework in Frameworks */,
 				B49776A91097789400FA1B69 /* OSCPackFramework.framework in Frameworks */,
 				B49776BA109778B900FA1B69 /* TJScriptFramework.framework in Frameworks */,
 				B49776AA1097789400FA1B69 /* TinyXMLFramework.framework in Frameworks */,
@@ -197,6 +217,7 @@
 		08FB7794FE84155DC02AAC07 /* TJFabric */ = {
 			isa = PBXGroup;
 			children = (
+				B462AF171098E0E100484C29 /* EPFramework.xcodeproj */,
 				B49776B0109778B200FA1B69 /* TJScriptFramework.xcodeproj */,
 				B497765E1097776300FA1B69 /* OSCPackFramework.xcodeproj */,
 				B49776611097776300FA1B69 /* TinyXMLFramework.xcodeproj */,
@@ -254,6 +275,14 @@
 				B4461F7A10979BF60061A082 /* tjfabricregistry.h */,
 			);
 			name = include;
+			sourceTree = "<group>";
+		};
+		B462AF181098E0E100484C29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B462AF1C1098E0E100484C29 /* EPFramework.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B497765F1097776300FA1B69 /* Products */ = {
@@ -318,6 +347,8 @@
 				B4E3ED06108F6AF5008B42D7 /* tjconnectionsregistry.cpp */,
 				B462ACF1109839C500484C29 /* tjbetweenfabricconnection.h */,
 				B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */,
+				B462AF6C1098E45F00484C29 /* tjepdisovery.h */,
+				B462AF6D1098E45F00484C29 /* tjepdisovery.cpp */,
 			);
 			name = connections;
 			sourceTree = "<group>";
@@ -342,6 +373,7 @@
 				B497769B1097777800FA1B69 /* PBXTargetDependency */,
 				B497769D1097777800FA1B69 /* PBXTargetDependency */,
 				B49776BC109778C000FA1B69 /* PBXTargetDependency */,
+				B462AF1F1098E0EE00484C29 /* PBXTargetDependency */,
 			);
 			name = TJFabric;
 			productInstallPath = "$(HOME)/bin";
@@ -360,6 +392,10 @@
 			mainGroup = 08FB7794FE84155DC02AAC07 /* TJFabric */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = B462AF181098E0E100484C29 /* Products */;
+					ProjectRef = B462AF171098E0E100484C29 /* EPFramework.xcodeproj */;
+				},
 				{
 					ProductGroup = B497765F1097776300FA1B69 /* Products */;
 					ProjectRef = B497765E1097776300FA1B69 /* OSCPackFramework.xcodeproj */;
@@ -393,6 +429,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B462AF1C1098E0E100484C29 /* EPFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EPFramework.framework;
+			remoteRef = B462AF1B1098E0E100484C29 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B49776721097776300FA1B69 /* OSCPackFramework.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -460,12 +503,18 @@
 				B4E3ED07108F6AF5008B42D7 /* tjconnectionsregistry.cpp in Sources */,
 				B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */,
 				B462ACF3109839C500484C29 /* tjbetweenfabricconnection.cpp in Sources */,
+				B462AF6E1098E45F00484C29 /* tjepdisovery.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B462AF1F1098E0EE00484C29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EPFramework;
+			targetProxy = B462AF1E1098E0EE00484C29 /* PBXContainerItemProxy */;
+		};
 		B49776951097777800FA1B69 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OSCPackFramework;

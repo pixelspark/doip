@@ -11,6 +11,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B462AF4E1098E13E00484C29 /* EPFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B462AF4D1098E13B00484C29 /* EPFramework.framework */; };
 		B4720D60108C50AC002DEC9F /* Fabric.icns in Resources */ = {isa = PBXBuildFile; fileRef = B4720D5F108C50AC002DEC9F /* Fabric.icns */; };
 		B4720D97108C5650002DEC9F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4720D96108C5650002DEC9F /* MainViewController.m */; };
 		B4720F98108C6D8D002DEC9F /* TJScoutFramework.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4720D3C108C4B31002DEC9F /* TJScoutFramework.framework */; };
@@ -29,6 +30,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B462AF4C1098E13B00484C29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B462AF481098E13B00484C29 /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* EPFramework.framework */;
+			remoteInfo = EPFramework;
+		};
 		B4720D1D108C4AF6002DEC9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4720D19108C4AF6002DEC9F /* TJSharedFramework.xcodeproj */;
@@ -105,6 +113,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				B4977779109782B200FA1B69 /* TJFabric in Copy Executables */,
+				B462AF4E1098E13E00484C29 /* EPFramework.framework in Copy Executables */,
 				B4720F98108C6D8D002DEC9F /* TJScoutFramework.framework in Copy Executables */,
 				B4720F99108C6D8D002DEC9F /* OSCPackFramework.framework in Copy Executables */,
 				B4720F9A108C6D8D002DEC9F /* TinyXMLFramework.framework in Copy Executables */,
@@ -129,6 +138,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Frontend-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Frontend-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frontend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B462AF481098E13B00484C29 /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EPFramework/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJFabric.xcodeproj; path = ../TJFabric/TJFabric.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4720D19108C4AF6002DEC9F /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4720D1F108C4B04002DEC9F /* TJScriptFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScriptFramework.xcodeproj; path = ../../TJScript/TJScriptFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -235,6 +245,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B462AF481098E13B00484C29 /* EPFramework.xcodeproj */,
 				B4720D37108C4B31002DEC9F /* TJScoutFramework.xcodeproj */,
 				B4720D31108C4B25002DEC9F /* OSCPackFramework.xcodeproj */,
 				B4720D2B108C4B1B002DEC9F /* TinyXMLFramework.xcodeproj */,
@@ -245,6 +256,14 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B462AF491098E13B00484C29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B462AF4D1098E13B00484C29 /* EPFramework.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B4720D1A108C4AF6002DEC9F /* Products */ = {
@@ -346,6 +365,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = B462AF491098E13B00484C29 /* Products */;
+					ProjectRef = B462AF481098E13B00484C29 /* EPFramework.xcodeproj */;
+				},
+				{
 					ProductGroup = B4720D32108C4B25002DEC9F /* Products */;
 					ProjectRef = B4720D31108C4B25002DEC9F /* OSCPackFramework.xcodeproj */;
 				},
@@ -382,6 +405,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B462AF4D1098E13B00484C29 /* EPFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EPFramework.framework;
+			remoteRef = B462AF4C1098E13B00484C29 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B4720D1E108C4AF6002DEC9F /* TJSharedFramework.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

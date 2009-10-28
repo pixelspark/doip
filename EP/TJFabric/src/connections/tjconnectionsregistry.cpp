@@ -4,6 +4,7 @@
 #include "tjepconnection.h"
 #include "tjdnssddiscovery.h"
 #include "tjbetweenfabricconnection.h"
+#include "tjepdisovery.h"
 using namespace tj::shared;
 using namespace tj::fabric;
 
@@ -23,6 +24,7 @@ ConnectionFactory::ConnectionFactory() {
 /** DiscoveryFactory **/
 DiscoveryFactory::DiscoveryFactory() {
 	RegisterPrototype(L"dnssd", GC::Hold(new SubclassedPrototype<connections::DNSSDDiscovery, Discovery>(L"DNS-SD/mDNS discovery")));
+	RegisterPrototype(L"ep", GC::Hold(new SubclassedPrototype<connections::EPDiscovery, Discovery>(L"EP discovery (over DNS-SD/mDNS)")));
 }
 
 /** ConnectionDefinitionFactory **/
@@ -36,4 +38,5 @@ ConnectionDefinitionFactory::ConnectionDefinitionFactory() {
 /** DiscoveryDefinitionFactory **/
 DiscoveryDefinitionFactory::DiscoveryDefinitionFactory() {
 	RegisterPrototype(L"dnssd", GC::Hold(new SubclassedPrototype<connections::DNSSDDiscoveryDefinition, DiscoveryDefinition>(L"DNS-SD/mDNS discovery")));
+	RegisterPrototype(L"ep", GC::Hold(new SubclassedPrototype<connections::EPDiscoveryDefinition, DiscoveryDefinition>(L"EP discovery (over DNS-SD/mDNS)")));
 }

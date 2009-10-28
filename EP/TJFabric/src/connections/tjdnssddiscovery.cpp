@@ -6,7 +6,10 @@ using namespace tj::fabric;
 using namespace tj::fabric::connections;
 using namespace tj::scout;
 
-DNSSDDiscoveryDefinition::DNSSDDiscoveryDefinition(): DiscoveryDefinition(L"dnssd") {
+DNSSDDiscoveryDefinition::DNSSDDiscoveryDefinition(): DiscoveryDefinition(L"dnssd"), _serviceType(L"_osc._udp") {
+}
+
+DNSSDDiscoveryDefinition::DNSSDDiscoveryDefinition(const std::wstring& type, const std::wstring& dst): DiscoveryDefinition(type), _serviceType(dst) {
 }
 
 DNSSDDiscoveryDefinition::~DNSSDDiscoveryDefinition() {
@@ -37,9 +40,12 @@ void DNSSDDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::Resolv
 void DNSSDDiscovery::Create(tj::shared::strong<DiscoveryDefinition> def) {
 	if(ref<DiscoveryDefinition>(def).IsCastableTo<DNSSDDiscoveryDefinition>()) {
 		ServiceDescription sd;
-		sd.AddType(ServiceDiscoveryDNSSD, L"_osc._udp");
-		_resolver = GC::Hold(new ResolveRequest(sd));
-		_resolver->EventService.AddListener(ref<DNSSDDiscovery>(this));
-		Scout::Instance()->Resolve(_resolver);
+		ref<DNSSDDiscoveryDefinition> dsd = ref<DiscoveryDefinition>(def);
+		if(dsd) {
+			sd.AddType(ServiceDiscoveryDNSSD, dsd->_serviceType);
+			_resolver = GC::Hold(new ResolveRequest(sd));
+			_resolver->EventService.AddListener(ref<DNSSDDiscovery>(this));
+			Scout::Instance()->Resolve(_resolver);
+		}
 	}
 }
