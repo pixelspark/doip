@@ -16,6 +16,7 @@
 		B40229A41069653500137628 /* tjfabricmessagescriptable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40229A31069653500137628 /* tjfabricmessagescriptable.cpp */; };
 		B423B7F1106E0E4200147974 /* tjfabricutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B7F0106E0E4200147974 /* tjfabricutil.cpp */; };
 		B423B832106E144F00147974 /* tjoscutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B831106E144F00147974 /* tjoscutil.cpp */; };
+		B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4461F7B10979C500061A082 /* tjfabricregistry.cpp */; };
 		B46AD43A107DD2A000806748 /* tjfabricserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B46AD439107DD2A000806748 /* tjfabricserver.cpp */; };
 		B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */; };
 		B49776A91097789400FA1B69 /* OSCPackFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49776721097776300FA1B69 /* OSCPackFramework.framework */; };
@@ -36,84 +37,84 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B497765E1097776300FA1B69 /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPackFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = OSCPackFramework;
 		};
 		B49776771097776300FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776611097776300FA1B69 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TinyXMLFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TinyXMLFramework;
 		};
 		B49776831097776300FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJNPFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJNPFramework;
 		};
 		B497768F1097776300FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776671097776300FA1B69 /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScoutFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
 		B49776921097776300FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJSharedFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJSharedFramework;
 		};
 		B49776941097777800FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497765E1097776300FA1B69 /* OSCPackFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OSCPackFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = OSCPackFramework;
 		};
 		B49776961097777800FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776611097776300FA1B69 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TinyXMLFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TinyXMLFramework;
 		};
 		B49776981097777800FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJNPFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJNPFramework;
 		};
 		B497769A1097777800FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJSharedFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJSharedFramework;
 		};
 		B497769C1097777800FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776671097776300FA1B69 /* TJScoutFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScoutFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
 		B49776B8109778B200FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776B0109778B200FA1B69 /* TJScriptFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScriptFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJScriptFramework;
 		};
 		B49776BB109778C000FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776B0109778B200FA1B69 /* TJScriptFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScriptFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJScriptFramework;
 		};
 /* End PBXContainerItemProxy section */
@@ -150,6 +151,8 @@
 		B423B7F0106E0E4200147974 /* tjfabricutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricutil.cpp; path = src/tjfabricutil.cpp; sourceTree = "<group>"; };
 		B423B830106E13F500147974 /* tjoscutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjoscutil.h; path = src/connections/tjoscutil.h; sourceTree = "<group>"; };
 		B423B831106E144F00147974 /* tjoscutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjoscutil.cpp; path = src/connections/tjoscutil.cpp; sourceTree = "<group>"; };
+		B4461F7A10979BF60061A082 /* tjfabricregistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricregistry.h; path = include/tjfabricregistry.h; sourceTree = "<group>"; };
+		B4461F7B10979C500061A082 /* tjfabricregistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricregistry.cpp; path = src/tjfabricregistry.cpp; sourceTree = "<group>"; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
@@ -227,6 +230,7 @@
 				B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */,
 				B423B7F0106E0E4200147974 /* tjfabricutil.cpp */,
 				B46AD439107DD2A000806748 /* tjfabricserver.cpp */,
+				B4461F7B10979C500061A082 /* tjfabricregistry.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -244,6 +248,7 @@
 				B4D0F249106CB3FB0053A1BA /* tjfabricconnection.h */,
 				B423B7EE106E0DFC00147974 /* tjfabricutil.h */,
 				B46AD438107DD1F600806748 /* tjfabricserver.h */,
+				B4461F7A10979BF60061A082 /* tjfabricregistry.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				B46AD43A107DD2A000806748 /* tjfabricserver.cpp in Sources */,
 				B4E3ECE3108F6565008B42D7 /* tjepconnection.cpp in Sources */,
 				B4E3ED07108F6AF5008B42D7 /* tjconnectionsregistry.cpp in Sources */,
+				B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

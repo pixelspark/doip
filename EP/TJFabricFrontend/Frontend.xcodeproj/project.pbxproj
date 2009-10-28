@@ -75,14 +75,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DD76F6C0486A84900D96B5E /* TJFabric */;
+			remoteGlobalIDString = 8DD76F6C0486A84900D96B5E;
 			remoteInfo = TJFabric;
 		};
 		B49777081097796A00FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4720C9E108C4A1B002DEC9F /* TJFabric.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DD76F620486A84900D96B5E /* TJFabric */;
+			remoteGlobalIDString = 8DD76F620486A84900D96B5E;
 			remoteInfo = TJFabric;
 		};
 /* End PBXContainerItemProxy section */

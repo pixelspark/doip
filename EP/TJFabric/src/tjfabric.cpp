@@ -20,8 +20,14 @@ void Fabric::Clone() {
 	_id = Util::RandomIdentifier(L'F');
 }
 
+String Fabric::GetPackage() const {
+	return _package;
+}
+
 void Fabric::Load(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
+	_id = LoadAttributeSmall(me, "id", _id);
+	_package = LoadAttributeSmall(me, "package", _package);
 	
 	TiXmlElement* info = me->FirstChildElement("info");
 	if(info!=0) {
@@ -56,8 +62,9 @@ void Fabric::Load(TiXmlElement* me) {
 void Fabric::SaveEndpointDefinition(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	SaveAttributeSmall(me, "id", _id);
+	SaveAttributeSmall(me, "namespace", _package);
 	SaveAttributeSmall(me, "version", _version);
-	SaveAttributeSmall(me, "class", std::wstring(L"dynamic"));
+	SaveAttributeSmall(me, "dynamic", std::wstring(L"yes"));
 	SaveAttributeSmall(me, "friendly-name", _title);
 	
 	if(_groups.size()>0) {
