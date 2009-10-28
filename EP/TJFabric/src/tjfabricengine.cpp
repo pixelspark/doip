@@ -61,6 +61,8 @@ void FabricEngine::Notify(ref<Object> source, const MessageNotification& data) {
 
 void FabricEngine::Connect(bool t) {
 	if(t) {
+		_registration = FabricRegistry::Instance()->Register(_fabric->GetFullIdentifier(), this);
+		
 		// Iterate through all groups and connect them
 		std::map< ref<Group>, ref<ConnectedGroup> > newGroups;
 		
@@ -90,5 +92,6 @@ void FabricEngine::Connect(bool t) {
 		/* No need to call Connect(false) on each group, a ConnectedGroup will
 		automatically disconnect when it is destroyed. */
 		_groups.clear();
+		_registration = null;
 	}
 }

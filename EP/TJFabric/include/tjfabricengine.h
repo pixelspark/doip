@@ -6,6 +6,7 @@
 #include "../../../TJScout/include/tjservice.h"
 #include "tjfabric.h"
 #include "tjfabricconnection.h"
+#include "tjfabricregistry.h"
 
 namespace tj {
 	namespace fabric {
@@ -31,6 +32,7 @@ namespace tj {
 				tj::shared::CriticalSection _lock;
 				tj::shared::ref<Fabric> _fabric;
 				tj::shared::ref<Queue> _queue;
+				tj::shared::ref<FabricRegistration> _registration;
 				std::map< tj::shared::ref<Group>, tj::shared::ref<ConnectedGroup> > _groups;
 		};
 	}

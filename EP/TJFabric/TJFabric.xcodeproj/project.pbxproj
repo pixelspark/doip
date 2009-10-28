@@ -17,6 +17,7 @@
 		B423B7F1106E0E4200147974 /* tjfabricutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B7F0106E0E4200147974 /* tjfabricutil.cpp */; };
 		B423B832106E144F00147974 /* tjoscutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B831106E144F00147974 /* tjoscutil.cpp */; };
 		B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4461F7B10979C500061A082 /* tjfabricregistry.cpp */; };
+		B462ACF3109839C500484C29 /* tjbetweenfabricconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */; };
 		B46AD43A107DD2A000806748 /* tjfabricserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B46AD439107DD2A000806748 /* tjfabricserver.cpp */; };
 		B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */; };
 		B49776A91097789400FA1B69 /* OSCPackFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49776721097776300FA1B69 /* OSCPackFramework.framework */; };
@@ -153,6 +154,8 @@
 		B423B831106E144F00147974 /* tjoscutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjoscutil.cpp; path = src/connections/tjoscutil.cpp; sourceTree = "<group>"; };
 		B4461F7A10979BF60061A082 /* tjfabricregistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricregistry.h; path = include/tjfabricregistry.h; sourceTree = "<group>"; };
 		B4461F7B10979C500061A082 /* tjfabricregistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricregistry.cpp; path = src/tjfabricregistry.cpp; sourceTree = "<group>"; };
+		B462ACF1109839C500484C29 /* tjbetweenfabricconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjbetweenfabricconnection.h; path = src/connections/tjbetweenfabricconnection.h; sourceTree = "<group>"; };
+		B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjbetweenfabricconnection.cpp; path = src/connections/tjbetweenfabricconnection.cpp; sourceTree = "<group>"; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 				B4E3ECE1108F6565008B42D7 /* tjepconnection.h */,
 				B4E3ECE2108F6565008B42D7 /* tjepconnection.cpp */,
 				B4E3ED06108F6AF5008B42D7 /* tjconnectionsregistry.cpp */,
+				B462ACF1109839C500484C29 /* tjbetweenfabricconnection.h */,
+				B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */,
 			);
 			name = connections;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				B4E3ECE3108F6565008B42D7 /* tjepconnection.cpp in Sources */,
 				B4E3ED07108F6AF5008B42D7 /* tjconnectionsregistry.cpp in Sources */,
 				B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */,
+				B462ACF3109839C500484C29 /* tjbetweenfabricconnection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

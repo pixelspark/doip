@@ -24,6 +24,15 @@ String Fabric::GetPackage() const {
 	return _package;
 }
 
+String Fabric::GetFullIdentifier() const {
+	std::wostringstream wos;
+	if(_package.length()>0) {
+		wos << _package << L'.';
+	}
+	wos << _id;
+	return wos.str();
+}
+
 void Fabric::Load(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	_id = LoadAttributeSmall(me, "id", _id);

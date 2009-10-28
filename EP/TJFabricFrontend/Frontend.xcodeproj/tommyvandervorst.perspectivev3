@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -311,12 +309,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>B4720CF4108C4A75002DEC9F</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>FrontendAppDelegate.m</string>
+								<string>tubled.fabric</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -324,11 +324,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B4720CF5108C4A75002DEC9F</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>FrontendAppDelegate.m</string>
+										<string>tubled.fabric</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B462ACD5109835BD00484C29</string>
+										<string>B462ADF610984D7C00484C29</string>
 										<key>history</key>
 										<array>
 											<string>B4720FE9108C772D002DEC9F</string>
@@ -341,10 +341,10 @@
 											<string>B4977773109782A400FA1B69</string>
 											<string>B4977775109782A400FA1B69</string>
 											<string>B497778D1097845800FA1B69</string>
-											<string>B4461F62109799560061A082</string>
 											<string>B4461F63109799560061A082</string>
 											<string>B4461F64109799560061A082</string>
-											<string>B4461F9F1097B4360061A082</string>
+											<string>B462ADF510984D7C00484C29</string>
+											<string>B4461F62109799560061A082</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -662,7 +662,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B462ACDF109835BD00484C29</string>
 		<string>B462ACE0109835BD00484C29</string>
 		<string>B462ACE1109835BD00484C29</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJFabricFrontend/Frontend.xcodeproj</string>

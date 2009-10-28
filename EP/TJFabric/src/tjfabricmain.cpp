@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 				strong<Fabric> fabric = engine->GetFabric();
 				Fabric::LoadRecursive(argv[a], fabric);
 				engine->Connect(true);
-				fabrics[argv[1]] = engine;
+				fabrics[argv[a]] = engine;
 			}
 		}
 		

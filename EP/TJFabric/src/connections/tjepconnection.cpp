@@ -37,14 +37,7 @@ void EPConnection::Create(tj::shared::strong<ConnectionDefinition> def, Directio
 		
 		if(_server) {
 			strong<Fabric> fabric = fe->GetFabric();
-			std::wostringstream pathPrefixStream;
-			pathPrefixStream << L"/ep/";
-			std::wstring package = fabric->GetPackage();
-			if(package.length()>0) {
-				pathPrefixStream << package << L'.';
-			}
-			pathPrefixStream << fabric->GetID();
-			std::wstring pathPrefix = pathPrefixStream.str();
+			std::wstring pathPrefix = L"/ep/" + fabric->GetFullIdentifier();
 			std::wstring definitionPath = pathPrefix + L"/definition";
 			
 			if(epd->_customPath.length()>0) {

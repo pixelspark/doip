@@ -86,6 +86,16 @@ using namespace osc;
 	self.download = [[MWDownload alloc] initWithURL:url delegate:self];
 }
 
+- (NSString*) loadAttribute: (const char*)name fromElement:(TiXmlElement*)element {
+	const char* attr = element->Attribute(name);
+	if(attr!=0) {
+		return [NSString stringWithUTF8String:attr];
+	}
+	else {
+		return nil;
+	}
+}
+
 - (void) download:(MWDownload*)d completed:(NSData*)xmlData {
 	if(xmlData!=nil && [xmlData length]>0) {
 		TiXmlDocument doc;
@@ -107,8 +117,8 @@ using namespace osc;
 			if(transports!=0) {
 				TiXmlElement* transport = transports->FirstChildElement("transport");
 				while(transport!=0) {
-					self.transportType = [NSString stringWithUTF8String:transport->Attribute("type")];
-					self.transportFormat = [NSString stringWithUTF8String:transport->Attribute("format")];
+					self.transportType = [self loadAttribute:"type" fromElement:transport];
+					self.transportFormat = [self loadAttribute:"format" fromElement:transport];
 					
 					if([_transportType isEqualToString:@"udp"] && [_transportFormat isEqualToString:@"osc"]) {
 						const char* address = transport->Attribute("address");
