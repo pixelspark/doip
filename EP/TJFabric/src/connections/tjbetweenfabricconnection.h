@@ -2,6 +2,7 @@
 #define _TJ_BETWEEN_FAB_CONNECTION_H
 
 #include "../../../../TJShared/include/tjshared.h"
+#include "../../../EPFramework/include/ependpoint.h"
 #include "../../include/tjfabricconnection.h"
 #include "../../include/tjfabricgroup.h"
 #include "../../include/tjfabricengine.h"
@@ -26,7 +27,9 @@ namespace tj {
 				public:
 					BetweenConnection();
 					virtual ~BetweenConnection();
-					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe);
+					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> fe);
+					virtual void CreateForTransport(tj::shared::strong<tj::ep::EPTransport> ept, const tj::np::NetworkAddress& address);
+				
 					virtual void Send(tj::shared::strong<Message> msg);
 				
 				protected:

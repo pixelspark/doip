@@ -137,7 +137,7 @@ ref<CompiledScript> Queue::GetScriptForRule(strong<Rule> r) {
 	return it->second;
 }
 
-
+/** QueueThread **/
 QueueThread::QueueThread(ref<Queue> q): _queue(q), _running(false) {
 }
 
@@ -149,6 +149,7 @@ QueueThread::~QueueThread() {
 void QueueThread::Start() {
 	if(!_running) {
 		_running = true;
+		_signal.Reset();
 		Thread::Start();
 	}
 }
@@ -176,8 +177,9 @@ void QueueThread::Run() {
 		}
 	}
 	
+	Log::Write(L"TJFabric/QueueThread", L"Sent init message");
+	
 	while(_running) {
-		_signal.Wait();
 		_signal.Reset();
 		if(!_running) {
 			Log::Write(L"TJFabric/QueueThread", L"Thread was stopped");
@@ -204,6 +206,8 @@ void QueueThread::Run() {
 			}
 			q->_queue.clear();
 		}
+		
+		_signal.Wait();
 	}
 }
 

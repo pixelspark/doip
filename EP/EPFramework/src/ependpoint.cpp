@@ -44,7 +44,7 @@ void EPEndpointDefinition::Load(TiXmlElement* me) {
 		}
 	}
 
-	TiXmlElement* transports = me->FirstChildElement("transport");
+	TiXmlElement* transports = me->FirstChildElement("transports");
 	if(transports!=0) {
 		TiXmlElement* transport = transports->FirstChildElement("transport");
 		while(transport!=0) {
@@ -159,6 +159,7 @@ void  EPMethodDefinition::GetPaths(std::set<EPPath>& pathList) const {
 	std::set<EPPath>::const_iterator it = _paths.begin();
 	while(it!=_paths.end()) {
 		pathList.insert(*it);
+		++it;
 	}
 }
 
@@ -172,6 +173,7 @@ void EPMethodDefinition::Save(TiXmlElement* me) {
 		TiXmlText pathText(Mbs(*it));
 		path.InsertEndChild(pathText);
 		me->InsertEndChild(path);
+		++it;
 	}
 	
 	std::vector< ref<EPParameter> >::const_iterator pit = _parameters.begin();

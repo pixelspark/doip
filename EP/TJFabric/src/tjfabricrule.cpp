@@ -11,26 +11,26 @@ Rule::~Rule() {
 }
 
 void Rule::SaveEndpointMethodDefinition(TiXmlElement* me) {
-	// Only the first pattern is put in the definition as the message path
-	std::set<String>::const_iterator it = _patterns.begin();
-	if(it!=_patterns.end()) {
-		SaveAttributeSmall(me, "id", _id);
-		SaveAttributeSmall(me, "friendly-name", _name);
+	SaveAttributeSmall(me, "id", _id);
+	SaveAttributeSmall(me, "friendly-name", _name);
 		
+	std::set<String>::const_iterator it = _patterns.begin();
+	while(it!=_patterns.end()) {
 		TiXmlElement pattern("path");
 		pattern.InsertEndChild(TiXmlText(Mbs(*it).c_str()));
 		me->InsertEndChild(pattern);
+		++it;
+	}
 		
-		std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
-		while(pit!=_parameters.end()) {
-			ref<Parameter> param = *pit;
-			if(param) {
-				TiXmlElement tag("parameter");
-				param->Save(&tag);
-				me->InsertEndChild(tag);
-			}
-			++pit;
+	std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
+	while(pit!=_parameters.end()) {
+		ref<Parameter> param = *pit;
+		if(param) {
+			TiXmlElement tag("parameter");
+			param->Save(&tag);
+			me->InsertEndChild(tag);
 		}
+		++pit;
 	}
 }
 

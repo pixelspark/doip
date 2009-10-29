@@ -19,7 +19,7 @@
 		B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4461F7B10979C500061A082 /* tjfabricregistry.cpp */; };
 		B462ACF3109839C500484C29 /* tjbetweenfabricconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */; };
 		B462AF1D1098E0E700484C29 /* EPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B462AF1C1098E0E100484C29 /* EPFramework.framework */; };
-		B462AF6E1098E45F00484C29 /* tjepdisovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AF6D1098E45F00484C29 /* tjepdisovery.cpp */; };
+		B462AF6E1098E45F00484C29 /* tjepdiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AF6D1098E45F00484C29 /* tjepdiscovery.cpp */; };
 		B46AD43A107DD2A000806748 /* tjfabricserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B46AD439107DD2A000806748 /* tjfabricserver.cpp */; };
 		B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */; };
 		B49776A91097789400FA1B69 /* OSCPackFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49776721097776300FA1B69 /* OSCPackFramework.framework */; };
@@ -40,14 +40,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B462AF171098E0E100484C29 /* EPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* EPFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = EPFramework;
 		};
 		B462AF1E1098E0EE00484C29 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B462AF171098E0E100484C29 /* EPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* EPFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = EPFramework;
 		};
 		B49776711097776300FA1B69 /* PBXContainerItemProxy */ = {
@@ -173,8 +173,8 @@
 		B462ACF1109839C500484C29 /* tjbetweenfabricconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjbetweenfabricconnection.h; path = src/connections/tjbetweenfabricconnection.h; sourceTree = "<group>"; };
 		B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjbetweenfabricconnection.cpp; path = src/connections/tjbetweenfabricconnection.cpp; sourceTree = "<group>"; };
 		B462AF171098E0E100484C29 /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EPFramework/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B462AF6C1098E45F00484C29 /* tjepdisovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjepdisovery.h; path = src/connections/tjepdisovery.h; sourceTree = "<group>"; };
-		B462AF6D1098E45F00484C29 /* tjepdisovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjepdisovery.cpp; path = src/connections/tjepdisovery.cpp; sourceTree = "<group>"; };
+		B462AF6C1098E45F00484C29 /* tjepdiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjepdiscovery.h; path = src/connections/tjepdiscovery.h; sourceTree = "<group>"; };
+		B462AF6D1098E45F00484C29 /* tjepdiscovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjepdiscovery.cpp; path = src/connections/tjepdiscovery.cpp; sourceTree = "<group>"; };
 		B46AD438107DD1F600806748 /* tjfabricserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricserver.h; path = include/tjfabricserver.h; sourceTree = "<group>"; };
 		B46AD439107DD2A000806748 /* tjfabricserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricserver.cpp; path = src/tjfabricserver.cpp; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
@@ -347,8 +347,8 @@
 				B4E3ED06108F6AF5008B42D7 /* tjconnectionsregistry.cpp */,
 				B462ACF1109839C500484C29 /* tjbetweenfabricconnection.h */,
 				B462ACF2109839C500484C29 /* tjbetweenfabricconnection.cpp */,
-				B462AF6C1098E45F00484C29 /* tjepdisovery.h */,
-				B462AF6D1098E45F00484C29 /* tjepdisovery.cpp */,
+				B462AF6C1098E45F00484C29 /* tjepdiscovery.h */,
+				B462AF6D1098E45F00484C29 /* tjepdiscovery.cpp */,
 			);
 			name = connections;
 			sourceTree = "<group>";
@@ -503,7 +503,7 @@
 				B4E3ED07108F6AF5008B42D7 /* tjconnectionsregistry.cpp in Sources */,
 				B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */,
 				B462ACF3109839C500484C29 /* tjbetweenfabricconnection.cpp in Sources */,
-				B462AF6E1098E45F00484C29 /* tjepdisovery.cpp in Sources */,
+				B462AF6E1098E45F00484C29 /* tjepdiscovery.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

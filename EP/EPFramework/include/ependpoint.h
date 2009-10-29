@@ -1,7 +1,7 @@
-#ifndef _TJ_EP_ENDPOINT_H
-#define _TJ_EP_ENDPOINT_H
+#ifndef _TJ_EP_EPENDPOINT_H
+#define _TJ_EP_EPENDPOINT_H
 
-#include "internal/tjep.h"
+#include "internal/ep.h"
 
 #pragma warning (push)
 #pragma warning (disable: 4251 4275)
@@ -120,7 +120,7 @@ namespace tj {
 				tj::shared::String _defaultValue;
 		};
 		
-		class EP_EXPORTED EPTransportDefinition: public virtual tj::shared::Object, public tj::shared::Serializable {
+		class EP_EXPORTED EPTransportDefinition: public EPTransport, public tj::shared::Serializable {
 			public:
 				EPTransportDefinition();
 				~EPTransportDefinition();

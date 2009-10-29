@@ -24,6 +24,7 @@ using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::fabric::connections;
 using namespace tj::np;
+using namespace tj::ep;
 
 /** OSCOverIPConnectionDefinition **/
 OSCOverIPConnectionDefinition::OSCOverIPConnectionDefinition(const String& upperProtocol): ConnectionDefinition(upperProtocol), _format(L"osc") {
@@ -51,7 +52,7 @@ std::wstring OSCOverIPConnectionDefinition::GetFramingType() const {
 }
 
 /** OSCOverIPConnection **/
-OSCOverIPConnection::OSCOverIPConnection(): _useSendTo(false), _outSocket(-1), _inSocket(-1), _in4Socket(-1), _toPort(0), _toAddress(L""), _direction(DirectionNone) {
+OSCOverIPConnection::OSCOverIPConnection(): _useSendTo(false), _outSocket(-1), _inSocket(-1), _toPort(0), _toAddress(L""), _direction(DirectionNone) {
 }
 
 OSCOverIPConnection::~OSCOverIPConnection() {
@@ -70,7 +71,6 @@ void OSCOverIPConnection::StopInbound() {
 		
 		#ifdef TJ_OS_POSIX
 			close(_inSocket);
-			close(_in4Socket);
 		#endif
 				
 		#ifdef TJ_OS_WIN
@@ -156,19 +156,17 @@ void OSCOverIPConnection::StartOutbound(const tj::np::NetworkAddress& na, unsign
 	_direction = (Direction)(_direction | DirectionOutbound);
 }
 
-void OSCOverIPConnection::StartInbound(NativeSocket in4Socket, NativeSocket in6Socket) {
+void OSCOverIPConnection::StartInbound(NativeSocket inSocket) {
 	ThreadLock lock(&_lock);
 	StopInbound();
 	
 	// Update flags
 	_direction = Direction(_direction | DirectionInbound);
-	_in4Socket = in4Socket;
-	_inSocket = in6Socket;
+	_inSocket = inSocket;
 
 	// Start listener thread
 	_listenerThread = GC::Hold(new SocketListenerThread());
-	_listenerThread->AddListener(_inSocket, this);
-	_listenerThread->AddListener(_in4Socket, this);
+	_listenerThread->AddListener(inSocket, this);
 	_listenerThread->Start();
 }
 
@@ -355,10 +353,10 @@ void OSCOverUDPConnection::OnReceive(NativeSocket ns) {
 	}
 }
 
-void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short port, Direction direction) {
+void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigned short port, Direction direction) {
 	ThreadLock lock(&_lock);
-	NativeSocket outSocket, inSocket, in4Socket;
-	outSocket = inSocket = in4Socket = -1;
+	NativeSocket outSocket, inSocket;
+	outSocket = inSocket = -1;
 	NetworkAddress networkAddress(address);
 	
 	// Create outgoing socket
@@ -371,76 +369,105 @@ void OSCOverUDPConnection::Create(const std::wstring& address, unsigned short po
 		
 		setsockopt(outSocket, SOL_SOCKET, SO_BROADCAST, (const char*)&on, sizeof(int));
 		setsockopt(outSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
-		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+Stringify(address)+L":"+Stringify(port)+L")");
+		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
 		StartOutbound(networkAddress, port, outSocket, true);
 	}
 	
 	// Create server socket and thread
 	if((direction & DirectionInbound)!=0) {
-		inSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
-		in4Socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-		
-		// Fill in the interface information for the IPv6 listener socket
-		in6_addr any = IN6ADDR_ANY_INIT;
-		sockaddr_in6 addr;
-		addr.sin6_family = AF_INET6;
-		addr.sin6_port = htons(port);
-		addr.sin6_addr = any;
-		
-		// Addresses for the IPv4 listener socket
-		sockaddr_in addr4;
-		memset(&addr4, 0, sizeof(addr4));
-		addr4.sin_family = AF_INET;
-		addr4.sin_port = htons(port);
-		addr4.sin_addr.s_addr = INADDR_ANY;
+		if(networkAddress.GetAddressFamily()==AddressFamilyIPv6) {
+			inSocket = socket(AF_INET6, SOCK_DGRAM, IPPROTO_UDP);
+			
+			// Fill in the interface information for the IPv6 listener socket
+			in6_addr any = IN6ADDR_ANY_INIT;
+			sockaddr_in6 addr;
+			addr.sin6_family = AF_INET6;
+			addr.sin6_port = htons(port);
+			addr.sin6_addr = any;
+			
+			int on = 1;
+			setsockopt(inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
+			
+			// Bind IPv6 socket
+			int err = bind(inSocket, (sockaddr*)&addr, sizeof(addr));
+			if(err==-1) {
+				Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
+				return;
+			}
+			
+			// try to make us member of the multicast group (IPv6)
+			struct sockaddr_in6 maddr;
+			struct ipv6_mreq mreq;
+			if(networkAddress.GetIPv6SocketAddress(&maddr)) {
+				mreq.ipv6mr_multiaddr = maddr.sin6_addr;
+				mreq.ipv6mr_interface = 0;
+				setsockopt(inSocket, IPPROTO_IPV6, IPV6_JOIN_GROUP, (char*)&mreq, sizeof(mreq));
+			}
+		}
+		else if(networkAddress.GetAddressFamily()==AddressFamilyIPv4) {
+			inSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+			
+			// Addresses for the IPv4 listener socket
+			sockaddr_in addr4;
+			memset(&addr4, 0, sizeof(addr4));
+			addr4.sin_family = AF_INET;
+			addr4.sin_port = htons(port);
+			addr4.sin_addr.s_addr = INADDR_ANY;
 
-		#ifdef TJ_OS_POSIX
-			addr4.sin_len = sizeof(sockaddr_in);
-		#endif
-		
-		int on = 1;
-		setsockopt(inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
-		setsockopt(in4Socket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
-		
-		// Bind IPv6 socket
-		int err = bind(inSocket, (sockaddr*)&addr, sizeof(addr));
-		if(err==-1) {
-			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
-			return;
+			#ifdef TJ_OS_POSIX
+				addr4.sin_len = sizeof(sockaddr_in);
+			#endif
+			
+			int on = 1;
+			setsockopt(inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
+			
+			// Bind IPv4 socket
+			int err = bind(inSocket, (sockaddr*)&addr4, sizeof(addr4));
+			if(err==-1) {
+				Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
+				return;
+			}
+			
+			// try to make us member of the multicast group (IPv4)
+			struct ip_mreq mreq4;
+			struct sockaddr_in maddr;
+			mreq4.imr_interface.s_addr = INADDR_ANY;
+			mreq4.imr_multiaddr.s_addr = addr4.sin_addr.s_addr;
+			if(networkAddress.GetIPv4SocketAddress(&maddr)) {
+				mreq4.imr_multiaddr = maddr.sin_addr;
+				setsockopt(inSocket, IPPROTO_IPV4, IP_ADD_MEMBERSHIP, (char*)&mreq4, sizeof(mreq4));
+			}
+		}
+		else {
+			Throw(L"Unsupported address family", ExceptionTypeError);
 		}
 		
-		// Bind IPv4 socket
-		err = bind(in4Socket, (sockaddr*)&addr4, sizeof(addr4));
-		if(err==-1) {
-			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
-			return;
-		}
-		
-		// try to make us member of the multicast group (IPv6)
-		struct ipv6_mreq mreq;
-		inet_pton(AF_INET6, Mbs(address).c_str(), &(mreq.ipv6mr_multiaddr));
-		mreq.ipv6mr_interface = 0;
-		setsockopt(inSocket, IPPROTO_IPV6, IPV6_JOIN_GROUP, (char*)&mreq, sizeof(mreq));
-		
-		// try to make us member of the multicast group (IPv4)
-		struct ip_mreq mreq4;
-		mreq4.imr_interface.s_addr = INADDR_ANY;
-		mreq4.imr_multiaddr.s_addr = addr4.sin_addr.s_addr;
-		setsockopt(in4Socket, IPPROTO_IPV4, IP_ADD_MEMBERSHIP, (char*)&mreq4, sizeof(mreq4));
-		
-		StartInbound(in4Socket, inSocket);
-		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected inbound OSC-over-UDP (")+Stringify(address)+L":"+Stringify(port)+L")");
+		StartInbound(inSocket);
+		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected inbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
 	}	
 }
 
-void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction, strong<FabricEngine> fe) {
+void OSCOverUDPConnection::CreateForTransport(strong<EPTransport> ept, const NetworkAddress& address) {
+	if(ept->GetType()!=L"udp") {
+		Throw(L"Cannot create connection to transport of this type", ExceptionTypeError);
+	}
+	if(ept->GetFormat()!=L"osc") {
+		Throw(L"Cannot create connection to transport: format unsupported", ExceptionTypeError);
+	}
+	
+	SetFramingType(ept->GetFraming());
+	std::wstring host = ept->GetAddress();
+	Create((host.length()==0) ? address : NetworkAddress(host,true), ept->GetPort(), DirectionOutbound);
+}
+
+void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction, ref<FabricEngine> fe) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverUDPConnectionDefinition>()) {
 		ref<OSCOverUDPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
 			if(cd->_format==L"osc") {
 				_def = cd;
 				SetFramingType(cd->GetFramingType());
-				Create(cd->_address, cd->_port, direction);
+				Create(NetworkAddress(cd->_address, true), cd->_port, direction);
 			}
 			else {
 				Throw(L"Invalid format type for UDP connection", ExceptionTypeError);
@@ -478,7 +505,7 @@ void OSCOverTCPConnection::OnReceive(NativeSocket ns) {
 	ThreadLock lock(&_lock);
 	
 	if((GetDirection() & DirectionInbound)!=0) {
-		if(ns==_in4ServerSocket || ns==_in6ServerSocket) {
+		if(ns==_inServerSocket) {
 			NativeSocket cs = accept(ns, 0, 0);
 			if(cs!=-1) {
 				_streams[cs] = GC::Hold(new QueueSLIPFrameDecoder());
@@ -523,12 +550,25 @@ void OSCOverTCPConnection::OnReceive(NativeSocket ns) {
 	}
 }
 
-void OSCOverTCPConnection::Create(const std::wstring& address, unsigned short port, Direction direction) {
+void OSCOverTCPConnection::CreateForTransport(strong<EPTransport> ept, const tj::np::NetworkAddress& address) {
+	if(ept->GetType()!=L"tcp") {
+		Throw(L"Cannot create connection to transport of this type", ExceptionTypeError);
+	}
+	if(ept->GetFormat()!=L"osc") {
+		Throw(L"Cannot create connection to transport: format unsupported", ExceptionTypeError);
+	}
+	
+	SetFramingType(ept->GetFraming());
+	std::wstring host = ept->GetAddress();
+	Create((host.length()==0) ? address : NetworkAddress(host,true), ept->GetPort(), DirectionOutbound);
+}
+
+
+void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned short port, Direction direction) {
 	ThreadLock lock(&_lock);
 	NativeSocket outSocket;
-	outSocket = _in4ServerSocket = _in6ServerSocket = -1;
+	outSocket = _inServerSocket = -1;
 	_streams.clear();
-	NetworkAddress networkAddress(address);
 	
 	// Create outgoing socket
 	if((direction & DirectionOutbound)!=0) {
@@ -570,71 +610,80 @@ void OSCOverTCPConnection::Create(const std::wstring& address, unsigned short po
 			}
 			else {
 				StartOutbound(networkAddress, port, outSocket, false);
-				Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected outbound OSC-over-TCP (")+Stringify(address)+L":"+Stringify(port)+L")");
+				Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected outbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
 			}
 		}
 	}
 	
 	// Create server socket and thread
 	if((direction & DirectionInbound)!=0) {
-		_in6ServerSocket = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP);
-		_in4ServerSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+		if(networkAddress.GetAddressFamily()==AddressFamilyIPv6) {
+			_inServerSocket = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP);
 		
-		// Fill in the interface information for the IPv6 listener socket
-		in6_addr any = IN6ADDR_ANY_INIT;
-		sockaddr_in6 addr;
-		addr.sin6_family = AF_INET6;
-		addr.sin6_port = htons(port);
-		addr.sin6_addr = any;
+			// Fill in the interface information for the IPv6 listener socket
+			in6_addr any = IN6ADDR_ANY_INIT;
+			sockaddr_in6 addr;
+			addr.sin6_family = AF_INET6;
+			addr.sin6_port = htons(port);
+			addr.sin6_addr = any;
+			
+			// Bind IPv6 socket
+			int err = bind(_inServerSocket, (sockaddr*)&addr, sizeof(addr));
+			if(err==-1) {
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
+			}
+			
+			// Listen IPv6 socket
+			err = listen(_inServerSocket, 10);
+			if(err!=0) {
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Stringify(errno));
+			}
+			
+			
+		}
+		else if(networkAddress.GetAddressFamily()==AddressFamilyIPv4) {
+			_inServerSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		
-		// Addresses for the IPv4 listener socket
-		sockaddr_in addr4;
-		memset(&addr4, 0, sizeof(addr4));
-		addr4.sin_family = AF_INET;
-		addr4.sin_port = htons(port);
-		addr4.sin_addr.s_addr = INADDR_ANY;
+			// Addresses for the IPv4 listener socket
+			sockaddr_in addr4;
+			memset(&addr4, 0, sizeof(addr4));
+			addr4.sin_family = AF_INET;
+			addr4.sin_port = htons(port);
+			addr4.sin_addr.s_addr = INADDR_ANY;
+			
+			#ifdef TJ_OS_POSIX
+				addr4.sin_len = sizeof(sockaddr_in);
+			#endif
 		
-		#ifdef TJ_OS_POSIX
-			addr4.sin_len = sizeof(sockaddr_in);
-		#endif
-		
-		// Bind IPv6 socket
-		int err = bind(_in6ServerSocket, (sockaddr*)&addr, sizeof(addr));
-		if(err==-1) {
-			Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
+			// Bind IPv4 socket
+			int err = bind(_inServerSocket, (sockaddr*)&addr4, sizeof(addr4));
+			if(err==-1) {
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
+			}
+			
+			// Listen IPv4 socket
+			err = listen(_inServerSocket, 10);
+			if(err!=0) {
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv4 server socket, error="+Stringify(errno));
+			}
+		}
+		else {
+			Throw(L"Unsupported address family", ExceptionTypeError);
 		}
 		
-		// Bind IPv4 socket
-		err = bind(_in4ServerSocket, (sockaddr*)&addr4, sizeof(addr4));
-		if(err==-1) {
-			Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
-		}
-		
-		// Listen IPv4 socket
-		err = listen(_in4ServerSocket, 10);
-		if(err!=0) {
-			Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv4 server socket, error="+Stringify(errno));
-		}
-		
-		// Listen IPv6 socket
-		err = listen(_in6ServerSocket, 10);
-		if(err!=0) {
-			Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Stringify(errno));
-		}
-		
-		StartInbound(_in4ServerSocket, _in6ServerSocket);
-		Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected inbound OSC-over-TCP (")+Stringify(address)+L":"+Stringify(port)+L")");
+		StartInbound(_inServerSocket);
+		Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected inbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
 	}
 }
 
-void OSCOverTCPConnection::Create(strong<ConnectionDefinition> def, Direction direction, strong<FabricEngine> fe) {
+void OSCOverTCPConnection::Create(strong<ConnectionDefinition> def, Direction direction, ref<FabricEngine> fe) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverTCPConnectionDefinition>()) {
 		ref<OSCOverTCPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
 			if(cd->_format==L"osc") {
 				_def = cd;
 				SetFramingType(cd->GetFramingType());
-				Create(cd->_address, cd->_port, direction);
+				Create(NetworkAddress(cd->_address,true), cd->_port, direction);
 			}
 			else {
 				Throw(L"Invalid format type for TCP connection", ExceptionTypeError);

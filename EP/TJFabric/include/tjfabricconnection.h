@@ -2,6 +2,8 @@
 #define _TJ_FABRIC_CONNECTION_H
 
 #include "../../../TJShared/include/tjshared.h"
+#include "../../EPFramework/include/ependpoint.h"
+#include "../../../TJNP/include/tjnetworkaddress.h"
 #include "tjfabricgroup.h"
 #include "tjfabricmessage.h"
 
@@ -20,16 +22,19 @@ namespace tj {
 		class Connection: public virtual tj::shared::Object {
 			public:
 				virtual ~Connection();
-				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> engine) = 0;
+				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> engine) = 0;
+			virtual void CreateForTransport(tj::shared::strong< tj::ep::EPTransport > ept, const tj::np::NetworkAddress& address) = 0;
 				virtual void Send(tj::shared::strong< Message > msg) = 0;
-			
+				
 				tj::shared::Listenable<MessageNotification> EventMessageReceived;
 		};
 		
 		class ConnectionFactory: public virtual tj::shared::PrototypeBasedFactory< Connection > {
 			public:
 				virtual ~ConnectionFactory();
-				virtual tj::shared::ref<Connection> CreateFromDefinition(tj::shared::strong<ConnectionDefinition> cd, Direction d, tj::shared::strong<FabricEngine> engine);
+				virtual tj::shared::ref<Connection> CreateFromDefinition(tj::shared::strong<ConnectionDefinition> cd, Direction d, tj::shared::ref<FabricEngine> engine);
+				virtual tj::shared::ref<Connection> CreateForTransport(tj::shared::strong< tj::ep::EPTransport > cd, const tj::np::NetworkAddress& address);
+			
 				static tj::shared::strong< ConnectionFactory > Instance();
 			
 			protected:

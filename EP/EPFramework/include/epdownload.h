@@ -1,7 +1,7 @@
 #ifndef _TJ_EP_DOWNLOAD_H
 #define _TJ_EP_DOWNLOAD_H
 
-#include "internal/tjep.h"
+#include "internal/ep.h"
 #include "ependpoint.h"
 #include "../../../TJNP/include/tjhttp.h"
 

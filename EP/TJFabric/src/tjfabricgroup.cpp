@@ -114,6 +114,9 @@ void Group::Save(TiXmlElement* me) {
 		case DirectionOutbound:
 			dirValue = L"out";
 			break;
+			
+		case DirectionBoth:
+			dirValue = L"both";
 		
 		case DirectionNone:
 		default:
@@ -170,6 +173,9 @@ void Group::Load(TiXmlElement* me) {
 	}
 	else if(dirValue==L"out") {
 		_direction = DirectionOutbound;
+	}
+	else if(dirValue==L"both") {
+		_direction = DirectionBoth;
 	}
 	
 	// Load connection definitions

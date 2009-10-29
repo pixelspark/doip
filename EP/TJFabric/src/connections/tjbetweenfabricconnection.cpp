@@ -1,8 +1,11 @@
 #include "tjbetweenfabricconnection.h"
 #include "../../include/tjfabricregistry.h"
+#include "../../../../TJNP/include/tjnetworkaddress.h"
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::fabric::connections;
+using namespace tj::ep;
+using namespace tj::np;
 
 /** BetweenConnectionDefinition **/
 BetweenConnectionDefinition::BetweenConnectionDefinition(): ConnectionDefinition(L"fabric") {
@@ -26,7 +29,14 @@ BetweenConnection::BetweenConnection() {
 BetweenConnection::~BetweenConnection() {
 }
 
-void BetweenConnection::Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe) {
+void BetweenConnection::CreateForTransport(strong<EPTransport> ept, const NetworkAddress& np) {
+	Throw(L"Cannot create transport for this", ExceptionTypeError);
+}
+
+void BetweenConnection::Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> fe) {
+	if(!fe) {
+		Throw(L"No fabric was given in BetweenConnection::Create; between-fabric connections can only be created directly from the fabric definition!", ExceptionTypeError);
+	}
 	if(def.IsCastableTo<BetweenConnectionDefinition>()) {
 		ref<BetweenConnectionDefinition> btd = ref<ConnectionDefinition>(def);
 		if(btd) {

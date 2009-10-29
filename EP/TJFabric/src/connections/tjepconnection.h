@@ -31,7 +31,8 @@ namespace tj {
 				public:
 					EPConnection();
 					virtual ~EPConnection();
-					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe);
+					virtual void CreateForTransport(tj::shared::strong<tj::ep::EPTransport> ept, const tj::np::NetworkAddress& address);
+					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> fe);
 					virtual void Send(tj::shared::strong<Message> msg);
 				
 				protected:

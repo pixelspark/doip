@@ -6,6 +6,14 @@ using namespace tj::np;
 using namespace tj::fabric;
 
 ref<WebServerManager> WebServerManager::_instance;
+String FabricProcess::_magic;
+
+String FabricProcess::GetServerMagic() {
+	if(_magic.length()==0) {
+		_magic = Util::RandomIdentifier(L'P');
+	}
+	return _magic;
+}
 
 WebServerManager::~WebServerManager() {
 }

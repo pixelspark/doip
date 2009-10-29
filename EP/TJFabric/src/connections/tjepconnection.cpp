@@ -1,13 +1,15 @@
 #include "tjepconnection.h"
 #include "../../include/tjfabricserver.h"
+#include "../../../../TJNP/include/tjnetworkaddress.h"
 using namespace tj::shared;
 using namespace tj::np;
+using namespace tj::ep;
 using namespace tj::fabric;
 using namespace tj::scout;
 using namespace tj::fabric::connections;
 
 /** EPConnectionDefinition **/
-EPConnectionDefinition::EPConnectionDefinition(): ConnectionDefinition(L"ep"), _port(WebServer::KPortDontCare) {
+EPConnectionDefinition::EPConnectionDefinition(): ConnectionDefinition(L"epserver"), _port(WebServer::KPortDontCare) {
 }
 
 EPConnectionDefinition::~EPConnectionDefinition() {
@@ -30,7 +32,15 @@ EPConnection::EPConnection() {
 EPConnection::~EPConnection() {
 }
 
-void EPConnection::Create(tj::shared::strong<ConnectionDefinition> def, Direction d, strong<FabricEngine> fe) {
+void EPConnection::CreateForTransport(strong<EPTransport> ept, const NetworkAddress& na) {
+	Throw(L"EP server cannot be created as transport", ExceptionTypeError);
+}
+
+void EPConnection::Create(tj::shared::strong<ConnectionDefinition> def, Direction d, ref<FabricEngine> fe) {
+	if(!fe) {
+		Throw(L"EP server cannot be created, no fabric engine was given (an EP server can only be created directly from a fabric definition)", ExceptionTypeError);
+	}
+	
 	if(def.IsCastableTo<EPConnectionDefinition>()) {
 		ref<EPConnectionDefinition> epd = ref<ConnectionDefinition>(def);
 		_server = WebServerManager::Instance()->CreateServer(epd->_port);
@@ -46,11 +56,12 @@ void EPConnection::Create(tj::shared::strong<ConnectionDefinition> def, Directio
 			
 			std::map<std::wstring, std::wstring> attributes;
 			attributes[L"EPDefinitionPath"] = definitionPath;
+			attributes[L"EPMagicNumber"] = FabricProcess::GetServerMagic();
 			_server->AddResolver(definitionPath, ref<FileRequestResolver>(GC::Hold(new FabricDefinitionResolver(fabric))));
 			
 			if((d & DirectionInbound)!=0) {
 				std::wstring messagePath = pathPrefix + L"/message";
-				attributes[L"EPMessagePath"] = messagePath;
+				///attributes[L"EPMessagePath"] = messagePath;
 				_server->AddResolver(messagePath, ref<FileRequestResolver>(GC::Hold(new FabricMessageResolver(fe, messagePath))));
 			}
 			

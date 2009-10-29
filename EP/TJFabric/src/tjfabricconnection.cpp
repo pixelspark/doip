@@ -3,6 +3,7 @@
 #include "../include/tjfabricengine.h"
 using namespace tj::shared;
 using namespace tj::fabric;
+using namespace tj::ep;
 
 /** Connection **/
 Connection::~Connection() {
@@ -15,7 +16,16 @@ MessageNotification::MessageNotification(const Timestamp& ts, strong<Message> m)
 ConnectionFactory::~ConnectionFactory() {
 }
 
-ref<Connection> ConnectionFactory::CreateFromDefinition(strong<ConnectionDefinition> cd, Direction d, strong<FabricEngine> fe) {
+ref<Connection> ConnectionFactory::CreateForTransport(strong<EPTransport> cd, const tj::np::NetworkAddress& address) {
+	std::wstring type = cd->GetType();
+	ref<Connection> conn = CreateObjectOfType(type);
+	if(conn) {
+		conn->CreateForTransport(cd, address);
+	}
+	return conn;
+}
+
+ref<Connection> ConnectionFactory::CreateFromDefinition(strong<ConnectionDefinition> cd, Direction d, ref<FabricEngine> fe) {
 	std::wstring type = cd->GetType();
 	ref<Connection> conn = CreateObjectOfType(type);
 	if(conn) {

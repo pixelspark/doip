@@ -7,6 +7,20 @@
 
 namespace tj {
 	namespace fabric {
+		/** The FabricProcess class generates a unique 'magic' key for each fabric process. This is
+		 used to prevent discovery of services published by the process itself: when the service supports
+		 it, services published from this process should have the EPMagicNumber attribute set to the
+		 process magic number. When discovering services, the EPMagicNumber attribute should be checked.
+		 If it is present, it should be compared with the process magic number. If the magic numbers are
+		 equal, the discovery is ignored **/
+		class FabricProcess {
+			public:
+				static tj::shared::String GetServerMagic();
+			
+			protected:
+				static tj::shared::String _magic;
+		};
+		
 		/** Manages WebServer instances **/
 		class WebServerManager {
 			public:

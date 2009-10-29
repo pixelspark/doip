@@ -46,7 +46,7 @@ namespace tj {
 					
 				protected:
 					OSCOverIPConnection();
-					virtual void StartInbound(tj::np::NativeSocket in4Socket, tj::np::NativeSocket in6Socket);
+					virtual void StartInbound(tj::np::NativeSocket inSocket);
 					virtual void StartOutbound(const tj::np::NetworkAddress& na, unsigned short port, tj::np::NativeSocket outSocket, bool useSendTo);
 					virtual void StopOutbound();
 					virtual void StopInbound();
@@ -60,7 +60,6 @@ namespace tj {
 				private:
 					tj::np::NativeSocket _outSocket;
 					tj::np::NativeSocket _inSocket;
-					tj::np::NativeSocket _in4Socket;
 					std::deque<tj::np::NativeSocket> _additionalIncomingSockets;
 					tj::shared::ref< tj::np::SocketListenerThread> _listenerThread;
 					Direction _direction;
@@ -87,15 +86,15 @@ namespace tj {
 				public:
 					OSCOverTCPConnection();
 					virtual ~OSCOverTCPConnection();
-					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe);
-					virtual void Create(const std::wstring& address, unsigned short port, Direction d);
+					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> fe);
+					virtual void Create(const tj::np::NetworkAddress& address, unsigned short port, Direction d);
+					virtual void CreateForTransport(tj::shared::strong<tj::ep::EPTransport> ept, const tj::np::NetworkAddress& address);
 					virtual void OnReceive(tj::np::NativeSocket ns);
 				
 				protected:
 					tj::shared::ref<OSCOverTCPConnectionDefinition> _def;
 					tj::shared::ref< tj::scout::ServiceRegistration > _serviceRegistration;
-					tj::np::NativeSocket _in4ServerSocket;
-					tj::np::NativeSocket _in6ServerSocket;
+					tj::np::NativeSocket _inServerSocket;
 					std::map<tj::np::NativeSocket, tj::shared::ref<tj::np::QueueSLIPFrameDecoder> > _streams;
 			};
 			
@@ -116,8 +115,9 @@ namespace tj {
 				public:
 					OSCOverUDPConnection();
 					virtual ~OSCOverUDPConnection();
-					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::strong<FabricEngine> fe);
-					virtual void Create(const std::wstring& address, unsigned short port, Direction d);
+					virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> fe);
+					virtual void Create(const tj::np::NetworkAddress& address, unsigned short port, Direction d);
+					virtual void CreateForTransport(tj::shared::strong<tj::ep::EPTransport> ept, const tj::np::NetworkAddress& address);
 					virtual void OnReceive(tj::np::NativeSocket ns);
 					
 				protected:
