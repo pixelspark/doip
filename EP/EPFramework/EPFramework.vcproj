@@ -120,6 +120,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4275;4251"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -132,7 +133,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(SolutionDir)\Release\tjshared.lib $(SolutionDir)\Release\tjnp.lib $(SolutionDir)\Libraries\TinyXML\build\Release\tinyxml.lib"
+				AdditionalDependencies="$(SolutionDir)\Release\tjshared.lib $(SolutionDir)\Release\tjnp.lib $(SolutionDir)\Release\tjscout.lib $(SolutionDir)\Libraries\TinyXML\build\Release\tinyxml.lib $(SolutionDir)\Libraries\OSCPack\build\Release\oscpack.lib ws2_32.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -172,11 +173,47 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\src\epcondition.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epconnection.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epconnectionsregistry.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epdiscovery.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epdnssddiscovery.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\epdownload.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\ependpoint.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epmessage.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\eposcipconnection.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epserverconnection.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\epservermanager.cpp"
 				>
 			</File>
 		</Filter>
@@ -186,6 +223,22 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\include\epcondition.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\epconnection.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\epdiscovery.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\epdnssddiscovery.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\epdownload.h"
 				>
 			</File>
@@ -193,11 +246,27 @@
 				RelativePath=".\include\ependpoint.h"
 				>
 			</File>
+			<File
+				RelativePath=".\include\epmessage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\eposcipconnection.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\epserverconnection.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\epservermanager.h"
+				>
+			</File>
 			<Filter
 				Name="internal"
 				>
 				<File
-					RelativePath=".\include\internal\tjep.h"
+					RelativePath=".\include\internal\ep.h"
 					>
 				</File>
 			</Filter>

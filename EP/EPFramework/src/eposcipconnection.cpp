@@ -6,6 +6,7 @@
 #include "../../../Libraries/OSCPack/osc/OscPacketListener.h"
 #include "../../../Libraries/OSCPack/osc/OscPrintReceivedElements.h"
 
+#include <limits>
 #include <errno.h>
 
 #ifdef TJ_OS_POSIX
@@ -166,24 +167,23 @@ void OSCOverIPConnection::StopInbound() {
 		_listenerThread->Stop();
 		_listenerThread = null; // This will call ~SocketListenerThread => Thread::WaitForCompletion on the thread
 		
-#ifdef TJ_OS_POSIX
-		close(_inSocket);
-#endif
+		#ifdef TJ_OS_POSIX
+			close(_inSocket);
+		#endif
 		
-#ifdef TJ_OS_WIN
-		closesocket(_inSocket);
-		closesocket(_in4Socket);
-#endif
+		#ifdef TJ_OS_WIN
+			closesocket(_inSocket);
+		#endif
 		
 		std::deque<NativeSocket>::iterator it = _additionalIncomingSockets.begin();
 		while(it!=_additionalIncomingSockets.end()) {
-#ifdef TJ_OS_POSIX
-			close(*it);
-#endif
-			
-#ifdef TJ_OS_WIN
-			closesocket(*it);
-#endif
+			#ifdef TJ_OS_POSIX
+				close(*it);
+			#endif
+						
+			#ifdef TJ_OS_WIN
+				closesocket(*it);
+			#endif
 			
 			++it;
 		}

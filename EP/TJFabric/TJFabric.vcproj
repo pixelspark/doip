@@ -120,6 +120,8 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				CompileAs="2"
+				DisableSpecificWarnings="4251;4275"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -192,10 +194,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\tjfabricmessage.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\tjfabricmessagescriptable.cpp"
 				>
 			</File>
@@ -212,69 +210,9 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\tjfabricserver.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\tjfabricutil.cpp"
 				>
 			</File>
-			<Filter
-				Name="connections"
-				>
-				<File
-					RelativePath=".\src\connections\tjbetweenfabricconnection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjbetweenfabricconnection.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjconnectionsregistry.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjdnssddiscovery.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjdnssddiscovery.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepconnection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepconnection.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepdisovery.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjepdisovery.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscipconnection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscipconnection.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscutil.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\connections\tjoscutil.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -298,10 +236,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\tjfabricmessage.h"
-				>
-			</File>
-			<File
 				RelativePath=".\include\tjfabricmessagescriptable.h"
 				>
 			</File>
@@ -315,10 +249,6 @@
 			</File>
 			<File
 				RelativePath=".\include\tjfabricrule.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricserver.h"
 				>
 			</File>
 			<File

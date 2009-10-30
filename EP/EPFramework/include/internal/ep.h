@@ -3,7 +3,7 @@
 
 #include "../../../../TJShared/include/tjshared.h"
 
-#ifdef TJEP_EXPORTS
+#ifdef EPFRAMEWORK_EXPORTS
 	#ifdef TJ_OS_WIN
 		#define EP_EXPORTED __declspec(dllexport)
 	#else
