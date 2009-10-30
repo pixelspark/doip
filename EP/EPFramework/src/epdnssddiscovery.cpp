@@ -1,14 +1,60 @@
-#include "tjepdiscovery.h"
-#include "../../include/tjfabricengine.h"
-#include "../../include/tjfabricserver.h"
-
+#include "../include/epdnssddiscovery.h"
+#include "../include/eposcipconnection.h"
+#include "../include/epservermanager.h"
+#include "../../../TJScout/include/tjscout.h"
+#include "../../../TJNP/include/tjnetworkaddress.h"
 using namespace tj::shared;
-using namespace tj::np;
 using namespace tj::ep;
-using namespace tj::fabric;
 using namespace tj::scout;
-using namespace tj::fabric::connections;
+using namespace tj::np;
 
+/** DNSSDDiscoveryDefinition **/
+DNSSDDiscoveryDefinition::DNSSDDiscoveryDefinition(): DiscoveryDefinition(L"dnssd"), _serviceType(L"_osc._udp") {
+}
+
+DNSSDDiscoveryDefinition::DNSSDDiscoveryDefinition(const std::wstring& type, const std::wstring& dst): DiscoveryDefinition(type), _serviceType(dst) {
+}
+
+DNSSDDiscoveryDefinition::~DNSSDDiscoveryDefinition() {
+}
+
+void DNSSDDiscoveryDefinition::Load(TiXmlElement* me) {
+	_serviceType = LoadAttributeSmall<std::wstring>(me, "service-type", _serviceType);
+}
+
+void DNSSDDiscoveryDefinition::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "service-type", _serviceType);
+}
+
+/** DNSSDDiscovery **/
+DNSSDDiscovery::DNSSDDiscovery() {
+}
+
+DNSSDDiscovery::~DNSSDDiscovery() {
+}
+
+void DNSSDDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRequest::ServiceNotification& data) {
+	if(data.online) {
+		ref<OSCOverUDPConnection> con = GC::Hold(new OSCOverUDPConnection());
+		con->Create(data.service->GetHostName(), data.service->GetPort(), DirectionOutbound);
+		EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), ref<Connection>(con), true));
+	}
+}
+
+void DNSSDDiscovery::Create(tj::shared::strong<DiscoveryDefinition> def) {
+	if(ref<DiscoveryDefinition>(def).IsCastableTo<DNSSDDiscoveryDefinition>()) {
+		ServiceDescription sd;
+		ref<DNSSDDiscoveryDefinition> dsd = ref<DiscoveryDefinition>(def);
+		if(dsd) {
+			sd.AddType(ServiceDiscoveryDNSSD, dsd->_serviceType);
+			_resolver = GC::Hold(new ResolveRequest(sd));
+			_resolver->EventService.AddListener(ref<DNSSDDiscovery>(this));
+			Scout::Instance()->Resolve(_resolver);
+		}
+	}
+}
+
+/** EPDiscoveryDefinition **/
 EPDiscoveryDefinition::EPDiscoveryDefinition(): DNSSDDiscoveryDefinition(L"ep", L"_ep._tcp") {
 }
 
@@ -96,7 +142,7 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		std::wstring magicNumber;
 		ref<Service> service = data.service;
 		
-		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==FabricProcess::GetServerMagic()) {
+		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==EPServerManager::Instance()->GetServerMagic()) {
 			return;
 		}
 		

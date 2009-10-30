@@ -1,14 +1,14 @@
 #ifndef _TJ_FABRIC_MESSAGE_SCRIPTABLE_H
 #define _TJ_FABRIC_MESSAGE_SCRIPTABLE_H
 
-#include "tjfabricmessage.h"
+#include "../../EPFramework/include/epmessage.h"
 #include "../../../TJScript/include/tjscript.h"
 
 namespace tj {
 	namespace fabric {
 		class MessageScriptable: public tj::script::ScriptObject<MessageScriptable> {
 			public:
-				MessageScriptable(tj::shared::strong<Message> m);
+				MessageScriptable(tj::shared::strong<tj::ep::Message> m);
 				virtual ~MessageScriptable();
 				static void Initialize();
 				virtual tj::shared::ref<tj::script::Scriptable> SSetPath(tj::shared::ref<tj::script::ParameterList> p);
@@ -18,10 +18,10 @@ namespace tj {
 				virtual tj::shared::ref<tj::script::Scriptable> SToString(tj::shared::ref<tj::script::ParameterList> p);
 				virtual tj::shared::ref<tj::script::Scriptable> SParameterTypes(tj::shared::ref<tj::script::ParameterList> p);
 				virtual tj::shared::ref<tj::script::Scriptable> SParameterCount(tj::shared::ref<tj::script::ParameterList> p);
-				virtual tj::shared::strong<Message> GetMessage();
+				virtual tj::shared::strong<tj::ep::Message> GetMessage();
 			
 			protected:
-				tj::shared::strong<Message> _message;
+				tj::shared::strong<tj::ep::Message> _message;
 		};
 		
 		class MessageScriptType: public tj::script::ScriptType {

@@ -1,46 +1,8 @@
-#include "../include/tjfabricmessage.h"
 #include "../include/tjfabricconnection.h"
 #include "../include/tjfabricengine.h"
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;
-
-/** Connection **/
-Connection::~Connection() {
-}
-
-MessageNotification::MessageNotification(const Timestamp& ts, strong<Message> m): when(ts), message(m) {
-}
-
-/** ConnectionFactory **/
-ConnectionFactory::~ConnectionFactory() {
-}
-
-ref<Connection> ConnectionFactory::CreateForTransport(strong<EPTransport> cd, const tj::np::NetworkAddress& address) {
-	std::wstring type = cd->GetType();
-	ref<Connection> conn = CreateObjectOfType(type);
-	if(conn) {
-		conn->CreateForTransport(cd, address);
-	}
-	return conn;
-}
-
-ref<Connection> ConnectionFactory::CreateFromDefinition(strong<ConnectionDefinition> cd, Direction d, ref<FabricEngine> fe) {
-	std::wstring type = cd->GetType();
-	ref<Connection> conn = CreateObjectOfType(type);
-	if(conn) {
-		conn->Create(cd, d, fe);
-	}
-	return conn;
-}
-
-strong< ConnectionFactory > ConnectionFactory::Instance() {
-	if(!_instance) {
-		_instance = GC::Hold(new ConnectionFactory());
-	}
-	
-	return _instance;
-}
 
 /** ConnectedGroup **/
 ConnectedGroup::ConnectedGroup(strong<Group> g): _group(g), _shouldStillConnectOutbound(false) {
@@ -127,7 +89,7 @@ void ConnectedGroup::CreateConnections(strong<FabricEngine> fe) {
 					newConnections[cd] = eit->second;
 				}
 				else {
-					ref<Connection> conn = ConnectionFactory::Instance()->CreateFromDefinition(cd, _group->GetDirection(), fe);
+					ref<Connection> conn = ConnectionFactory::Instance()->CreateFromDefinition(cd, _group->GetDirection(), fe->GetFabric());
 					
 					if(conn) {
 						conn->EventMessageReceived.AddListener(ref<ConnectedGroup>(this));
@@ -191,32 +153,3 @@ void ConnectedGroup::Connect(bool t, strong<FabricEngine> fe) {
 		_discoveries.clear();
 	}
 }
-
-/** Discovery **/
-Discovery::~Discovery() {
-}
-
-DiscoveryNotification::DiscoveryNotification(const Timestamp& ts, strong<Connection> m, bool a): when(ts), connection(m), added(a) {
-}
-
-/** DiscoveryFactory **/
-DiscoveryFactory::~DiscoveryFactory() {
-}
-
-ref<Discovery> DiscoveryFactory::CreateFromDefinition(strong<DiscoveryDefinition> cd) {
-	std::wstring type = cd->GetType();
-	ref<Discovery> conn = CreateObjectOfType(type);
-	if(conn) {
-		conn->Create(cd);
-	}
-	return conn;
-}
-
-strong< DiscoveryFactory > DiscoveryFactory::Instance() {
-	if(!_instance) {
-		_instance = GC::Hold(new DiscoveryFactory());
-	}
-	
-	return _instance;
-}
-

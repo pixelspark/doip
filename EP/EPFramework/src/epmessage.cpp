@@ -1,6 +1,6 @@
-#include "../include/tjfabricmessage.h"
+#include "../include/epmessage.h"
 using namespace tj::shared;
-using namespace tj::fabric;
+using namespace tj::ep;
 
 Message::Message(const tj::shared::String& path): _path(path) {
 }
@@ -27,7 +27,7 @@ String Message::GetParameterTags() const {
 				}
 				break;
 			}
-		
+				
 			case Any::TypeDouble:
 				wos << L'd';
 				break;
@@ -75,7 +75,7 @@ Any Message::GetParameter(unsigned int i) const {
 	if(it!=_parameters.end()) {
 		return it->second;
 	}
-
+	
 	Throw(L"Invalid parameter index: ", ExceptionTypeError);
 }
 

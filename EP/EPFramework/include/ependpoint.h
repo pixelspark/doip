@@ -18,6 +18,7 @@ namespace tj {
 				virtual tj::shared::String GetFormat() const = 0;
 				virtual tj::shared::String GetFraming() const = 0;
 				virtual unsigned short GetPort() const = 0;
+				virtual void Save(TiXmlElement* me);
 		};
 		
 		class EP_EXPORTED EPParameter: public virtual tj::shared::Object {
@@ -29,6 +30,7 @@ namespace tj {
 				virtual tj::shared::Any GetMinimumValue() const = 0;
 				virtual tj::shared::Any GetMaximumValue() const = 0;
 				virtual tj::shared::Any GetDefaultValue() const = 0;
+				virtual void Save(TiXmlElement* me);
 		};
 		
 		class EP_EXPORTED EPMethod: public virtual tj::shared::Object {
@@ -36,8 +38,9 @@ namespace tj {
 				virtual ~EPMethod();
 				virtual tj::shared::String GetID() const = 0;
 				virtual tj::shared::String GetFriendlyName() const = 0;
-				virtual void  GetPaths(std::set<EPPath>& pathList) const = 0;
+				virtual void GetPaths(std::set<EPPath>& pathList) const = 0;
 				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const = 0;
+				virtual void Save(TiXmlElement* me);
 		};
 		
 		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object {
@@ -51,14 +54,13 @@ namespace tj {
 				virtual bool IsDynamic() const = 0;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const = 0;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const = 0;
+				virtual void Save(TiXmlElement* me);
 		};		
 		
 		class EP_EXPORTED EPEndpointDefinition: public EPEndpoint, public tj::shared::Serializable {
 			public:
 				EPEndpointDefinition();
 				virtual ~EPEndpointDefinition();
-				virtual void Load(TiXmlElement* me);
-				virtual void Save(TiXmlElement* me);
 				virtual void Clone();
 			
 				virtual tj::shared::String GetID() const;
@@ -69,6 +71,8 @@ namespace tj {
 				virtual bool IsDynamic() const;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
+				virtual void Load(TiXmlElement* me);
+				virtual void Save(TiXmlElement* me);
 			
 			protected:
 				tj::shared::String _id;
@@ -88,8 +92,8 @@ namespace tj {
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual void  GetPaths(std::set<EPPath>& pathList) const;
 				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const;
-				virtual void Save(TiXmlElement* me);
 				virtual void Load(TiXmlElement* me);
+				virtual void Save(TiXmlElement* me);
 				virtual void Clone();
 			
 			protected:

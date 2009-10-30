@@ -4,6 +4,7 @@
 #include "../include/tjfabricqueue.h"
 using namespace tj::shared;
 using namespace tj::fabric;
+using namespace tj::ep;
 
 ref<FabricRegistry> FabricRegistry::_instance;
 

@@ -2,11 +2,11 @@
 #define _TJ_FABRIC_REGISTRY_H
 
 #include "../../../TJShared/include/tjshared.h"
+#include "../../EPFramework/include/epmessage.h"
 
 namespace tj {
 	namespace fabric {
 		class FabricEngine;
-		class Message;
 		
 		class FabricRegistration: public virtual tj::shared::Object {
 			friend class FabricRegistry;
@@ -26,7 +26,7 @@ namespace tj {
 				virtual ~FabricRegistry();
 				static tj::shared::strong<FabricRegistry> Instance();
 				virtual tj::shared::ref<FabricRegistration> Register(const tj::shared::String& fqdn, tj::shared::ref<FabricEngine> fe);
-				virtual void Send(const tj::shared::String& pattern, tj::shared::strong<Message> msg);
+				virtual void Send(const tj::shared::String& pattern, tj::shared::strong<tj::ep::Message> msg);
 			
 			protected:
 				virtual void Unregister(const tj::shared::String& fqdn);

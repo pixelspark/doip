@@ -2,79 +2,7 @@
 #include "../include/tjfabricutil.h"
 using namespace tj::shared;
 using namespace tj::fabric;
-
-/** ConnectionDefinition **/
-ConnectionDefinition::~ConnectionDefinition() {
-}
-
-ConnectionDefinition::ConnectionDefinition(const std::wstring& type): _type(type) {
-}
-
-std::wstring ConnectionDefinition::GetType() const {
-	return _type;
-}
-
-/** ConnectionDefinitionFactory **/
-ConnectionDefinitionFactory::~ConnectionDefinitionFactory() {
-}
-
-ref<ConnectionDefinition> ConnectionDefinitionFactory::Load(TiXmlElement* me) {
-	std::wstring type = LoadAttributeSmall<std::wstring>(me, "type", L"");
-	ref<ConnectionDefinition> cd = CreateObjectOfType(type);
-	if(cd) {
-		cd->Load(me);
-	}
-	return cd;
-}
-
-void ConnectionDefinitionFactory::Save(strong<ConnectionDefinition> c, TiXmlElement* me) {
-	SaveAttributeSmall(me, "type", c->GetType());
-	c->Save(me);
-}
-
-tj::shared::strong<ConnectionDefinitionFactory> ConnectionDefinitionFactory::Instance() {
-	if(!_instance) {
-		_instance = GC::Hold(new ConnectionDefinitionFactory());
-	}
-	return _instance;
-}
-
-/** DiscoveryDefinition **/
-DiscoveryDefinition::~DiscoveryDefinition() {
-}
-
-DiscoveryDefinition::DiscoveryDefinition(const std::wstring& type): _type(type) {
-}
-
-std::wstring DiscoveryDefinition::GetType() const {
-	return _type;
-}
-
-/** DiscoveryDefinitionFactory **/
-DiscoveryDefinitionFactory::~DiscoveryDefinitionFactory() {
-}
-
-ref<DiscoveryDefinition> DiscoveryDefinitionFactory::Load(TiXmlElement* me) {
-	std::wstring type = LoadAttributeSmall<std::wstring>(me, "type", L"");
-	std::wstring format = LoadAttributeSmall<std::wstring>(me, "format", L"osc");
-	ref<DiscoveryDefinition> cd = CreateObjectOfType(type);
-	if(cd) {
-		cd->Load(me);
-	}
-	return cd;
-}
-
-void DiscoveryDefinitionFactory::Save(strong<DiscoveryDefinition> c, TiXmlElement* me) {
-	SaveAttributeSmall(me, "type", c->GetType());
-	c->Save(me);
-}
-
-tj::shared::strong<DiscoveryDefinitionFactory> DiscoveryDefinitionFactory::Instance() {
-	if(!_instance) {
-		_instance = GC::Hold(new DiscoveryDefinitionFactory());
-	}
-	return _instance;
-}
+using namespace tj::ep;
 
 /** Group **/
 Group::Group(): _direction(DirectionNone), _lazy(true) {
@@ -84,19 +12,14 @@ Group::Group(): _direction(DirectionNone), _lazy(true) {
 Group::~Group() {
 }
 
-void Group::SaveEndpointDefinition(TiXmlElement* transports) {
-	if((_direction & DirectionInbound)!=0) {
-		// Export connection definitions
-		std::deque< ref<ConnectionDefinition> >::iterator rit = _connections.begin();
-		while(rit!=_connections.end()) {
-			ref<ConnectionDefinition> cd = *rit;
-			if(cd) {
-				TiXmlElement connElement("transport");
-				ConnectionDefinitionFactory::Instance()->Save(cd, &connElement);
-				transports->InsertEndChild(connElement);
-			}
-			++rit;
+void Group::GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const {
+	std::deque< ref<ConnectionDefinition> >::const_iterator rit = _connections.begin();
+	while(rit!=_connections.end()) {
+		ref<ConnectionDefinition> cd = *rit;
+		if(cd) {
+			transportsList.push_back(cd);
 		}
+		++rit;
 	}
 }
 

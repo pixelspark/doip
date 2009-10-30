@@ -1,11 +1,11 @@
-#ifndef _TJFABRIC_MESSAGE_H
-#define _TJFABRIC_MESSAGE_H
+#ifndef _TJ_EP_MESSAGE_H
+#define _TJ_EP_MESSAGE_H
 
-#include "../../../TJShared/include/tjshared.h"
+#include "internal/ep.h"
 
 namespace tj {
-	namespace fabric {
-		class Message: public virtual tj::shared::Object {
+	namespace ep {
+		class EP_EXPORTED Message: public virtual tj::shared::Object {
 			public:
 				Message(const tj::shared::String& path);
 				virtual ~Message();
@@ -16,7 +16,7 @@ namespace tj {
 				virtual unsigned int GetParameterCount() const;
 				virtual tj::shared::String ToString() const;
 				virtual tj::shared::String GetParameterTags() const;
-			
+				
 			protected:
 				tj::shared::String _path;
 				std::map<unsigned int, tj::shared::Any > _parameters;

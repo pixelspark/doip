@@ -26,6 +26,10 @@ EPEndpointDefinition::EPEndpointDefinition() {
 EPEndpointDefinition::~EPEndpointDefinition() {
 }
 
+void EPEndpointDefinition::Save(TiXmlElement* me) {
+	EPEndpoint::Save(me);
+}
+
 void EPEndpointDefinition::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall(me, "id", _id);
 	_friendlyName = LoadAttributeSmall(me, "friendly-name", _friendlyName);
@@ -56,38 +60,44 @@ void EPEndpointDefinition::Load(TiXmlElement* me) {
 	}
 }
 
-void EPEndpointDefinition::Save(TiXmlElement* me) {
-	SaveAttributeSmall(me,"id", _id);
-	SaveAttributeSmall(me, "namespace", _namespace);
-	SaveAttributeSmall(me, "friendly-name", _friendlyName);
-	SaveAttributeSmall(me, "version", _version);
-	SaveAttributeSmall(me, "dynamic", Bool::ToString(_dynamic));
+void EPEndpoint::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me,"id", GetID());
+	SaveAttributeSmall(me, "namespace", GetNamespace());
+	SaveAttributeSmall(me, "friendly-name", GetFriendlyName());
+	SaveAttributeSmall(me, "version", GetVersion());
+	SaveAttributeSmall(me, "dynamic", Bool::ToString(IsDynamic()));
 	
-	TiXmlElement methods("methods");
-	std::vector< ref<EPMethod> >::iterator it = _methods.begin();
-	while(it!=_methods.end()) {
+	TiXmlElement methodsElement("methods");
+	std::vector< ref<EPMethod> > methods;
+	GetMethods(methods);
+	
+	std::vector< ref<EPMethod> >::iterator it = methods.begin();
+	while(it!=methods.end()) {
 		ref<EPMethod> epm = *it;
-		if(epm && epm.IsCastableTo<EPMethodDefinition>()) {
+		if(epm) {
 			TiXmlElement method("method");
-			ref<EPMethodDefinition>(epm)->Save(&method);
-			methods.InsertEndChild(method);
+			epm->Save(&method);
+			methodsElement.InsertEndChild(method);
 		}
 		++it;
 	}
-	me->InsertEndChild(methods);
+	me->InsertEndChild(methodsElement);
 	
-	TiXmlElement transports("transports");
-	std::vector< ref<EPTransport> >::iterator tit = _transports.begin();
-	while(tit!=_transports.end()) {
+	TiXmlElement transportsElement("transports");
+	std::vector< ref<EPTransport> > transports;
+	GetTransports(transports);
+	
+	std::vector< ref<EPTransport> >::iterator tit = transports.begin();
+	while(tit!=transports.end()) {
 		ref<EPTransport> ept = *tit;
-		if(ept && ept.IsCastableTo<EPTransportDefinition>()) {
+		if(ept) {
 			TiXmlElement transport("transport");
-			ref<EPTransportDefinition>(ept)->Save(&transport);
-			transports.InsertEndChild(transport);
+			ept->Save(&transport);
+			transportsElement.InsertEndChild(transport);
 		}
 		++tit;
 	}
-	me->InsertEndChild(transports);
+	me->InsertEndChild(transportsElement);
 }
 
 void EPEndpointDefinition::GetTransports(std::vector< ref<EPTransport> >& transportsList) const {
@@ -164,11 +174,18 @@ void  EPMethodDefinition::GetPaths(std::set<EPPath>& pathList) const {
 }
 
 void EPMethodDefinition::Save(TiXmlElement* me) {
-	SaveAttributeSmall(me, "id", _id);
-	SaveAttributeSmall(me, "friendly-name", _friendlyName);
+	EPMethod::Save(me);
+}
+
+void EPMethod::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "id", GetID());
+	SaveAttributeSmall(me, "friendly-name", GetFriendlyName());
 	
-	std::set<EPPath>::const_iterator it = _paths.begin();
-	while(it!=_paths.end()) {
+	std::set<EPPath> paths;
+	GetPaths(paths);
+	
+	std::set<EPPath>::const_iterator it = paths.begin();
+	while(it!=paths.end()) {
 		TiXmlElement path("path");
 		TiXmlText pathText(Mbs(*it));
 		path.InsertEndChild(pathText);
@@ -176,12 +193,15 @@ void EPMethodDefinition::Save(TiXmlElement* me) {
 		++it;
 	}
 	
-	std::vector< ref<EPParameter> >::const_iterator pit = _parameters.begin();
-	while(pit!=_parameters.end()) {
+	std::vector< ref<EPParameter> > parameters;
+	GetParameters(parameters);
+	
+	std::vector< ref<EPParameter> >::const_iterator pit = parameters.begin();
+	while(pit!=parameters.end()) {
 		ref<EPParameter> epp = *pit;
-		if(epp && epp.IsCastableTo<EPParameterDefinition>()) {
-			TiXmlElement param("param");
-			ref<EPParameterDefinition>(epp)->Save(&param);
+		if(epp) {
+			TiXmlElement param("parameter");
+			epp->Save(&param);
 			me->InsertEndChild(param);
 		}
 		++pit;
@@ -267,6 +287,10 @@ Any EPParameterDefinition::GetDefaultValue() const {
 	return Any(_defaultValue).Force(GetValueType());
 }
 
+void EPParameterDefinition::Save(TiXmlElement* me) {
+	EPParameter::Save(me);
+}
+
 void EPParameterDefinition::Load(TiXmlElement* me) {
 	_friendlyName = LoadAttributeSmall(me, "friendly-name", _friendlyName);
 	_type = LoadAttributeSmall(me, "type", _type);
@@ -275,12 +299,12 @@ void EPParameterDefinition::Load(TiXmlElement* me) {
 	_defaultValue = LoadAttributeSmall(me, "default", _defaultValue);
 }
 
-void EPParameterDefinition::Save(TiXmlElement* me) {
-	SaveAttributeSmall(me, "friendly-name", _friendlyName);
-	SaveAttributeSmall(me, "type", _type);
-	SaveAttributeSmall(me, "min", _minimumValue);
-	SaveAttributeSmall(me, "max", _maximumValue);
-	SaveAttributeSmall(me, "default", _defaultValue);
+void EPParameter::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "friendly-name", GetFriendlyName());
+	SaveAttributeSmall(me, "type", GetType());
+	SaveAttributeSmall(me, "min", GetMinimumValue().ToString());
+	SaveAttributeSmall(me, "max", GetMaximumValue().ToString());
+	SaveAttributeSmall(me, "default", GetDefaultValue().ToString());
 }
 
 /** EPTransportDefinition **/
@@ -309,12 +333,16 @@ unsigned short EPTransportDefinition::GetPort() const {
 	return _port;
 }
 
+void EPTransport::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "type", GetType());
+	SaveAttributeSmall(me, "format", GetFormat());
+	SaveAttributeSmall(me, "address", GetAddress());
+	SaveAttributeSmall(me, "framing", GetFraming());
+	SaveAttributeSmall(me, "port", int(GetPort()));
+}
+
 void EPTransportDefinition::Save(TiXmlElement* me) {
-	SaveAttributeSmall(me, "type", _type);
-	SaveAttributeSmall(me, "format", _format);
-	SaveAttributeSmall(me, "address", _address);
-	SaveAttributeSmall(me, "framing", _framing);
-	SaveAttributeSmall(me, "port", int(_port));
+	EPTransport::Save(me);
 }
 
 void EPTransportDefinition::Load(TiXmlElement* me) {

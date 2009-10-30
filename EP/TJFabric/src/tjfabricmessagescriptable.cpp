@@ -2,6 +2,7 @@
 using namespace tj::shared;
 using namespace tj::script;
 using namespace tj::fabric;
+using namespace tj::ep;
 
 MessageScriptable::MessageScriptable(tj::shared::strong<Message> m): _message(m) {
 }

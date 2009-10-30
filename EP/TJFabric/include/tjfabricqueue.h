@@ -2,6 +2,7 @@
 #define _TJ_FABRIC_QUEUE_H
 
 #include "../../../TJShared/include/tjshared.h"
+#include "../../EPFramework/include/epmessage.h"
 
 namespace tj {
 	namespace script {
@@ -15,7 +16,6 @@ namespace tj {
 	namespace fabric {
 		class QueueThread;
 		class Rule;
-		class Message;
 		class FabricEngine;
 		class Fabric;
 		
@@ -28,20 +28,20 @@ namespace tj {
 				virtual ~Queue();
 				virtual void OnCreated();
 				virtual tj::shared::ref<tj::script::CompiledScript> GetScriptForRule(tj::shared::strong<Rule> r);
-				virtual void ExecuteScript(tj::shared::strong<Rule> rule, tj::shared::strong<tj::script::CompiledScript> script, tj::shared::strong<Message> m);
+				virtual void ExecuteScript(tj::shared::strong<Rule> rule, tj::shared::strong<tj::script::CompiledScript> script, tj::shared::strong<tj::ep::Message> m);
 				virtual void Clear();
-				virtual void Add(tj::shared::strong<Message> m);
+				virtual void Add(tj::shared::strong<tj::ep::Message> m);
 				virtual void WaitForCompletion();
 				virtual void Stop();
 			
 			protected:
-				virtual void ProcessMessage(tj::shared::strong<Message> m);
+				virtual void ProcessMessage(tj::shared::strong<tj::ep::Message> m);
 				tj::shared::CriticalSection _lock;
 				tj::shared::ref<QueueThread> _thread;
 				tj::shared::ref<tj::script::ScriptContext> _context;
 				tj::shared::ref<tj::script::ScriptScope> _global;
 				std::map< tj::shared::ref<Rule>, tj::shared::ref<tj::script::CompiledScript> > _scriptCache;
-				std::deque< tj::shared::ref<Message> > _queue;
+				std::deque< tj::shared::ref<tj::ep::Message> > _queue;
 				tj::shared::weak<FabricEngine> _engine;
 		};
 		

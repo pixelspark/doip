@@ -17,6 +17,23 @@
 		B462AF5C1098E17000484C29 /* TJNPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B462AF5B1098E16E00484C29 /* TJNPFramework.framework */; };
 		B462AF601098E19200484C29 /* epdownload.h in Headers */ = {isa = PBXBuildFile; fileRef = B462AF5F1098E19200484C29 /* epdownload.h */; };
 		B462AF621098E20300484C29 /* epdownload.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AF611098E20300484C29 /* epdownload.cpp */; };
+		B4CD44B1109AED5F004B3BBB /* epconnection.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44B0109AED5F004B3BBB /* epconnection.h */; };
+		B4CD44B3109AEDBE004B3BBB /* epconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */; };
+		B4CD44BD109AEE18004B3BBB /* epmessage.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44BC109AEE18004B3BBB /* epmessage.h */; };
+		B4CD44BF109AEE40004B3BBB /* epmessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44BE109AEE40004B3BBB /* epmessage.cpp */; };
+		B4CD44C7109AEED5004B3BBB /* epdiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44C6109AEED5004B3BBB /* epdiscovery.h */; };
+		B4CD44C9109AEF20004B3BBB /* epdiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44C8109AEF20004B3BBB /* epdiscovery.cpp */; };
+		B4CD44D2109AEF72004B3BBB /* epdnssddiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */; };
+		B4CD44D9109AF54E004B3BBB /* epdnssddiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44D8109AF54E004B3BBB /* epdnssddiscovery.h */; };
+		B4CD44FA109AF88C004B3BBB /* eposcipconnection.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44F9109AF88C004B3BBB /* eposcipconnection.h */; };
+		B4CD44FC109AF911004B3BBB /* eposcipconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */; };
+		B4CD450E109AFAAD004B3BBB /* epconnectionsregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */; };
+		B4CD4510109AFAFC004B3BBB /* epserverconnection.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD450F109AFAFC004B3BBB /* epserverconnection.h */; };
+		B4CD4512109AFB6D004B3BBB /* epserverconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */; };
+		B4CD4514109AFBAB004B3BBB /* epservermanager.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD4513109AFBAB004B3BBB /* epservermanager.h */; };
+		B4CD4516109AFC5A004B3BBB /* epservermanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */; };
+		B4CD4550109B0228004B3BBB /* TJScoutFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CD454F109B0223004B3BBB /* TJScoutFramework.framework */; };
+		B4CD455C109B0249004B3BBB /* OSCPackFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CD455B109B0246004B3BBB /* OSCPackFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +79,34 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJNPFramework;
 		};
+		B4CD454E109B0223004B3BBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScoutFramework.framework */;
+			remoteInfo = TJScoutFramework;
+		};
+		B4CD4551109B0230004B3BBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScoutFramework */;
+			remoteInfo = TJScoutFramework;
+		};
+		B4CD455A109B0246004B3BBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPackFramework.framework */;
+			remoteInfo = OSCPackFramework;
+		};
+		B4CD455D109B024F004B3BBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OSCPackFramework */;
+			remoteInfo = OSCPackFramework;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +122,23 @@
 		B462AF561098E16E00484C29 /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B462AF5F1098E19200484C29 /* epdownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epdownload.h; sourceTree = "<group>"; };
 		B462AF611098E20300484C29 /* epdownload.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epdownload.cpp; sourceTree = "<group>"; };
+		B4CD44B0109AED5F004B3BBB /* epconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epconnection.h; sourceTree = "<group>"; };
+		B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epconnection.cpp; sourceTree = "<group>"; };
+		B4CD44BC109AEE18004B3BBB /* epmessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epmessage.h; sourceTree = "<group>"; };
+		B4CD44BE109AEE40004B3BBB /* epmessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epmessage.cpp; sourceTree = "<group>"; };
+		B4CD44C6109AEED5004B3BBB /* epdiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epdiscovery.h; sourceTree = "<group>"; };
+		B4CD44C8109AEF20004B3BBB /* epdiscovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epdiscovery.cpp; sourceTree = "<group>"; };
+		B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epdnssddiscovery.cpp; sourceTree = "<group>"; };
+		B4CD44D8109AF54E004B3BBB /* epdnssddiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = epdnssddiscovery.h; path = include/epdnssddiscovery.h; sourceTree = SOURCE_ROOT; };
+		B4CD44F9109AF88C004B3BBB /* eposcipconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eposcipconnection.h; sourceTree = "<group>"; };
+		B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eposcipconnection.cpp; sourceTree = "<group>"; };
+		B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epconnectionsregistry.cpp; sourceTree = "<group>"; };
+		B4CD450F109AFAFC004B3BBB /* epserverconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epserverconnection.h; sourceTree = "<group>"; };
+		B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epserverconnection.cpp; sourceTree = "<group>"; };
+		B4CD4513109AFBAB004B3BBB /* epservermanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epservermanager.h; sourceTree = "<group>"; };
+		B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epservermanager.cpp; sourceTree = "<group>"; };
+		B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +146,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4CD455C109B0249004B3BBB /* OSCPackFramework.framework in Frameworks */,
+				B4CD4550109B0228004B3BBB /* TJScoutFramework.framework in Frameworks */,
 				B462AF5C1098E17000484C29 /* TJNPFramework.framework in Frameworks */,
 				B462AF0C1098E0C100484C29 /* TinyXMLFramework.framework in Frameworks */,
 				B462AF001098E0A300484C29 /* TJSharedFramework.framework in Frameworks */,
@@ -104,6 +168,8 @@
 		0867D691FE84028FC02AAC07 /* EPFramework */ = {
 			isa = PBXGroup;
 			children = (
+				B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */,
+				B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */,
 				B462AF561098E16E00484C29 /* TJNPFramework.xcodeproj */,
 				B462AF061098E0BE00484C29 /* TinyXMLFramework.xcodeproj */,
 				B462AEFA1098E09B00484C29 /* TJSharedFramework.xcodeproj */,
@@ -134,10 +200,17 @@
 		B462AEEE1098E00E00484C29 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				B4CD44D8109AF54E004B3BBB /* epdnssddiscovery.h */,
 				B462AEEF1098E00E00484C29 /* ependpoint.h */,
 				B462AEF41098E02900484C29 /* ep.h */,
 				B462AF5F1098E19200484C29 /* epdownload.h */,
 				B419EE561099F47700FE1A72 /* epcondition.h */,
+				B4CD44B0109AED5F004B3BBB /* epconnection.h */,
+				B4CD44BC109AEE18004B3BBB /* epmessage.h */,
+				B4CD44C6109AEED5004B3BBB /* epdiscovery.h */,
+				B4CD44F9109AF88C004B3BBB /* eposcipconnection.h */,
+				B4CD450F109AFAFC004B3BBB /* epserverconnection.h */,
+				B4CD4513109AFBAB004B3BBB /* epservermanager.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -145,9 +218,17 @@
 		B462AEF01098E00E00484C29 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */,
 				B462AEF11098E00E00484C29 /* ependpoint.cpp */,
 				B462AF611098E20300484C29 /* epdownload.cpp */,
 				B419EE581099F5BF00FE1A72 /* epcondition.cpp */,
+				B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */,
+				B4CD44BE109AEE40004B3BBB /* epmessage.cpp */,
+				B4CD44C8109AEF20004B3BBB /* epdiscovery.cpp */,
+				B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */,
+				B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */,
+				B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */,
+				B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -176,6 +257,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B4CD454B109B0223004B3BBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4CD454F109B0223004B3BBB /* TJScoutFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4CD4557109B0246004B3BBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4CD455B109B0246004B3BBB /* OSCPackFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -187,6 +284,13 @@
 				B462AEF51098E02900484C29 /* ep.h in Headers */,
 				B462AF601098E19200484C29 /* epdownload.h in Headers */,
 				B419EE571099F47700FE1A72 /* epcondition.h in Headers */,
+				B4CD44B1109AED5F004B3BBB /* epconnection.h in Headers */,
+				B4CD44BD109AEE18004B3BBB /* epmessage.h in Headers */,
+				B4CD44C7109AEED5004B3BBB /* epdiscovery.h in Headers */,
+				B4CD44D9109AF54E004B3BBB /* epdnssddiscovery.h in Headers */,
+				B4CD44FA109AF88C004B3BBB /* eposcipconnection.h in Headers */,
+				B4CD4510109AFAFC004B3BBB /* epserverconnection.h in Headers */,
+				B4CD4514109AFBAB004B3BBB /* epservermanager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +312,8 @@
 				B462AF021098E0A900484C29 /* PBXTargetDependency */,
 				B462AF0E1098E0C700484C29 /* PBXTargetDependency */,
 				B462AF5E1098E17700484C29 /* PBXTargetDependency */,
+				B4CD4552109B0230004B3BBB /* PBXTargetDependency */,
+				B4CD455E109B024F004B3BBB /* PBXTargetDependency */,
 			);
 			name = EPFramework;
 			productInstallPath = "$(HOME)/Library/Frameworks";
@@ -228,12 +334,20 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = B4CD4557109B0246004B3BBB /* Products */;
+					ProjectRef = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
+				},
+				{
 					ProductGroup = B462AF071098E0BE00484C29 /* Products */;
 					ProjectRef = B462AF061098E0BE00484C29 /* TinyXMLFramework.xcodeproj */;
 				},
 				{
 					ProductGroup = B462AF571098E16E00484C29 /* Products */;
 					ProjectRef = B462AF561098E16E00484C29 /* TJNPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4CD454B109B0223004B3BBB /* Products */;
+					ProjectRef = B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */;
 				},
 				{
 					ProductGroup = B462AEFB1098E09B00484C29 /* Products */;
@@ -269,6 +383,20 @@
 			remoteRef = B462AF5A1098E16E00484C29 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B4CD454F109B0223004B3BBB /* TJScoutFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJScoutFramework.framework;
+			remoteRef = B4CD454E109B0223004B3BBB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4CD455B109B0246004B3BBB /* OSCPackFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OSCPackFramework.framework;
+			remoteRef = B4CD455A109B0246004B3BBB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -289,6 +417,14 @@
 				B462AEF31098E00E00484C29 /* ependpoint.cpp in Sources */,
 				B462AF621098E20300484C29 /* epdownload.cpp in Sources */,
 				B419EE591099F5BF00FE1A72 /* epcondition.cpp in Sources */,
+				B4CD44B3109AEDBE004B3BBB /* epconnection.cpp in Sources */,
+				B4CD44BF109AEE40004B3BBB /* epmessage.cpp in Sources */,
+				B4CD44C9109AEF20004B3BBB /* epdiscovery.cpp in Sources */,
+				B4CD44D2109AEF72004B3BBB /* epdnssddiscovery.cpp in Sources */,
+				B4CD44FC109AF911004B3BBB /* eposcipconnection.cpp in Sources */,
+				B4CD450E109AFAAD004B3BBB /* epconnectionsregistry.cpp in Sources */,
+				B4CD4512109AFB6D004B3BBB /* epserverconnection.cpp in Sources */,
+				B4CD4516109AFC5A004B3BBB /* epservermanager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +445,16 @@
 			isa = PBXTargetDependency;
 			name = TJNPFramework;
 			targetProxy = B462AF5D1098E17700484C29 /* PBXContainerItemProxy */;
+		};
+		B4CD4552109B0230004B3BBB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJScoutFramework;
+			targetProxy = B4CD4551109B0230004B3BBB /* PBXContainerItemProxy */;
+		};
+		B4CD455E109B024F004B3BBB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OSCPackFramework;
+			targetProxy = B4CD455D109B024F004B3BBB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

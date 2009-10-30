@@ -1,7 +1,6 @@
 #include "../include/tjfabricqueue.h"
 #include "../../../TJScript/include/tjscript.h"
 #include "../include/tjfabricrule.h"
-#include "../include/tjfabricmessage.h"
 #include "../include/tjfabricmessagescriptable.h"
 #include "../include/tjfabric.h"
 #include "../include/tjfabricengine.h"
@@ -9,6 +8,7 @@
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::script;
+using namespace tj::ep;
 
 /** QueueGlobalScriptable **/
 namespace tj {

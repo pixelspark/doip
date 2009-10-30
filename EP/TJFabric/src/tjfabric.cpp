@@ -1,8 +1,10 @@
 #include "../include/tjfabric.h"
 #include "../include/tjfabricrule.h"
 #include "../include/tjfabricgroup.h"
+#include "../../EPFramework/include/epconnection.h"
 using namespace tj::shared;
 using namespace tj::fabric;
+using namespace tj::ep;
 
 Fabric::Fabric(): _version(0) {
 	Clone();
@@ -68,44 +70,34 @@ void Fabric::Load(TiXmlElement* me) {
 	}
 }
 
-void Fabric::SaveEndpointDefinition(TiXmlElement* me) {
+void Fabric::Save(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
-	SaveAttributeSmall(me, "id", _id);
-	SaveAttributeSmall(me, "namespace", _package);
-	SaveAttributeSmall(me, "version", _version);
-	SaveAttributeSmall(me, "dynamic", std::wstring(L"yes"));
-	SaveAttributeSmall(me, "friendly-name", _title);
-	
-	if(_groups.size()>0) {
-		TiXmlElement transports("transports");
-		std::deque< ref<Group> >::iterator it = _groups.begin();
-		while(it!=_groups.end()) {
-			ref<Group> group = *it;
-			if(group && (group->GetDirection() & DirectionInbound)!=0) {
-				group->SaveEndpointDefinition(&transports);
-			}
-			++it;
-		}
-		me->InsertEndChild(transports);
-	}
+	EPEndpoint::Save(me);
+}
 
-	if(_rules.size()>0) {
-		TiXmlElement rules("methods");
-		std::deque< ref<Rule> >::iterator it = _rules.begin();
-		while(it!=_rules.end()) {
-			ref<Rule> rule = *it;
-			if(rule && rule->IsEnabled() && rule->IsPublic()) {
-				TiXmlElement ruleElement("method");
-				rule->SaveEndpointMethodDefinition(&ruleElement);
-				rules.InsertEndChild(ruleElement);
-			}
-			++it;
+void Fabric::GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const {
+	std::deque< ref<Rule> >::const_iterator it = _rules.begin();
+	while(it!=_rules.end()) {
+		ref<Rule> rule = *it;
+		if(rule) {
+			methodList.push_back(rule);
 		}
-		me->InsertEndChild(rules);
+		++it;
 	}
 }
 
-void Fabric::Save(TiXmlElement* me) {
+void Fabric::GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const {
+	std::deque< ref<Group> >::const_iterator it = _groups.begin();
+	while(it!=_groups.end()) {
+		ref<Group> g = *it;
+		if(g && (g->GetDirection() & DirectionInbound)!=0) {
+			g->GetTransports(transportsList);
+		}
+		++it;
+	}
+}
+
+void Fabric::SaveFabric(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	++_version;
 	SaveAttributeSmall(me, "id", _id);
@@ -138,7 +130,7 @@ void Fabric::Save(TiXmlElement* me) {
 			ref<Rule> rule = *it;
 			if(rule) {
 				TiXmlElement ruleElement("rule");
-				rule->Save(&ruleElement);
+				rule->SaveRule(&ruleElement);
 				rules.InsertEndChild(ruleElement);
 			}
 			++it;
@@ -159,8 +151,8 @@ tj::shared::String Fabric::GetID() const {
 	return _id;
 }
 
-unsigned int Fabric::GetVersion() const {
-	return _version;
+String Fabric::GetVersion() const {
+	return Stringify(_version);
 }
 
 void Fabric::GetAllMatchingRules(const String& msg, const String& tags, std::deque< ref<Rule> >& results) {
@@ -193,6 +185,18 @@ ref<Rule> Fabric::GetFirstMatchingRule(const tj::shared::String& msg) {
 	return null;
 }
 
+tj::shared::String Fabric::GetFriendlyName() const {
+	return GetTitle();
+}
+
+tj::shared::String Fabric::GetNamespace() const {
+	return GetPackage();
+}
+
+bool Fabric::IsDynamic() const {
+	return true;
+}
+
 /** This loads fabric files, while also (recursively) processing <include file="someotherfile.fabric"/> tags.
  FIXME: Add some kind of way to check whether an include file is already loaded (i.e. by passing an 
  std::set<std::string>& as parameter). **/
@@ -219,7 +223,7 @@ void Fabric::LoadRecursive(const std::string& path, strong<Fabric> f) {
 		cleanest solution. Instead, we should probably implement sub-fabrics or something like that, or
 		fabrics that extend eachother. **/
 		f->Load(root);
-		Log::Write(L"TJFabric/Main", L"Loaded fabric '"+f->GetTitle()+L"' v"+Stringify((int)f->GetVersion()));
+		Log::Write(L"TJFabric/Main", L"Loaded fabric '"+f->GetTitle()+L"' version="+f->GetVersion());
 	}
 	else {
 		Throw(L"Invalid fabric configuration file ", ExceptionTypeError);

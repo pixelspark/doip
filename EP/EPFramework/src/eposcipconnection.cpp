@@ -1,11 +1,10 @@
-#include "tjoscipconnection.h"
-#include "../../include/tjfabricmessage.h"
-#include "../../include/tjfabricengine.h"
-#include "tjoscutil.h"
-#include "../../../../Libraries/OSCPack/osc/OscOutboundPacketStream.h"
-#include "../../../../Libraries/OSCPack/osc/OscReceivedElements.h"
-#include "../../../../Libraries/OSCPack/osc/OscPacketListener.h"
-#include "../../../../Libraries/OSCPack/osc/OscPrintReceivedElements.h"
+#include "../include/eposcipconnection.h"
+#include "../include/epmessage.h"
+
+#include "../../../Libraries/OSCPack/osc/OscOutboundPacketStream.h"
+#include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"
+#include "../../../Libraries/OSCPack/osc/OscPacketListener.h"
+#include "../../../Libraries/OSCPack/osc/OscPrintReceivedElements.h"
 
 #include <errno.h>
 
@@ -21,10 +20,96 @@
 #endif
 
 using namespace tj::shared;
-using namespace tj::fabric;
-using namespace tj::fabric::connections;
 using namespace tj::np;
 using namespace tj::ep;
+
+/** OSCUtil **/
+class OSCUtil {
+	public:
+		static bool ArgumentToAny(const osc::ReceivedMessageArgument& arg, tj::shared::Any& any);
+};
+
+bool OSCUtil::ArgumentToAny(const osc::ReceivedMessageArgument& arg, tj::shared::Any& any) {
+	const char type = arg.TypeTag();
+	switch(type) {
+		case osc::TRUE_TYPE_TAG:
+			any = Any(true);
+			return true;
+			
+		case osc::FALSE_TYPE_TAG:
+			any = Any(false);
+			return true;
+			
+		case osc::NIL_TYPE_TAG:
+			any = Any();
+			return true;
+			
+		case osc::INFINITUM_TYPE_TAG:
+			any = Any(std::numeric_limits<double>::infinity());
+			return true;
+			
+		case osc::INT32_TYPE_TAG:
+			any = Any((int)arg.AsInt32());
+			return true;
+			
+		case osc::FLOAT_TYPE_TAG:
+			any = Any((float)arg.AsFloat());
+			return true;
+			
+		case osc::CHAR_TYPE_TAG:
+			any = Any(Stringify(arg.AsChar()));
+			return true;
+			
+		case osc::RGBA_COLOR_TYPE_TAG: {
+			strong<Tuple> data = GC::Hold(new Tuple(4));
+			unsigned int color = arg.AsRgbaColor();
+			
+			data->Set(0, Any(double(int((color >> 24) & 0xFF)) / 255.0));
+			data->Set(1, Any(double(int((color >> 16) & 0xFF)) / 255.0));
+			data->Set(2, Any(double(int((color >> 8) & 0xFF)) / 255.0));
+			data->Set(3, Any(double(int(color & 0xFF)) / 255.0));
+			any = Any(data);
+			return true;								
+		}
+			
+		case osc::MIDI_MESSAGE_TYPE_TAG: {
+			strong<Tuple> data = GC::Hold(new Tuple(4));
+			unsigned int msg = arg.AsMidiMessage();
+			
+			data->Set(0, Any(double(int((msg >> 24) & 0xFF)) / 255.0));
+			data->Set(1, Any(double(int((msg >> 16) & 0xFF)) / 255.0));
+			data->Set(2, Any(double(int((msg >> 8) & 0xFF)) / 255.0));
+			data->Set(3, Any(double(int(msg & 0xFF)) / 255.0));
+			any = Any(data);
+			return true;											  
+		}
+			
+		case osc::DOUBLE_TYPE_TAG:
+			any = Any(arg.AsDouble());
+			return true;
+			
+		case osc::STRING_TYPE_TAG:
+			any = Any(Wcs(std::string(arg.AsString())));
+			return true;
+			
+		case osc::SYMBOL_TYPE_TAG:
+			any = Any(Wcs(std::string(arg.AsSymbol())));
+			return true;
+			
+		case osc::BLOB_TYPE_TAG:
+			// TODO: implement this in some way... We cannot convert blob data to a string,
+			// since it can contain \0 characters. It is thus not very suited for Any...
+			
+		case osc::INT64_TYPE_TAG:
+			// TODO: add Any::TypeInt64 or something like that...
+			
+		case osc::TIME_TAG_TYPE_TAG:
+			// TODO: conversion to Time type (and addition of Any::TypeTime?)
+			
+		default:
+			return false;
+	};
+}
 
 /** OSCOverIPConnectionDefinition **/
 OSCOverIPConnectionDefinition::OSCOverIPConnectionDefinition(const String& upperProtocol): ConnectionDefinition(upperProtocol), _format(L"osc") {
@@ -33,22 +118,34 @@ OSCOverIPConnectionDefinition::OSCOverIPConnectionDefinition(const String& upper
 OSCOverIPConnectionDefinition::~OSCOverIPConnectionDefinition() {
 }
 
-void OSCOverIPConnectionDefinition::Save(TiXmlElement* me) {
+tj::shared::String OSCOverIPConnectionDefinition::GetAddress() const {
+	return _address;
+}
+
+tj::shared::String OSCOverIPConnectionDefinition::GetFormat() const {
+	return _format;
+}
+
+tj::shared::String OSCOverIPConnectionDefinition::GetFraming() const {
+	return _framing;
+}
+
+unsigned short OSCOverIPConnectionDefinition::GetPort() const {
+	return _port;
+}
+
+void OSCOverIPConnectionDefinition::SaveConnection(TiXmlElement* me) {
 	SaveAttributeSmall<std::wstring>(me, "address", _address);
 	SaveAttributeSmall<int>(me, "port", int(_port));
 	SaveAttributeSmall<std::wstring>(me, "format", _format);
 	SaveAttributeSmall<std::wstring>(me, "framing", _framing);
 }
 
-void OSCOverIPConnectionDefinition::Load(TiXmlElement* me) {
+void OSCOverIPConnectionDefinition::LoadConnection(TiXmlElement* me) {
 	_address = LoadAttributeSmall<std::wstring>(me, "address", _address);
 	_port = (unsigned short)LoadAttributeSmall<int>(me, "port", (int)_port);
 	_format = LoadAttributeSmall<std::wstring>(me, "format", _format);	
 	_framing = LoadAttributeSmall<std::wstring>(me,"framing", _framing);
-}
-
-std::wstring OSCOverIPConnectionDefinition::GetFramingType() const {
-	return _framing;
 }
 
 /** OSCOverIPConnection **/
@@ -69,24 +166,24 @@ void OSCOverIPConnection::StopInbound() {
 		_listenerThread->Stop();
 		_listenerThread = null; // This will call ~SocketListenerThread => Thread::WaitForCompletion on the thread
 		
-		#ifdef TJ_OS_POSIX
-			close(_inSocket);
-		#endif
-				
-		#ifdef TJ_OS_WIN
-			closesocket(_inSocket);
-			closesocket(_in4Socket);
-		#endif
+#ifdef TJ_OS_POSIX
+		close(_inSocket);
+#endif
+		
+#ifdef TJ_OS_WIN
+		closesocket(_inSocket);
+		closesocket(_in4Socket);
+#endif
 		
 		std::deque<NativeSocket>::iterator it = _additionalIncomingSockets.begin();
 		while(it!=_additionalIncomingSockets.end()) {
-			#ifdef TJ_OS_POSIX
-				close(*it);
-			#endif
+#ifdef TJ_OS_POSIX
+			close(*it);
+#endif
 			
-			#ifdef TJ_OS_WIN
-				closesocket(*it);
-			#endif
+#ifdef TJ_OS_WIN
+			closesocket(*it);
+#endif
 			
 			++it;
 		}
@@ -122,24 +219,24 @@ void OSCOverIPConnection::RemoveInboundConnection(NativeSocket ns) {
 		_listenerThread->RemoveListener(ns);
 	}
 	
-	#ifdef TJ_OS_POSIX
-		close(ns);
-	#endif
+#ifdef TJ_OS_POSIX
+	close(ns);
+#endif
 	
-	#ifdef TJ_OS_WIN
-		closesocket(ns);
-	#endif
+#ifdef TJ_OS_WIN
+	closesocket(ns);
+#endif
 }
 
 void OSCOverIPConnection::StopOutbound() {
 	if((_direction & DirectionOutbound) != 0) {
-		#ifdef TJ_OS_POSIX
-			close(_outSocket);
-		#endif
-					
-		#ifdef TJ_OS_WIN
-			closesocket(_outSocket);
-		#endif	
+#ifdef TJ_OS_POSIX
+		close(_outSocket);
+#endif
+		
+#ifdef TJ_OS_WIN
+		closesocket(_outSocket);
+#endif	
 		
 		_direction = (Direction)(_direction & (~DirectionOutbound));
 	}
@@ -163,7 +260,7 @@ void OSCOverIPConnection::StartInbound(NativeSocket inSocket) {
 	// Update flags
 	_direction = Direction(_direction | DirectionInbound);
 	_inSocket = inSocket;
-
+	
 	// Start listener thread
 	_listenerThread = GC::Hold(new SocketListenerThread());
 	_listenerThread->AddListener(inSocket, this);
@@ -216,7 +313,7 @@ void OSCOverIPConnection::Send(strong<Message> msg) {
 		Log::Write(L"TJFabric/OSCOverIPConnection", std::wstring(L"Could not send message, outgoing socket is invalid (to-address=")+_toAddress.ToString()+std::wstring(L":")+Stringify(_toPort));
 		return;
 	}
-
+	
 	// Create the OSC representation of the message
 	char buffer[2048];
 	char* packetBuffer = buffer;
@@ -317,14 +414,6 @@ OSCOverUDPConnectionDefinition::OSCOverUDPConnectionDefinition(): OSCOverIPConne
 OSCOverUDPConnectionDefinition::~OSCOverUDPConnectionDefinition() {
 }
 
-void OSCOverUDPConnectionDefinition::Save(TiXmlElement* me) {
-	OSCOverIPConnectionDefinition::Save(me);
-}
-
-void OSCOverUDPConnectionDefinition::Load(TiXmlElement* me) {
-	OSCOverIPConnectionDefinition::Load(me);
-}
-
 /** OSCOverUDPConnection **/
 OSCOverUDPConnection::OSCOverUDPConnection() {
 }
@@ -413,10 +502,10 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 			addr4.sin_family = AF_INET;
 			addr4.sin_port = htons(port);
 			addr4.sin_addr.s_addr = INADDR_ANY;
-
-			#ifdef TJ_OS_POSIX
-				addr4.sin_len = sizeof(sockaddr_in);
-			#endif
+			
+#ifdef TJ_OS_POSIX
+			addr4.sin_len = sizeof(sockaddr_in);
+#endif
 			
 			int on = 1;
 			setsockopt(inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
@@ -460,13 +549,13 @@ void OSCOverUDPConnection::CreateForTransport(strong<EPTransport> ept, const Net
 	Create((host.length()==0) ? address : NetworkAddress(host,true), ept->GetPort(), DirectionOutbound);
 }
 
-void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction, ref<FabricEngine> fe) {
+void OSCOverUDPConnection::Create(strong<ConnectionDefinition> def, Direction direction, ref<EPEndpoint> parent) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverUDPConnectionDefinition>()) {
 		ref<OSCOverUDPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
 			if(cd->_format==L"osc") {
 				_def = cd;
-				SetFramingType(cd->GetFramingType());
+				SetFramingType(cd->GetFraming());
 				Create(NetworkAddress(cd->_address, true), cd->_port, direction);
 			}
 			else {
@@ -484,14 +573,6 @@ OSCOverTCPConnectionDefinition::OSCOverTCPConnectionDefinition(): OSCOverIPConne
 }
 
 OSCOverTCPConnectionDefinition::~OSCOverTCPConnectionDefinition() {
-}
-
-void OSCOverTCPConnectionDefinition::Save(TiXmlElement* me) {
-	OSCOverIPConnectionDefinition::Save(me);
-}
-
-void OSCOverTCPConnectionDefinition::Load(TiXmlElement* me) {
-	OSCOverIPConnectionDefinition::Load(me);
 }
 
 /** OSCOverTCPConnection **/
@@ -600,13 +681,13 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			
 			if(connect(outSocket, (const sockaddr*)toAddress, toAddressSize)!=0) {
 				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(errno));
-				#ifdef TJ_OS_POSIX
-					close(outSocket);
-				#endif
+#ifdef TJ_OS_POSIX
+				close(outSocket);
+#endif
 				
-				#ifdef TJ_OS_WIN
-					closesocket(outSocket);
-				#endif
+#ifdef TJ_OS_WIN
+				closesocket(outSocket);
+#endif
 			}
 			else {
 				StartOutbound(networkAddress, port, outSocket, false);
@@ -619,7 +700,7 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 	if((direction & DirectionInbound)!=0) {
 		if(networkAddress.GetAddressFamily()==AddressFamilyIPv6) {
 			_inServerSocket = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP);
-		
+			
 			// Fill in the interface information for the IPv6 listener socket
 			in6_addr any = IN6ADDR_ANY_INIT;
 			sockaddr_in6 addr;
@@ -643,7 +724,7 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 		}
 		else if(networkAddress.GetAddressFamily()==AddressFamilyIPv4) {
 			_inServerSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-		
+			
 			// Addresses for the IPv4 listener socket
 			sockaddr_in addr4;
 			memset(&addr4, 0, sizeof(addr4));
@@ -651,10 +732,10 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			addr4.sin_port = htons(port);
 			addr4.sin_addr.s_addr = INADDR_ANY;
 			
-			#ifdef TJ_OS_POSIX
-				addr4.sin_len = sizeof(sockaddr_in);
-			#endif
-		
+#ifdef TJ_OS_POSIX
+			addr4.sin_len = sizeof(sockaddr_in);
+#endif
+			
 			// Bind IPv4 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr4, sizeof(addr4));
 			if(err==-1) {
@@ -676,13 +757,13 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 	}
 }
 
-void OSCOverTCPConnection::Create(strong<ConnectionDefinition> def, Direction direction, ref<FabricEngine> fe) {
+void OSCOverTCPConnection::Create(strong<ConnectionDefinition> def, Direction direction, ref<EPEndpoint> parent) {
 	if(ref<ConnectionDefinition>(def).IsCastableTo<OSCOverTCPConnectionDefinition>()) {
 		ref<OSCOverTCPConnectionDefinition> cd = ref<ConnectionDefinition>(def);
 		if(cd) {
 			if(cd->_format==L"osc") {
 				_def = cd;
-				SetFramingType(cd->GetFramingType());
+				SetFramingType(cd->GetFraming());
 				Create(NetworkAddress(cd->_address,true), cd->_port, direction);
 			}
 			else {

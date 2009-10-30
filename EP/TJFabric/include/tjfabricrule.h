@@ -2,10 +2,11 @@
 #define _TJFABRIC_RULE_H
 
 #include "../../../TJShared/include/tjshared.h"
+#include "../../EPFramework/include/ependpoint.h"
 
 namespace tj {
 	namespace fabric {
-		class Parameter: public virtual tj::shared::Object, public tj::shared::Serializable {
+		class Parameter: public virtual tj::shared::Object, public tj::ep::EPParameter, public tj::shared::Serializable {
 			public:
 				Parameter();
 				virtual ~Parameter();
@@ -13,9 +14,9 @@ namespace tj {
 				virtual void Load(TiXmlElement* me);
 				virtual std::wstring GetFriendlyName() const;
 				virtual std::wstring GetType() const;
-				virtual tj::shared::Any GetMinimum() const;
-				virtual tj::shared::Any GetMaximum() const;
-				virtual tj::shared::Any GetDefault() const;
+				virtual tj::shared::Any GetMinimumValue() const;
+				virtual tj::shared::Any GetMaximumValue() const;
+				virtual tj::shared::Any GetDefaultValue() const;
 				virtual tj::shared::Any::Type GetValueType() const;
 				virtual wchar_t GetValueTypeTag() const;
 			
@@ -33,13 +34,13 @@ namespace tj {
 				tj::shared::String _default;
 		};
 		
-		class Rule: public virtual tj::shared::Object, public tj::shared::Serializable {
+		class Rule: public virtual tj::shared::Object, public tj::ep::EPMethod, public tj::shared::Serializable {
 			public:
 				Rule();
 				virtual ~Rule();
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
-				virtual void SaveEndpointMethodDefinition(TiXmlElement* me);
+				virtual void SaveRule(TiXmlElement* me);
 				virtual void Clone();
 				virtual bool Matches(const std::wstring& msg) const;
 				virtual bool Matches(const std::wstring& msg, const std::wstring& tags) const;
@@ -47,7 +48,10 @@ namespace tj {
 				virtual tj::shared::String GetScriptSource() const;
 				virtual bool IsEnabled() const;
 				virtual bool IsPublic() const;
+				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String ToString() const;
+				virtual void GetPaths(std::set<tj::ep::EPPath>& pathList) const;
+				virtual void GetParameters(std::vector< tj::shared::ref<tj::ep::EPParameter> >& parameterList) const;
 			
 			protected:
 				tj::shared::String _id;

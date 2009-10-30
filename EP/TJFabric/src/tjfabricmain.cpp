@@ -1,7 +1,6 @@
 #include "../include/tjfabricengine.h"
 #include "../include/tjfabricrule.h"
 #include "../include/tjfabricqueue.h"
-#include "../include/tjfabricmessage.h"
 #include "../../../TJScript/include/tjscript.h"
 #include "../../../TJNP/include/tjnetworkaddress.h"
 #include "../../../TJNP/include/tjsocket.h"

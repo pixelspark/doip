@@ -4,6 +4,7 @@
 #include "../../../TJShared/include/tjshared.h"
 #include "../../../TJNP/include/tjwebserver.h"
 #include "../../../TJScout/include/tjservice.h"
+#include "../../EPFramework/include/epmessage.h"
 #include "tjfabric.h"
 #include "tjfabricconnection.h"
 #include "tjfabricregistry.h"
@@ -12,9 +13,8 @@ namespace tj {
 	namespace fabric {
 		class Queue;
 		class Group;
-		class Message;
 		
-		class FabricEngine: public virtual tj::shared::Object, public tj::shared::Listener<MessageNotification> {
+		class FabricEngine: public virtual tj::shared::Object, public tj::shared::Listener<tj::ep::MessageNotification> {
 			public:
 				FabricEngine();
 				virtual ~FabricEngine();
@@ -22,8 +22,8 @@ namespace tj {
 				virtual tj::shared::strong<Queue> GetQueue();
 				virtual void SetFabric(tj::shared::strong<Fabric> f);
 				virtual void Connect(bool t);
-				virtual void Send(const tj::shared::String& gid, tj::shared::strong<Message> m);
-				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const MessageNotification& data);
+				virtual void Send(const tj::shared::String& gid, tj::shared::strong<tj::ep::Message> m);
+				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
 			
 			protected:
 				virtual void OnCreated();

@@ -3,13 +3,12 @@
 #include "../include/tjfabricqueue.h"
 #include "../include/tjfabricgroup.h"
 #include "../include/tjfabricconnection.h"
-#include "../include/tjfabricmessage.h"
-#include "../include/tjfabricserver.h"
 
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::np;
 using namespace tj::scout;
+using namespace tj::ep;
 
 FabricEngine::FabricEngine(): _fabric(GC::Hold(new Fabric())) {
 }

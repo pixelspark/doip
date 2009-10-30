@@ -3,81 +3,25 @@
 
 #include "../../../TJShared/include/tjshared.h"
 #include "../../EPFramework/include/ependpoint.h"
+#include "../../EPFramework/include/epdiscovery.h"
+#include "../../EPFramework/include/epconnection.h"
+#include "../../EPFramework/include/epmessage.h"
 #include "../../../TJNP/include/tjnetworkaddress.h"
 #include "tjfabricgroup.h"
-#include "tjfabricmessage.h"
 
 namespace tj {
 	namespace fabric {
-		class Message;
 		class FabricEngine;
 		
-		struct MessageNotification {
-			MessageNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Message> m);
-			
-			tj::shared::Timestamp when;
-			tj::shared::strong<Message> message;
-		};
-		
-		class Connection: public virtual tj::shared::Object {
-			public:
-				virtual ~Connection();
-				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<FabricEngine> engine) = 0;
-			virtual void CreateForTransport(tj::shared::strong< tj::ep::EPTransport > ept, const tj::np::NetworkAddress& address) = 0;
-				virtual void Send(tj::shared::strong< Message > msg) = 0;
-				
-				tj::shared::Listenable<MessageNotification> EventMessageReceived;
-		};
-		
-		class ConnectionFactory: public virtual tj::shared::PrototypeBasedFactory< Connection > {
-			public:
-				virtual ~ConnectionFactory();
-				virtual tj::shared::ref<Connection> CreateFromDefinition(tj::shared::strong<ConnectionDefinition> cd, Direction d, tj::shared::ref<FabricEngine> engine);
-				virtual tj::shared::ref<Connection> CreateForTransport(tj::shared::strong< tj::ep::EPTransport > cd, const tj::np::NetworkAddress& address);
-			
-				static tj::shared::strong< ConnectionFactory > Instance();
-			
-			protected:
-				ConnectionFactory();
-				static tj::shared::ref< ConnectionFactory > _instance;
-		};
-		
-		struct DiscoveryNotification {
-			DiscoveryNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Connection> m, bool add);
-			
-			tj::shared::Timestamp when;
-			tj::shared::strong<Connection> connection;
-			bool added;
-		};
-		
-		class Discovery: public virtual tj::shared::Object {
-			public:
-				virtual ~Discovery();
-				virtual void Create(tj::shared::strong<DiscoveryDefinition> def) = 0;
-				
-				tj::shared::Listenable<DiscoveryNotification> EventDiscovered;
-		};
-		
-		class DiscoveryFactory: public virtual tj::shared::PrototypeBasedFactory< Discovery > {
-			public:
-				virtual ~DiscoveryFactory();
-				virtual tj::shared::ref<Discovery> CreateFromDefinition(tj::shared::strong<DiscoveryDefinition> cd);
-				static tj::shared::strong< DiscoveryFactory > Instance();
-				
-			protected:
-				DiscoveryFactory();
-				static tj::shared::ref< DiscoveryFactory > _instance;
-		};
-		
-		class ConnectedGroup: public virtual tj::shared::Object, public tj::shared::Listener<MessageNotification>, public tj::shared::Listener<DiscoveryNotification>  {
+		class ConnectedGroup: public virtual tj::shared::Object, public tj::shared::Listener<tj::ep::MessageNotification>, public tj::shared::Listener<tj::ep::DiscoveryNotification>  {
 			public:
 				ConnectedGroup(tj::shared::strong<Group> g);
 				virtual ~ConnectedGroup();
 				virtual void Connect(bool t, tj::shared::strong<FabricEngine> fe);
-				virtual void Send(tj::shared::strong<Message> m, tj::shared::strong<FabricEngine> fe);
-				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const MessageNotification& data);
-				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const DiscoveryNotification& data);
-				tj::shared::Listenable<MessageNotification> EventMessageReceived;
+				virtual void Send(tj::shared::strong<tj::ep::Message> m, tj::shared::strong<FabricEngine> fe);
+				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
+				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::DiscoveryNotification& data);
+				tj::shared::Listenable<tj::ep::MessageNotification> EventMessageReceived;
 			
 			protected:
 				virtual void CreateConnections(tj::shared::strong<FabricEngine> fe);
@@ -85,9 +29,9 @@ namespace tj {
 				tj::shared::CriticalSection _lock;
 				tj::shared::strong<Group> _group;
 				bool _shouldStillConnectOutbound;
-				std::map< tj::shared::ref<ConnectionDefinition>, tj::shared::ref<Connection> > _connections;
-				std::deque< tj::shared::ref<Connection> > _discoveredConnections;
-				std::map< tj::shared::ref<DiscoveryDefinition>, tj::shared::ref<Discovery> > _discoveries;
+				std::map< tj::shared::ref<tj::ep::ConnectionDefinition>, tj::shared::ref<tj::ep::Connection> > _connections;
+				std::deque< tj::shared::ref<tj::ep::Connection> > _discoveredConnections;
+				std::map< tj::shared::ref<tj::ep::DiscoveryDefinition>, tj::shared::ref<tj::ep::Discovery> > _discoveries;
 		};
 	}
 }

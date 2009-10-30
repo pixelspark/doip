@@ -2,36 +2,13 @@
 #include "../include/tjfabricutil.h"
 using namespace tj::shared;
 using namespace tj::fabric;
+using namespace tj::ep;
 
 Rule::Rule(): _isEnabled(true), _isPublic(true) {
 	Clone();
 }
 
 Rule::~Rule() {
-}
-
-void Rule::SaveEndpointMethodDefinition(TiXmlElement* me) {
-	SaveAttributeSmall(me, "id", _id);
-	SaveAttributeSmall(me, "friendly-name", _name);
-		
-	std::set<String>::const_iterator it = _patterns.begin();
-	while(it!=_patterns.end()) {
-		TiXmlElement pattern("path");
-		pattern.InsertEndChild(TiXmlText(Mbs(*it).c_str()));
-		me->InsertEndChild(pattern);
-		++it;
-	}
-		
-	std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
-	while(pit!=_parameters.end()) {
-		ref<Parameter> param = *pit;
-		if(param) {
-			TiXmlElement tag("parameter");
-			param->Save(&tag);
-			me->InsertEndChild(tag);
-		}
-		++pit;
-	}
 }
 
 void Rule::Load(TiXmlElement* me) {
@@ -59,7 +36,34 @@ void Rule::Load(TiXmlElement* me) {
 	}
 }
 
+String Rule::GetFriendlyName() const {
+	return _name;
+}
+
 void Rule::Save(TiXmlElement* me) {
+	EPMethod::Save(me);
+}
+
+void Rule::GetPaths(std::set<EPPath>& pathList) const {
+	std::set<String>::const_iterator it = _patterns.begin();
+	while(it!=_patterns.end()) {
+		pathList.insert(*it);
+		++it;
+	}
+}
+
+void Rule::GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const {
+	std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
+	while(pit!=_parameters.end()) {
+		ref<Parameter> param = *pit;
+		if(param) {
+			parameterList.push_back(param);
+		}
+		++pit;
+	}
+}
+
+void Rule::SaveRule(TiXmlElement* me) {
 	SaveAttributeSmall(me, "id", _id);
 	SaveAttribute(me, "script", _script);
 	SaveAttributeSmall<std::wstring>(me, "name", _name);
@@ -197,15 +201,15 @@ std::wstring Parameter::GetType() const {
 	return _type;
 }
 
-Any Parameter::GetMinimum() const {
+Any Parameter::GetMinimumValue() const {
 	return Any(_min).Force(GetValueType());
 }
 
-Any Parameter::GetMaximum() const {
+Any Parameter::GetMaximumValue() const {
 	return Any(_max).Force(GetValueType());
 }
 
-Any Parameter::GetDefault() const {
+Any Parameter::GetDefaultValue() const {
 	return Any(_default).Force(GetValueType());
 }
 
