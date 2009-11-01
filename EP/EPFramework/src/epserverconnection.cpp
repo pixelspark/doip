@@ -84,6 +84,6 @@ void EPServerConnection::Create(tj::shared::strong<ConnectionDefinition> def, Di
 	}
 }
 
-void EPServerConnection::Send(tj::shared::strong<Message> msg) {
+void EPServerConnection::Send(tj::shared::strong<Message> msg, ref<ReplyHandler> rh, ref<ConnectionChannel> cc) {
 	Throw(L"Cannot send messages to an EP connection", ExceptionTypeWarning);
 }

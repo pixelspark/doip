@@ -11,7 +11,7 @@ ConnectedGroup::ConnectedGroup(strong<Group> g): _group(g), _shouldStillConnectO
 ConnectedGroup::~ConnectedGroup() {
 }
 
-void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe) {
+void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyHandler> rh) {
 	if((_group->GetDirection() & DirectionOutbound) != 0) {
 		if(_group->PassesFilter(m->GetPath())) {
 			// If we still haven't created our connections, do it now
@@ -24,7 +24,7 @@ void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe) {
 			while(it!=_connections.end()) {
 				ref<Connection> conn = it->second;
 				if(conn) {
-					conn->Send(m);
+					conn->Send(m, rh);
 				}
 				++it;
 			}
@@ -34,7 +34,7 @@ void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe) {
 			while(cit!=_discoveredConnections.end()) {
 				ref<Connection> conn = *cit;
 				if(conn) {
-					conn->Send(m);
+					conn->Send(m, rh);
 				}
 				
 				++cit;

@@ -8,18 +8,29 @@
 
 namespace tj {
 	namespace ep {
+		class Connection;
+
 		enum Direction {
 			DirectionNone = 0,
 			DirectionInbound = 1,
 			DirectionOutbound = 2,
 			DirectionBoth = DirectionInbound | DirectionOutbound,
 		};
+
+		class EP_EXPORTED ConnectionChannel: public tj::shared::Object {
+			public:
+				virtual ~ConnectionChannel();
+		};
 		
-		struct EP_EXPORTED MessageNotification {
-			MessageNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Message> m);
-			
-			tj::shared::Timestamp when;
-			tj::shared::strong<Message> message;
+		class EP_EXPORTED MessageNotification: public tj::shared::Object {
+			public:
+				MessageNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Message> m, tj::shared::ref<Connection> source, tj::shared::ref<ConnectionChannel> cc);
+				virtual ~MessageNotification();
+
+				tj::shared::Timestamp when;
+				tj::shared::strong<Message> message;
+				tj::shared::ref<Connection> source;
+				tj::shared::ref<ConnectionChannel> channel;
 		};
 		
 		class EP_EXPORTED ConnectionDefinition: public virtual tj::shared::Object, public virtual EPTransport {
@@ -46,13 +57,20 @@ namespace tj {
 				ConnectionDefinitionFactory();
 				static tj::shared::ref<ConnectionDefinitionFactory> _instance;
 		};
+
+		class EP_EXPORTED ReplyHandler: public virtual tj::shared::Object {
+			public:
+				virtual ~ReplyHandler();
+				virtual void OnReceiveReply(tj::shared::strong<Message> originalMessage, tj::shared::strong<Message> replyMessage, tj::shared::strong<Connection> con, tj::shared::ref<ConnectionChannel> channel) = 0;
+				virtual void OnEndReply(tj::shared::strong<Message> originalMessage);
+		};
 		
 		class EP_EXPORTED Connection: public virtual tj::shared::Object {
 			public:
 				virtual ~Connection();
 				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<EPEndpoint> parent) = 0;
 				virtual void CreateForTransport(tj::shared::strong< tj::ep::EPTransport > ept, const tj::np::NetworkAddress& address) = 0;
-				virtual void Send(tj::shared::strong< Message > msg) = 0;
+				virtual void Send(tj::shared::strong< Message > msg, tj::shared::ref<ReplyHandler> rh = tj::shared::null, tj::shared::ref<ConnectionChannel> cc = tj::shared::null) = 0;
 				
 				tj::shared::Listenable<MessageNotification> EventMessageReceived;
 		};

@@ -9,6 +9,7 @@ using namespace tj::fabric;
 using namespace tj::np;
 using namespace tj::scout;
 using namespace tj::ep;
+using namespace tj::script;
 
 FabricEngine::FabricEngine(): _fabric(GC::Hold(new Fabric())) {
 }
@@ -41,13 +42,13 @@ void FabricEngine::Clear() {
 	_queue->Clear();
 }
 
-void FabricEngine::Send(const String& gid, strong<Message> m) {
+void FabricEngine::Send(const String& gid, strong<Message> m, ref<ReplyHandler> rh) {
 	std::map< ref<Group>, ref<ConnectedGroup> >::iterator it = _groups.begin();
 	while(it!=_groups.end()) {
 		ref<Group> group = it->first;
 		ref<ConnectedGroup> cg = it->second;
 		if(cg && group && group->GetID()==gid) {
-			cg->Send(m, ref<FabricEngine>(this));
+			cg->Send(m, ref<FabricEngine>(this), rh);
 			return;
 		}
 		++it;
@@ -55,7 +56,7 @@ void FabricEngine::Send(const String& gid, strong<Message> m) {
 }
 
 void FabricEngine::Notify(ref<Object> source, const MessageNotification& data) {
-	_queue->Add(data.message);
+	_queue->Add(data.message, data.source, data.channel);
 }
 
 void FabricEngine::Connect(bool t) {

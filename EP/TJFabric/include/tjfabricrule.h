@@ -52,11 +52,13 @@ namespace tj {
 				virtual tj::shared::String ToString() const;
 				virtual void GetPaths(std::set<tj::ep::EPPath>& pathList) const;
 				virtual void GetParameters(std::vector< tj::shared::ref<tj::ep::EPParameter> >& parameterList) const;
+				virtual void GetReplies(std::vector< tj::shared::ref<tj::ep::EPReply> >& replyList) const;
 			
 			protected:
 				tj::shared::String _id;
 				std::set<tj::shared::String> _patterns;
 				std::deque< tj::shared::ref<Parameter> > _parameters;
+				std::vector< tj::shared::ref<tj::ep::EPReply> > _replies;
 				std::wstring _script;
 				bool _isEnabled;
 				bool _isPublic;

@@ -108,23 +108,26 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 		else {
 			Log::Write(L"TJFabric/EPDiscovery", L"Found suitable endpoint; friendly name="+epe->GetFriendlyName()+L" fqdn="+epe->GetFullIdentifier());
 			
+			ref<Connection> connection;
 			std::vector< ref<EPTransport> > transportsList;
 			epe->GetTransports(transportsList);
 			std::vector< ref<EPTransport> >::iterator it = transportsList.begin();
 			while(it!=transportsList.end()) {
 				ref<EPTransport> trp = *it;
 				if(trp) {
-					ref<Connection> con = ConnectionFactory::Instance()->CreateForTransport(trp, edd->GetAddress());
-					if(con) {
+					connection = ConnectionFactory::Instance()->CreateForTransport(trp, edd->GetAddress());
+					if(connection) {
 						// we're done
-						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), con, true));
+						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), connection, true));
 						break;
 					}
 				}
 				++it;
 			}
 			
-			Log::Write(L"TJFabric/EPDiscovery", L"Endpoint found that met requirements, but did not have a compatible transport available");
+			if(!connection) {
+				Log::Write(L"TJFabric/EPDiscovery", L"Endpoint found that met requirements, but did not have a compatible transport available");
+			}
 		}
 	}
 	

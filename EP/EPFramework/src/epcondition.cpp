@@ -13,12 +13,14 @@ EPSupportsCondition::EPSupportsCondition() {
 }
 
 void EPSupportsCondition::Load(TiXmlElement* me) {
-	_pathPattern = LoadAttributeSmall(me, "path", _pathPattern);
+	_pathPattern = LoadAttributeSmall(me, "method", _pathPattern);
+	_replyPattern = LoadAttributeSmall(me, "withReply", _replyPattern);
 }
 
 void EPSupportsCondition::Save(TiXmlElement* parent) {
 	TiXmlElement me("supports");
-	SaveAttributeSmall(&me, "path", _pathPattern);
+	SaveAttributeSmall(&me, "method", _pathPattern);
+	SaveAttributeSmall(&me, "withReply", _replyPattern);
 	parent->InsertEndChild(me);
 }
 
@@ -32,9 +34,29 @@ bool EPSupportsCondition::Matches(strong<EPEndpoint> ep) {
 			std::set<EPPath> paths;
 			method->GetPaths(paths);
 			std::set<EPPath>::const_iterator pit = paths.begin();
+
 			while(pit!=paths.end()) {
+				// Check whether this path matches with our path pattern
 				if(Pattern::Match(_pathPattern.c_str(), (*pit).c_str())) {
-					return true;
+					// We have a match; now check reply pattern, if there is one
+					if(_replyPattern.length()>0) {
+						std::vector< ref<EPReply> > replyList;
+						method->GetReplies(replyList);
+						std::vector< ref<EPReply> >::iterator rit = replyList.begin();
+						while(rit!=replyList.end()) {
+							ref<EPReply> reply = *it;
+							if(reply && Pattern::Match(_replyPattern.c_str(), reply->GetPath().c_str())) {
+								return true;
+							}
+							++rit;
+						}
+
+						// None of the replies supported by this method match with the reply pattern
+					}
+					else {
+						// Don't care about supported replies
+						return true;
+					}
 				}
 				++pit;
 			}

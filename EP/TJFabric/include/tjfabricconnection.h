@@ -18,7 +18,7 @@ namespace tj {
 				ConnectedGroup(tj::shared::strong<Group> g);
 				virtual ~ConnectedGroup();
 				virtual void Connect(bool t, tj::shared::strong<FabricEngine> fe);
-				virtual void Send(tj::shared::strong<tj::ep::Message> m, tj::shared::strong<FabricEngine> fe);
+				virtual void Send(tj::shared::strong<tj::ep::Message> m, tj::shared::strong<FabricEngine> fe, tj::shared::ref< tj::ep::ReplyHandler > rh);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::DiscoveryNotification& data);
 				tj::shared::Listenable<tj::ep::MessageNotification> EventMessageReceived;

@@ -39,25 +39,28 @@ namespace tj {
 			public:
 				virtual ~OSCOverIPConnection();
 				virtual void OnReceive(tj::np::NativeSocket ns) = 0;
-				virtual void OnReceiveBundle(osc::ReceivedBundle rb);
-				virtual void OnReceiveMessage(osc::ReceivedMessage rb);
-				virtual void Send(tj::shared::strong< Message > msg);
+				virtual void OnReceiveBundle(osc::ReceivedBundle rb, bool isReply, bool endReply, tj::np::NativeSocket ns);
+				virtual void OnReceiveMessage(osc::ReceivedMessage rb, bool isReply, bool endReply, tj::np::NativeSocket ns);
+				virtual void Send(tj::shared::strong< Message > msg, tj::shared::ref<ReplyHandler> rh, tj::shared::ref<ConnectionChannel> cc);
 				
 			protected:
 				OSCOverIPConnection();
-				virtual void StartInbound(tj::np::NativeSocket inSocket);
+				virtual void StartInbound(tj::np::NativeSocket inSocket, bool handleReplies);
+				virtual void StartInboundReplies(tj::np::NativeSocket inSocket);
 				virtual void StartOutbound(const tj::np::NetworkAddress& na, unsigned short port, tj::np::NativeSocket outSocket, bool useSendTo);
 				virtual void StopOutbound();
 				virtual void StopInbound();
 				virtual Direction GetDirection() const;
+				virtual bool IsHandlingReplies() const;
 				virtual void SetFramingType(const std::wstring& ft);
 				virtual void AddInboundConnection(tj::np::NativeSocket ns);
 				virtual void RemoveInboundConnection(tj::np::NativeSocket ns);
+				virtual void PopReplyHandler();
 				
 				tj::shared::CriticalSection _lock;
+				tj::np::NativeSocket _outSocket;
 				
 			private:
-				tj::np::NativeSocket _outSocket;
 				tj::np::NativeSocket _inSocket;
 				std::deque<tj::np::NativeSocket> _additionalIncomingSockets;
 				tj::shared::ref< tj::np::SocketListenerThread> _listenerThread;
@@ -65,7 +68,9 @@ namespace tj {
 				tj::np::NetworkAddress _toAddress;
 				unsigned short _toPort;
 				bool _useSendTo;
+				bool _handlingReplies;
 				std::wstring _framing;
+				std::deque< std::pair< tj::shared::ref<ReplyHandler>, tj::shared::ref<Message> > > _replyQueue;
 		};
 		
 		/** OSC-over-TCP/IP with SLIP framing **/
@@ -92,6 +97,7 @@ namespace tj {
 				tj::shared::ref<OSCOverTCPConnectionDefinition> _def;
 				tj::shared::ref< tj::scout::ServiceRegistration > _serviceRegistration;
 				tj::np::NativeSocket _inServerSocket;
+				tj::shared::ref<tj::np::QueueSLIPFrameDecoder> _replyStream;
 				std::map<tj::np::NativeSocket, tj::shared::ref<tj::np::QueueSLIPFrameDecoder> > _streams;
 		};
 		

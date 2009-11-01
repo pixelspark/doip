@@ -5,6 +5,7 @@
 #include "../../../TJNP/include/tjnetworkaddress.h"
 #include "../../../TJNP/include/tjsocket.h"
 #include "../../../TJNP/include/tjhttp.h"
+#include "../../EPFramework/include/epmessage.h"
 
 #include <iomanip>
 #include <sstream>
@@ -13,6 +14,7 @@ using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::script;
 using namespace tj::np;
+using namespace tj::ep;
 
 Event _globalStop;
 
@@ -45,6 +47,11 @@ int main(int argc, char** argv) {
 				Fabric::LoadRecursive(argv[a], fabric);
 				engine->Connect(true);
 				fabrics[argv[a]] = engine;
+
+				if(a==(argc-1)) {
+					// Last fabric, send init message
+					engine->GetQueue()->Add(GC::Hold(new Message(L"init")), null, null);
+				}
 			}
 		}
 		

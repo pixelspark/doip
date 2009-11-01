@@ -6,8 +6,32 @@ using namespace tj::ep;
 EPEndpoint::~EPEndpoint() {
 }
 
+/** EPReply **/
+EPReply::~EPReply() {
+}
+
+void EPReply::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "path", GetPath());
+
+	std::vector< ref<EPParameter> > parameterList;
+	GetParameters(parameterList);
+	std::vector< ref<EPParameter> >::iterator it = parameterList.begin();
+	while(it!=parameterList.end()) {
+		ref<EPParameter> pp = *it;
+		if(pp) {
+			TiXmlElement paramElement("parameter");
+			pp->Save(&paramElement);
+			me->InsertEndChild(paramElement);
+		}
+		++it;
+	}
+}
+
 /** EPMethod **/
 EPMethod::~EPMethod() {
+}
+
+void EPMethod::GetReplies(std::vector< ref<EPReply> >& replyList) const {
 }
 
 /** EPParameter **/
@@ -192,6 +216,20 @@ void EPMethod::Save(TiXmlElement* me) {
 		me->InsertEndChild(path);
 		++it;
 	}
+
+	std::vector< ref<EPReply> > replyList;
+	GetReplies(replyList);
+
+	std::vector< ref<EPReply> >::const_iterator rpit = replyList.begin();
+	while(rpit!=replyList.end()) {
+		ref<EPReply> epr = *rpit;
+		if(epr) {
+			TiXmlElement replyElement("reply");
+			epr->Save(&replyElement);
+			me->InsertEndChild(replyElement);
+		}
+		++rpit;
+	}
 	
 	std::vector< ref<EPParameter> > parameters;
 	GetParameters(parameters);
@@ -351,4 +389,39 @@ void EPTransportDefinition::Load(TiXmlElement* me) {
 	_address = LoadAttributeSmall(me, "address", _address);
 	_framing = LoadAttributeSmall(me, "framing", _framing);
 	_port = LoadAttributeSmall<int>(me, "port", _port);
+}
+
+/** EPReplyDefinition **/
+EPReplyDefinition::EPReplyDefinition() {
+}
+
+EPReplyDefinition::~EPReplyDefinition() {
+}
+
+tj::shared::String EPReplyDefinition::GetPath() const {
+	return _path;
+}
+
+void EPReplyDefinition::GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const {
+	std::vector< ref<EPParameter> >::const_iterator it = _parameters.begin();
+	while(it!=_parameters.end()) {
+		parameterList.push_back(*it);
+		++it;
+	}
+}
+
+void EPReplyDefinition::Load(TiXmlElement* me) {
+	_path = LoadAttributeSmall<std::wstring>(me, "path", _path);
+
+	TiXmlElement* param = me->FirstChildElement("parameter");
+	while(param!=0) {
+		ref<EPParameterDefinition> epp = GC::Hold(new EPParameterDefinition());
+		epp->Load(param);
+		_parameters.push_back(epp);
+		param = param->NextSiblingElement("parameter");
+	}
+}
+
+void EPReplyDefinition::Save(TiXmlElement* me) {
+	EPReply::Save(me);	
 }

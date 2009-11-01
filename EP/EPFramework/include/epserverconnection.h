@@ -8,7 +8,7 @@
 
 namespace tj {
 	namespace ep {
-		/** An 'EP' connection is sort of a virtual connection that only creates a server to 'serve' the
+		/** An 'EP' connection is sort of 'pseudo'-connection that only creates a server to 'serve' the
 		 definitions of the methods the fabric accepts over HTTP (following the EP standard) **/
 		class EP_EXPORTED EPServerDefinition: public ConnectionDefinition {
 			friend class EPServerConnection;
@@ -34,7 +34,7 @@ namespace tj {
 				virtual ~EPServerConnection();
 				virtual void CreateForTransport(tj::shared::strong<tj::ep::EPTransport> ept, const tj::np::NetworkAddress& address);
 				virtual void Create(tj::shared::strong<ConnectionDefinition> def, Direction d, tj::shared::ref<EPEndpoint> parent);
-				virtual void Send(tj::shared::strong<Message> msg);
+				virtual void Send(tj::shared::strong<Message> msg, tj::shared::ref<ReplyHandler> rh, tj::shared::ref<ConnectionChannel> cc);
 				
 			protected:
 				tj::shared::CriticalSection _lock;

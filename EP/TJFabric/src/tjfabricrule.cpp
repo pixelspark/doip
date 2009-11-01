@@ -11,6 +11,14 @@ Rule::Rule(): _isEnabled(true), _isPublic(true) {
 Rule::~Rule() {
 }
 
+void Rule::GetReplies(std::vector< tj::shared::ref<tj::ep::EPReply> >& replyList) const {
+	std::vector< ref<EPReply> >::const_iterator it = _replies.begin();
+	while(it!=_replies.end()) {
+		replyList.push_back(*it);
+		++it;
+	}
+}
+
 void Rule::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall<std::wstring>(me, "id", L"");
 	_script = LoadAttribute<std::wstring>(me, "script", L"");
@@ -33,6 +41,14 @@ void Rule::Load(TiXmlElement* me) {
 		param->Load(tag);
 		_parameters.push_back(param);
 		tag = tag->NextSiblingElement("parameter");
+	}
+
+	TiXmlElement* reply = me->FirstChildElement("reply");
+	while(reply!=0) {
+		ref<EPReplyDefinition> erp = GC::Hold(new EPReplyDefinition());
+		erp->Load(reply);
+		_replies.push_back(erp);
+		reply = reply->NextSiblingElement("reply");
 	}
 }
 

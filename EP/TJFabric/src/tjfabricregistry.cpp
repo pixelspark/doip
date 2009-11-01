@@ -28,7 +28,7 @@ void FabricRegistry::Send(const String& pattern, strong<Message> m) {
 		ref<FabricEngine> fe = it->second;
 		if(fe) {
 			if(Pattern::Matches(pattern, it->first)) {
-				fe->GetQueue()->Add(m);
+				fe->GetQueue()->Add(m, null, null);
 			}
 		}
 		++it;

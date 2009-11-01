@@ -33,6 +33,14 @@ namespace tj {
 				virtual void Save(TiXmlElement* me);
 		};
 		
+		class EXPORTED EPReply: public virtual tj::shared::Object {
+			public:
+				virtual ~EPReply();
+				virtual tj::shared::String GetPath() const = 0;
+				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const = 0;
+				virtual void Save(TiXmlElement* me);
+		};
+
 		class EP_EXPORTED EPMethod: public virtual tj::shared::Object {
 			public:
 				virtual ~EPMethod();
@@ -41,6 +49,7 @@ namespace tj {
 				virtual void GetPaths(std::set<EPPath>& pathList) const = 0;
 				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const = 0;
 				virtual void Save(TiXmlElement* me);
+				virtual void GetReplies(std::vector< tj::shared::ref<EPReply> >& replyList) const;
 		};
 		
 		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object {
@@ -100,6 +109,20 @@ namespace tj {
 				tj::shared::String _id;
 				tj::shared::String _friendlyName;
 				std::set<EPPath> _paths;
+				std::vector< tj::shared::ref<EPParameter> > _parameters;
+		};
+
+		class EP_EXPORTED EPReplyDefinition: public EPReply, public tj::shared::Serializable {
+			public:
+				EPReplyDefinition();
+				virtual ~EPReplyDefinition();
+				virtual tj::shared::String GetPath() const;
+				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const;
+				virtual void Load(TiXmlElement* me);
+				virtual void Save(TiXmlElement* me);
+			
+			protected:
+				tj::shared::String _path;
 				std::vector< tj::shared::ref<EPParameter> > _parameters;
 		};
 		

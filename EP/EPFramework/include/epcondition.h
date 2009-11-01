@@ -40,6 +40,7 @@ namespace tj {
 			
 			protected:
 				EPPath _pathPattern;
+				EPPath _replyPattern;
 		};
 		
 		class EP_EXPORTED EPConditionFactory {

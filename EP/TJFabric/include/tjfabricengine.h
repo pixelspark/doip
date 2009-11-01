@@ -4,6 +4,7 @@
 #include "../../../TJShared/include/tjshared.h"
 #include "../../../TJNP/include/tjwebserver.h"
 #include "../../../TJScout/include/tjservice.h"
+#include "../../../TJScript/include/tjscript.h"
 #include "../../EPFramework/include/epmessage.h"
 #include "tjfabric.h"
 #include "tjfabricconnection.h"
@@ -22,7 +23,7 @@ namespace tj {
 				virtual tj::shared::strong<Queue> GetQueue();
 				virtual void SetFabric(tj::shared::strong<Fabric> f);
 				virtual void Connect(bool t);
-				virtual void Send(const tj::shared::String& gid, tj::shared::strong<tj::ep::Message> m);
+				virtual void Send(const tj::shared::String& gid, tj::shared::strong<tj::ep::Message> m, tj::shared::ref<tj::ep::ReplyHandler> handler);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
 			
 			protected:

@@ -13,6 +13,20 @@ using namespace tj::ep;
 /** QueueGlobalScriptable **/
 namespace tj {
 	namespace fabric {
+		class ConnectionScriptable: public ScriptObject<ConnectionScriptable> {
+			public:
+				ConnectionScriptable(ref<Connection> c, ref<ConnectionChannel> chan);
+				virtual ~ConnectionScriptable();
+				static void Initialize();
+				virtual ref<Scriptable> SToString(ref<ParameterList> p);
+				virtual ref<Connection> GetConnection();
+				virtual ref<ConnectionChannel> GetConnectionChannel();
+
+			protected:
+				ref<Connection> _connection;
+				ref<ConnectionChannel> _channel;
+		};
+
 		class QueueGlobalScriptable: public ScriptObject<QueueGlobalScriptable> {
 			public:
 				QueueGlobalScriptable(ref<Queue> q);
@@ -26,7 +40,50 @@ namespace tj {
 			protected:
 				weak<Queue> _queue;
 		};
+
+		class QueueReplyHandler: public ReplyHandler {
+			public:
+				QueueReplyHandler(ref<Queue> q, ref<ScriptDelegate> dlg);
+				virtual ~QueueReplyHandler();
+				virtual void OnReceiveReply(strong<Message> originalMessage, strong<Message> replyMessage, strong<Connection> con, ref<ConnectionChannel> cc);
+				virtual void OnEndReply(strong<Message> originalMessage);
+
+			protected:
+				weak<Queue> _queue;
+				ref<ScriptDelegate> _dlg;
+		};
 	}
+}
+
+/** QueueReplyHandler **/
+QueueReplyHandler::QueueReplyHandler(ref<Queue> q, ref<ScriptDelegate> dlg): _queue(q), _dlg(dlg) {
+}
+
+QueueReplyHandler::~QueueReplyHandler() {
+}
+
+void QueueReplyHandler::OnReceiveReply(strong<Message> originalMessage, strong<Message> replyMessage, strong<Connection> connection, ref<ConnectionChannel> channel) {
+	ref<Queue> q = _queue;
+	if(q) {
+		q->AddReply(GC::Hold(new QueuedReply(originalMessage, replyMessage, _dlg, connection, channel)));
+	}
+}
+
+void QueueReplyHandler::OnEndReply(strong<Message> originalMessage) {
+}
+
+/* QueuedReply */
+QueuedReply::QueuedReply(strong<Message> o, strong<Message> r, ref<ScriptDelegate> d, strong<Connection> con, ref<ConnectionChannel> cc): _originalMessage(o), _replyMessage(r), _delegate(d), _connection(con), _channel(cc) {
+}
+
+QueuedReply::~QueuedReply() {
+}
+
+/** QueuedMessage **/
+QueuedMessage::QueuedMessage(strong<Message> msg, ref<Connection> src, ref<ConnectionChannel> cc): _message(msg), _source(src), _sourceChannel(cc) {
+}
+
+QueuedMessage::~QueuedMessage() {
 }
 
 /* Queue */
@@ -50,10 +107,19 @@ void Queue::Clear() {
 	_global = GC::Hold(new ScriptScope());
 }
 
-void Queue::Add(strong<Message> m) {
+void Queue::AddReply(strong<QueuedReply> m) {
 	ThreadLock lock(&_lock);
-	_queue.push_back(m);
-	
+	_replyQueue.push_back(m);
+	SignalWorkAdded();
+}
+
+void Queue::Add(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
+	ThreadLock lock(&_lock);
+	_queue.push_back(GC::Hold(new QueuedMessage(m, c, cc)));
+	SignalWorkAdded();
+}
+
+void Queue::SignalWorkAdded() {
 	if(!_thread) {
 		_thread = GC::Hold(new QueueThread(this));
 		_thread->Start();
@@ -73,13 +139,14 @@ void Queue::WaitForCompletion() {
 	}
 }
 
-void Queue::ExecuteScript(strong<Rule> r, strong<CompiledScript> cs, strong<Message> m) {
+void Queue::ExecuteScript(strong<Rule> r, strong<CompiledScript> cs, strong<QueuedMessage> m) {
 	ThreadLock lock(&_lock);
 	if(!r->IsEnabled()) Throw(L"Cannot execute the script of a rule that is disabled", ExceptionTypeError);
 	try {
 		ref<ScriptScope> sc = GC::Hold(new ScriptScope()); // TODO persist with rule?
 		sc->Set(L"globals", _global);
-		sc->Set(L"message", GC::Hold(new MessageScriptable(m)));
+		sc->Set(L"message", GC::Hold(new MessageScriptable(m->_message)));
+		sc->Set(L"source", GC::Hold(new ConnectionScriptable(m->_source, m->_sourceChannel)));
 		//_context->SetDebug(true);
 		_context->Execute(cs, sc);
 	}
@@ -88,7 +155,24 @@ void Queue::ExecuteScript(strong<Rule> r, strong<CompiledScript> cs, strong<Mess
 	}
 }
 
-void Queue::ProcessMessage(strong<Message> m) {
+void Queue::ProcessReply(strong<QueuedReply> r) {
+	try {
+		ThreadLock lock(&_lock);
+		ref<ScriptScope> sc = GC::Hold(new ScriptScope());
+		sc->Set(L"globals", _global);
+		sc->Set(L"reply", GC::Hold(new MessageScriptable(r->_replyMessage)));
+		sc->Set(L"message", GC::Hold(new MessageScriptable(r->_originalMessage)));
+		sc->Set(L"source", GC::Hold(new ConnectionScriptable(r->_connection, r->_channel)));
+		_context->Execute(r->_delegate->GetScript(), sc);
+	}
+	catch(const Exception& e) {
+		Log::Write(L"TJFabric/Queue", std::wstring(L"Exception occurred while processing reply '")+r->_replyMessage->GetPath()+L" to "+r->_originalMessage->GetPath()+L"': " + e.GetMsg());
+	}
+}
+
+void Queue::ProcessMessage(strong<QueuedMessage> qm) {
+	strong<Message> m = qm->_message;
+
 	try {
 		ThreadLock lock(&_lock);
 		std::deque< ref<Rule> > matchingRules;
@@ -102,7 +186,7 @@ void Queue::ProcessMessage(strong<Message> m) {
 				while(it!=matchingRules.end()) {
 					ref<Rule> rule = *it;
 					if(rule) {
-						ExecuteScript(rule, GetScriptForRule(rule), m);
+						ExecuteScript(rule, GetScriptForRule(rule), qm);
 					}
 					++it;
 				}
@@ -169,15 +253,6 @@ void QueueThread::Stop() {
 
 void QueueThread::Run() {
 	Log::Write(L"TJFabric/QueueThread", L"Queue processing thread started");
-	// Init message
-	{
-		ref<Queue> q = _queue;
-		if(q) {
-			q->ProcessMessage(GC::Hold(new Message(L"init")));
-		}
-	}
-	
-	Log::Write(L"TJFabric/QueueThread", L"Sent init message");
 	
 	while(_running) {
 		_signal.Reset();
@@ -195,16 +270,34 @@ void QueueThread::Run() {
 			}
 			
 			ThreadLock lock(&(q->_lock));
-			std::deque< ref<Message> >::iterator it = q->_queue.begin();
-			while(it!=q->_queue.end()) {
-				ref<Message> msg = *it;
-				if(msg) {
-					Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process message: ")+msg->GetPath());
-					q->ProcessMessage(msg);
+
+			// Process queued replies
+			if(q->_replyQueue.size()>0) {
+				std::deque< ref<QueuedReply> >::iterator it = q->_replyQueue.begin();
+				while(it!=q->_replyQueue.end()) {
+					ref<QueuedReply> msg = *it;
+					if(msg) {
+						Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process reply: ")+msg->_replyMessage->GetPath()+L" to: "+msg->_originalMessage->GetPath());
+						q->ProcessReply(msg);
+					}
+					++it;
 				}
-				++it;
+				q->_replyQueue.clear();
 			}
-			q->_queue.clear();
+
+			// Process queued messages
+			if(q->_queue.size()>0) {
+				std::deque< ref<QueuedMessage> >::iterator it = q->_queue.begin();
+				while(it!=q->_queue.end()) {
+					ref<QueuedMessage> msg = *it;
+					if(msg) {
+						Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process message: ")+msg->_message->GetPath());
+						q->ProcessMessage(msg);
+					}
+					++it;
+				}
+				q->_queue.clear();
+			}
 		}
 		
 		_signal.Wait();
@@ -256,13 +349,25 @@ ref<Scriptable> QueueGlobalScriptable::SDefer(ref<ParameterList> p) {
 	return null; // Not implemented yet
 }
 
-ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {
-	static script::Parameter<std::wstring> PToGroupID(L"group", 0);
-	std::wstring gid = PToGroupID.Require(p, L"");
-	
+ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {	
+	Log::Write(L"TJFabric/QueueGlobalScriptable", L"SSend");
+
 	ref<Scriptable> ms = p->Get(L"message");
 	if(!ms) {
 		ms = p->Get(L"1");
+	}
+
+	ref<Scriptable> rh = p->Get(L"reply");
+	if(!rh) {
+		rh = p->Get(L"2");
+	}
+
+	ref<Scriptable> to = p->Get(L"to");
+	if(!to) {
+		to = p->Get(L"0");
+		if(!to) {
+			throw ScriptException(L"Missing parameter 'to' in send method");
+		}
 	}
 	
 	if(ms && ms.IsCastableTo<MessageScriptable>()) {
@@ -271,7 +376,31 @@ ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {
 		if(q) {
 			ref<FabricEngine> fe = q->_engine;
 			if(fe) {
-				fe->Send(gid, m);
+				// If we have a handler delegate, hand it to the engine
+				ref<ScriptDelegate> handler;
+				ref<ReplyHandler> replyHandler;
+				if(rh.IsCastableTo<ScriptDelegate>()) {
+					handler = rh;
+					Log::Write(L"TJFabric/QueueGlobalScriptable", L"Has handler in SSend, creating delegate-based reply handler");
+					replyHandler = GC::Hold(new QueueReplyHandler(q, handler));
+				}
+
+				if(to.IsCastableTo<ConnectionScriptable>()) {
+					ref<ConnectionScriptable> conScriptable = to;
+					if(conScriptable) {
+						Log::Write(L"TJFabric/QueueGlobalScriptable", L"Has connection in SSend");
+						ref<Connection> connection = conScriptable->GetConnection();
+						if(connection) {
+							connection->Send(m, replyHandler, conScriptable->GetConnectionChannel());
+						}
+						else {
+							Throw(L"Cannot send() to null connection", ExceptionTypeError);
+						}
+					}
+				}
+				else {
+					fe->Send(ScriptContext::GetValue<std::wstring>(to, L""), m, replyHandler);
+				}
 			}
 		}
 	}
@@ -283,4 +412,26 @@ ref<Scriptable> QueueGlobalScriptable::SPrint(ref<ParameterList> p) {
 	std::wstring msg = PMessage.Require(p, L"");
 	Log::Write(L"TJFabric/Script", msg);
 	return ScriptConstants::Null;
+}
+
+ConnectionScriptable::ConnectionScriptable(ref<Connection> c, ref<ConnectionChannel> cc): _connection(c), _channel(cc) {
+}
+
+ConnectionScriptable::~ConnectionScriptable() {
+}
+
+void ConnectionScriptable::Initialize() {
+	Bind(L"toString", &ConnectionScriptable::SToString);
+}
+
+ref<Scriptable> ConnectionScriptable::SToString(ref<ParameterList> p) {
+	return GC::Hold(new ScriptString(L"[Connection]"));
+}
+
+ref<Connection> ConnectionScriptable::GetConnection() {
+	return _connection;
+}
+
+ref<ConnectionChannel> ConnectionScriptable::GetConnectionChannel() {
+	return _channel;
 }

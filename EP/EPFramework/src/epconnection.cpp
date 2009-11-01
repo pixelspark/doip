@@ -2,6 +2,13 @@
 using namespace tj::shared;
 using namespace tj::ep;
 
+/** ReplyHandler **/
+ReplyHandler::~ReplyHandler() {
+}
+
+void ReplyHandler::OnEndReply(strong<Message> orig) {
+}
+
 /** ConnectionDefinition **/
 ConnectionDefinition::~ConnectionDefinition() {
 }
@@ -38,11 +45,18 @@ tj::shared::strong<ConnectionDefinitionFactory> ConnectionDefinitionFactory::Ins
 	return _instance;
 }
 
+/** ConnectionChannel **/
+ConnectionChannel::~ConnectionChannel() {
+}
+
 /** Connection **/
 Connection::~Connection() {
 }
 
-MessageNotification::MessageNotification(const Timestamp& ts, strong<Message> m): when(ts), message(m) {
+MessageNotification::MessageNotification(const Timestamp& ts, strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc): when(ts), message(m), source(src), channel(cc) {
+}
+
+MessageNotification::~MessageNotification() {
 }
 
 /** ConnectionFactory **/

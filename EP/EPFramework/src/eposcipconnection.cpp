@@ -24,6 +24,17 @@ using namespace tj::shared;
 using namespace tj::np;
 using namespace tj::ep;
 
+class OSCOverIPConnectionChannel: public ConnectionChannel {
+	public:
+		OSCOverIPConnectionChannel(NativeSocket ns): _socket(ns) {
+		}
+
+		virtual ~OSCOverIPConnectionChannel() {
+		}
+
+		NativeSocket _socket;
+};
+
 /** OSCUtil **/
 class OSCUtil {
 	public:
@@ -150,7 +161,7 @@ void OSCOverIPConnectionDefinition::LoadConnection(TiXmlElement* me) {
 }
 
 /** OSCOverIPConnection **/
-OSCOverIPConnection::OSCOverIPConnection(): _useSendTo(false), _outSocket(-1), _inSocket(-1), _toPort(0), _toAddress(L""), _direction(DirectionNone) {
+OSCOverIPConnection::OSCOverIPConnection(): _useSendTo(false), _handlingReplies(false), _outSocket(-1), _inSocket(-1), _toPort(0), _toAddress(L""), _direction(DirectionNone) {
 }
 
 OSCOverIPConnection::~OSCOverIPConnection() {
@@ -165,6 +176,7 @@ Direction OSCOverIPConnection::GetDirection() const {
 void OSCOverIPConnection::StopInbound() {
 	if((_direction & DirectionInbound) !=0) {
 		_listenerThread->Stop();
+		_handlingReplies = false;
 		_listenerThread = null; // This will call ~SocketListenerThread => Thread::WaitForCompletion on the thread
 		
 		#ifdef TJ_OS_POSIX
@@ -191,6 +203,10 @@ void OSCOverIPConnection::StopInbound() {
 		_additionalIncomingSockets.clear();
 		_direction = (Direction)(_direction & (~DirectionInbound));
 	}
+}
+
+bool OSCOverIPConnection::IsHandlingReplies() const {
+	return _handlingReplies;
 }
 
 void OSCOverIPConnection::AddInboundConnection(NativeSocket ns) {
@@ -253,7 +269,22 @@ void OSCOverIPConnection::StartOutbound(const tj::np::NetworkAddress& na, unsign
 	_direction = (Direction)(_direction | DirectionOutbound);
 }
 
-void OSCOverIPConnection::StartInbound(NativeSocket inSocket) {
+void OSCOverIPConnection::StartInboundReplies(NativeSocket outSocket) {
+	ThreadLock lock(&_lock);
+	StopInbound();
+	
+	// Update flags
+	_direction = Direction(_direction | DirectionInbound);
+	_inSocket = outSocket;
+	_handlingReplies = true;
+	
+	// Start listener thread
+	_listenerThread = GC::Hold(new SocketListenerThread());
+	_listenerThread->AddListener(outSocket, this);
+	_listenerThread->Start();
+}
+
+void OSCOverIPConnection::StartInbound(NativeSocket inSocket, bool handleReplies) {
 	ThreadLock lock(&_lock);
 	StopInbound();
 	
@@ -264,10 +295,14 @@ void OSCOverIPConnection::StartInbound(NativeSocket inSocket) {
 	// Start listener thread
 	_listenerThread = GC::Hold(new SocketListenerThread());
 	_listenerThread->AddListener(inSocket, this);
+	if(handleReplies) {
+		_listenerThread->AddListener(_outSocket, this);
+		_handlingReplies = true;
+	}
 	_listenerThread->Start();
 }
 
-void OSCOverIPConnection::OnReceiveMessage(osc::ReceivedMessage rm) {
+void OSCOverIPConnection::OnReceiveMessage(osc::ReceivedMessage rm, bool isReply, bool endReply, NativeSocket ns) {
 	ref<Message> msg = GC::Hold(new Message(Wcs(rm.AddressPattern())));
 	
 	// Convert OSC arguments to Any values
@@ -282,19 +317,63 @@ void OSCOverIPConnection::OnReceiveMessage(osc::ReceivedMessage rm) {
 		++ait;
 	}
 	
-	EventMessageReceived.Fire(this, MessageNotification(Timestamp(true), msg));
+	if(isReply) {
+		ThreadLock lock(&_lock);
+		std::deque< std::pair< ref<ReplyHandler>, ref<Message> > >::iterator it = _replyQueue.begin();
+		if(it!=_replyQueue.end()) {
+			std::pair< ref<ReplyHandler>, ref<Message> >& data = *it;
+			if(data.first && data.second) {
+				data.first->OnReceiveReply(data.second, msg, ref<Connection>(ref<OSCOverIPConnection>(this)), GC::Hold(new OSCOverIPConnectionChannel(ns)));
+			}
+			else {
+				// Nil reply handler; ignore
+			}
+		}
+		
+		if(endReply) {
+			PopReplyHandler();
+		}
+	}
+	else {
+		EventMessageReceived.Fire(this, MessageNotification(Timestamp(true), msg, this, GC::Hold(new OSCOverIPConnectionChannel(ns))));
+	}
 }
 
-void OSCOverIPConnection::OnReceiveBundle(osc::ReceivedBundle rb) {
+void OSCOverIPConnection::OnReceiveBundle(osc::ReceivedBundle rb, bool isReply, bool endReply, NativeSocket ns) {
+	ThreadLock lock(&_lock);
 	osc::ReceivedBundle::const_iterator it = rb.ElementsBegin(); 
 	while(it!=rb.ElementsEnd()) {
 		if(it->IsBundle()) {
-			OnReceiveBundle(osc::ReceivedBundle(*it));
+			OnReceiveBundle(osc::ReceivedBundle(*it), isReply, false, ns);
 		}
 		else {
-			OnReceiveMessage(osc::ReceivedMessage(*it));
+			OnReceiveMessage(osc::ReceivedMessage(*it), isReply, false, ns);
 		}
 		++it;
+	}
+
+	if(endReply) {
+		PopReplyHandler();
+	}
+}
+
+void OSCOverIPConnection::PopReplyHandler() {
+	ThreadLock lock(&_lock);
+	std::deque< std::pair< ref<ReplyHandler>, ref<Message> > >::iterator it = _replyQueue.begin();
+	if(it!=_replyQueue.end()) {
+		{
+			std::pair< ref<ReplyHandler>, ref<Message> >& data = *it;
+			if(data.first && data.second) {
+				data.first->OnEndReply(data.second);
+			}
+			else {
+				// 'nil' handler; reply is expected, but client doesn't care about it
+			}
+		}
+		_replyQueue.pop_front();
+	}
+	else {
+		Log::Write(L"EPFramework/OSCOverIPConnection", L"A reply to a message was received, but no handler is installed to handle it");
 	}
 }
 
@@ -302,15 +381,21 @@ void OSCOverIPConnection::SetFramingType(const std::wstring& ft) {
 	_framing = ft;
 }
 
-void OSCOverIPConnection::Send(strong<Message> msg) {
+void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<ConnectionChannel> cc) {
 	ThreadLock lock(&_lock);
-	
-	if((_direction & DirectionOutbound)==0) {
+
+	/** If the client supplies a specific channel (=socket) to send to, use it; if not, use the outgoing socket if 
+	we are an outbound connection; otherwise, ignore **/
+	NativeSocket outSocket = _outSocket;
+	if(cc && cc.IsCastableTo<OSCOverIPConnectionChannel>()) {
+		outSocket = ref<OSCOverIPConnectionChannel>(cc)->_socket;
+	}
+	else if((_direction & DirectionOutbound)==0) {
 		return;
 	}
-	
-	if(_outSocket==-1) {
-		Log::Write(L"TJFabric/OSCOverIPConnection", std::wstring(L"Could not send message, outgoing socket is invalid (to-address=")+_toAddress.ToString()+std::wstring(L":")+Stringify(_toPort));
+
+	if(outSocket==-1) {
+		Log::Write(L"EPFramework/OSCOverIPConnection", std::wstring(L"Could not send message, outgoing socket is invalid (to-address=")+_toAddress.ToString()+std::wstring(L":")+Stringify(_toPort));
 		return;
 	}
 	
@@ -321,7 +406,7 @@ void OSCOverIPConnection::Send(strong<Message> msg) {
 	osc::OutboundPacketStream outPacket(&(buffer[0]), 2047);
 	outPacket << osc::BeginMessage(Mbs(msg->GetPath()).c_str());
 	std::wostringstream wos;
-	wos << msg->GetPath() << L",";
+	wos << StringifyHex(outSocket) << L"<= " << msg->GetPath() << L",";
 	
 	for(unsigned int a=0;a<msg->GetParameterCount();a++) {
 		Any value = msg->GetParameter(a);
@@ -389,14 +474,14 @@ void OSCOverIPConnection::Send(strong<Message> msg) {
 			toAddressSize = sizeof(sockaddr_in);
 		}
 		
-		if(sendto(_outSocket, (const char*)packetBuffer, packetSize, 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
+		if(sendto(outSocket, (const char*)packetBuffer, packetSize, 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
 			Log::Write(L"TJFabric/OSCOverIPConnection", L"sendto() failed, error="+Stringify(errno));
 		}
 		
 		wos << L" => " << _toAddress.ToString();
 	}
 	else {
-		if(send(_outSocket, (const char*)packetBuffer, packetSize, 0)==-1) {
+		if(send(outSocket, (const char*)packetBuffer, packetSize, 0)==-1) {
 			Log::Write(L"TJFabric/OSCOverIPConnection", L"send() failed, error="+Stringify(errno));
 		}
 	}
@@ -405,6 +490,22 @@ void OSCOverIPConnection::Send(strong<Message> msg) {
 		delete[] packetBuffer;
 	}
 	Log::Write(L"TJFabric/OSCOverIPConnection", wos.str());
+
+	// Register reply handler
+	if(IsHandlingReplies()) {
+		if(rh) {
+			_replyQueue.push_back(std::pair< ref<ReplyHandler>, ref<Message> >(rh, msg));
+		}
+		else {
+			Log::Write(L"EPFramework/OSCOverIPConnection", L"Handling replies, but no reply handler given; inserting nil handler!");
+			_replyQueue.push_back(std::pair< ref<ReplyHandler>, ref<Message> >(null,null));
+		}
+	}
+	else {
+		if(rh) {
+			Log::Write(L"EPFramework/OSCIPConnection", L"A reply handler was given for a sent message, but this connection is not handling replies");
+		}
+	}
 }
 
 /** OSCOverUDPConnectionDefinition **/
@@ -434,10 +535,10 @@ void OSCOverUDPConnection::OnReceive(NativeSocket ns) {
 		
 		osc::ReceivedPacket msg(receiveBuffer, ret);
 		if(msg.IsBundle()) {
-			OnReceiveBundle(osc::ReceivedBundle(msg));
+			OnReceiveBundle(osc::ReceivedBundle(msg), false, false, ns);
 		}
 		else {
-			OnReceiveMessage(osc::ReceivedMessage(msg));
+			OnReceiveMessage(osc::ReceivedMessage(msg), false, false, ns);
 		}
 	}
 }
@@ -531,7 +632,7 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 			Throw(L"Unsupported address family", ExceptionTypeError);
 		}
 		
-		StartInbound(inSocket);
+		StartInbound(inSocket, false);
 		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected inbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
 	}	
 }
@@ -598,33 +699,50 @@ void OSCOverTCPConnection::OnReceive(NativeSocket ns) {
 		}
 		else {
 			// Process data
+			bool isReply = (IsHandlingReplies() && ns==_outSocket);
+			if(isReply) {
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Receiving reply data");
+			}
+
 			char buffer[4096];
 			int r = recv(ns, buffer, 4095, 0);
-			std::map<NativeSocket, ref<QueueSLIPFrameDecoder> >::iterator it = _streams.find(ns);
-			if(r==0) {
-				if(it!=_streams.end()) {
-					_streams.erase(it);
+
+			ref<QueueSLIPFrameDecoder> decoder = null;
+			if(isReply) {
+				if(!_replyStream) {
+					_replyStream = GC::Hold(new QueueSLIPFrameDecoder());
 				}
-				
-				RemoveInboundConnection(ns);
+				decoder = _replyStream;
 			}
-			else if(r>0 && it!=_streams.end()) {
-				ref<QueueSLIPFrameDecoder> decoder =  it->second;
-				if(decoder) {
-					decoder->Append((const unsigned char*)buffer, r);
-					
-					// Process any finished messages
-					ref<Code> buffer = decoder->NextPacket();
-					while(buffer) {
-						osc::ReceivedPacket msg(buffer->GetBuffer(), buffer->GetSize());
-						if(msg.IsBundle()) {
-							OnReceiveBundle(osc::ReceivedBundle(msg));
-						}
-						else {
-							OnReceiveMessage(osc::ReceivedMessage(msg));
-						}
-						buffer = decoder->NextPacket();
+			else {
+				std::map<NativeSocket, ref<QueueSLIPFrameDecoder> >::iterator it = _streams.find(ns);
+				if(r==0) {
+					if(it!=_streams.end()) {
+						_streams.erase(it);
 					}
+					RemoveInboundConnection(ns);
+				}
+				else {
+					if(it!=_streams.end()) {
+						decoder = it->second;
+					}
+				}
+			}
+			
+			if(r>0 && decoder) {
+				decoder->Append((const unsigned char*)buffer, r);
+					
+				// Process any finished messages
+				ref<Code> buffer = decoder->NextPacket();
+				while(buffer) {
+					osc::ReceivedPacket msg(buffer->GetBuffer(), buffer->GetSize());
+					if(msg.IsBundle()) {
+						OnReceiveBundle(osc::ReceivedBundle(msg), isReply, isReply, ns);
+					}
+					else {
+						OnReceiveMessage(osc::ReceivedMessage(msg), isReply, isReply, ns);
+					}
+					buffer = decoder->NextPacket();
 				}
 			}
 		}
@@ -650,8 +768,9 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 	NativeSocket outSocket;
 	outSocket = _inServerSocket = -1;
 	_streams.clear();
-	
-	// Create outgoing socket
+
+	/** When direction = OUT|IN, the connection will be outbound, but listening for incoming replies. When the direction
+	is IN, the connection will be a TCP-server. When direction=OUT, the connection will be outbound-only **/
 	if((direction & DirectionOutbound)!=0) {
 		outSocket = socket((networkAddress.GetAddressFamily()==AddressFamilyIPv6) ? AF_INET6 : AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		if(outSocket==-1) {
@@ -680,24 +799,31 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			}
 			
 			if(connect(outSocket, (const sockaddr*)toAddress, toAddressSize)!=0) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(errno));
-#ifdef TJ_OS_POSIX
-				close(outSocket);
-#endif
+				#ifdef TJ_OS_POSIX
+					Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(errno));
+					close(outSocket);
+				#endif
 				
-#ifdef TJ_OS_WIN
-				closesocket(outSocket);
-#endif
+				#ifdef TJ_OS_WIN
+					Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(WSAGetLastError()));
+					closesocket(outSocket);
+				#endif
 			}
 			else {
 				StartOutbound(networkAddress, port, outSocket, false);
 				Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected outbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
+
+				if((direction & DirectionInbound)!=0) {
+					// Also listen for replies
+					StartInboundReplies(outSocket);
+					Log::Write(L"TJFabric/OSCOverTCPConnection",L"Will also listen for replies");
+				}
 			}
 		}
 	}
 	
 	// Create server socket and thread
-	if((direction & DirectionInbound)!=0) {
+	if(direction == DirectionInbound) {
 		if(networkAddress.GetAddressFamily()==AddressFamilyIPv6) {
 			_inServerSocket = socket(AF_INET6, SOCK_STREAM, IPPROTO_TCP);
 			
@@ -719,8 +845,6 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			if(err!=0) {
 				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Stringify(errno));
 			}
-			
-			
 		}
 		else if(networkAddress.GetAddressFamily()==AddressFamilyIPv4) {
 			_inServerSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -732,9 +856,9 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			addr4.sin_port = htons(port);
 			addr4.sin_addr.s_addr = INADDR_ANY;
 			
-#ifdef TJ_OS_POSIX
-			addr4.sin_len = sizeof(sockaddr_in);
-#endif
+			#ifdef TJ_OS_POSIX
+				addr4.sin_len = sizeof(sockaddr_in);
+			#endif
 			
 			// Bind IPv4 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr4, sizeof(addr4));
@@ -752,7 +876,7 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			Throw(L"Unsupported address family", ExceptionTypeError);
 		}
 		
-		StartInbound(_inServerSocket);
+		StartInbound(_inServerSocket, (direction & DirectionOutbound)!=0);
 		Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected inbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
 	}
 }
