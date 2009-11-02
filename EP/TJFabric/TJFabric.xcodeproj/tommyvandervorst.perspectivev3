@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -271,8 +269,6 @@
 							<array>
 								<string>08FB7794FE84155DC02AAC07</string>
 								<string>B462AF171098E0E100484C29</string>
-								<string>B40225F61068E8D600137628</string>
-								<string>B40225F51068E8D200137628</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
 								<string>1C77FABC04509CD000000102</string>
@@ -280,8 +276,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>16</integer>
-									<integer>7</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -314,12 +308,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>B40226201068F01300137628</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>tjfabricgroup.cpp</string>
+								<string>tubled.fabric</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B40226211068F01300137628</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>tjfabricgroup.cpp</string>
+										<string>tubled.fabric</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4CD45EC109B0B2F004B3BBB</string>
+										<string>B4CD4612109B0D9E004B3BBB</string>
 										<key>history</key>
 										<array>
 											<string>B402274C10691D6500137628</string>
@@ -387,7 +383,6 @@
 											<string>B419EFC8109A1C0600FE1A72</string>
 											<string>B419F029109A27CA00FE1A72</string>
 											<string>B419F03F109A2DC300FE1A72</string>
-											<string>B419F061109A316400FE1A72</string>
 											<string>B419F06D109A32D200FE1A72</string>
 											<string>B4CD45B4109B0A9B004B3BBB</string>
 											<string>B4CD45B5109B0A9B004B3BBB</string>
@@ -410,7 +405,8 @@
 											<string>B4CD45CA109B0A9B004B3BBB</string>
 											<string>B4CD45CB109B0A9B004B3BBB</string>
 											<string>B4CD45E8109B0AD1004B3BBB</string>
-											<string>B4CD45E3109B0AC9004B3BBB</string>
+											<string>B4CD4611109B0D9E004B3BBB</string>
+											<string>B419F061109A316400FE1A72</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
