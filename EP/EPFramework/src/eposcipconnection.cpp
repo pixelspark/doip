@@ -604,10 +604,6 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 			addr4.sin_port = htons(port);
 			addr4.sin_addr.s_addr = INADDR_ANY;
 			
-#ifdef TJ_OS_POSIX
-			addr4.sin_len = sizeof(sockaddr_in);
-#endif
-			
 			int on = 1;
 			setsockopt(inSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
 			
@@ -625,7 +621,7 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 			mreq4.imr_multiaddr.s_addr = addr4.sin_addr.s_addr;
 			if(networkAddress.GetIPv4SocketAddress(&maddr)) {
 				mreq4.imr_multiaddr = maddr.sin_addr;
-				setsockopt(inSocket, IPPROTO_IPV4, IP_ADD_MEMBERSHIP, (char*)&mreq4, sizeof(mreq4));
+				setsockopt(inSocket, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char*)&mreq4, sizeof(mreq4));
 			}
 		}
 		else {
@@ -855,10 +851,6 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			addr4.sin_family = AF_INET;
 			addr4.sin_port = htons(port);
 			addr4.sin_addr.s_addr = INADDR_ANY;
-			
-			#ifdef TJ_OS_POSIX
-				addr4.sin_len = sizeof(sockaddr_in);
-			#endif
 			
 			// Bind IPv4 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr4, sizeof(addr4));
