@@ -475,7 +475,7 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 		}
 		
 		if(sendto(outSocket, (const char*)packetBuffer, packetSize, 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
-			Log::Write(L"TJFabric/OSCOverIPConnection", L"sendto() failed, error="+Stringify(errno));
+			Log::Write(L"TJFabric/OSCOverIPConnection", L"sendto() failed, error="+Util::GetDescriptionOfSystemError(errno));
 		}
 		
 		wos << L" => " << _toAddress.ToString();
@@ -770,7 +770,7 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 	if((direction & DirectionOutbound)!=0) {
 		outSocket = socket((networkAddress.GetAddressFamily()==AddressFamilyIPv6) ? AF_INET6 : AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		if(outSocket==-1) {
-			Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not create TCP socket");
+			Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not create TCP socket; error="+Util::GetDescriptionOfSystemError(errno));
 		}
 		else {
 			void* toAddress = 0;
@@ -791,12 +791,12 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 				toAddressSize = sizeof(sockaddr_in);
 			}
 			else {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Unsupported address family!");
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Unsupported address family!");
 			}
 			
 			if(connect(outSocket, (const sockaddr*)toAddress, toAddressSize)!=0) {
 				#ifdef TJ_OS_POSIX
-					Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(errno));
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Util::GetDescriptionOfSystemError(errno));
 					close(outSocket);
 				#endif
 				
@@ -833,13 +833,13 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			// Bind IPv6 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr, sizeof(addr));
 			if(err==-1) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv6 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 			
 			// Listen IPv6 socket
 			err = listen(_inServerSocket, 10);
 			if(err!=0) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Stringify(errno));
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 		}
 		else if(networkAddress.GetAddressFamily()==AddressFamilyIPv4) {
@@ -855,13 +855,13 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			// Bind IPv4 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr4, sizeof(addr4));
 			if(err==-1) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv4 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 			
 			// Listen IPv4 socket
 			err = listen(_inServerSocket, 10);
 			if(err!=0) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv4 server socket, error="+Stringify(errno));
+				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv4 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 		}
 		else {

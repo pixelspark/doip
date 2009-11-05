@@ -103,7 +103,7 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 	
 	if(epe) {
 		if(_condition && !_condition->Matches(epe)) {
-			//Log::Write(L"TJFabric/EPDiscovery", L"Endpoint does not meet requirements");
+			Log::Write(L"TJFabric/EPDiscovery", L"Endpoint does not meet requirements");
 		}
 		else {
 			Log::Write(L"TJFabric/EPDiscovery", L"Found suitable endpoint; friendly name="+epe->GetFriendlyName()+L" fqdn="+epe->GetFullIdentifier());

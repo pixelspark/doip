@@ -83,28 +83,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScoutFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
 		B4CD4551109B0230004B3BBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScoutFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
 		B4CD455A109B0246004B3BBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPackFramework.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = OSCPackFramework;
 		};
 		B4CD455D109B024F004B3BBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OSCPackFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = OSCPackFramework;
 		};
 /* End PBXContainerItemProxy section */
