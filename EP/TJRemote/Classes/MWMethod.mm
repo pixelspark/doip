@@ -38,7 +38,7 @@
 		UISlider* slider = [[UISlider alloc] initWithFrame:rect];
 		[slider setMinimumValue:[_min floatValue]];
 		[slider setMaximumValue:[_max floatValue]];
-		[slider setValue:[_default floatValue]];
+		[slider setValue:[((NSNumber*)self.value) floatValue]];
 		[slider addTarget:self action:@selector(sliderValueChanged:event:) forControlEvents:UIControlEventValueChanged];
 		if(imm) {
 			[slider addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventValueChanged];

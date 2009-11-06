@@ -43,6 +43,12 @@ using namespace osc;
 					ops << (osc::int32)[value intValue];
 				}
 			}
+			else if([parameter.type isEqualToString:@"double"]) {
+				NSNumber* value = (NSNumber*)parameter.value;
+				if(value!=nil) {
+					ops << (double)[value doubleValue];
+				}
+			}
 			else if([parameter.type isEqualToString:@"bool"]) {
 				NSNumber* value = (NSNumber*)parameter.value;
 				if(value!=nil) {

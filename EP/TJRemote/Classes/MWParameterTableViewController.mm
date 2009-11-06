@@ -29,6 +29,10 @@
 	[self.tableView setSeparatorColor:[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:0.4f]];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+	[self setMethod:nil];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return (_method!=nil) ? [_method.parameters count] : 0;
 }
