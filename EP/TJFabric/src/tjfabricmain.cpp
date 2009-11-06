@@ -38,8 +38,11 @@ void sigIntHandler(int s) {
 
 int main(int argc, char** argv) {
 	signal(SIGINT, sigIntHandler);
-	signal(SIGHUP, sigIntHandler);
-	signal(SIGCHLD, sigIntHandler);
+	
+	#ifdef TJ_OS_POSIX
+		signal(SIGHUP, sigIntHandler);
+		signal(SIGCHLD, sigIntHandler);
+	#endif
 	
 	#ifdef TJ_OS_MAC
 		signal(SIGINFO, sigIntHandler);
@@ -122,13 +125,17 @@ int main(int argc, char** argv) {
 					Log::Write(L"TJFabric/Main", info.str());
 				}
 			#endif
-			else if(_lastSignal==SIGHUP) {
-				// Reload config?
-				Log::Write(L"TJFabric/Main", L"Received hang-up signal; will reload configuration");
-			}
-			else if(_lastSignal==SIGCHLD) {
-				Log::Write(L"TJFabric/Main", L"A child process terminated");
-			}
+
+			#ifdef TJ_OS_POSIX
+				else if(_lastSignal==SIGHUP) {
+					// Reload config?
+					Log::Write(L"TJFabric/Main", L"Received hang-up signal; will reload configuration");
+				}
+				else if(_lastSignal==SIGCHLD) {
+					Log::Write(L"TJFabric/Main", L"A child process terminated");
+				}
+			#endif
+
 			else {
 				break;
 			}
