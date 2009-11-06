@@ -26,6 +26,10 @@ namespace tj {
 				virtual tj::shared::String GetFormat() const;
 				virtual tj::shared::String GetFraming() const;
 				virtual unsigned short GetPort() const;
+				virtual void SetAddress(const std::wstring& a);
+				virtual void SetFormat(const std::wstring& f);
+				virtual void SetFraming(const std::wstring& f);
+				virtual void SetPort(const unsigned short port);
 				
 			protected:
 				OSCOverIPConnectionDefinition(const tj::shared::String& upperProtocol);
@@ -42,7 +46,8 @@ namespace tj {
 				virtual void OnReceiveBundle(osc::ReceivedBundle rb, bool isReply, bool endReply, tj::np::NativeSocket ns);
 				virtual void OnReceiveMessage(osc::ReceivedMessage rb, bool isReply, bool endReply, tj::np::NativeSocket ns);
 				virtual void Send(tj::shared::strong< Message > msg, tj::shared::ref<ReplyHandler> rh, tj::shared::ref<ConnectionChannel> cc);
-				
+				virtual unsigned short GetInboundPort() const;
+			
 			protected:
 				OSCOverIPConnection();
 				virtual void StartInbound(tj::np::NativeSocket inSocket, bool handleReplies);
@@ -67,6 +72,7 @@ namespace tj {
 				Direction _direction;
 				tj::np::NetworkAddress _toAddress;
 				unsigned short _toPort;
+				unsigned short _inPort;
 				bool _useSendTo;
 				bool _handlingReplies;
 				std::wstring _framing;

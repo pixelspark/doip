@@ -43,7 +43,7 @@ EPTransport::~EPTransport() {
 }
 
 /** EPEndpointDefinition **/
-EPEndpointDefinition::EPEndpointDefinition() {
+EPEndpointDefinition::EPEndpointDefinition(): _dynamic(true) {
 	Clone();
 }
 
@@ -189,12 +189,28 @@ String EPMethodDefinition::GetFriendlyName() const {
 	return _friendlyName;
 }
 
-void  EPMethodDefinition::GetPaths(std::set<EPPath>& pathList) const {
+void EPMethodDefinition::GetPaths(std::set<EPPath>& pathList) const {
 	std::set<EPPath>::const_iterator it = _paths.begin();
 	while(it!=_paths.end()) {
 		pathList.insert(*it);
 		++it;
 	}
+}
+
+void EPMethodDefinition::SetID(const tj::shared::String& i) {
+	_id = i;
+}
+
+void EPMethodDefinition::SetFriendlyName(const tj::shared::String& fn) {
+	_friendlyName = fn;
+}
+
+void EPMethodDefinition::AddPath(const EPPath& pt) {
+	_paths.insert(pt);
+}
+
+void EPMethodDefinition::AddParameter(tj::shared::ref<EPParameter> p) {
+	_parameters.push_back(p);
 }
 
 void EPMethodDefinition::Save(TiXmlElement* me) {
@@ -282,6 +298,14 @@ void EPMethodDefinition::Clone() {
 
 /** EPParameterDefinition **/
 EPParameterDefinition::EPParameterDefinition() {
+}
+
+EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue):
+	_friendlyName(friendlyName),
+	_type(type),
+	_minimumValue(minValue),
+	_maximumValue(maxValue),
+	_defaultValue(defaultValue) {
 }
 
 EPParameterDefinition::~EPParameterDefinition() {

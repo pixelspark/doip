@@ -105,6 +105,11 @@ namespace tj {
 				virtual void Save(TiXmlElement* me);
 				virtual void Clone();
 			
+				virtual void SetID(const tj::shared::String& i);
+				virtual void SetFriendlyName(const tj::shared::String& fn);
+				virtual void AddPath(const EPPath& pt);
+				virtual void AddParameter(tj::shared::ref<EPParameter> p);
+			
 			protected:
 				tj::shared::String _id;
 				tj::shared::String _friendlyName;
@@ -129,6 +134,7 @@ namespace tj {
 		class EP_EXPORTED EPParameterDefinition: public EPParameter, public tj::shared::Serializable {
 			public:
 				EPParameterDefinition();
+				EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue);
 				virtual ~EPParameterDefinition();
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetType() const;

@@ -130,6 +130,22 @@ OSCOverIPConnectionDefinition::OSCOverIPConnectionDefinition(const String& upper
 OSCOverIPConnectionDefinition::~OSCOverIPConnectionDefinition() {
 }
 
+void OSCOverIPConnectionDefinition::SetAddress(const std::wstring& a) {
+	_address = a;
+}
+
+void OSCOverIPConnectionDefinition::SetFormat(const std::wstring& f) {
+	_format = f;
+}
+
+void OSCOverIPConnectionDefinition::SetFraming(const std::wstring& f) {
+	_framing = f;
+}
+
+void OSCOverIPConnectionDefinition::SetPort(const unsigned short port) {
+	_port = port;
+}
+
 tj::shared::String OSCOverIPConnectionDefinition::GetAddress() const {
 	return _address;
 }
@@ -161,7 +177,7 @@ void OSCOverIPConnectionDefinition::LoadConnection(TiXmlElement* me) {
 }
 
 /** OSCOverIPConnection **/
-OSCOverIPConnection::OSCOverIPConnection(): _useSendTo(false), _handlingReplies(false), _outSocket(-1), _inSocket(-1), _toPort(0), _toAddress(L""), _direction(DirectionNone) {
+OSCOverIPConnection::OSCOverIPConnection(): _inPort(0), _useSendTo(false), _handlingReplies(false), _outSocket(-1), _inSocket(-1), _toPort(0), _toAddress(L""), _direction(DirectionNone) {
 }
 
 OSCOverIPConnection::~OSCOverIPConnection() {
@@ -177,6 +193,7 @@ void OSCOverIPConnection::StopInbound() {
 	if((_direction & DirectionInbound) !=0) {
 		_listenerThread->Stop();
 		_handlingReplies = false;
+		_inPort = 0;
 		_listenerThread = null; // This will call ~SocketListenerThread => Thread::WaitForCompletion on the thread
 		
 		#ifdef TJ_OS_POSIX
@@ -246,13 +263,13 @@ void OSCOverIPConnection::RemoveInboundConnection(NativeSocket ns) {
 
 void OSCOverIPConnection::StopOutbound() {
 	if((_direction & DirectionOutbound) != 0) {
-#ifdef TJ_OS_POSIX
-		close(_outSocket);
-#endif
+		#ifdef TJ_OS_POSIX
+			close(_outSocket);
+		#endif
 		
-#ifdef TJ_OS_WIN
-		closesocket(_outSocket);
-#endif	
+		#ifdef TJ_OS_WIN
+			closesocket(_outSocket);
+		#endif	
 		
 		_direction = (Direction)(_direction & (~DirectionOutbound));
 	}
@@ -288,9 +305,19 @@ void OSCOverIPConnection::StartInbound(NativeSocket inSocket, bool handleReplies
 	ThreadLock lock(&_lock);
 	StopInbound();
 	
+	// Get port number
+	sockaddr_in6 address;
+	socklen_t len = sizeof(sockaddr_in6);
+	memset(&address, 0, sizeof(sockaddr_in6));
+	if(getsockname(inSocket, (sockaddr*)&address, &len)==0) {
+		_inPort = ntohs(address.sin6_port);
+		Log::Write(L"EPFramework/OSCOverIPConnection", L"Inbound IP server chose port number: "+Stringify(_inPort));
+	}  
+	
 	// Update flags
 	_direction = Direction(_direction | DirectionInbound);
 	_inSocket = inSocket;
+	
 	
 	// Start listener thread
 	_listenerThread = GC::Hold(new SocketListenerThread());
@@ -337,6 +364,10 @@ void OSCOverIPConnection::OnReceiveMessage(osc::ReceivedMessage rm, bool isReply
 	else {
 		EventMessageReceived.Fire(this, MessageNotification(Timestamp(true), msg, this, GC::Hold(new OSCOverIPConnectionChannel(ns))));
 	}
+}
+
+unsigned short OSCOverIPConnection::GetInboundPort() const {
+	return _inPort;
 }
 
 void OSCOverIPConnection::OnReceiveBundle(osc::ReceivedBundle rb, bool isReply, bool endReply, NativeSocket ns) {

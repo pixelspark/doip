@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 	
 	try {
 		Log::SetLogToConsole(true);
-		Log::Write(L"TJFabric/Main", std::wstring(L"Starting at t=")+Timestamp(true).ToString());
+		Log::Write(L"TJFabric/Main", std::wstring(L"Starting at ")+Date().ToFriendlyString());
 		
 		bool runningAsDaemon = false;
 		if(argc>1) {
