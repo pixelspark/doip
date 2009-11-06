@@ -34,13 +34,15 @@ class USPEndpoint: public EPEndpointDefinition, public Listener<MessageNotificat
 		virtual ~USPEndpoint();
 		virtual void OnCreated();
 		virtual void Notify(ref<Object> src, const MessageNotification& data);
+		virtual void UpdateColor(bool fade);
 	
 	protected:
 		ref<OSCOverUDPConnection> _inConnection;
 		usp3::ChromoflexStripeDevice _device;
+		float _dim, _r, _g, _b;
 };
 
-USPEndpoint::USPEndpoint(const std::wstring& id, const std::wstring& nsp, const std::wstring& friendlyName, const std::string& devicePath): _device(devicePath.c_str()) {
+USPEndpoint::USPEndpoint(const std::wstring& id, const std::wstring& nsp, const std::wstring& friendlyName, const std::string& devicePath): _device(devicePath.c_str()), _dim(1.0f), _r(0.0f), _g(0.0f), _b(0.0f) {
 	_id = id;
 	_namespace = nsp;
 	_friendlyName = friendlyName;
@@ -75,6 +77,22 @@ void USPEndpoint::OnCreated() {
 	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0")));
 	_methods.push_back(setColor);
 	
+	ref<EPMethodDefinition> fadeColor = GC::Hold(new EPMethodDefinition());
+	fadeColor->SetID(L"fadeColor");
+	fadeColor->AddPath(L"/ep/basic/color/fade");
+	fadeColor->SetFriendlyName(L"Fade to color");
+	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0")));
+	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0")));
+	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0")));
+	_methods.push_back(fadeColor);
+	
+	ref<EPMethodDefinition> dim = GC::Hold(new EPMethodDefinition());
+	dim->SetID(L"dim");
+	dim->AddPath(L"/ep/basic/dim");
+	dim->SetFriendlyName(L"Dim light");
+	dim->AddParameter(GC::Hold(new EPParameterDefinition(L"Value", L"double", L"0", L"1", L"1")));
+	_methods.push_back(dim);
+	
 	ref<EPMethodDefinition> reset = GC::Hold(new EPMethodDefinition());
 	reset->SetID(L"reset");
 	reset->AddPath(L"/ep/basic/reset");
@@ -82,24 +100,38 @@ void USPEndpoint::OnCreated() {
 	_methods.push_back(reset);
 }
 
-void USPEndpoint::Notify(ref<Object> src, const MessageNotification& data) {
-	Log::Write(L"TJUSP3EPServer/USPEndpoint", L"Receive message");
-	ref<Message> msg = data.message;
-	if(msg->GetPath()==L"/ep/basic/reset") {
-		_device.WriteReset();
-	}
-	else if(msg->GetPath()==L"/ep/basic/color/set") {
-		Any r = msg->GetParameter(0);
-		Any g = msg->GetParameter(1);
-		Any b = msg->GetParameter(2);
+void USPEndpoint::UpdateColor(bool fading) {
+	unsigned char rc = int(_r * _dim) & 0xFF;
+	unsigned char gc = int(_g * _dim) & 0xFF;
+	unsigned char bc = int(_b * _dim) & 0xFF;
 	
-		unsigned char rc = (int(r)  & 0xFF);
-		unsigned char gc = (int(g) & 0xFF);
-		unsigned char bc = (int(b) & 0xFF);
-		
-		_device.WriteRegister(usp3::ChromoflexStripeDevice::KRegisterStatus, 0x01);
-		_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterSetR, rc, gc, bc, 0x00);
+	_device.WriteRegister(usp3::ChromoflexStripeDevice::KRegisterStatus, 0x01);
+	_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterSetR, rc, gc, bc, 0x00);
+	if(!fading) {
 		_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterLevelR, rc, gc, bc, 0x00);
+	}
+}
+
+void USPEndpoint::Notify(ref<Object> src, const MessageNotification& data) {
+	try {
+		Log::Write(L"TJUSP3EPServer/USPEndpoint", L"Receive message");
+		ref<Message> msg = data.message;
+		if(msg->GetPath()==L"/ep/basic/reset") {
+			_device.WriteReset();
+		}
+		else if(msg->GetPath()==L"/ep/basic/dim") {
+			_dim = msg->GetParameter(0);
+			UpdateColor(true);
+		}
+		else if(msg->GetPath()==L"/ep/basic/color/set" || msg->GetPath()==L"/ep/basic/color/fade") {
+			_r = msg->GetParameter(0);
+			_g = msg->GetParameter(1);
+			_b = msg->GetParameter(2);
+			UpdateColor(msg->GetPath()==L"/ep/basic/color/fade");
+		}
+	}
+	catch(const Exception& e) {
+		Log::Write(L"TJUSP3EPServer/USPEndpoint", L"Exception occurred in message processing: "+e.GetMsg());
 	}
 }
 
