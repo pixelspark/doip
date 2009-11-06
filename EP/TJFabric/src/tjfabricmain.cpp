@@ -11,6 +11,10 @@
 #include <sstream>
 #include <signal.h>
 
+#ifdef TJ_OS_MAC
+	#include <sys/stat.h>
+#endif
+
 #ifdef TJ_OS_POSIX
 	#include <sys/types.h>
 	#include <unistd.h>

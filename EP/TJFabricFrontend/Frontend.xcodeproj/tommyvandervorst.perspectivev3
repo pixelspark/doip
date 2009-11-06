@@ -281,8 +281,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
-									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -332,7 +330,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B477C2F810A3914200396B72</string>
+										<string>B46CBC7D10A43AEC00CDE29F</string>
 										<key>history</key>
 										<array>
 											<string>B4720FE9108C772D002DEC9F</string>
@@ -350,7 +348,7 @@
 											<string>B45CFB7A10A1B154007CA879</string>
 											<string>B45CFB7B10A1B154007CA879</string>
 											<string>B477C2F710A3914200396B72</string>
-											<string>B497778D1097845800FA1B69</string>
+											<string>B46CBC7C10A43AEC00CDE29F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -364,18 +362,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 578}}</string>
+								<string>{{0, 0}, {1073, 571}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 96 1280 906 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>578pt</string>
+							<string>571pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>282pt</string>
+							<string>289pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -389,7 +387,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 255}}</string>
+										<string>{{10, 27}, {1073, 262}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 96 1280 906 0 0 1280 1002 </string>
 									</dict>
@@ -473,11 +471,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B477C2DF10A38F4600396B72</string>
+				<string>B46CBC7E10A43AEC00CDE29F</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B477C2E010A38F4600396B72</string>
+				<string>B46CBC7F10A43AEC00CDE29F</string>
 				<string>B4720CF4108C4A75002DEC9F</string>
-				<string>B477C2E110A38F4600396B72</string>
+				<string>B46CBC8010A43AEC00CDE29F</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
