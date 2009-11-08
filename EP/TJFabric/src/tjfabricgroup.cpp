@@ -138,7 +138,7 @@ void Group::Load(TiXmlElement* me) {
 			std::wstring type = LoadAttributeSmall<std::wstring>(disco, "type", L"");
 			Log::Write(L"TJFabric/Group", std::wstring(L"A discovery definition could not be loaded (probably because the type is not supported). Type was '")+type+std::wstring(L"'."));
 		}
-		disco = disco->NextSiblingElement("disco");
+		disco = disco->NextSiblingElement("discover");
 	}
 	
 	// Load filter definitions

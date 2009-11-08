@@ -88,9 +88,9 @@ void USPEndpoint::UpdateColor(bool fading) {
 	if(dim<0.0f) {
 		dim = 0.0f;
 	}
-	unsigned char rc = int(_r * _dim) & 0xFF;
-	unsigned char gc = int(_g * _dim) & 0xFF;
-	unsigned char bc = int(_b * _dim) & 0xFF;
+	unsigned char rc = int(_r * dim) & 0xFF;
+	unsigned char gc = int(_g * dim) & 0xFF;
+	unsigned char bc = int(_b * dim) & 0xFF;
 	
 	_device.WriteRegister(usp3::ChromoflexStripeDevice::KRegisterStatus, 0x01);
 	_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterSetR, rc, gc, bc, 0x00);
