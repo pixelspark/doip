@@ -248,6 +248,10 @@ EPMethodDefinition::EPMethodDefinition() {
 	Clone();
 }
 
+EPMethodDefinition::EPMethodDefinition(const String& ids, const String& path, const String& friendly): _id(ids), _friendlyName(friendly) {
+	_paths.insert(path);
+}
+
 EPMethodDefinition::~EPMethodDefinition() {
 }
 

@@ -20,7 +20,10 @@ class USPEndpoint: public EPEndpointServer<USPEndpoint> {
 		virtual void MDim(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
 		virtual void MSetColor(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
 		virtual void MFadeColor(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
+		virtual void MPowerOff(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
+		virtual void MPowerSleep(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
 		virtual void UpdateColor(bool fade);
+		virtual void PowerUp();
 	
 	protected:
 		usp3::ChromoflexStripeDevice _device;
@@ -48,39 +51,43 @@ void USPEndpoint::OnCreated() {
 	}
 	
 	// Create the methods
-	ref<EPMethodDefinition> setColor = GC::Hold(new EPMethodDefinition());
-	setColor->SetID(L"setColor");
-	setColor->AddPath(L"/ep/basic/color/set");
-	setColor->SetFriendlyName(L"Set color");
+	ref<EPMethodDefinition> setColor = GC::Hold(new EPMethodDefinition(L"setColor", L"/ep/basic/color/set", L"Set color"));
 	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0")));
 	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0")));
 	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0")));
 	AddMethod(ref<EPMethod>(setColor), &USPEndpoint::MSetColor);
 	
-	ref<EPMethodDefinition> fadeColor = GC::Hold(new EPMethodDefinition());
-	fadeColor->SetID(L"fadeColor");
-	fadeColor->AddPath(L"/ep/basic/color/fade");
-	fadeColor->SetFriendlyName(L"Fade to color");
+	ref<EPMethodDefinition> fadeColor = GC::Hold(new EPMethodDefinition(L"fadeColor", L"/ep/basic/color/fade", L"Fade to color"));
 	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0")));
 	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0")));
 	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0")));
 	AddMethod(ref<EPMethod>(fadeColor), &USPEndpoint::MFadeColor);
 	
-	ref<EPMethodDefinition> dim = GC::Hold(new EPMethodDefinition());
-	dim->SetID(L"dim");
-	dim->AddPath(L"/ep/basic/dim");
-	dim->SetFriendlyName(L"Dim light");
+	ref<EPMethodDefinition> dim = GC::Hold(new EPMethodDefinition(L"dim", L"/ep/basic/dim", L"Dim light"));
 	dim->AddParameter(GC::Hold(new EPParameterDefinition(L"Value", L"double", L"0", L"1", L"1")));
 	AddMethod(ref<EPMethod>(dim), &USPEndpoint::MDim);
 	
-	ref<EPMethodDefinition> reset = GC::Hold(new EPMethodDefinition());
-	reset->SetID(L"reset");
-	reset->AddPath(L"/ep/basic/reset");
-	reset->SetFriendlyName(L"Reset device");
+	ref<EPMethodDefinition> reset = GC::Hold(new EPMethodDefinition(L"reset", L"/ep/basic/reset", L"Reset device"));
 	AddMethod(ref<EPMethod>(reset), &USPEndpoint::MReset);
+	
+	ref<EPMethodDefinition> powerSleep = GC::Hold(new EPMethodDefinition(L"sleep", L"/ep/basic/power/sleep", L"Sleep device"));
+	AddMethod(ref<EPMethod>(powerSleep), &USPEndpoint::MPowerSleep);
+	
+	ref<EPMethodDefinition> powerOff = GC::Hold(new EPMethodDefinition(L"off", L"/ep/basic/power/off", L"Turn off device"));
+	AddMethod(ref<EPMethod>(powerOff), &USPEndpoint::MPowerOff);
+}
+
+void USPEndpoint::PowerUp() {
+	if(_dim<0.0) {
+		_dim = -_dim;
+	}
 }
 
 void USPEndpoint::UpdateColor(bool fading) {
+	float dim = _dim;
+	if(dim<0.0f) {
+		dim = 0.0f;
+	}
 	unsigned char rc = int(_r * _dim) & 0xFF;
 	unsigned char gc = int(_g * _dim) & 0xFF;
 	unsigned char bc = int(_b * _dim) & 0xFF;
@@ -93,23 +100,44 @@ void USPEndpoint::UpdateColor(bool fading) {
 }
 
 void USPEndpoint::MReset(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
+	PowerUp();
 	_device.WriteReset();
+	_dim = 1.0f;
+	_r = 1.0f;
+	_g = 1.0f;
+	_b = 1.0f;
 }
 
 void USPEndpoint::MDim(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
+	PowerUp();
 	_dim = m->GetParameter(0);
 	UpdateColor(true);
 }
 
+
+void USPEndpoint::MPowerSleep(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
+	_dim = -_dim;
+	UpdateColor(true);
+}
+
+void USPEndpoint::MPowerOff(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
+	_r = 1.0;
+	_g = 1.0;
+	_b = 1.0;
+	_dim = -1.0f;
+	UpdateColor(false);
+}
+
 void USPEndpoint::MSetColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
+	PowerUp();
 	_r = msg->GetParameter(0);
 	_g = msg->GetParameter(1);
 	_b = msg->GetParameter(2);
 	UpdateColor(false);
-	
 }
 
 void USPEndpoint::MFadeColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
+	PowerUp();
 	_r = msg->GetParameter(0);
 	_g = msg->GetParameter(1);
 	_b = msg->GetParameter(2);

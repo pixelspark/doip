@@ -75,6 +75,15 @@
 			B469548A10A6D1100045DB2D /* PBXTextBookmark */ = B469548A10A6D1100045DB2D /* PBXTextBookmark */;
 			B469548C10A6D1100045DB2D /* XCBuildMessageTextBookmark */ = B469548C10A6D1100045DB2D /* XCBuildMessageTextBookmark */;
 			B469548D10A6D1100045DB2D /* PBXTextBookmark */ = B469548D10A6D1100045DB2D /* PBXTextBookmark */;
+			B46954F310A6E4C30045DB2D /* PBXTextBookmark */ = B46954F310A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954F510A6E4C30045DB2D /* PBXTextBookmark */ = B46954F510A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954F710A6E4C30045DB2D /* PBXTextBookmark */ = B46954F710A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954F910A6E4C30045DB2D /* PBXTextBookmark */ = B46954F910A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954FB10A6E4C30045DB2D /* PBXTextBookmark */ = B46954FB10A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954FC10A6E4C30045DB2D /* PBXTextBookmark */ = B46954FC10A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954FE10A6E4C30045DB2D /* PBXTextBookmark */ = B46954FE10A6E4C30045DB2D /* PBXTextBookmark */;
+			B46954FF10A6E4C30045DB2D /* PBXTextBookmark */ = B46954FF10A6E4C30045DB2D /* PBXTextBookmark */;
+			B469550010A6E4C30045DB2D /* PBXTextBookmark */ = B469550010A6E4C30045DB2D /* PBXTextBookmark */;
 			B46CBCEC10A4603F00CDE29F = B46CBCEC10A4603F00CDE29F /* PBXTextBookmark */;
 			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
 			B46CBCFD10A4617500CDE29F = B46CBCFD10A4617500CDE29F /* PBXTextBookmark */;
@@ -121,7 +130,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 168";
 		rLen = 0;
-		rLoc = 1867;
+		rLoc = 2081;
 		rType = 0;
 		vrLen = 1651;
 		vrLoc = 5147;
@@ -131,7 +140,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 199";
 		rLen = 0;
-		rLoc = 3654;
+		rLoc = 3617;
 		rType = 0;
 		vrLen = 1969;
 		vrLoc = 5811;
@@ -142,7 +151,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 154;
+		rLoc = 182;
 		rType = 1;
 	};
 	B469545210A6CAF90045DB2D /* PBXTextBookmark */ = {
@@ -150,7 +159,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 351";
 		rLen = 0;
-		rLoc = 5728;
+		rLoc = 6593;
 		rType = 0;
 		vrLen = 1245;
 		vrLoc = 11436;
@@ -160,7 +169,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 352";
 		rLen = 0;
-		rLoc = 5807;
+		rLoc = 6672;
 		rType = 0;
 		vrLen = 1249;
 		vrLoc = 11794;
@@ -170,7 +179,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 227";
 		rLen = 0;
-		rLoc = 3653;
+		rLoc = 3616;
 		rType = 0;
 		vrLen = 1688;
 		vrLoc = 7759;
@@ -190,7 +199,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 350";
 		rLen = 0;
-		rLoc = 5665;
+		rLoc = 6530;
 		rType = 0;
 		vrLen = 1270;
 		vrLoc = 11429;
@@ -200,7 +209,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 351";
 		rLen = 0;
-		rLoc = 5613;
+		rLoc = 6478;
 		rType = 0;
 		vrLen = 1322;
 		vrLoc = 11429;
@@ -237,7 +246,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 0;
-		rLoc = 120;
+		rLoc = 148;
 		rType = 1;
 	};
 	B469548D10A6D1100045DB2D /* PBXTextBookmark */ = {
@@ -245,10 +254,130 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 204";
 		rLen = 0;
-		rLoc = 4843;
+		rLoc = 5708;
 		rType = 0;
 		vrLen = 1059;
 		vrLoc = 5814;
+	};
+	B46954F310A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46954F410A6E4C30045DB2D /* tjsettings.cpp */;
+		name = "tjsettings.cpp: 191";
+		rLen = 0;
+		rLoc = 5039;
+		rType = 0;
+		vrLen = 1348;
+		vrLoc = 3751;
+	};
+	B46954F410A6E4C30045DB2D /* tjsettings.cpp */ = {
+		isa = PBXFileReference;
+		name = tjsettings.cpp;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJShared/src/tjsettings.cpp;
+		sourceTree = "<absolute>";
+	};
+	B46954F510A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46954F610A6E4C30045DB2D /* tjthread.cpp */;
+		name = "tjthread.cpp: 617";
+		rLen = 0;
+		rLoc = 13006;
+		rType = 0;
+		vrLen = 1058;
+		vrLoc = 12588;
+	};
+	B46954F610A6E4C30045DB2D /* tjthread.cpp */ = {
+		isa = PBXFileReference;
+		name = tjthread.cpp;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJShared/src/tjthread.cpp;
+		sourceTree = "<absolute>";
+	};
+	B46954F710A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46954F810A6E4C30045DB2D /* tjutil.cpp */;
+		name = "tjutil.cpp: 99";
+		rLen = 0;
+		rLoc = 2404;
+		rType = 0;
+		vrLen = 1042;
+		vrLoc = 1903;
+	};
+	B46954F810A6E4C30045DB2D /* tjutil.cpp */ = {
+		isa = PBXFileReference;
+		name = tjutil.cpp;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJShared/src/tjutil.cpp;
+		sourceTree = "<absolute>";
+	};
+	B46954F910A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46954FA10A6E4C30045DB2D /* tjlanguage.cpp */;
+		name = "tjlanguage.cpp: 182";
+		rLen = 0;
+		rLoc = 4357;
+		rType = 0;
+		vrLen = 1025;
+		vrLoc = 3816;
+	};
+	B46954FA10A6E4C30045DB2D /* tjlanguage.cpp */ = {
+		isa = PBXFileReference;
+		name = tjlanguage.cpp;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJShared/src/tjlanguage.cpp;
+		sourceTree = "<absolute>";
+	};
+	B46954FB10A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCED10A4603F00CDE29F /* ependpoint.h */;
+		name = "ependpoint.h: 110";
+		rLen = 0;
+		rLoc = 4257;
+		rType = 0;
+		vrLen = 1638;
+		vrLoc = 3531;
+	};
+	B46954FC10A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46954FD10A6E4C30045DB2D /* ependpoint.cpp */;
+		name = "ependpoint.cpp: 234";
+		rLen = 0;
+		rLoc = 5583;
+		rType = 0;
+		vrLen = 976;
+		vrLoc = 9972;
+	};
+	B46954FD10A6E4C30045DB2D /* ependpoint.cpp */ = {
+		isa = PBXFileReference;
+		name = ependpoint.cpp;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/src/ependpoint.cpp;
+		sourceTree = "<absolute>";
+	};
+	B46954FE10A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBD5A10A46A5900CDE29F /* usp3.h */;
+		name = "usp3.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1189;
+		vrLoc = 0;
+	};
+	B46954FF10A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 63";
+		rLen = 18;
+		rLoc = 2722;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2042;
+	};
+	B469550010A6E4C30045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 83";
+		rLen = 0;
+		rLoc = 4088;
+		rType = 0;
+		vrLen = 1747;
+		vrLoc = 2946;
 	};
 	B46CBC8A10A45B2100CDE29F /* TJUSP3EPServer */ = {
 		isa = PBXExecutable;
@@ -293,9 +422,9 @@
 	};
 	B46CBCBE10A45C2800CDE29F /* uspmain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 4277}}";
-			sepNavSelRange = "{6658, 0}";
-			sepNavVisRange = "{5814, 1059}";
+			sepNavIntBoundsRect = "{{0, 0}, {1853, 2327}}";
+			sepNavSelRange = "{4088, 0}";
+			sepNavVisRange = "{2946, 1747}";
 			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
 		};
 	};
@@ -316,9 +445,9 @@
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/include/ependpoint.h;
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 2431}}";
-			sepNavSelRange = "{2463, 516}";
-			sepNavVisRange = "{1630, 1865}";
+			sepNavIntBoundsRect = "{{0, 0}, {1013, 2418}}";
+			sepNavSelRange = "{4257, 0}";
+			sepNavVisRange = "{3531, 1638}";
 		};
 	};
 	B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = {
@@ -437,9 +566,9 @@
 	};
 	B46CBD5A10A46A5900CDE29F /* usp3.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 793}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 806}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1193}";
+			sepNavVisRange = "{0, 1189}";
 		};
 	};
 	B46CBD6610A46AC900CDE29F /* PBXTextBookmark */ = {
@@ -467,7 +596,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 95";
 		rLen = 0;
-		rLoc = 3498;
+		rLoc = 3520;
 		rType = 0;
 		vrLen = 1058;
 		vrLoc = 2447;
@@ -477,7 +606,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 161";
 		rLen = 0;
-		rLoc = 4810;
+		rLoc = 5675;
 		rType = 0;
 		vrLen = 1390;
 		vrLoc = 4681;

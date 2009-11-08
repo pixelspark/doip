@@ -107,6 +107,7 @@ namespace tj {
 		class EP_EXPORTED EPMethodDefinition: public EPMethod, public tj::shared::Serializable {
 			public:
 				EPMethodDefinition();
+				EPMethodDefinition(const tj::shared::String& ids, const tj::shared::String& firstPath, const tj::shared::String& friendlyName);
 				virtual ~EPMethodDefinition();
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetFriendlyName() const;
