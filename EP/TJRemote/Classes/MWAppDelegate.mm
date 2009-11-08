@@ -4,8 +4,8 @@
 
 @implementation MWAppDelegate
 @synthesize window;
-@synthesize tabController, servicesController, endpointsController;
-@synthesize endpointsNavigationController, servicesNavigationController;
+@synthesize tabController, endpointsController;
+@synthesize endpointsNavigationController;
 @synthesize splashThrobber, splashBackground, regularBackground;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
@@ -18,12 +18,10 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	[servicesNavigationController popToRootViewControllerAnimated:YES];
 	[endpointsNavigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)client:(MWClient*)c foundServiceRemoved:(NSNetService*)s {
-	[servicesController.tableView reloadData];
 	[endpointsController.tableView reloadData];
 	
 	if([endpointsController.selected.service isEqual:s]) {
@@ -44,16 +42,13 @@
 		[UIView commitAnimations];
 	}
 	
-	[servicesController.tableView reloadData];
 	[endpointsController.tableView reloadData];
 }
 
 - (void)dealloc {
     [window release];
     [super dealloc];
-	[servicesController release];
 	[endpointsController release];
-	[servicesNavigationController release];
 	[endpointsNavigationController release];
 }
 

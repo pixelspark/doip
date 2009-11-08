@@ -59,6 +59,10 @@ void FabricEngine::Notify(ref<Object> source, const MessageNotification& data) {
 	_queue->Add(data.message, data.source, data.channel);
 }
 
+void FabricEngine::Notify(ref<Object> source, const DiscoveryScriptNotification& data) {
+	_queue->AddDiscoveryScriptCall(data.definition, data.connection, data.scriptSource);
+}
+
 void FabricEngine::Connect(bool t) {
 	if(t) {
 		_registration = FabricRegistry::Instance()->Register(_fabric->GetFullIdentifier(), this);
@@ -80,6 +84,7 @@ void FabricEngine::Connect(bool t) {
 				}
 				
 				cg->EventMessageReceived.AddListener(ref<FabricEngine>(this));
+				cg->EventDiscoveryScript.AddListener(ref<FabricEngine>(this));
 				cg->Connect(true, ref<FabricEngine>(this));
 				newGroups[group] = cg;
 			}

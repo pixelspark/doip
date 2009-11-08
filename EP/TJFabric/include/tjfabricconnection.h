@@ -13,6 +13,12 @@ namespace tj {
 	namespace fabric {
 		class FabricEngine;
 		
+		struct DiscoveryScriptNotification {
+			tj::shared::ref<tj::ep::DiscoveryDefinition> definition;
+			tj::shared::ref<tj::ep::Connection> connection;
+			tj::shared::String scriptSource;
+		};
+		
 		class ConnectedGroup: public virtual tj::shared::Object, public tj::shared::Listener<tj::ep::MessageNotification>, public tj::shared::Listener<tj::ep::DiscoveryNotification>  {
 			public:
 				ConnectedGroup(tj::shared::strong<Group> g);
@@ -21,7 +27,9 @@ namespace tj {
 				virtual void Send(tj::shared::strong<tj::ep::Message> m, tj::shared::strong<FabricEngine> fe, tj::shared::ref< tj::ep::ReplyHandler > rh);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::DiscoveryNotification& data);
+			
 				tj::shared::Listenable<tj::ep::MessageNotification> EventMessageReceived;
+				tj::shared::Listenable<DiscoveryScriptNotification> EventDiscoveryScript;
 			
 			protected:
 				virtual void CreateConnections(tj::shared::strong<FabricEngine> fe);

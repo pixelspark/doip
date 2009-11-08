@@ -6,6 +6,8 @@
 #include "../../EPFramework/include/epconnection.h"
 #include "../../EPFramework/include/epdiscovery.h"
 
+#include <map>
+
 namespace tj {
 	namespace fabric {
 		class ConnectedGroup;
@@ -26,6 +28,7 @@ namespace tj {
 				virtual bool IsLazy() const;
 				virtual bool PassesFilter(const tj::shared::String& path) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<tj::ep::EPTransport> >& transportsList) const;
+				virtual bool GetDiscoveryScript(tj::shared::ref<tj::ep::DiscoveryDefinition> disco, tj::shared::String& scriptSource) const;
 			
 			protected:
 				tj::shared::String _id;
@@ -33,6 +36,7 @@ namespace tj {
 				bool _lazy;
 				std::deque< tj::shared::ref<tj::ep::ConnectionDefinition> > _connections;
 				std::deque< tj::shared::ref<tj::ep::DiscoveryDefinition> > _discoveries;
+				std::map< tj::shared::ref<tj::ep::DiscoveryDefinition>, tj::shared::String > _discoveryScripts;
 				std::deque< tj::shared::String > _filter;
 				tj::shared::String _prefix;
 		};

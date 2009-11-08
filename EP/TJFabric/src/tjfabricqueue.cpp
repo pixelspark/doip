@@ -221,6 +221,47 @@ ref<CompiledScript> Queue::GetScriptForRule(strong<Rule> r) {
 	return it->second;
 }
 
+void Queue::AddDiscoveryScriptCall(ref<DiscoveryDefinition> def, ref<Connection> connection, const String& source) {
+	try {
+		ref<CompiledScript> cs = _context->Compile(source);
+		if(cs) {
+			ref<ScriptScope> sc = GC::Hold(new ScriptScope());
+			sc->Set(L"globals", _global);
+			sc->Set(L"source", GC::Hold(new ConnectionScriptable(connection, null)));
+			RunAsynchronously(GC::Hold(new ScriptDelegate(cs, _context)), sc);
+		}
+	}
+	catch(const ParserException& e) {
+		Log::Write(L"TJFabric/Queue", std::wstring(L"Could not compile discovery script, parser exception: ")+e.GetMsg());
+	}
+}
+
+
+void Queue::RunAsynchronously(ref<ScriptDelegate> dlg, ref<ScriptScope> scope) {
+	if(dlg) {
+		ThreadLock lock(&_lock);
+		_asyncScriptsQueue.push_back(ScriptCall(dlg,scope));
+		SignalWorkAdded();
+	}
+}
+
+void Queue::ProcessScriptCall(Queue::ScriptCall& call) {
+	ThreadLock lock(&_lock);
+	
+	try {
+		ref<ScriptContext> ctx = call.first->GetContext();
+		if(ctx) {
+			ctx->Execute(call.first->GetScript(), call.second);
+		}
+		else {
+			Throw(L"No context set for asynchronous script delegate; script not executed", ExceptionTypeError);
+		}
+	}
+	catch(const Exception& e) {
+		Log::Write(L"TJFabric/Queue", std::wstring(L"Exception occurred while executing asynchronous script:") + e.GetMsg());
+	}	
+}
+
 /** QueueThread **/
 QueueThread::QueueThread(ref<Queue> q): _queue(q), _running(false) {
 }
@@ -270,6 +311,19 @@ void QueueThread::Run() {
 			}
 			
 			ThreadLock lock(&(q->_lock));
+			
+			// Process asynchronous scripts
+			if(q->_asyncScriptsQueue.size()>0) {
+				std::deque<Queue::ScriptCall>::iterator it = q->_asyncScriptsQueue.begin();
+				while(it!=q->_asyncScriptsQueue.end()) {
+					Queue::ScriptCall& call = *it;
+					if(call.first) {
+						q->ProcessScriptCall(call);
+					}
+					++it;
+				}
+				q->_asyncScriptsQueue.clear();
+			}
 
 			// Process queued replies
 			if(q->_replyQueue.size()>0) {

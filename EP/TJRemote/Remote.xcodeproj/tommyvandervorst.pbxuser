@@ -2,16 +2,16 @@
 {
 	1D3623240D0F684500981E51 /* MWAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1219, 442}}";
-			sepNavSelRange = "{452, 0}";
-			sepNavVisRange = "{266, 984}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 431}}";
+			sepNavSelRange = "{196, 0}";
+			sepNavVisRange = "{0, 977}";
 		};
 	};
 	1D3623250D0F684500981E51 /* MWAppDelegate.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 741}}";
-			sepNavSelRange = "{613, 0}";
-			sepNavVisRange = "{0, 1210}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 728}}";
+			sepNavSelRange = "{1415, 0}";
+			sepNavVisRange = "{702, 839}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* TJShowRemote */ = {
@@ -328,13 +328,25 @@
 		vrLoc = 3;
 	};
 	B413B96F1046C6AE00587E77 /* MWLedDeviceViewController.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = MWLedDeviceViewController.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/TJRemote/Classes/MWLedDeviceViewController.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 477}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 431}}";
 			sepNavSelRange = "{23, 0}";
 			sepNavVisRange = "{0, 927}";
 		};
 	};
 	B413B9701046C6AE00587E77 /* MWLedDeviceViewController.mm */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.objcpp;
+		name = MWLedDeviceViewController.mm;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/TJRemote/Classes/MWLedDeviceViewController.mm;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1012, 1859}}";
 			sepNavSelRange = "{183, 0}";
@@ -343,17 +355,29 @@
 		};
 	};
 	B43BF9091046BE08002F17E1 /* MWServicesTableViewController.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = MWServicesTableViewController.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/TJRemote/Classes/MWServicesTableViewController.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 412}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 431}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 263}";
 		};
 	};
 	B43BF90A1046BE08002F17E1 /* MWServicesTableViewController.mm */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.objcpp;
+		name = MWServicesTableViewController.mm;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/TJRemote/Classes/MWServicesTableViewController.mm;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1012, 936}}";
 			sepNavSelRange = "{1834, 0}";
-			sepNavVisRange = "{750, 1223}";
+			sepNavVisRange = "{796, 1177}";
 		};
 	};
 	B44DD23C108B1A1200EBDC00 /* PBXTextBookmark */ = {
@@ -371,7 +395,7 @@
 		fRef = 1D3623240D0F684500981E51 /* MWAppDelegate.h */;
 		name = "MWAppDelegate.h: 15";
 		rLen = 0;
-		rLoc = 452;
+		rLoc = 353;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 0;
@@ -381,7 +405,7 @@
 		fRef = B47F0A310FB6295700DB3BEE /* MWClient.mm */;
 		name = "MWClient.mm: 91";
 		rLen = 0;
-		rLoc = 2635;
+		rLoc = 2241;
 		rType = 0;
 		vrLen = 1254;
 		vrLoc = 954;
@@ -432,16 +456,16 @@
 	};
 	B46AC5F01083899A00EAE42C /* MWMethod.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 702}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 715}}";
 			sepNavSelRange = "{176, 0}";
-			sepNavVisRange = "{20, 854}";
+			sepNavVisRange = "{0, 907}";
 		};
 	};
 	B46AC5F11083899A00EAE42C /* MWMethod.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 2041}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 2054}}";
 			sepNavSelRange = "{620, 0}";
-			sepNavVisRange = "{375, 1158}";
+			sepNavVisRange = "{345, 1212}";
 			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
 		};
 	};
@@ -712,21 +736,21 @@
 	};
 	B47F0A300FB6295700DB3BEE /* MWClient.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 467}}";
-			sepNavSelRange = "{473, 169}";
-			sepNavVisRange = "{0, 642}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 431}}";
+			sepNavSelRange = "{368, 0}";
+			sepNavVisRange = "{0, 538}";
 		};
 	};
 	B47F0A310FB6295700DB3BEE /* MWClient.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1013, 1456}}";
-			sepNavSelRange = "{2635, 0}";
-			sepNavVisRange = "{954, 1254}";
+			sepNavIntBoundsRect = "{{0, 0}, {1013, 1209}}";
+			sepNavSelRange = "{2222, 0}";
+			sepNavVisRange = "{1621, 865}";
 		};
 	};
 	B48DC24E108CC6B1002AB313 /* MWDownload.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 467}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1219, 299}}";
 			sepNavSelRange = "{257, 0}";
 			sepNavVisRange = "{0, 536}";
 		};
@@ -753,7 +777,7 @@
 		fRef = 1D3623250D0F684500981E51 /* MWAppDelegate.mm */;
 		name = "MWAppDelegate.mm: 19";
 		rLen = 0;
-		rLoc = 613;
+		rLoc = 563;
 		rType = 0;
 		vrLen = 1210;
 		vrLoc = 0;
@@ -763,7 +787,7 @@
 		fRef = B47F0A300FB6295700DB3BEE /* MWClient.h */;
 		name = "MWClient.h: 22";
 		rLen = 169;
-		rLoc = 473;
+		rLoc = 369;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 0;
@@ -820,16 +844,16 @@
 	};
 	B499D010108BA6F5002E1F92 /* MWParameterTableViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 408}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 431}}";
 			sepNavSelRange = "{130, 0}";
 			sepNavVisRange = "{0, 212}";
 		};
 	};
 	B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 1014}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 1053}}";
 			sepNavSelRange = "{1660, 0}";
-			sepNavVisRange = "{933, 1041}";
+			sepNavVisRange = "{892, 1100}";
 		};
 	};
 	B499D013108BA725002E1F92 /* MWParameterTableViewController.mm:72 */ = {
@@ -1052,7 +1076,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1012, 910}}";
 			sepNavSelRange = "{2041, 0}";
-			sepNavVisRange = "{867, 1216}";
+			sepNavVisRange = "{680, 1359}";
 		};
 	};
 	B4E617C110827203004D7C02 /* PBXTextBookmark */ = {
@@ -1101,9 +1125,9 @@
 	};
 	B4E618831082779C004D7C02 /* MWEndpoint.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 2782}}";
-			sepNavSelRange = "{1370, 0}";
-			sepNavVisRange = "{861, 877}";
+			sepNavIntBoundsRect = "{{0, 0}, {1219, 2678}}";
+			sepNavSelRange = "{2024, 0}";
+			sepNavVisRange = "{1460, 562}";
 		};
 	};
 	B4F699351068143500A32B2B /* PBXBookmark */ = {

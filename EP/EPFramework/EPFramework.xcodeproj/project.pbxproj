@@ -17,6 +17,9 @@
 		B462AF5C1098E17000484C29 /* TJNPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B462AF5B1098E16E00484C29 /* TJNPFramework.framework */; };
 		B462AF601098E19200484C29 /* epdownload.h in Headers */ = {isa = PBXBuildFile; fileRef = B462AF5F1098E19200484C29 /* epdownload.h */; };
 		B462AF621098E20300484C29 /* epdownload.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AF611098E20300484C29 /* epdownload.cpp */; };
+		B469546810A6CCDD0045DB2D /* ependpointserver.h in Headers */ = {isa = PBXBuildFile; fileRef = B469546710A6CCDD0045DB2D /* ependpointserver.h */; };
+		B469547610A6CDB90045DB2D /* eppublication.h in Headers */ = {isa = PBXBuildFile; fileRef = B469547510A6CDB90045DB2D /* eppublication.h */; };
+		B469547810A6CDF20045DB2D /* eppublication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B469547710A6CDF20045DB2D /* eppublication.cpp */; };
 		B4CD44B1109AED5F004B3BBB /* epconnection.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44B0109AED5F004B3BBB /* epconnection.h */; };
 		B4CD44B3109AEDBE004B3BBB /* epconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */; };
 		B4CD44BD109AEE18004B3BBB /* epmessage.h in Headers */ = {isa = PBXBuildFile; fileRef = B4CD44BC109AEE18004B3BBB /* epmessage.h */; };
@@ -122,6 +125,9 @@
 		B462AF561098E16E00484C29 /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B462AF5F1098E19200484C29 /* epdownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epdownload.h; sourceTree = "<group>"; };
 		B462AF611098E20300484C29 /* epdownload.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epdownload.cpp; sourceTree = "<group>"; };
+		B469546710A6CCDD0045DB2D /* ependpointserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ependpointserver.h; sourceTree = "<group>"; };
+		B469547510A6CDB90045DB2D /* eppublication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eppublication.h; sourceTree = "<group>"; };
+		B469547710A6CDF20045DB2D /* eppublication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eppublication.cpp; sourceTree = "<group>"; };
 		B4CD44B0109AED5F004B3BBB /* epconnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epconnection.h; sourceTree = "<group>"; };
 		B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epconnection.cpp; sourceTree = "<group>"; };
 		B4CD44BC109AEE18004B3BBB /* epmessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epmessage.h; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 				B4CD44F9109AF88C004B3BBB /* eposcipconnection.h */,
 				B4CD450F109AFAFC004B3BBB /* epserverconnection.h */,
 				B4CD4513109AFBAB004B3BBB /* epservermanager.h */,
+				B469546710A6CCDD0045DB2D /* ependpointserver.h */,
+				B469547510A6CDB90045DB2D /* eppublication.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -229,6 +237,7 @@
 				B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */,
 				B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */,
 				B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */,
+				B469547710A6CDF20045DB2D /* eppublication.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -291,6 +300,8 @@
 				B4CD44FA109AF88C004B3BBB /* eposcipconnection.h in Headers */,
 				B4CD4510109AFAFC004B3BBB /* epserverconnection.h in Headers */,
 				B4CD4514109AFBAB004B3BBB /* epservermanager.h in Headers */,
+				B469546810A6CCDD0045DB2D /* ependpointserver.h in Headers */,
+				B469547610A6CDB90045DB2D /* eppublication.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +436,7 @@
 				B4CD450E109AFAAD004B3BBB /* epconnectionsregistry.cpp in Sources */,
 				B4CD4512109AFB6D004B3BBB /* epserverconnection.cpp in Sources */,
 				B4CD4516109AFC5A004B3BBB /* epservermanager.cpp in Sources */,
+				B469547810A6CDF20045DB2D /* eppublication.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

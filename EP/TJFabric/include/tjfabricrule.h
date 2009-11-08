@@ -17,14 +17,6 @@ namespace tj {
 				virtual tj::shared::Any GetMinimumValue() const;
 				virtual tj::shared::Any GetMaximumValue() const;
 				virtual tj::shared::Any GetDefaultValue() const;
-				virtual tj::shared::Any::Type GetValueType() const;
-				virtual wchar_t GetValueTypeTag() const;
-			
-				const static wchar_t* KTypeBoolean;
-				const static wchar_t* KTypeInt32;
-				const static wchar_t* KTypeDouble;
-				const static wchar_t* KTypeString;
-				const static wchar_t* KTypeNull;
 			
 			protected:
 				tj::shared::String _friendly;
@@ -42,8 +34,6 @@ namespace tj {
 				virtual void Save(TiXmlElement* me);
 				virtual void SaveRule(TiXmlElement* me);
 				virtual void Clone();
-				virtual bool Matches(const std::wstring& msg) const;
-				virtual bool Matches(const std::wstring& msg, const std::wstring& tags) const;
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetScriptSource() const;
 				virtual bool IsEnabled() const;

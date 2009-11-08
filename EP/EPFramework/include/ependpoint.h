@@ -26,11 +26,19 @@ namespace tj {
 				virtual ~EPParameter();
 				virtual tj::shared::String GetFriendlyName() const = 0;
 				virtual tj::shared::String GetType() const = 0;
-				virtual tj::shared::Any::Type GetValueType() const = 0;
 				virtual tj::shared::Any GetMinimumValue() const = 0;
 				virtual tj::shared::Any GetMaximumValue() const = 0;
 				virtual tj::shared::Any GetDefaultValue() const = 0;
+			
 				virtual void Save(TiXmlElement* me);
+				virtual wchar_t GetValueTypeTag() const;
+				virtual tj::shared::Any::Type GetValueType() const;
+				
+				const static wchar_t* KTypeBoolean;
+				const static wchar_t* KTypeInt32;
+				const static wchar_t* KTypeDouble;
+				const static wchar_t* KTypeString;
+				const static wchar_t* KTypeNull;
 		};
 		
 		class EXPORTED EPReply: public virtual tj::shared::Object {
@@ -50,6 +58,8 @@ namespace tj {
 				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const = 0;
 				virtual void Save(TiXmlElement* me);
 				virtual void GetReplies(std::vector< tj::shared::ref<EPReply> >& replyList) const;
+				virtual bool Matches(const tj::shared::String& path) const;
+				virtual bool Matches(const tj::shared::String& path, const tj::shared::String& ptags) const;
 		};
 		
 		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object {
@@ -57,13 +67,14 @@ namespace tj {
 				virtual ~EPEndpoint();
 				virtual tj::shared::String GetID() const = 0;
 				virtual tj::shared::String GetNamespace() const = 0;
-				virtual tj::shared::String GetFullIdentifier() const = 0;
 				virtual tj::shared::String GetFriendlyName() const = 0;
 				virtual tj::shared::String GetVersion() const = 0;
 				virtual bool IsDynamic() const = 0;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const = 0;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const = 0;
+			
 				virtual void Save(TiXmlElement* me);
+				virtual tj::shared::String GetFullIdentifier() const;
 		};		
 		
 		class EP_EXPORTED EPEndpointDefinition: public EPEndpoint, public tj::shared::Serializable {

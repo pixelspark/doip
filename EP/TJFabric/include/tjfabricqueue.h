@@ -5,6 +5,7 @@
 #include "../../../TJScript/include/tjscript.h"
 #include "../../EPFramework/include/epmessage.h"
 #include "../../EPFramework/include/epconnection.h"
+#include "../../EPFramework/include/epdiscovery.h"
 
 namespace tj {
 	namespace script {
@@ -56,6 +57,8 @@ namespace tj {
 			friend class QueueGlobalScriptable;
 			
 			public:
+				typedef std::pair< tj::shared::ref<tj::script::ScriptDelegate>, tj::shared::ref<tj::script::ScriptScope> > ScriptCall;
+			
 				Queue(tj::shared::ref<FabricEngine> f);
 				virtual ~Queue();
 				virtual void OnCreated();
@@ -64,6 +67,8 @@ namespace tj {
 				virtual void Clear();
 				virtual void Add(tj::shared::strong<tj::ep::Message> m, tj::shared::ref<tj::ep::Connection> source, tj::shared::ref<tj::ep::ConnectionChannel> sourceChannel);
 				virtual void AddReply(tj::shared::strong<QueuedReply> m);
+				virtual void AddDiscoveryScriptCall(tj::shared::ref<tj::ep::DiscoveryDefinition> def, tj::shared::ref<tj::ep::Connection> connection, const tj::shared::String& source);
+			
 				virtual void WaitForCompletion();
 				virtual void Stop();
 			
@@ -71,6 +76,8 @@ namespace tj {
 				virtual void SignalWorkAdded();
 				virtual void ProcessMessage(tj::shared::strong<QueuedMessage> m);
 				virtual void ProcessReply(tj::shared::strong<QueuedReply> r);
+				virtual void ProcessScriptCall(ScriptCall& call);
+				virtual void RunAsynchronously(tj::shared::ref<tj::script::ScriptDelegate> dlg, tj::shared::ref<tj::script::ScriptScope> sc);
 
 				tj::shared::CriticalSection _lock;
 				tj::shared::ref<QueueThread> _thread;
@@ -79,6 +86,7 @@ namespace tj {
 				std::map< tj::shared::ref<Rule>, tj::shared::ref<tj::script::CompiledScript> > _scriptCache;
 				std::deque< tj::shared::ref<QueuedMessage> > _queue;
 				std::deque< tj::shared::ref<QueuedReply> > _replyQueue;
+				std::deque<ScriptCall> _asyncScriptsQueue;
 				tj::shared::weak<FabricEngine> _engine;
 		};
 		

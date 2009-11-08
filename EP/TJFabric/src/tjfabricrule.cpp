@@ -141,52 +141,7 @@ String Rule::ToString() const {
 	return wos.str();
 }
 
-bool Rule::Matches(const std::wstring& msg, const std::wstring& tags) const {
-	if(Matches(msg)) {
-		// Create the tag that belongs to these parameters
-		std::wostringstream positiveTagStream, negativeTagStream;
-		
-		// TODO make this more efficient by simply iterating over both strings and bailing out when not equal
-		std::deque< ref<Parameter> >::const_iterator it = _parameters.begin();
-		while(it!=_parameters.end()) {
-			ref<Parameter> param = *it;
-			if(param) {
-				if(param->GetType()==Parameter::KTypeBoolean) {
-					positiveTagStream << L"T";
-					negativeTagStream << L"F";
-				}
-				else {
-					positiveTagStream << param->GetValueTypeTag();
-					negativeTagStream << param->GetValueTypeTag();
-				}
-			}
-			++it;
-		}
-		
-		return (positiveTagStream.str() == tags) || (negativeTagStream.str() == tags);
-	}
-	
-	return false;
-}
-
-bool Rule::Matches(const std::wstring& msg) const {
-	std::set<String>::const_iterator it = _patterns.begin();
-	while(it!=_patterns.end()) {
-		if(Pattern::Matches(*it, msg)) {
-			return true;
-		}
-		++it;
-	}
-	return false;
-}
-
 /** Parameter **/
-const wchar_t* Parameter::KTypeBoolean = L"bool";
-const wchar_t* Parameter::KTypeString = L"string";
-const wchar_t* Parameter::KTypeDouble = L"double";
-const wchar_t* Parameter::KTypeInt32 = L"int32";
-const wchar_t* Parameter::KTypeNull = L"null";
-
 Parameter::Parameter() {
 }
 
@@ -227,54 +182,4 @@ Any Parameter::GetMaximumValue() const {
 
 Any Parameter::GetDefaultValue() const {
 	return Any(_default).Force(GetValueType());
-}
-
-wchar_t Parameter::GetValueTypeTag() const {
-	Any::Type type = GetValueType();
-	switch(type) {
-		case Any::TypeString:
-			return L's';
-			break;
-			
-		case Any::TypeObject:
-			return L'o';
-			break;
-			
-		case Any::TypeInteger:
-			return L'i';
-			break;
-			
-		case Any::TypeDouble:
-			return L'd';
-			break;
-			
-		case Any::TypeBool:
-			return L'T';
-			break;
-			
-		case Any::TypeNull:
-		default:
-			return L'N';
-	}
-}
-
-Any::Type Parameter::GetValueType() const {
-	if(_type==L"string") {
-		return Any::TypeString;
-	}
-	else if(_type==L"bool") {
-		return Any::TypeBool;
-	}
-	else if(_type==L"int32") {
-		return Any::TypeInteger;
-	}
-	else if(_type==L"double") {
-		return Any::TypeDouble;
-	}
-	else if(_type==L"null") {
-		return Any::TypeNull;
-	}
-	else {
-		return Any::TypeNull;
-	}
 }

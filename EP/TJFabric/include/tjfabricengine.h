@@ -15,7 +15,7 @@ namespace tj {
 		class Queue;
 		class Group;
 		
-		class FabricEngine: public virtual tj::shared::Object, public tj::shared::Listener<tj::ep::MessageNotification> {
+		class FabricEngine: public virtual tj::shared::Object, public tj::shared::Listener<tj::ep::MessageNotification>, public tj::shared::Listener<DiscoveryScriptNotification> {
 			public:
 				FabricEngine();
 				virtual ~FabricEngine();
@@ -25,6 +25,7 @@ namespace tj {
 				virtual void Connect(bool t);
 				virtual void Send(const tj::shared::String& gid, tj::shared::strong<tj::ep::Message> m, tj::shared::ref<tj::ep::ReplyHandler> handler);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
+				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const DiscoveryScriptNotification& data);
 			
 			protected:
 				virtual void OnCreated();

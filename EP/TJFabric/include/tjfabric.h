@@ -28,7 +28,6 @@ namespace tj {
 				virtual tj::shared::String GetAuthor() const;
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetPackage() const;
-				virtual tj::shared::String GetFullIdentifier() const;
 				virtual tj::shared::String GetVersion() const;
 				virtual tj::shared::ref<Rule> GetFirstMatchingRule(const tj::shared::String& msg);
 				virtual void GetAllMatchingRules(const tj::shared::String& path, const tj::shared::String& tags, std::deque< tj::shared::ref<Rule> >& results);

@@ -14,6 +14,8 @@ ConnectedGroup::~ConnectedGroup() {
 void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyHandler> rh) {
 	if((_group->GetDirection() & DirectionOutbound) != 0) {
 		if(_group->PassesFilter(m->GetPath())) {
+			ThreadLock lock(&_lock);
+			
 			// If we still haven't created our connections, do it now
 			if(_shouldStillConnectOutbound && _group->IsLazy()) {
 				CreateConnections(fe);
@@ -59,8 +61,33 @@ void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data)
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
 	if(data.added) {
 		_discoveredConnections.push_back(data.connection);
+		
+		// If there was a discovery script, run it
+		if(source.IsCastableTo<Discovery>()) {
+			ThreadLock lock(&_lock);
+			String scriptSource;
+			
+			ref<Discovery> discovery = source;
+			std::map< ref<DiscoveryDefinition>, ref<Discovery> >::iterator it = _discoveries.begin();
+			while(it!=_discoveries.end()) {
+				if(discovery == it->second) {
+					ref<DiscoveryDefinition> def = it->first;
+					if(_group->GetDiscoveryScript(def, scriptSource)) {
+						DiscoveryScriptNotification dn;
+						dn.definition = def;
+						dn.connection = data.connection;
+						dn.scriptSource = scriptSource;
+						EventDiscoveryScript.Fire(this, dn);
+					}
+					break;
+				}
+				++it;
+			}
+		}
 	}
 	else {
+		ThreadLock lock(&_lock);
+		
 		// remove connection from _discoveredConnections
 		std::deque< ref<Connection> >::iterator it = _discoveredConnections.begin();
 		while(it!=_discoveredConnections.end()) {

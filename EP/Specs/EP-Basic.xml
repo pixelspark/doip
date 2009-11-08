@@ -1,0 +1,100 @@
+<?xml version="1.0" standalone="no" ?>
+<?xml-stylesheet href="Specification.xsl" type="text/xsl" ?>
+
+<!-- This document contains the messages defined in the EP-Basic 1.0 specification in Endpoint XML format. Devices
+that implement all applicable methods in this specification to the maximum possible extent can be said to be EP-Basic 1.0
+compatible devices. Even if a device is not EP-Basic 1.0 compliant, it may still implement and respond to messages in this
+specification. 
+
+The EP-Basic 1.0 specification provides basic functionality for managing devices (i.e. resetting them), some global parameters
+(global light dimmer, global sound volume, global color). The 'global' methods affect all devices that support the message; which
+devices are in the 'global' group is determined by the underlying implementation.
+-->
+<endpoint friendly-name="EP-Basic 1.0 Specification">
+    <methods>
+        <method id="setcolor" friendly-name="Set color">
+            <path>/ep/basic/color/set</path>
+            <parameter friendly-name="Red" type="int32" min="0" max="255" default="0" />
+            <parameter friendly-name="Green" type="int32" min="0" max="255" default="0" />
+            <parameter friendly-name="Blue" type="int32" min="0" max="255" default="0" />
+            
+            <description>
+            	The 'set color' method is meant to set a general color on a device that supports colors. For instance, a LED
+		    	strip connected using EP will use this message to set its color. If a device supports more than one color, this
+		    	method will either set the color globally or use it as a 'hue' value to change the subcolors accordingly. The change
+		    	of color is expected to be taken place immediately if the device supports this.
+            </description>
+        </method>
+
+        <method id="fadecolor" friendly-name="Fade to color">
+            <path>/ep/basic/color/fade</path>
+            <parameter friendly-name="Red" type="int32" min="0" max="255" default="0" />
+            <parameter friendly-name="Green" type="int32" min="0" max="255" default="0" />
+            <parameter friendly-name="Blue" type="int32" min="0" max="255" default="0" />
+            <description>
+            	The 'fade color' method is equivalent to the 'set color' message, but the device should (if possible)
+		        gradually fade to this color instead of setting it immediately.
+            </description>
+        </method>
+
+         <method id="dim" friendly-name="Global dimmer">
+            <path>/ep/basic/dim</path>
+            <parameter friendly-name="Value" type="double" min="0" max="1" default="1" />
+            <description>
+            	The global dimmer method 'dims' all light intensities a device manages. The value is between 0 and 1; the
+		        device can simply multiply this value with the color values in memory. The device is expected to 'remember' 
+		        the color independently from the dim; i.e., when a specific color is set, it should be the same after dimming
+		        to 0% and then back to 100%.
+            </description>
+        </method>
+        
+        <method id="volume" friendly-name="Global volume">
+            <path>/ep/basic/volume</path>
+            <parameter friendly-name="Volume" type="double" min="0" max="1" default="1" />
+            <description>
+            	The global volume method, like the global dimmer, moderates all audio volumes a device handles.
+		         The same semantics as the global dimmer method apply to the global volume method. Devices should implement
+		         this logarithmically (i.e. a value of 1 corresponds with 0dB, whereas 0 should be interpreted as -inf dB.
+            </description>
+        </method>
+
+        <method id="reset" friendly-name="Reset device">
+            <path>/ep/basic/reset</path>
+            <description>
+	            The 'reset' method is meant to reset a connected device to its initial state. It may use any method to do so, and
+				there may be artifacts visible to the end user due to the reset operation
+			</description>
+        </method>
+        
+        <method id="emergency" friendly-name="Emergency stop">
+            <path>/ep/basic/emergency</path>
+            <description>
+	            The 'emergency' method should cause all devices to cancel any pending operations and move to a 'safe' 
+		        state. In some cases, the best response to calling this method is simply to do nothing, depending on the
+		        application. Devices should never respond to this method by alerting users (i.e. starting to blink lights, etc.) 
+            </description>
+        </method>
+        
+        <method id="off" friendly-name="Power off">
+            <path>/ep/basic/power/off</path>
+            <description>
+	            The 'off' method should make any device processing this method to go into the lowest power state possible.
+		        The device may lose state information in doing this; i.e., when powering on again, the state may be different. The
+		        device is, however, not required to return to an initial state. Devices do not have to be able to receive any further
+		        messages when powered off. Whenever a method is called that requires action, a device that is still
+		        able to receive messages is allowed to power up again (there is no separate 'power on' message - a device is
+		        turned on manually or has some kind of sleep state).
+            </description>
+        </method>
+
+        <method id="sleep" friendly-name="Sleep">
+            <path>/ep/basic/power/sleep</path>
+            <description>
+            	The 'sleep' method should make any device processing this method to go into the lowest power state possible,
+		        without losing state information. Also, devices should still be able to 'wake up' in short time. Whenever a method is
+		        called that requires action, a device is required to power up again (there is no separate 'power on' message - a
+		        device is turned on manually or has some kind of sleep state).
+            </description>
+        </method>
+    </methods>
+</endpoint>

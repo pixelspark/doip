@@ -19,13 +19,7 @@
 	if(self = [super init]) {
 		// Initialize services array
 		services = [[NSMutableSet alloc] init];
-		resolvedServices = [[NSMutableArray alloc] init];
 		resolvedEndpoints = [[NSMutableArray alloc] init];
-		
-		// Start searching for services
-		browser = [[NSNetServiceBrowser alloc] init];
-		browser.delegate = self;
-		[browser searchForServicesOfType:@"_osc._udp" inDomain:@""];
 		
 		// Start searching for endpoints
 		endpointsBrowser = [[NSNetServiceBrowser alloc] init];
@@ -34,10 +28,6 @@
 
 	}
 	return self;
-}
-
-- (NSMutableArray*)resolvedServices {
-	return resolvedServices;
 }
 
 - (NSMutableArray*)resolvedEndpoints {
@@ -60,9 +50,6 @@
 		[resolvedEndpoints addObject:ep];
 		[ep release];
 	}
-	else {
-		[resolvedServices addObject:netService];
-	}
 	[services removeObject:netService];
 	
 	// Let the appdelegate know that we've resolved a service
@@ -83,7 +70,6 @@
 - (void)netServiceBrowser:(NSNetServiceBrowser *)browser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	NSLog(@"Remove service: %@", [aNetService name]);
 	[services removeObject:aNetService];
-	[resolvedServices removeObject:aNetService];
 	
 	for (MWEndpoint* endpoint in resolvedEndpoints) {
 		if([[endpoint service] isEqual:aNetService]) {
@@ -101,10 +87,7 @@
 	[services release];
 	[endpointsBrowser stop];
 	[endpointsBrowser release];
-	[resolvedServices release];
 	[resolvedEndpoints release];
-	[browser stop];
-	[browser release];
 	[super dealloc];
 }
 

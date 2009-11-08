@@ -1,9 +1,28 @@
 #include "../include/ependpoint.h"
+#include "../../../TJNP/include/tjpattern.h"
 using namespace tj::shared;
 using namespace tj::ep;
+using namespace tj::np::pattern;
+
+const wchar_t* EPParameter::KTypeBoolean = L"bool";
+const wchar_t* EPParameter::KTypeString = L"string";
+const wchar_t* EPParameter::KTypeDouble = L"double";
+const wchar_t* EPParameter::KTypeInt32 = L"int32";
+const wchar_t* EPParameter::KTypeNull = L"null";
 
 /** EPEndpoint **/
 EPEndpoint::~EPEndpoint() {
+}
+
+String EPEndpoint::GetFullIdentifier() const {
+	String pid = GetID();
+	String ns = GetNamespace();
+	std::wostringstream wos;
+	if(ns.length()>0) {
+		wos << ns << L'.';
+	}
+	wos << pid;
+	return wos.str();
 }
 
 /** EPReply **/
@@ -36,6 +55,57 @@ void EPMethod::GetReplies(std::vector< ref<EPReply> >& replyList) const {
 
 /** EPParameter **/
 EPParameter::~EPParameter() {
+}
+
+wchar_t EPParameter::GetValueTypeTag() const {
+	Any::Type type = GetValueType();
+	switch(type) {
+		case Any::TypeString:
+			return L's';
+			break;
+			
+		case Any::TypeObject:
+			return L'o';
+			break;
+			
+		case Any::TypeInteger:
+			return L'i';
+			break;
+			
+		case Any::TypeDouble:
+			return L'd';
+			break;
+			
+		case Any::TypeBool:
+			return L'T';
+			break;
+			
+		case Any::TypeNull:
+		default:
+			return L'N';
+	}
+}
+
+Any::Type EPParameter::GetValueType() const {
+	String type = GetType();
+	if(type==L"string") {
+		return Any::TypeString;
+	}
+	else if(type==L"bool") {
+		return Any::TypeBool;
+	}
+	else if(type==L"int32") {
+		return Any::TypeInteger;
+	}
+	else if(type==L"double") {
+		return Any::TypeDouble;
+	}
+	else if(type==L"null") {
+		return Any::TypeNull;
+	}
+	else {
+		return Any::TypeNull;
+	}
 }
 
 /** EPTransport **/
@@ -209,12 +279,58 @@ void EPMethodDefinition::AddPath(const EPPath& pt) {
 	_paths.insert(pt);
 }
 
-void EPMethodDefinition::AddParameter(tj::shared::ref<EPParameter> p) {
+void EPMethodDefinition::AddParameter(ref<EPParameter> p) {
 	_parameters.push_back(p);
 }
 
 void EPMethodDefinition::Save(TiXmlElement* me) {
 	EPMethod::Save(me);
+}
+
+/** EPMethod **/
+bool EPMethod::Matches(const String& msg, const String& tags) const {
+	if(Matches(msg)) {
+		// Create the tag that belongs to these parameters
+		std::wostringstream positiveTagStream, negativeTagStream;
+		
+		std::vector< ref<EPParameter> > parameterList;
+		GetParameters(parameterList);
+		
+		// TODO make this more efficient by simply iterating over both strings and bailing out when not equal
+		std::vector< ref<EPParameter> >::const_iterator it = parameterList.begin();
+		while(it!=parameterList.end()) {
+			ref<EPParameter> param = *it;
+			if(param) {
+				if(param->GetType()==L"bool") {
+					positiveTagStream << L"T";
+					negativeTagStream << L"F";
+				}
+				else {
+					positiveTagStream << param->GetValueTypeTag();
+					negativeTagStream << param->GetValueTypeTag();
+				}
+			}
+			++it;
+		}
+		
+		return (positiveTagStream.str() == tags) || (negativeTagStream.str() == tags);
+	}
+	
+	return false;
+}
+
+bool EPMethod::Matches(const std::wstring& msg) const {
+	std::set<EPPath> pathList;
+	GetPaths(pathList);
+	
+	std::set<String>::const_iterator it = pathList.begin();
+	while(it!=pathList.end()) {
+		if(Pattern::Match((*it).c_str(), msg.c_str())) {
+			return true;
+		}
+		++it;
+	}
+	return false;
 }
 
 void EPMethod::Save(TiXmlElement* me) {

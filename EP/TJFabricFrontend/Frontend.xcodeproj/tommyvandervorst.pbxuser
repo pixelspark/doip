@@ -255,9 +255,9 @@
 		path = "/Volumes/tommy/local/tj-epd/usp3/usp3oscd.cpp";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 2730}}";
-			sepNavSelRange = "{1918, 561}";
-			sepNavVisRange = "{1225, 1261}";
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 2769}}";
+			sepNavSelRange = "{1764, 0}";
+			sepNavVisRange = "{2637, 973}";
 		};
 	};
 	B46CBDF710A4ADD900CDE29F /* PBXTextBookmark */ = {
@@ -343,7 +343,7 @@
 	};
 	B4720D95108C5650002DEC9F /* MainViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 538}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 531}}";
 			sepNavSelRange = "{169, 0}";
 			sepNavVisRange = "{0, 1111}";
 		};

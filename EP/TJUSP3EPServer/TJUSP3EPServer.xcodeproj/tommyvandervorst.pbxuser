@@ -56,21 +56,36 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 279206689;
-			PBXWorkspaceStateSaveDate = 279206689;
+			PBXPerProjectTemplateStateSaveDate = 279363753;
+			PBXWorkspaceStateSaveDate = 279363753;
 		};
 		perUserProjectItems = {
-			B46CBCEC10A4603F00CDE29F /* PBXTextBookmark */ = B46CBCEC10A4603F00CDE29F /* PBXTextBookmark */;
-			B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
-			B46CBCFD10A4617500CDE29F /* PBXTextBookmark */ = B46CBCFD10A4617500CDE29F /* PBXTextBookmark */;
-			B46CBD0410A461CF00CDE29F /* PBXTextBookmark */ = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
-			B46CBD4110A4685200CDE29F /* PBXTextBookmark */ = B46CBD4110A4685200CDE29F /* PBXTextBookmark */;
-			B46CBD4210A4685200CDE29F /* PBXTextBookmark */ = B46CBD4210A4685200CDE29F /* PBXTextBookmark */;
-			B46CBD5210A469B700CDE29F /* PBXTextBookmark */ = B46CBD5210A469B700CDE29F /* PBXTextBookmark */;
-			B46CBD6610A46AC900CDE29F /* PBXTextBookmark */ = B46CBD6610A46AC900CDE29F /* PBXTextBookmark */;
-			B46CBD6710A46AC900CDE29F /* PBXTextBookmark */ = B46CBD6710A46AC900CDE29F /* PBXTextBookmark */;
-			B46CBD7410A46C7D00CDE29F /* PBXTextBookmark */ = B46CBD7410A46C7D00CDE29F /* PBXTextBookmark */;
-			B46CBD7910A47B0400CDE29F /* PBXTextBookmark */ = B46CBD7910A47B0400CDE29F /* PBXTextBookmark */;
+			B469541210A6C7D10045DB2D /* PBXTextBookmark */ = B469541210A6C7D10045DB2D /* PBXTextBookmark */;
+			B469541310A6C7D10045DB2D /* XCBuildMessageTextBookmark */ = B469541310A6C7D10045DB2D /* XCBuildMessageTextBookmark */;
+			B469541410A6C7D10045DB2D /* PBXTextBookmark */ = B469541410A6C7D10045DB2D /* PBXTextBookmark */;
+			B469542610A6C8DE0045DB2D /* PBXTextBookmark */ = B469542610A6C8DE0045DB2D /* PBXTextBookmark */;
+			B469545110A6CAF90045DB2D /* XCBuildMessageTextBookmark */ = B469545110A6CAF90045DB2D /* XCBuildMessageTextBookmark */;
+			B469545210A6CAF90045DB2D /* PBXTextBookmark */ = B469545210A6CAF90045DB2D /* PBXTextBookmark */;
+			B469545710A6CB390045DB2D /* PBXTextBookmark */ = B469545710A6CB390045DB2D /* PBXTextBookmark */;
+			B469545A10A6CB5B0045DB2D /* PBXTextBookmark */ = B469545A10A6CB5B0045DB2D /* PBXTextBookmark */;
+			B469545D10A6CBC60045DB2D /* PBXTextBookmark */ = B469545D10A6CBC60045DB2D /* PBXTextBookmark */;
+			B469545E10A6CBC60045DB2D /* PBXTextBookmark */ = B469545E10A6CBC60045DB2D /* PBXTextBookmark */;
+			B469545F10A6CBC60045DB2D /* PBXTextBookmark */ = B469545F10A6CBC60045DB2D /* PBXTextBookmark */;
+			B469548910A6D1100045DB2D /* PBXTextBookmark */ = B469548910A6D1100045DB2D /* PBXTextBookmark */;
+			B469548A10A6D1100045DB2D /* PBXTextBookmark */ = B469548A10A6D1100045DB2D /* PBXTextBookmark */;
+			B469548C10A6D1100045DB2D /* XCBuildMessageTextBookmark */ = B469548C10A6D1100045DB2D /* XCBuildMessageTextBookmark */;
+			B469548D10A6D1100045DB2D /* PBXTextBookmark */ = B469548D10A6D1100045DB2D /* PBXTextBookmark */;
+			B46CBCEC10A4603F00CDE29F = B46CBCEC10A4603F00CDE29F /* PBXTextBookmark */;
+			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
+			B46CBCFD10A4617500CDE29F = B46CBCFD10A4617500CDE29F /* PBXTextBookmark */;
+			B46CBD0410A461CF00CDE29F = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
+			B46CBD4110A4685200CDE29F = B46CBD4110A4685200CDE29F /* PBXTextBookmark */;
+			B46CBD4210A4685200CDE29F = B46CBD4210A4685200CDE29F /* PBXTextBookmark */;
+			B46CBD5210A469B700CDE29F = B46CBD5210A469B700CDE29F /* PBXTextBookmark */;
+			B46CBD6610A46AC900CDE29F = B46CBD6610A46AC900CDE29F /* PBXTextBookmark */;
+			B46CBD6710A46AC900CDE29F = B46CBD6710A46AC900CDE29F /* PBXTextBookmark */;
+			B46CBD7410A46C7D00CDE29F = B46CBD7410A46C7D00CDE29F /* PBXTextBookmark */;
+			B46CBD7910A47B0400CDE29F = B46CBD7910A47B0400CDE29F /* PBXTextBookmark */;
 		};
 		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
 		userBuildSettings = {
@@ -81,6 +96,159 @@
 		executables = (
 			B46CBC8A10A45B2100CDE29F /* TJUSP3EPServer */,
 		);
+	};
+	B469541210A6C7D10045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCED10A4603F00CDE29F /* ependpoint.h */;
+		name = "ependpoint.h: 68";
+		rLen = 458;
+		rLoc = 2463;
+		rType = 0;
+		vrLen = 1865;
+		vrLoc = 1630;
+	};
+	B469541310A6C7D10045DB2D /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'EPConnection' was not declared in this scope";
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 0;
+		rLoc = 12;
+		rType = 1;
+	};
+	B469541410A6C7D10045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 168";
+		rLen = 0;
+		rLoc = 1867;
+		rType = 0;
+		vrLen = 1651;
+		vrLoc = 5147;
+	};
+	B469542610A6C8DE0045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 199";
+		rLen = 0;
+		rLoc = 3654;
+		rType = 0;
+		vrLen = 1969;
+		vrLoc = 5811;
+	};
+	B469545110A6CAF90045DB2D /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "No matching function for call to 'EPPublication::EPPublication(tj::shared::ref<USPEndpoint>&)'";
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 154;
+		rType = 1;
+	};
+	B469545210A6CAF90045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 351";
+		rLen = 0;
+		rLoc = 5728;
+		rType = 0;
+		vrLen = 1245;
+		vrLoc = 11436;
+	};
+	B469545710A6CB390045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 352";
+		rLen = 0;
+		rLoc = 5807;
+		rType = 0;
+		vrLen = 1249;
+		vrLoc = 11794;
+	};
+	B469545A10A6CB5B0045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 227";
+		rLen = 0;
+		rLoc = 3653;
+		rType = 0;
+		vrLen = 1688;
+		vrLoc = 7759;
+	};
+	B469545D10A6CBC60045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBD5310A469B700CDE29F /* tjcrypto.h */;
+		name = "tjcrypto.h: 14";
+		rLen = 0;
+		rLoc = 262;
+		rType = 0;
+		vrLen = 963;
+		vrLoc = 0;
+	};
+	B469545E10A6CBC60045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 350";
+		rLen = 0;
+		rLoc = 5665;
+		rType = 0;
+		vrLen = 1270;
+		vrLoc = 11429;
+	};
+	B469545F10A6CBC60045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 351";
+		rLen = 0;
+		rLoc = 5613;
+		rType = 0;
+		vrLen = 1322;
+		vrLoc = 11429;
+	};
+	B469548910A6D1100045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBD5310A469B700CDE29F /* tjcrypto.h */;
+		name = "tjcrypto.h: 9";
+		rLen = 0;
+		rLoc = 150;
+		rType = 0;
+		vrLen = 963;
+		vrLoc = 0;
+	};
+	B469548A10A6D1100045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B469548B10A6D1100045DB2D /* ependpointserver.h */;
+		name = "ependpointserver.h: 82";
+		rLen = 0;
+		rLoc = 3174;
+		rType = 0;
+		vrLen = 1735;
+		vrLoc = 0;
+	};
+	B469548B10A6D1100045DB2D /* ependpointserver.h */ = {
+		isa = PBXFileReference;
+		name = ependpointserver.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/include/ependpointserver.h;
+		sourceTree = "<absolute>";
+	};
+	B469548C10A6D1100045DB2D /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Control reaches end of non-void function";
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 0;
+		rLoc = 120;
+		rType = 1;
+	};
+	B469548D10A6D1100045DB2D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 204";
+		rLen = 0;
+		rLoc = 4843;
+		rType = 0;
+		vrLen = 1059;
+		vrLoc = 5814;
 	};
 	B46CBC8A10A45B2100CDE29F /* TJUSP3EPServer */ = {
 		isa = PBXExecutable;
@@ -125,9 +293,10 @@
 	};
 	B46CBCBE10A45C2800CDE29F /* uspmain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1195, 3289}}";
-			sepNavSelRange = "{4883, 0}";
-			sepNavVisRange = "{4681, 1390}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 4277}}";
+			sepNavSelRange = "{6658, 0}";
+			sepNavVisRange = "{5814, 1059}";
+			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
 		};
 	};
 	B46CBCEC10A4603F00CDE29F /* PBXTextBookmark */ = {
@@ -135,7 +304,7 @@
 		fRef = B46CBCED10A4603F00CDE29F /* ependpoint.h */;
 		name = "ependpoint.h: 69";
 		rLen = 95;
-		rLoc = 2626;
+		rLoc = 3030;
 		rType = 0;
 		vrLen = 1739;
 		vrLoc = 2162;
@@ -146,6 +315,11 @@
 		name = ependpoint.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/include/ependpoint.h;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 2431}}";
+			sepNavSelRange = "{2463, 516}";
+			sepNavVisRange = "{1630, 1865}";
+		};
 	};
 	B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -159,6 +333,7 @@
 	};
 	B46CBCEF10A4603F00CDE29F /* tjwebserver.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = tjwebserver.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/include/tjwebserver.h;
 		sourceTree = "<absolute>";
@@ -169,11 +344,6 @@
 		name = epconnection.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/include/epconnection.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1517, 1222}}";
-			sepNavSelRange = "{3298, 0}";
-			sepNavVisRange = "{1701, 1848}";
-		};
 	};
 	B46CBCFD10A4617500CDE29F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -204,6 +374,7 @@
 	};
 	B46CBD0510A461CF00CDE29F /* tjsocket.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = tjsocket.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/include/tjsocket.h;
 		sourceTree = "<absolute>";
@@ -230,6 +401,7 @@
 	};
 	B46CBD4310A4685200CDE29F /* eposcipconnection.cpp */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
 		name = eposcipconnection.cpp;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/src/eposcipconnection.cpp;
 		sourceTree = "<absolute>";
@@ -246,9 +418,15 @@
 	};
 	B46CBD5310A469B700CDE29F /* tjcrypto.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = tjcrypto.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJShared/include/tjcrypto.h;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 598}}";
+			sepNavSelRange = "{150, 0}";
+			sepNavVisRange = "{0, 963}";
+		};
 	};
 	B46CBD5910A46A5900CDE29F /* usp3.cpp */ = {
 		uiCtxt = {
@@ -289,7 +467,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 95";
 		rLen = 0;
-		rLoc = 3557;
+		rLoc = 3498;
 		rType = 0;
 		vrLen = 1058;
 		vrLoc = 2447;
@@ -299,7 +477,7 @@
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
 		name = "uspmain.cpp: 161";
 		rLen = 0;
-		rLoc = 4883;
+		rLoc = 4810;
 		rType = 0;
 		vrLen = 1390;
 		vrLoc = 4681;

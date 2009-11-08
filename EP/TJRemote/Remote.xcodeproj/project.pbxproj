@@ -18,9 +18,7 @@
 		B413B9651046C5D900587E77 /* Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9611046C5D900587E77 /* Gray.png */; };
 		B413B9661046C5D900587E77 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9621046C5D900587E77 /* Green.png */; };
 		B413B9671046C5D900587E77 /* Red.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9631046C5D900587E77 /* Red.png */; };
-		B413B9711046C6AE00587E77 /* MWLedDeviceViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B413B9701046C6AE00587E77 /* MWLedDeviceViewController.mm */; };
 		B43BF8F31046BC68002F17E1 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B43BF8F21046BC68002F17E1 /* Background.png */; };
-		B43BF90B1046BE08002F17E1 /* MWServicesTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B43BF90A1046BE08002F17E1 /* MWServicesTableViewController.mm */; };
 		B46AC5F21083899A00EAE42C /* MWMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC5F11083899A00EAE42C /* MWMethod.mm */; };
 		B46AC61D10838C8C00EAE42C /* MWMethodTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */; };
 		B47F09D90FB625FB00DB3BEE /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B47F09D80FB625FB00DB3BEE /* Logo.png */; };
@@ -59,11 +57,7 @@
 		B413B9611046C5D900587E77 /* Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Gray.png; path = Resources/Gray.png; sourceTree = "<group>"; };
 		B413B9621046C5D900587E77 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Green.png; path = Resources/Green.png; sourceTree = "<group>"; };
 		B413B9631046C5D900587E77 /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Red.png; path = Resources/Red.png; sourceTree = "<group>"; };
-		B413B96F1046C6AE00587E77 /* MWLedDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWLedDeviceViewController.h; sourceTree = "<group>"; };
-		B413B9701046C6AE00587E77 /* MWLedDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWLedDeviceViewController.mm; sourceTree = "<group>"; };
 		B43BF8F21046BC68002F17E1 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
-		B43BF9091046BE08002F17E1 /* MWServicesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWServicesTableViewController.h; sourceTree = "<group>"; };
-		B43BF90A1046BE08002F17E1 /* MWServicesTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWServicesTableViewController.mm; sourceTree = "<group>"; };
 		B46AC5F01083899A00EAE42C /* MWMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWMethod.h; sourceTree = "<group>"; };
 		B46AC5F11083899A00EAE42C /* MWMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWMethod.mm; sourceTree = "<group>"; };
 		B46AC61B10838C8C00EAE42C /* MWMethodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWMethodTableViewController.h; sourceTree = "<group>"; };
@@ -127,14 +121,10 @@
 			children = (
 				B4E617B1108270C8004D7C02 /* MWEndpointsTableViewController.h */,
 				B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */,
-				B43BF9091046BE08002F17E1 /* MWServicesTableViewController.h */,
-				B43BF90A1046BE08002F17E1 /* MWServicesTableViewController.mm */,
 				1D3623240D0F684500981E51 /* MWAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MWAppDelegate.mm */,
 				B47F0A300FB6295700DB3BEE /* MWClient.h */,
 				B47F0A310FB6295700DB3BEE /* MWClient.mm */,
-				B413B96F1046C6AE00587E77 /* MWLedDeviceViewController.h */,
-				B413B9701046C6AE00587E77 /* MWLedDeviceViewController.mm */,
 				B4E618821082779C004D7C02 /* MWEndpoint.h */,
 				B4E618831082779C004D7C02 /* MWEndpoint.mm */,
 				B46AC5F01083899A00EAE42C /* MWMethod.h */,
@@ -337,8 +327,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MWAppDelegate.mm in Sources */,
 				B47F0A320FB6295700DB3BEE /* MWClient.mm in Sources */,
-				B43BF90B1046BE08002F17E1 /* MWServicesTableViewController.mm in Sources */,
-				B413B9711046C6AE00587E77 /* MWLedDeviceViewController.mm in Sources */,
 				B4F6999D106816DC00A32B2B /* IpEndpointName.cpp in Sources */,
 				B4F6999E106816DC00A32B2B /* NetworkingUtils.cpp in Sources */,
 				B4F6999F106816DC00A32B2B /* UdpSocket.cpp in Sources */,

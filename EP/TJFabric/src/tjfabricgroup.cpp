@@ -81,6 +81,15 @@ void Group::Save(TiXmlElement* me) {
 	}
 }
 
+bool Group::GetDiscoveryScript(ref<DiscoveryDefinition> disco, String& scriptSource) const {
+	std::map< ref<DiscoveryDefinition>,String >::const_iterator it = _discoveryScripts.find(disco);
+	if(it!=_discoveryScripts.end()) {
+		scriptSource = it->second;
+		return true;
+	}
+	return false;
+}
+
 bool Group::IsLazy() const {
 	return _lazy;
 }
@@ -120,6 +129,9 @@ void Group::Load(TiXmlElement* me) {
 	while(disco!=0) {
 		ref<DiscoveryDefinition> cd = DiscoveryDefinitionFactory::Instance()->Load(disco);
 		if(cd) {
+			// Try to load a discovery script{
+			std::wstring script = LoadAttribute<std::wstring>(disco, "script", L"");
+			_discoveryScripts[cd] = script;
 			_discoveries.push_back(cd);
 		}
 		else {
