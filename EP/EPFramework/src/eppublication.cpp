@@ -14,6 +14,7 @@ EPPublication::EPPublication(strong<EPEndpoint> ep) {
 	// Advertise the service
 	std::map<std::wstring, std::wstring> attributes;
 	attributes[L"EPDefinitionPath"] = definitionPath;
+	attributes[L"EPProtocol"] = L"HTTP";
 	attributes[L"EPMagicNumber"] = EPServerManager::Instance()->GetServerMagic();
 	unsigned short actualPort = _ws->GetActualPort();
 	_reg = ServiceRegistrationFactory::Instance()->CreateServiceRegistration(ServiceDiscoveryDNSSD, L"_ep._tcp", ep->GetFriendlyName(), actualPort, attributes);

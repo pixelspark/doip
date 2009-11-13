@@ -71,6 +71,7 @@ void EPServerConnection::Create(tj::shared::strong<ConnectionDefinition> def, Di
 			std::map<std::wstring, std::wstring> attributes;
 			attributes[L"EPDefinitionPath"] = definitionPath;
 			attributes[L"EPMagicNumber"] = EPServerManager::Instance()->GetServerMagic();
+			attributes[L"EPProtocol"] = L"HTTP";
 			_server->AddResolver(definitionPath, ref<FileRequestResolver>(GC::Hold(new EPDefinitionResolver(parent))));
 			
 			// Advertise the service

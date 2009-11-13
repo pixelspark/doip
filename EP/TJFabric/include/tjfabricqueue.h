@@ -8,93 +8,104 @@
 #include "../../EPFramework/include/epdiscovery.h"
 
 namespace tj {
-	namespace script {
-		class ScriptContext;
-		class ScriptScope;
-		class CompiledScript;
-	}
-}
-
-namespace tj {
 	namespace fabric {
+		using namespace tj::shared;
+		using namespace tj::script;
+		using namespace tj::ep;
 		class QueueThread;
 		class Rule;
 		class FabricEngine;
 		class Fabric;
 
-		class QueuedMessage: public virtual tj::shared::Object {
+		class QueuedMessage: public virtual Object {
 			friend class Queue;
 			friend class QueueThread;
 
 			public:
-				QueuedMessage(tj::shared::strong<tj::ep::Message> msg, tj::shared::ref<tj::ep::Connection> source, tj::shared::ref<tj::ep::ConnectionChannel> sourceChannel);
+				QueuedMessage(strong<Message> msg, ref<Connection> source, ref<ConnectionChannel> sourceChannel);
 				virtual ~QueuedMessage();
 
 			protected:
-				tj::shared::strong<tj::ep::Message> _message;
-				tj::shared::ref<tj::ep::Connection> _source;
-				tj::shared::ref<tj::ep::ConnectionChannel> _sourceChannel;
+				strong<Message> _message;
+				ref<Connection> _source;
+				ref<ConnectionChannel> _sourceChannel;
 		};
 
-		class QueuedReply: public virtual tj::shared::Object {
+		class QueuedReply: public virtual Object {
 			friend class Queue;
 			friend class QueueThread;
 
 			public:
-				QueuedReply(tj::shared::strong<tj::ep::Message> org, tj::shared::strong<tj::ep::Message> reply, tj::shared::ref<tj::script::ScriptDelegate> dlg, tj::shared::strong<tj::ep::Connection> con, tj::shared::ref<tj::ep::ConnectionChannel> cc);
+				QueuedReply(strong<Message> org, strong<Message> reply, ref<ScriptDelegate> dlg, strong<Connection> con, ref<ConnectionChannel> cc);
 				virtual ~QueuedReply();
 
 			protected:
-				tj::shared::strong<tj::ep::Message> _originalMessage;
-				tj::shared::strong<tj::ep::Message> _replyMessage;
-				tj::shared::ref<tj::script::ScriptDelegate> _delegate;
-				tj::shared::strong<tj::ep::Connection> _connection;
-				tj::shared::ref<tj::ep::ConnectionChannel> _channel;
+				strong<Message> _originalMessage;
+				strong<Message> _replyMessage;
+				ref<ScriptDelegate> _delegate;
+				strong<Connection> _connection;
+				ref<ConnectionChannel> _channel;
 		};
 		
-		class Queue: public virtual tj::shared::Object {
+		class Queue: public virtual Object {
 			friend class QueueThread;
 			friend class QueueGlobalScriptable;
 			
 			public:
-				typedef std::pair< tj::shared::ref<tj::script::ScriptDelegate>, tj::shared::ref<tj::script::ScriptScope> > ScriptCall;
+				typedef std::pair< ref<ScriptDelegate>, ref<ScriptScope> > ScriptCall;
 			
-				Queue(tj::shared::ref<FabricEngine> f);
+				Queue(ref<FabricEngine> f);
 				virtual ~Queue();
 				virtual void OnCreated();
-				virtual tj::shared::ref<tj::script::CompiledScript> GetScriptForRule(tj::shared::strong<Rule> r);
-				virtual void ExecuteScript(tj::shared::strong<Rule> rule, tj::shared::strong<tj::script::CompiledScript> script, tj::shared::strong<QueuedMessage> m);
+				virtual ref<CompiledScript> GetScriptForRule(strong<Rule> r);
+				virtual void ExecuteScript(strong<Rule> rule, strong<CompiledScript> script, strong<QueuedMessage> m);
 				virtual void Clear();
-				virtual void Add(tj::shared::strong<tj::ep::Message> m, tj::shared::ref<tj::ep::Connection> source, tj::shared::ref<tj::ep::ConnectionChannel> sourceChannel);
-				virtual void AddReply(tj::shared::strong<QueuedReply> m);
-				virtual void AddDiscoveryScriptCall(tj::shared::ref<tj::ep::DiscoveryDefinition> def, tj::shared::ref<tj::ep::Connection> connection, const tj::shared::String& source);
+				virtual void Add(strong<Message> m, ref<Connection> source, ref<ConnectionChannel> sourceChannel);
+				virtual void AddReply(strong<QueuedReply> m);
+				virtual void AddDiscoveryScriptCall(ref<DiscoveryDefinition> def, ref<Connection> connection, const String& source);
+				virtual void AddTimedScriptCall(const Date& at, ref<ScriptDelegate> dlg, ref<ScriptScope> sc);
+				virtual void AddDeferredScriptCall(ref<ScriptDelegate> dlg, ref<ScriptScope> sc);
 			
 				virtual void WaitForCompletion();
 				virtual void Stop();
 			
 			protected:
 				virtual void SignalWorkAdded();
-				virtual void ProcessMessage(tj::shared::strong<QueuedMessage> m);
-				virtual void ProcessReply(tj::shared::strong<QueuedReply> r);
+				virtual void ProcessMessage(strong<QueuedMessage> m);
+				virtual void ProcessReply(strong<QueuedReply> r);
 				virtual void ProcessScriptCall(ScriptCall& call);
-				virtual void RunAsynchronously(tj::shared::ref<tj::script::ScriptDelegate> dlg, tj::shared::ref<tj::script::ScriptScope> sc);
+				
 
-				tj::shared::CriticalSection _lock;
-				tj::shared::ref<QueueThread> _thread;
-				tj::shared::ref<tj::script::ScriptContext> _context;
-				tj::shared::ref<tj::script::ScriptScope> _global;
-				std::map< tj::shared::ref<Rule>, tj::shared::ref<tj::script::CompiledScript> > _scriptCache;
-				std::deque< tj::shared::ref<QueuedMessage> > _queue;
-				std::deque< tj::shared::ref<QueuedReply> > _replyQueue;
+				CriticalSection _lock;
+				ref<QueueThread> _thread;
+				ref<ScriptContext> _context;
+				ref<ScriptScope> _global;
+				std::map< ref<Rule>, ref<CompiledScript> > _scriptCache;
+				weak<FabricEngine> _engine;
+			
+				std::deque< ref<QueuedMessage> > _queue;
+				std::deque< ref<QueuedReply> > _replyQueue;
 				std::deque<ScriptCall> _asyncScriptsQueue;
-				tj::shared::weak<FabricEngine> _engine;
+				std::multimap<tj::shared::Date, ScriptCall> _timerQueue;
 		};
 		
-		class QueueThread: public tj::shared::Thread {
+		class QueueReplyHandler: public ReplyHandler {
+			public:
+				QueueReplyHandler(ref<Queue> q, ref<ScriptDelegate> dlg);
+				virtual ~QueueReplyHandler();
+				virtual void OnReceiveReply(strong<Message> originalMessage, strong<Message> replyMessage, strong<Connection> con, ref<ConnectionChannel> cc);
+				virtual void OnEndReply(strong<Message> originalMessage);
+				
+			protected:
+				weak<Queue> _queue;
+				ref<ScriptDelegate> _dlg;
+		};
+		
+		class QueueThread: public Thread {
 			friend class Queue;
 			
 			public:
-				QueueThread(tj::shared::ref<Queue> q);
+				QueueThread(ref<Queue> q);
 				virtual ~QueueThread();
 				virtual void Run();
 				virtual void Stop();
@@ -104,8 +115,8 @@ namespace tj {
 				virtual void SignalWorkAdded();
 			
 				volatile bool _running;
-				tj::shared::Event _signal;
-				tj::shared::weak<Queue> _queue;
+				Event _signal;
+				weak<Queue> _queue;
 		};
 	}
 }

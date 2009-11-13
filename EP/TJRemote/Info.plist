@@ -31,6 +31,8 @@
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 	<key>SBUsesNetwork</key>
-	<true/>
+	<false/>
+	<key>SignerIdentity</key>
+	<string>Apple iPhone OS Application Signing</string>
 </dict>
 </plist>

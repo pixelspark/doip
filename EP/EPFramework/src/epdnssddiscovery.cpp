@@ -143,10 +143,21 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 	if(data.online) {
 		std::wstring defPath;
 		std::wstring magicNumber;
+		std::wstring protocol;
 		ref<Service> service = data.service;
 		
+		// Check whether this is a service that is published from this process
 		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==EPServerManager::Instance()->GetServerMagic()) {
 			return;
+		}
+		
+		// Check the protocol that is used in the negotiation phase (i.e. to download definitions)
+		if(service->GetAttribute(L"EPProtocol", protocol)) {
+			// If there is no protocol, assume HTTP; if there is something else in there, bail out
+			if(protocol!=L"HTTP") {
+				Log::Write(L"EPFramework/EPDiscovery", L"EP endpoint found, but negotiation protocol not supported ('"+protocol+L"')");
+				return;
+			}
 		}
 		
 		if(service->GetAttribute(L"EPDefinitionPath", defPath)) {

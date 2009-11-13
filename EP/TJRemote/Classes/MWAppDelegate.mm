@@ -8,13 +8,24 @@
 @synthesize endpointsNavigationController;
 @synthesize splashThrobber, splashBackground, regularBackground;
 
+- (void) timeoutTimer:(NSTimer*)timer {
+	if([[[MWClient sharedInstance] resolvedEndpoints] count]==0) {
+		UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"No devices found" message:@"No remotely controllable devices could be found on your network. Please check whether you are connected to the network. " delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Keep looking",nil];
+		[av show];
+		[av autorelease];
+	}
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    // Override point for customization after application launch
 	startingUp = YES;
 	
     [window makeKeyAndVisible];
 	MWClient* client = [MWClient sharedInstance];
 	client.delegate = self;
+	
+	// Set time-out timer
+	NSTimer* timer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(timeoutTimer:) userInfo:nil repeats:NO];
+	[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

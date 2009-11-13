@@ -4,56 +4,12 @@
 #include "../include/tjfabricmessagescriptable.h"
 #include "../include/tjfabric.h"
 #include "../include/tjfabricengine.h"
+#include "../include/tjfabricscriptables.h"
 
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::script;
 using namespace tj::ep;
-
-/** QueueGlobalScriptable **/
-namespace tj {
-	namespace fabric {
-		class ConnectionScriptable: public ScriptObject<ConnectionScriptable> {
-			public:
-				ConnectionScriptable(ref<Connection> c, ref<ConnectionChannel> chan);
-				virtual ~ConnectionScriptable();
-				static void Initialize();
-				virtual ref<Scriptable> SToString(ref<ParameterList> p);
-				virtual ref<Connection> GetConnection();
-				virtual ref<ConnectionChannel> GetConnectionChannel();
-
-			protected:
-				ref<Connection> _connection;
-				ref<ConnectionChannel> _channel;
-		};
-
-		class QueueGlobalScriptable: public ScriptObject<QueueGlobalScriptable> {
-			public:
-				QueueGlobalScriptable(ref<Queue> q);
-				virtual ~QueueGlobalScriptable();
-				static void Initialize();
-				virtual ref<Scriptable> SPrint(ref<ParameterList> p);
-				virtual ref<Scriptable> SSend(ref<ParameterList> p);
-				virtual ref<Scriptable> SDefer(ref<ParameterList> p);
-				virtual ref<Scriptable> STry(ref<ParameterList> p);
-			
-			protected:
-				weak<Queue> _queue;
-		};
-
-		class QueueReplyHandler: public ReplyHandler {
-			public:
-				QueueReplyHandler(ref<Queue> q, ref<ScriptDelegate> dlg);
-				virtual ~QueueReplyHandler();
-				virtual void OnReceiveReply(strong<Message> originalMessage, strong<Message> replyMessage, strong<Connection> con, ref<ConnectionChannel> cc);
-				virtual void OnEndReply(strong<Message> originalMessage);
-
-			protected:
-				weak<Queue> _queue;
-				ref<ScriptDelegate> _dlg;
-		};
-	}
-}
 
 /** QueueReplyHandler **/
 QueueReplyHandler::QueueReplyHandler(ref<Queue> q, ref<ScriptDelegate> dlg): _queue(q), _dlg(dlg) {
@@ -119,6 +75,12 @@ void Queue::Add(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc)
 	SignalWorkAdded();
 }
 
+void Queue::AddTimedScriptCall(const Date& date, ref<ScriptDelegate> dlg, ref<ScriptScope> sc) {
+	ThreadLock lock(&_lock);
+	_timerQueue.insert(std::pair<Date, ScriptCall>(date, ScriptCall(dlg,sc)));
+	SignalWorkAdded();
+}
+
 void Queue::SignalWorkAdded() {
 	if(!_thread) {
 		_thread = GC::Hold(new QueueThread(this));
@@ -131,6 +93,7 @@ void Queue::OnCreated() {
 	_global = GC::Hold(new ScriptScope());
 	_context = GC::Hold(new ScriptContext(GC::Hold(new QueueGlobalScriptable(this))));
 	_context->AddType(L"Message", GC::Hold(new MessageScriptType()));
+	_context->AddType(L"Date", GC::Hold(new DateScriptType()));
 }
 
 void Queue::WaitForCompletion() {
@@ -228,7 +191,7 @@ void Queue::AddDiscoveryScriptCall(ref<DiscoveryDefinition> def, ref<Connection>
 			ref<ScriptScope> sc = GC::Hold(new ScriptScope());
 			sc->Set(L"globals", _global);
 			sc->Set(L"source", GC::Hold(new ConnectionScriptable(connection, null)));
-			RunAsynchronously(GC::Hold(new ScriptDelegate(cs, _context)), sc);
+			AddDeferredScriptCall(GC::Hold(new ScriptDelegate(cs, _context)), sc);
 		}
 	}
 	catch(const ParserException& e) {
@@ -236,8 +199,7 @@ void Queue::AddDiscoveryScriptCall(ref<DiscoveryDefinition> def, ref<Connection>
 	}
 }
 
-
-void Queue::RunAsynchronously(ref<ScriptDelegate> dlg, ref<ScriptScope> scope) {
+void Queue::AddDeferredScriptCall(ref<ScriptDelegate> dlg, ref<ScriptScope> scope) {
 	if(dlg) {
 		ThreadLock lock(&_lock);
 		_asyncScriptsQueue.push_back(ScriptCall(dlg,scope));
@@ -251,7 +213,10 @@ void Queue::ProcessScriptCall(Queue::ScriptCall& call) {
 	try {
 		ref<ScriptContext> ctx = call.first->GetContext();
 		if(ctx) {
-			ctx->Execute(call.first->GetScript(), call.second);
+			ref<ScriptScope> sc = GC::Hold(new ScriptScope());
+			sc->Set(L"globals", _global);
+			sc->SetPrevious(call.second);
+			ctx->Execute(call.first->GetScript(), sc);
 		}
 		else {
 			Throw(L"No context set for asynchronous script delegate; script not executed", ExceptionTypeError);
@@ -293,6 +258,9 @@ void QueueThread::Stop() {
 }
 
 void QueueThread::Run() {
+	const static double KMaxWaitSeconds = 10;
+	const static double KTimerPrecisionSeconds = 0.001;
+	
 	Log::Write(L"TJFabric/QueueThread", L"Queue processing thread started");
 	
 	while(_running) {
@@ -302,6 +270,8 @@ void QueueThread::Run() {
 			return;
 		}
 		
+		AbsoluteDate nextTimer = 0.0;
+		bool hasNextTimer = false;
 		// Process queue
 		{
 			ref<Queue> q = _queue;
@@ -311,6 +281,29 @@ void QueueThread::Run() {
 			}
 			
 			ThreadLock lock(&(q->_lock));
+			
+			// Process timed scripts
+			if(q->_timerQueue.size()>0) {
+				Date now;
+				std::multimap<Date, Queue::ScriptCall>::iterator it = q->_timerQueue.begin();
+				while(it!=q->_timerQueue.end()) {
+					if((it->first).ToAbsoluteDate() < (now.ToAbsoluteDate()+KTimerPrecisionSeconds)) {
+						// Run and delete
+						Log::Write(L"TJFabric/Queue", L"Timer for "+(it->first.ToFriendlyString())+L" run at "+(now.ToFriendlyString()));
+						q->ProcessScriptCall(it->second);
+						q->_timerQueue.erase(it++);
+					}
+					++it;
+				}
+				
+				if(q->_timerQueue.size()>0) {
+					hasNextTimer = true;
+					nextTimer = (q->_timerQueue.begin())->first.ToAbsoluteDate();
+				}
+				else {
+					hasNextTimer = false;
+				}
+			}
 			
 			// Process asynchronous scripts
 			if(q->_asyncScriptsQueue.size()>0) {
@@ -354,138 +347,14 @@ void QueueThread::Run() {
 			}
 		}
 		
-		_signal.Wait();
-	}
-}
-
-/** QueueGlobalScriptable **/
-QueueGlobalScriptable::QueueGlobalScriptable(ref<Queue> q): _queue(q) {
-}
-
-QueueGlobalScriptable::~QueueGlobalScriptable() {
-}
-
-void QueueGlobalScriptable::Initialize() {
-	Bind(L"print", &QueueGlobalScriptable::SPrint);
-	Bind(L"send", &QueueGlobalScriptable::SSend);
-	Bind(L"defer", &QueueGlobalScriptable::SDefer);
-	Bind(L"try", &QueueGlobalScriptable::STry);
-}
-
-ref<Scriptable> QueueGlobalScriptable::STry(ref<ParameterList> p) {
-	ref<Scriptable> ms = p->Get(L"0");
-	
-	if(ms && ms.IsCastableTo<ScriptDelegate>()) {
-		ref<Queue> q = _queue;
-		if(q) {
-			ref<ScriptDelegate> dgate = ms;
-			try {
-				p->Set(L"globals", q->_global);
-				q->_context->Execute(dgate->GetScript(), p);
-			}
-			catch(const Exception& e) {
-				Log::Write(L"TJFabric/Queue", L"Try-block exception: "+e.GetMsg());
-			}
-			catch(const std::exception& e) {
-				Log::Write(L"TJFabric/Queue", L"Try-block standard exception: "+Wcs(e.what()));
-			}
-			catch(...) {
-				Log::Write(L"TJFabric/Queue", L"Unknown exception in try-block");
-			}
-			return ScriptConstants::Null;
+		if(hasNextTimer) {
+			Date now;
+			AbsoluteDateInterval seconds = nextTimer - now.ToAbsoluteDate();
+			int ms = Util::Max(int(KTimerPrecisionSeconds*1000.0), Util::Min(int(KMaxWaitSeconds*1000.0), int(seconds*1000.0)));
+			_signal.Wait(ms);
+		}
+		else {
+			_signal.Wait();
 		}
 	}
-	Throw(L"Invalid argument to defer; should be a delegate!", ExceptionTypeError);
-	
-}
-
-ref<Scriptable> QueueGlobalScriptable::SDefer(ref<ParameterList> p) {
-	return null; // Not implemented yet
-}
-
-ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {	
-	Log::Write(L"TJFabric/QueueGlobalScriptable", L"SSend");
-
-	ref<Scriptable> ms = p->Get(L"message");
-	if(!ms) {
-		ms = p->Get(L"1");
-	}
-
-	ref<Scriptable> rh = p->Get(L"reply");
-	if(!rh) {
-		rh = p->Get(L"2");
-	}
-
-	ref<Scriptable> to = p->Get(L"to");
-	if(!to) {
-		to = p->Get(L"0");
-		if(!to) {
-			throw ScriptException(L"Missing parameter 'to' in send method");
-		}
-	}
-	
-	if(ms && ms.IsCastableTo<MessageScriptable>()) {
-		strong<Message> m = ref<MessageScriptable>(ms)->GetMessage();
-		ref<Queue> q = _queue;
-		if(q) {
-			ref<FabricEngine> fe = q->_engine;
-			if(fe) {
-				// If we have a handler delegate, hand it to the engine
-				ref<ScriptDelegate> handler;
-				ref<ReplyHandler> replyHandler;
-				if(rh.IsCastableTo<ScriptDelegate>()) {
-					handler = rh;
-					Log::Write(L"TJFabric/QueueGlobalScriptable", L"Has handler in SSend, creating delegate-based reply handler");
-					replyHandler = GC::Hold(new QueueReplyHandler(q, handler));
-				}
-
-				if(to.IsCastableTo<ConnectionScriptable>()) {
-					ref<ConnectionScriptable> conScriptable = to;
-					if(conScriptable) {
-						Log::Write(L"TJFabric/QueueGlobalScriptable", L"Has connection in SSend");
-						ref<Connection> connection = conScriptable->GetConnection();
-						if(connection) {
-							connection->Send(m, replyHandler, conScriptable->GetConnectionChannel());
-						}
-						else {
-							Throw(L"Cannot send() to null connection", ExceptionTypeError);
-						}
-					}
-				}
-				else {
-					fe->Send(ScriptContext::GetValue<std::wstring>(to, L""), m, replyHandler);
-				}
-			}
-		}
-	}
-	return ScriptConstants::Null;
-}
-
-ref<Scriptable> QueueGlobalScriptable::SPrint(ref<ParameterList> p) {
-	static script::Parameter<std::wstring> PMessage(L"message", 0);
-	std::wstring msg = PMessage.Require(p, L"");
-	Log::Write(L"TJFabric/Script", msg);
-	return ScriptConstants::Null;
-}
-
-ConnectionScriptable::ConnectionScriptable(ref<Connection> c, ref<ConnectionChannel> cc): _connection(c), _channel(cc) {
-}
-
-ConnectionScriptable::~ConnectionScriptable() {
-}
-
-void ConnectionScriptable::Initialize() {
-	Bind(L"toString", &ConnectionScriptable::SToString);
-}
-
-ref<Scriptable> ConnectionScriptable::SToString(ref<ParameterList> p) {
-	return GC::Hold(new ScriptString(L"[Connection]"));
-}
-
-ref<Connection> ConnectionScriptable::GetConnection() {
-	return _connection;
-}
-
-ref<ConnectionChannel> ConnectionScriptable::GetConnectionChannel() {
-	return _channel;
 }
