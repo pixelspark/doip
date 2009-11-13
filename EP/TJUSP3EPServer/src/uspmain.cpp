@@ -1,7 +1,7 @@
-#include "../../../TJShared/include/tjshared.h"
-#include "../../EPFramework/include/ependpointserver.h"
-#include "../../EPFramework/include/eppublication.h"
-#include "../../EPFramework/include/eposcipconnection.h"
+#include <TJShared/include/tjshared.h>
+#include <EP/include/ependpointserver.h>
+#include <EP/include/eppublication.h>
+#include <EP/include/eposcipconnection.h>
 
 using namespace tj::shared;
 using namespace tj::ep;

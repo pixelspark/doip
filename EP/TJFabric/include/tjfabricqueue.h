@@ -1,11 +1,11 @@
 #ifndef _TJ_FABRIC_QUEUE_H
 #define _TJ_FABRIC_QUEUE_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../../TJScript/include/tjscript.h"
-#include "../../EPFramework/include/epmessage.h"
-#include "../../EPFramework/include/epconnection.h"
-#include "../../EPFramework/include/epdiscovery.h"
+#include <TJShared/include/tjshared.h>
+#include <TJScript/include/tjscript.h>
+#include <EP/include/epmessage.h>
+#include <EP/include/epconnection.h>
+#include <EP/include/epdiscovery.h>
 
 namespace tj {
 	namespace fabric {

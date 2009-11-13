@@ -1,7 +1,7 @@
 #ifndef _TJ_EP_DISCOVERY_H
 #define _TJ_EP_DISCOVERY_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "epconnection.h"
 
 namespace tj {

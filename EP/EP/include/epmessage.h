@@ -1,7 +1,7 @@
 #ifndef _TJ_EP_MESSAGE_H
 #define _TJ_EP_MESSAGE_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 
 namespace tj {
 	namespace ep {

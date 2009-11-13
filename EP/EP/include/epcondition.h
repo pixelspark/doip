@@ -1,7 +1,7 @@
 #ifndef _EP_CONDITION_H
 #define _EP_CONDITION_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "ependpoint.h"
 
 namespace tj {

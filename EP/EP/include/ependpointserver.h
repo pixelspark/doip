@@ -1,7 +1,7 @@
 #ifndef _TJ_EP_EPENDPOINTSERVER_H
 #define _TJ_EP_EPENDPOINTSERVER_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "ependpoint.h"
 #include "epconnection.h"
 

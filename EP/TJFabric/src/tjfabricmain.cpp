@@ -1,11 +1,11 @@
 #include "../include/tjfabricengine.h"
 #include "../include/tjfabricrule.h"
 #include "../include/tjfabricqueue.h"
-#include "../../../TJScript/include/tjscript.h"
-#include "../../../TJNP/include/tjnetworkaddress.h"
-#include "../../../TJNP/include/tjsocket.h"
-#include "../../../TJNP/include/tjhttp.h"
-#include "../../EPFramework/include/epmessage.h"
+#include <TJScript/include/tjscript.h>
+#include <TJNP/include/tjnetworkaddress.h>
+#include <TJNP/include/tjsocket.h>
+#include <TJNP/include/tjhttp.h>
+#include <EP/include/epmessage.h>
 
 #include <iomanip>
 #include <sstream>

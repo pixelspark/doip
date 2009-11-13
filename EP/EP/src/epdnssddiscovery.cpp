@@ -1,8 +1,8 @@
 #include "../include/epdnssddiscovery.h"
 #include "../include/eposcipconnection.h"
 #include "../include/epservermanager.h"
-#include "../../../TJScout/include/tjscout.h"
-#include "../../../TJNP/include/tjnetworkaddress.h"
+#include <TJScout/include/tjscout.h>
+#include <TJNP/include/tjnetworkaddress.h>
 using namespace tj::shared;
 using namespace tj::ep;
 using namespace tj::scout;

@@ -1,13 +1,13 @@
 #ifndef _TJ_EP_OSCIP_CONNECTION_H
 #define _TJ_EP_OSCIP_CONNECTION_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../../TJNP/include/tjsocket.h"
-#include "../../../TJNP/include/tjnetworkaddress.h"
-#include "../../../TJScout/include/tjservice.h"
-#include "../../../TJNP/include/tjslip.h"
+#include <TJShared/include/tjshared.h>
+#include <TJNP/include/tjsocket.h>
+#include <TJNP/include/tjnetworkaddress.h>
+#include <TJScout/include/tjservice.h>
+#include <TJNP/include/tjslip.h>
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "epconnection.h"
 
 namespace osc {

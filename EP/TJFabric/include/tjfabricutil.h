@@ -1,7 +1,7 @@
 #ifndef _TJ_FABRIC_UTIL_H
 #define _TJ_FABRIC_UTIL_H
 
-#include "../../../TJShared/include/tjshared.h"
+#include <TJShared/include/tjshared.h>
 
 namespace tj {
 	namespace fabric {

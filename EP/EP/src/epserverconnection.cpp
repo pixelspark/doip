@@ -1,6 +1,6 @@
 #include "../include/epserverconnection.h"
 #include "../include/epservermanager.h"
-#include "../../../TJNP/include/tjnetworkaddress.h"
+#include <TJNP/include/tjnetworkaddress.h>
 
 using namespace tj::shared;
 using namespace tj::ep;

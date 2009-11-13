@@ -1,9 +1,9 @@
 #ifndef _TJ_FABRIC_SCRIPTABLES_H
 #define _TJ_FABRIC_SCRIPTABLES_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../../TJScript/include/tjscript.h"
-#include "../../EPFramework/include/epconnection.h"
+#include <TJShared/include/tjshared.h>
+#include <TJScript/include/tjscript.h>
+#include <EP/include/epconnection.h>
 
 namespace tj {
 	namespace fabric {

@@ -1,10 +1,10 @@
 #include "../include/eposcipconnection.h"
 #include "../include/epmessage.h"
 
-#include "../../../Libraries/OSCPack/osc/OscOutboundPacketStream.h"
-#include "../../../Libraries/OSCPack/osc/OscReceivedElements.h"
-#include "../../../Libraries/OSCPack/osc/OscPacketListener.h"
-#include "../../../Libraries/OSCPack/osc/OscPrintReceivedElements.h"
+#include <OSCPack/OscOutboundPacketStream.h>
+#include <OSCPack/OscReceivedElements.h>
+#include <OSCPack/OscPacketListener.h>
+#include <OSCPack/OscPrintReceivedElements.h>
 
 #include <limits>
 #include <errno.h>

@@ -1,9 +1,9 @@
 #ifndef _TJ_EP_DOWNLOAD_H
 #define _TJ_EP_DOWNLOAD_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "ependpoint.h"
-#include "../../../TJNP/include/tjhttp.h"
+#include <TJNP/include/tjhttp.h>
 
 #pragma warning (push)
 #pragma warning (disable: 4251 4275)

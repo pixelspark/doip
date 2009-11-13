@@ -1,8 +1,8 @@
 #ifndef _TJ_FABRIC_MESSAGE_SCRIPTABLE_H
 #define _TJ_FABRIC_MESSAGE_SCRIPTABLE_H
 
-#include "../../EPFramework/include/epmessage.h"
-#include "../../../TJScript/include/tjscript.h"
+#include <EP/include/epmessage.h>
+#include <TJScript/include/tjscript.h>
 
 namespace tj {
 	namespace fabric {

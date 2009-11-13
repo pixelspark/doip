@@ -1,11 +1,11 @@
 #ifndef _TJ_FABRIC_ENGINE_H
 #define _TJ_FABRIC_ENGINE_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../../TJNP/include/tjwebserver.h"
-#include "../../../TJScout/include/tjservice.h"
-#include "../../../TJScript/include/tjscript.h"
-#include "../../EPFramework/include/epmessage.h"
+#include <TJShared/include/tjshared.h>
+#include <TJNP/include/tjwebserver.h>
+#include <TJScout/include/tjservice.h>
+#include <TJScript/include/tjscript.h>
+#include <EP/include/epmessage.h>
 #include "tjfabric.h"
 #include "tjfabricconnection.h"
 #include "tjfabricregistry.h"

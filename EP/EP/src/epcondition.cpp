@@ -1,5 +1,5 @@
 #include "../include/epcondition.h"
-#include "../../../TJNP/include/tjpattern.h"
+#include <TJNP/include/tjpattern.h>
 using namespace tj::shared;
 using namespace tj::ep;
 using namespace tj::np::pattern;

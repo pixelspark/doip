@@ -1,10 +1,10 @@
 #ifndef _TJ_EP_CONNECTION_H
 #define _TJ_EP_CONNECTION_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "ependpoint.h"
 #include "epmessage.h"
-#include "../../../TJNP/include/tjnetworkaddress.h"
+#include <TJNP/include/tjnetworkaddress.h>
 
 namespace tj {
 	namespace ep {

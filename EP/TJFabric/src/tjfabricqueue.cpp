@@ -1,5 +1,5 @@
 #include "../include/tjfabricqueue.h"
-#include "../../../TJScript/include/tjscript.h"
+#include <TJScript/include/tjscript.h>
 #include "../include/tjfabricrule.h"
 #include "../include/tjfabricmessagescriptable.h"
 #include "../include/tjfabric.h"

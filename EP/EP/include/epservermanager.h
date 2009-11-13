@@ -1,8 +1,9 @@
 #ifndef _TJ_EP_SERVER_MGR_H
 #define _TJ_EP_SERVER_MGR_H
 
+#include "epinternal.h"
 #include "ependpoint.h"
-#include "../../../TJNP/include/tjwebserver.h"
+#include <TJNP/include/tjwebserver.h>
 
 namespace tj {
 	namespace ep {

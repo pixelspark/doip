@@ -1,8 +1,8 @@
 #ifndef _TJ_EP_DNSSD_DISCOVERY_H
 #define _TJ_EP_DNSSD_DISCOVERY_H
 
-#include "../../../TJScout/include/tjresolver.h"
-#include "internal/ep.h"
+#include <TJScout/include/tjresolver.h>
+#include "epinternal.h"
 #include "epdiscovery.h"
 #include "epcondition.h"
 #include "epdownload.h"

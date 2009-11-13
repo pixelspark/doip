@@ -1,12 +1,12 @@
 #ifndef _TJ_FABRIC_CONNECTION_H
 #define _TJ_FABRIC_CONNECTION_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../EPFramework/include/ependpoint.h"
-#include "../../EPFramework/include/epdiscovery.h"
-#include "../../EPFramework/include/epconnection.h"
-#include "../../EPFramework/include/epmessage.h"
-#include "../../../TJNP/include/tjnetworkaddress.h"
+#include <TJShared/include/tjshared.h>
+#include <EP/include/ependpoint.h>
+#include <EP/include/epdiscovery.h>
+#include <EP/include/epconnection.h>
+#include <EP/include/epmessage.h>
+#include <TJNP/include/tjnetworkaddress.h>
 #include "tjfabricgroup.h"
 
 namespace tj {

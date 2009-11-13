@@ -1,7 +1,7 @@
 #ifndef _TJ_EP_EPENDPOINT_H
 #define _TJ_EP_EPENDPOINT_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 
 #pragma warning (push)
 #pragma warning (disable: 4251 4275)

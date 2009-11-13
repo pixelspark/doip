@@ -1,8 +1,8 @@
 #ifndef _TJ_FABRIC_REGISTRY_H
 #define _TJ_FABRIC_REGISTRY_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../EPFramework/include/epmessage.h"
+#include <TJShared/include/tjshared.h>
+#include <EP/include/epmessage.h>
 
 namespace tj {
 	namespace fabric {

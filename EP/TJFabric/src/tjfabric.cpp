@@ -1,7 +1,7 @@
 #include "../include/tjfabric.h"
 #include "../include/tjfabricrule.h"
 #include "../include/tjfabricgroup.h"
-#include "../../EPFramework/include/epconnection.h"
+#include <EP/include/epconnection.h>
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;

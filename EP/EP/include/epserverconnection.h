@@ -1,10 +1,10 @@
 #ifndef _TJ_EP_SERVER_CONNECTION_H
 #define _TJ_EP_SERVER_CONNECTION_H
 
-#include "internal/ep.h"
+#include "epinternal.h"
 #include "epconnection.h"
-#include "../../../TJScout/include/tjservice.h"
-#include "../../../TJNP/include/tjwebserver.h"
+#include <TJScout/include/tjservice.h>
+#include <TJNP/include/tjwebserver.h>
 
 namespace tj {
 	namespace ep {

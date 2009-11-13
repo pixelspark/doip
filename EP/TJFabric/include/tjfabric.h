@@ -1,8 +1,8 @@
 #ifndef _TJ_FABRIC_H
 #define _TJ_FABRIC_H
 
-#include "../../../TJShared/include/tjshared.h"
-#include "../../EPFramework/include/ependpoint.h"
+#include <TJShared/include/tjshared.h>
+#include <EP/include/ependpoint.h>
 
 namespace tj {
 	namespace fabric {
