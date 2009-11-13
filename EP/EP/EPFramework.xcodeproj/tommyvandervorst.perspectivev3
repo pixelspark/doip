@@ -277,14 +277,11 @@
 								<string>034768DFFF38A50411DB9C8B</string>
 								<string>8DC2EF5B0486A6940098B216</string>
 								<string>1C37FBAC04509CD000000102</string>
-								<string>B4CAA73110AD611E00385A5F</string>
-								<string>B4CAA88A10AD65CE00385A5F</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
 									<integer>31</integer>
-									<integer>30</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -333,7 +330,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4CAA9FD10AD689900385A5F</string>
+										<string>B4CAAAFD10AD711400385A5F</string>
 										<key>history</key>
 										<array>
 											<string>B462AFDD1098F16D00484C29</string>
@@ -341,7 +338,6 @@
 											<string>B46954CD10A6E40D0045DB2D</string>
 											<string>B46954CF10A6E40D0045DB2D</string>
 											<string>B497DA0010AD599800EB9CB8</string>
-											<string>B497DB2110AD601D00EB9CB8</string>
 											<string>B497DB2410AD601D00EB9CB8</string>
 											<string>B497DB2710AD601D00EB9CB8</string>
 											<string>B497DB2B10AD601D00EB9CB8</string>
@@ -355,8 +351,7 @@
 											<string>B4CAA89210AD65CE00385A5F</string>
 											<string>B4CAA89410AD65CE00385A5F</string>
 											<string>B4CAA8FA10AD66CB00385A5F</string>
-											<string>B4CAA8FB10AD66CB00385A5F</string>
-											<string>B4CAA8FD10AD66CB00385A5F</string>
+											<string>B4CAA9FD10AD689900385A5F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -370,18 +365,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 470}}</string>
+								<string>{{0, 0}, {1073, 460}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 93 1280 909 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>470pt</string>
+							<string>460pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>393pt</string>
+							<string>403pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -397,7 +392,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 366}}</string>
+										<string>{{10, 27}, {1073, 376}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 93 1280 909 0 0 1280 1002 </string>
 									</dict>
@@ -481,11 +476,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4CAA89810AD65CE00385A5F</string>
+				<string>B4CAAAFE10AD711400385A5F</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B4CAA89910AD65CE00385A5F</string>
+				<string>B4CAAAFF10AD711400385A5F</string>
 				<string>B462AED11098DF9200484C29</string>
-				<string>B4CAA89A10AD65CE00385A5F</string>
+				<string>B4CAAB0010AD711400385A5F</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -655,7 +650,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/EPFramework/EPFramework.xcodeproj</string>
+		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/EPFramework.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 93 1280 909 0 0 1280 1002 </string>
