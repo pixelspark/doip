@@ -19,6 +19,8 @@ void Rule::GetReplies(std::vector< tj::shared::ref<tj::ep::EPReply> >& replyList
 	}
 }
 
+
+
 void Rule::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall<std::wstring>(me, "id", L"");
 	_script = LoadAttribute<std::wstring>(me, "script", L"");
@@ -37,7 +39,7 @@ void Rule::Load(TiXmlElement* me) {
 	
 	TiXmlElement* tag = me->FirstChildElement("parameter");
 	while(tag!=0) {
-		ref<Parameter> param = GC::Hold(new Parameter());
+		ref<EPParameterDefinition> param = GC::Hold(new EPParameterDefinition());
 		param->Load(tag);
 		_parameters.push_back(param);
 		tag = tag->NextSiblingElement("parameter");
@@ -69,9 +71,9 @@ void Rule::GetPaths(std::set<EPPath>& pathList) const {
 }
 
 void Rule::GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const {
-	std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
+	std::deque< ref<EPParameterDefinition> >::const_iterator pit = _parameters.begin();
 	while(pit!=_parameters.end()) {
-		ref<Parameter> param = *pit;
+		ref<EPParameterDefinition> param = *pit;
 		if(param) {
 			parameterList.push_back(param);
 		}
@@ -94,9 +96,9 @@ void Rule::SaveRule(TiXmlElement* me) {
 		++it;
 	}
 	
-	std::deque< ref<Parameter> >::const_iterator pit = _parameters.begin();
+	std::deque< ref<EPParameterDefinition> >::const_iterator pit = _parameters.begin();
 	while(pit!=_parameters.end()) {
-		ref<Parameter> param = *pit;
+		ref<EPParameterDefinition> param = *pit;
 		if(param) {
 			TiXmlElement tag("parameter");
 			param->Save(&tag);
@@ -139,47 +141,4 @@ String Rule::ToString() const {
 		}
 	}
 	return wos.str();
-}
-
-/** Parameter **/
-Parameter::Parameter() {
-}
-
-Parameter::~Parameter() {
-}
-
-void Parameter::Save(TiXmlElement* me) {
-	SaveAttributeSmall(me, "friendly-name", _friendly);
-	SaveAttributeSmall(me, "type", _type);
-	SaveAttributeSmall(me, "min", _min);
-	SaveAttributeSmall(me, "max", _max);
-	SaveAttributeSmall(me, "default", _default);
-}
-
-void Parameter::Load(TiXmlElement* me) {
-	_friendly = LoadAttributeSmall<std::wstring>(me, "friendly-name", _friendly);
-	_type = LoadAttributeSmall<std::wstring>(me, "type", _type);
-	_min = LoadAttributeSmall<std::wstring>(me, "min", _min);
-	_max = LoadAttributeSmall<std::wstring>(me, "max", _max);
-	_default = LoadAttributeSmall<std::wstring>(me, "default", _default);
-}
-
-std::wstring Parameter::GetFriendlyName() const {
-	return _friendly;
-}
-
-std::wstring Parameter::GetType() const {
-	return _type;
-}
-
-Any Parameter::GetMinimumValue() const {
-	return Any(_min).Force(GetValueType());
-}
-
-Any Parameter::GetMaximumValue() const {
-	return Any(_max).Force(GetValueType());
-}
-
-Any Parameter::GetDefaultValue() const {
-	return Any(_default).Force(GetValueType());
 }

@@ -2,6 +2,62 @@
 #import "MWEndpoint.h"
 #import "../../../Libraries/TinyXML/tinyxml.h"
 
+@implementation MWSliderView
+
+- (void) updateLabel {
+	if(_parameter.discrete) {
+		[_label setText:[NSString stringWithFormat:@"%d",[[_parameter value] intValue]]];
+	}
+	else {
+		[_label setText:[NSString stringWithFormat:@"%0.2f",[[_parameter value] floatValue]]];
+	}
+};
+
+- (id) initWithFrame:(CGRect)rect parameter:(MWParameter*)parameter immediate:(bool)imm {
+	const static int KLabelWidth = 64;
+	
+	if(self = [super initWithFrame:rect]) {
+		_parameter = parameter;
+		[_parameter retain];
+		_slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, rect.size.width-KLabelWidth, rect.size.height)];
+		[_slider setMinimumValue:[[parameter minimumValue] floatValue]];
+		[_slider setMaximumValue:[[parameter maximumValue] floatValue]];
+		[_slider setValue:[[parameter value] floatValue]];
+		[_slider addTarget:self action:@selector(sliderValueChanged:event:) forControlEvents:UIControlEventValueChanged];
+		if(imm) {
+			[_slider addTarget:parameter action:@selector(executeHandler:event:) forControlEvents:UIControlEventValueChanged];
+		}
+		[_slider setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+		[self addSubview:_slider];
+		
+		// Add label
+		_label = [[UILabel alloc] initWithFrame:CGRectMake(rect.size.width-KLabelWidth, 0, KLabelWidth, rect.size.height)];
+		[_label setBackgroundColor:[UIColor clearColor]];
+		[_label setOpaque:FALSE];
+		[_label setTextColor:[UIColor whiteColor]];
+		[_label setTextAlignment:UITextAlignmentRight];
+		[_label setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+		[self updateLabel];
+		[self addSubview:_label];
+	}
+	return self;
+}
+- (void) sliderValueChanged: (UIView*)slider event:(UIEvent*)evt {
+	[_parameter sliderValueChanged:slider event:evt];
+	[self updateLabel];
+};
+
+
+- (void) dealloc {
+	[_parameter release];
+	[_slider release];
+	[_label release];
+	[super dealloc];
+}
+
+@end
+
+
 @implementation MWParameter
 @synthesize friendlyName = _friendly;
 @synthesize minimumValue = _min;
@@ -11,21 +67,22 @@
 @synthesize parent = _parent;
 @synthesize value = _value;
 @synthesize identifier = _id;
+@synthesize discrete = _discrete;
 
 - (void) textValueChanged: (UIView*)view event:(UIEvent*)evt {
 	self.value = [(UITextField*)view text];
 }
 
 - (void) sliderValueChanged: (UIView*)slider event:(UIEvent*)evt {
-	self.value = [NSNumber numberWithFloat:((UISlider*)slider).value];
+	self.value = [[NSNumber numberWithFloat:((UISlider*)slider).value] stringValue];
 };
-
-- (void) switchValueChanged: (UISwitch*)sw event:(UIEvent*)evt {
-	self.value = [NSNumber numberWithBool:((UISwitch*)sw).on];
-}
 
 - (void) executeHandler: (UIView*)vw event:(UIEvent*)evt {
 	[self.parent execute];
+}
+
+- (void) switchValueChanged: (UISwitch*)sw event:(UIEvent*)evt {
+	self.value = [[NSNumber numberWithBool:((UISwitch*)sw).on] stringValue];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -35,16 +92,9 @@
 
 - (UIView*) createView: (CGRect)rect immediate:(BOOL)imm {
 	if([_type isEqualToString:@"int32"] || [_type isEqualToString:@"double"]) {
-		UISlider* slider = [[UISlider alloc] initWithFrame:rect];
-		[slider setMinimumValue:[_min floatValue]];
-		[slider setMaximumValue:[_max floatValue]];
-		[slider setValue:[((NSNumber*)self.value) floatValue]];
-		[slider addTarget:self action:@selector(sliderValueChanged:event:) forControlEvents:UIControlEventValueChanged];
-		if(imm) {
-			[slider addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventValueChanged];
-		}
-		[slider autorelease];
-		return slider;
+		MWSliderView* sv = [[MWSliderView alloc] initWithFrame:rect parameter:self immediate:imm];
+		[sv autorelease];
+		return sv;
 	}
 	else if([_type isEqualToString:@"bool"]) {
 		UISwitch* sw = [[UISwitch alloc] initWithFrame:rect];
@@ -69,17 +119,30 @@
 	return nil;
 }
 
+- (NSString*) attribute:(const char*)name fromElement:(TiXmlElement*)elm defaultsTo:(NSString*)def {
+	const char* value = elm->Attribute(name);
+	if(value==0) {
+		return def;
+	}
+	return [NSString stringWithUTF8String:value];
+}
+
 - (id) initFromDefinition:(TiXmlElement *)def inMethod:(MWMethod*)method {
 	if(self = [super init]) {
 		@try {
 			self.parent = method;
-			self.friendlyName = [NSString stringWithUTF8String:def->Attribute("friendly-name")];
-			self.type = [NSString stringWithUTF8String:def->Attribute("type")];
-			self.defaultValue = [NSString stringWithUTF8String:def->Attribute("default")];
+			self.friendlyName = [self attribute:"friendly-name" fromElement:def defaultsTo:@""];
+			self.type = [self attribute:"type" fromElement:def defaultsTo:@""];
+			self.defaultValue = [self attribute:"default" fromElement:def defaultsTo:@""];
 			self.value = self.defaultValue;
-			self.minimumValue = [NSString stringWithUTF8String:def->Attribute("min")];
-			self.maximumValue = [NSString stringWithUTF8String:def->Attribute("max")];
-			self.identifier = [NSString stringWithUTF8String:def->Attribute("id")];
+			self.minimumValue = [self attribute:"min" fromElement:def defaultsTo:@""];
+			self.maximumValue = [self attribute:"max" fromElement:def defaultsTo:@""];
+			self.identifier = [self attribute:"id" fromElement:def defaultsTo:@""];
+			_discrete = false;
+			if(def->Attribute("discrete")!=0) {
+				_discrete = [[NSString stringWithUTF8String:def->Attribute("discrete")] isEqualToString:@"yes"];
+				NSLog(@"Method is discrete? %d", _discrete);
+			}
 		}
 		@catch (NSException * e) {
 			NSLog(@"Invalid parameter specification, an attribute is probably missing; error was %@", [e reason]);

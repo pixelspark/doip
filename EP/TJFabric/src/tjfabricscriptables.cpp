@@ -68,6 +68,10 @@ ref<Scriptable> DateScriptable::SAbsolute(ref<ParameterList> p) {
 	return GC::Hold(new ScriptDouble(_date.ToAbsoluteDate()));
 }
 
+ref<Scriptable> DateScriptable::SToString(ref<ParameterList> p) {
+	return GC::Hold(new ScriptString(_date.ToFriendlyString()));
+}
+
 ref<Scriptable> DateScriptable::SMonth(ref<ParameterList> p) {
 	return GC::Hold(new ScriptInt(_date.GetMonth()));
 }
@@ -91,6 +95,35 @@ ref<Scriptable> DateScriptable::SMinute(ref<ParameterList> p) {
 
 ref<Scriptable> DateScriptable::SSecond(ref<ParameterList> p) {
 	return GC::Hold(new ScriptInt(_date.GetSeconds()));
+}
+
+/** TimedScriptExecution **/
+namespace tj {
+	namespace fabric {
+		class TimedScriptExecution: public virtual Object, public virtual Timed {
+			public:
+				TimedScriptExecution(ref<Queue> queue, strong<ScriptDelegate> dlg, ref<ScriptScope> scope): _delegate(dlg), _scope(scope), _queue(queue) {
+				}
+			
+				virtual ~TimedScriptExecution() {
+				}
+			
+				virtual void Run() {
+					ref<Queue> q = _queue;
+					if(q) {
+						q->ProcessScriptCall(_delegate, _scope);
+					}
+					else {
+						Throw(L"TimedScriptExecution without Queue!", ExceptionTypeError);
+					}
+				}	
+			
+			protected:
+				weak<Queue> _queue;
+				strong<ScriptDelegate> _delegate;
+				ref<ScriptScope> _scope;
+		};
+	}
 }
 
 /** QueueGlobalScriptable **/
@@ -129,7 +162,9 @@ ref<Scriptable> QueueGlobalScriptable::SSchedule(ref<ParameterList> p) {
 		
 		ref<Queue> q = _queue;
 		if(q) {
-			q->AddTimedScriptCall(ref<DateScriptable>(date)->GetDate(), ref<ScriptDelegate>(dlg), p);
+			ref<TimedScriptExecution> tse = GC::Hold(new TimedScriptExecution(q,ref<ScriptDelegate>(dlg), p));
+			q->AddTimed(ref<DateScriptable>(date)->GetDate(), ref<Timed>(tse));
+			return GC::Hold(new TimedScriptable(ref<Timed>(tse)));
 		}
 		return ScriptConstants::Null;
 	}
@@ -240,4 +275,30 @@ ref<Connection> ConnectionScriptable::GetConnection() {
 
 ref<ConnectionChannel> ConnectionScriptable::GetConnectionChannel() {
 	return _channel;
+}
+
+/** TimedScriptable **/
+TimedScriptable::TimedScriptable(strong<Timed> t): _timed(t) {
+}
+
+TimedScriptable::~TimedScriptable() {
+}
+
+ref<Scriptable> TimedScriptable::SCancel(ref<ParameterList> p) {
+	_timed->Cancel();
+	return ScriptConstants::Null;
+}	
+
+ref<Scriptable> TimedScriptable::SToString(ref<ParameterList> p) {
+	return GC::Hold(new ScriptString(L"[Timed item]"));
+}
+
+ref<Scriptable> TimedScriptable::SIsCancelled(ref<ParameterList> p) {
+	return _timed->IsCancelled() ? ScriptConstants::True : ScriptConstants::False;
+}
+
+void TimedScriptable::Initialize() {
+	Bind(L"cancel", &TimedScriptable::SCancel);
+	Bind(L"isCancelled", &TimedScriptable::SIsCancelled);
+	Bind(L"toString", &TimedScriptable::SToString);
 }

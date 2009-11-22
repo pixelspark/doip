@@ -54,7 +54,7 @@
     
 	MWParameter* parameter = [_method.parameters objectAtIndex:indexPath.row];
 	if(parameter!=nil) {
-		CGRect rect = CGRectMake(160, 8, 150, 28);
+		CGRect rect = CGRectMake(100, 8, 210, 28);
 		UIView* pv = [parameter createView:rect immediate:FALSE];
 		if(pv!=nil) {
 			pv.tag = 1337;

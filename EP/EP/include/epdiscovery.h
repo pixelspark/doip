@@ -30,11 +30,12 @@ namespace tj {
 		};
 		
 		struct EP_EXPORTED DiscoveryNotification {
-			DiscoveryNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Connection> m, bool add);
+			DiscoveryNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Connection> m, bool add, EPMediationLevel ml);
 			
 			tj::shared::Timestamp when;
 			tj::shared::strong<Connection> connection;
 			bool added;
+			EPMediationLevel mediationLevel;
 		};
 		
 		class EP_EXPORTED Discovery: public virtual tj::shared::Object {

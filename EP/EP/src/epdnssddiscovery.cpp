@@ -36,8 +36,17 @@ DNSSDDiscovery::~DNSSDDiscovery() {
 void DNSSDDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRequest::ServiceNotification& data) {
 	if(data.online) {
 		ref<OSCOverUDPConnection> con = GC::Hold(new OSCOverUDPConnection());
-		con->Create(data.service->GetHostName(), data.service->GetPort(), DirectionOutbound);
-		EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), ref<Connection>(con), true));
+		ref<tj::scout::Service> service = data.service;
+		con->Create(service->GetHostName(), service->GetPort(), DirectionOutbound);
+
+		bool GetAttribute(const std::wstring& key, std::wstring& value);
+		EPMediationLevel mediationLevel = 0;
+		std::wstring mlString;
+		if(service->GetAttribute(L"EPMediationLevel", mlString)) {
+			mediationLevel = StringTo<EPMediationLevel>(mlString, mediationLevel);
+		}
+		
+		EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), ref<Connection>(con), true, mediationLevel));
 	}
 }
 
@@ -117,8 +126,10 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 				if(trp) {
 					connection = ConnectionFactory::Instance()->CreateForTransport(trp, edd->GetAddress());
 					if(connection) {
-						// we're done
-						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), connection, true));
+						// TODO FIXME this reads the mediation level from the definition file, but it is also defined
+						// in service attributes; fix this to use the service attribute and not the value in the
+						// endpoint definition.
+						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), connection, true,epe->GetMediationLevel()));
 						break;
 					}
 				}

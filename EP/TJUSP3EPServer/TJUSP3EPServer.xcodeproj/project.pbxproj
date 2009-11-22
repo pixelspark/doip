@@ -62,14 +62,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* EP.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = EP;
 		};
 		B4CAAA8710AD68E700385A5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* EP */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = EP;
 		};
 /* End PBXContainerItemProxy section */

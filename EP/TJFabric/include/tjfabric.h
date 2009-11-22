@@ -29,6 +29,7 @@ namespace tj {
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetPackage() const;
 				virtual tj::shared::String GetVersion() const;
+				virtual tj::ep::EPMediationLevel GetMediationLevel() const;
 				virtual tj::shared::ref<Rule> GetFirstMatchingRule(const tj::shared::String& msg);
 				virtual void GetAllMatchingRules(const tj::shared::String& path, const tj::shared::String& tags, std::deque< tj::shared::ref<Rule> >& results);
 				virtual void GetMethods(std::vector< tj::shared::ref<tj::ep::EPMethod> >& methodList) const;
@@ -43,6 +44,7 @@ namespace tj {
 				tj::shared::String _title;
 				tj::shared::String _package;
 				unsigned int _version;
+				tj::ep::EPMediationLevel _mediationLevel;
 				std::deque< tj::shared::ref<Rule> > _rules;
 				std::deque< tj::shared::ref<Group> > _groups;
 		};

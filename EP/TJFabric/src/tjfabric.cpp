@@ -6,7 +6,7 @@ using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;
 
-Fabric::Fabric(): _version(0) {
+Fabric::Fabric(): _version(0), _mediationLevel(1) {
 	Clone();
 }
 
@@ -30,6 +30,7 @@ void Fabric::Load(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	_id = LoadAttributeSmall(me, "id", _id);
 	_package = LoadAttributeSmall(me, "package", _package);
+	_mediationLevel = LoadAttributeSmall(me, "mediation-level", _mediationLevel);
 	
 	TiXmlElement* info = me->FirstChildElement("info");
 	if(info!=0) {
@@ -66,11 +67,15 @@ void Fabric::Save(TiXmlElement* me) {
 	EPEndpoint::Save(me);
 }
 
+EPMediationLevel Fabric::GetMediationLevel() const {
+	return _mediationLevel;
+}
+
 void Fabric::GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const {
 	std::deque< ref<Rule> >::const_iterator it = _rules.begin();
 	while(it!=_rules.end()) {
 		ref<Rule> rule = *it;
-		if(rule) {
+		if(rule && rule->IsPublic() && rule->IsEnabled()) {
 			methodList.push_back(rule);
 		}
 		++it;

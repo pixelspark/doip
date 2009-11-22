@@ -11,6 +11,7 @@ namespace tj {
 		using namespace tj::script;
 		using namespace tj::ep;
 		class Queue;
+		class Timed;
 		
 		class DateScriptable: public ScriptObject<DateScriptable> {
 			public:
@@ -28,6 +29,7 @@ namespace tj {
 				virtual ref<Scriptable> SMinute(ref<ParameterList> p);
 				virtual ref<Scriptable> SSecond(ref<ParameterList> p);
 				virtual ref<Scriptable> SAbsolute(ref<ParameterList> p);
+				virtual ref<Scriptable> SToString(ref<ParameterList> p);
 			
 			protected:
 				Date _date;
@@ -53,6 +55,19 @@ namespace tj {
 			protected:
 				ref<tj::ep::Connection> _connection;
 				ref<tj::ep::ConnectionChannel> _channel;
+		};
+		
+		class TimedScriptable: public ScriptObject<TimedScriptable> {
+			public:
+				TimedScriptable(strong<Timed> t);
+				virtual ~TimedScriptable();
+				virtual ref<Scriptable> SCancel(ref<ParameterList> p);
+				virtual ref<Scriptable> SToString(ref<ParameterList> p);
+				virtual ref<Scriptable> SIsCancelled(ref<ParameterList> p);
+				static void Initialize();
+			
+			protected:
+				strong<Timed> _timed;
 		};
 		
 		class QueueGlobalScriptable: public ScriptObject<QueueGlobalScriptable> {

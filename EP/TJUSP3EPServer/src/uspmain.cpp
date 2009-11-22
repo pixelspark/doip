@@ -15,6 +15,7 @@ class USPEndpoint: public EPEndpointServer<USPEndpoint> {
 	public:
 		USPEndpoint(const std::wstring& id, const std::wstring& nsp, const std::wstring& friendlyName, const std::string& device);
 		virtual ~USPEndpoint();
+		virtual EPMediationLevel GetMediationLevel() const;
 		virtual void OnCreated();
 		virtual void MReset(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
 		virtual void MDim(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
@@ -31,6 +32,10 @@ class USPEndpoint: public EPEndpointServer<USPEndpoint> {
 };
 
 USPEndpoint::USPEndpoint(const std::wstring& id, const std::wstring& nsp, const std::wstring& friendlyName, const std::string& devicePath): EPEndpointServer<USPEndpoint>(id,nsp,friendlyName), _device(devicePath.c_str()), _dim(1.0f), _r(0.0f), _g(0.0f), _b(0.0f) {
+}
+
+EPMediationLevel USPEndpoint::GetMediationLevel() const {
+	return EPMediationLevelDefault;
 }
 
 void USPEndpoint::OnCreated() {

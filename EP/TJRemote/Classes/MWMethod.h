@@ -4,7 +4,18 @@
 
 @class MWEndpoint;
 @class MWMethod;
+@class MWParameter;
 class TiXmlElement;
+
+@interface MWSliderView: UIView {
+	UISlider* _slider;
+	UILabel* _label;
+	MWParameter* _parameter;
+}
+
+- (id) initWithFrame:(CGRect)rect parameter:(MWParameter*)p immediate:(bool)imm;
+
+@end;
 
 @interface MWParameter: NSObject <UITextFieldDelegate> {
 	NSString* _friendly;
@@ -13,12 +24,17 @@ class TiXmlElement;
 	NSString* _min;
 	NSString* _max;
 	NSString* _default;
-	NSObject* _value;
+	NSString* _value;
+	bool _discrete;
 	MWMethod* _parent;
 }
 
 - (id) initFromDefinition:(TiXmlElement*)def inMethod:(MWMethod*)m;
 - (UIView*) createView:(CGRect)rect immediate:(BOOL)imm;
+- (void) textValueChanged: (UIView*)view event:(UIEvent*)evt;
+- (void) sliderValueChanged: (UIView*)slider event:(UIEvent*)evt;
+- (void) executeHandler: (UIView*)vw event:(UIEvent*)evt;
+- (void) switchValueChanged: (UISwitch*)sw event:(UIEvent*)evt;
 
 @property (nonatomic, retain) NSString* friendlyName;
 @property (nonatomic, retain) NSString* minimumValue;
@@ -26,8 +42,9 @@ class TiXmlElement;
 @property (nonatomic, retain) NSString* defaultValue;
 @property (nonatomic, retain) NSString* type;
 @property (nonatomic, assign) MWMethod* parent;
-@property (nonatomic, retain) NSObject* value;
+@property (nonatomic, retain) NSString* value;
 @property (nonatomic, retain) NSString* identifier;
+@property (nonatomic, readonly) bool discrete;
 
 @end
 

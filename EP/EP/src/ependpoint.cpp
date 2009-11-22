@@ -113,7 +113,7 @@ EPTransport::~EPTransport() {
 }
 
 /** EPEndpointDefinition **/
-EPEndpointDefinition::EPEndpointDefinition(): _dynamic(true) {
+EPEndpointDefinition::EPEndpointDefinition(): _dynamic(true), _level(0) {
 	Clone();
 }
 
@@ -130,6 +130,7 @@ void EPEndpointDefinition::Load(TiXmlElement* me) {
 	_namespace = LoadAttributeSmall(me, "namespace", _namespace);
 	_version = LoadAttributeSmall(me, "version", _version);
 	_dynamic = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "dynamic", Bool::ToString(_dynamic)).c_str());
+	_level = LoadAttributeSmall(me, "mediation-level", _level);
 	
 	TiXmlElement* methods = me->FirstChildElement("methods");
 	if(methods!=0) {
@@ -159,7 +160,8 @@ void EPEndpoint::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "namespace", GetNamespace());
 	SaveAttributeSmall(me, "friendly-name", GetFriendlyName());
 	SaveAttributeSmall(me, "version", GetVersion());
-	SaveAttributeSmall(me, "dynamic", Bool::ToString(IsDynamic()));
+	SaveAttributeSmall(me, "dynamic", std::wstring(Bool::ToString(IsDynamic())));
+	SaveAttributeSmall(me, "mediation-level", GetMediationLevel());
 	
 	TiXmlElement methodsElement("methods");
 	std::vector< ref<EPMethod> > methods;
@@ -192,6 +194,10 @@ void EPEndpoint::Save(TiXmlElement* me) {
 		++tit;
 	}
 	me->InsertEndChild(transportsElement);
+}
+
+EPMediationLevel EPEndpointDefinition::GetMediationLevel() const {
+	return _level;
 }
 
 void EPEndpointDefinition::GetTransports(std::vector< ref<EPTransport> >& transportsList) const {
@@ -417,18 +423,23 @@ void EPMethodDefinition::Clone() {
 }
 
 /** EPParameterDefinition **/
-EPParameterDefinition::EPParameterDefinition() {
+EPParameterDefinition::EPParameterDefinition(): _discrete(false) {
 }
 
-EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue):
+EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, bool discrete):
 	_friendlyName(friendlyName),
 	_type(type),
 	_minimumValue(minValue),
 	_maximumValue(maxValue),
-	_defaultValue(defaultValue) {
+	_defaultValue(defaultValue),
+	_discrete(discrete) {
 }
 
 EPParameterDefinition::~EPParameterDefinition() {
+}
+
+bool EPParameterDefinition::IsDiscrete() const {
+	return _discrete;
 }
 
 String EPParameterDefinition::GetFriendlyName() const {
@@ -479,6 +490,7 @@ void EPParameterDefinition::Load(TiXmlElement* me) {
 	_minimumValue = LoadAttributeSmall(me, "min", _minimumValue);
 	_maximumValue = LoadAttributeSmall(me, "max", _maximumValue);
 	_defaultValue = LoadAttributeSmall(me, "default", _defaultValue);
+	_discrete = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "discrete", Bool::ToString(false)).c_str());
 }
 
 void EPParameter::Save(TiXmlElement* me) {
@@ -487,6 +499,7 @@ void EPParameter::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "min", GetMinimumValue().ToString());
 	SaveAttributeSmall(me, "max", GetMaximumValue().ToString());
 	SaveAttributeSmall(me, "default", GetDefaultValue().ToString());
+	SaveAttributeSmall(me, "discrete", std::wstring(Bool::ToString(IsDiscrete())));
 }
 
 /** EPTransportDefinition **/

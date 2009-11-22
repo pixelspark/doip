@@ -9,7 +9,13 @@
 namespace tj {
 	namespace ep {
 		typedef tj::shared::String EPPath;
+		typedef int EPMediationLevel;
 		
+		enum EPMediationLevels {
+			EPMediationLevelDefault = 0,
+			EPMediationLevelIgnore = -1,
+		};
+
 		class EP_EXPORTED EPTransport: public virtual tj::shared::Object {
 			public:
 				virtual ~EPTransport();
@@ -29,6 +35,7 @@ namespace tj {
 				virtual tj::shared::Any GetMinimumValue() const = 0;
 				virtual tj::shared::Any GetMaximumValue() const = 0;
 				virtual tj::shared::Any GetDefaultValue() const = 0;
+				virtual bool IsDiscrete() const = 0;
 			
 				virtual void Save(TiXmlElement* me);
 				virtual wchar_t GetValueTypeTag() const;
@@ -70,6 +77,7 @@ namespace tj {
 				virtual tj::shared::String GetFriendlyName() const = 0;
 				virtual tj::shared::String GetVersion() const = 0;
 				virtual bool IsDynamic() const = 0;
+				virtual EPMediationLevel GetMediationLevel() const = 0;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const = 0;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const = 0;
 			
@@ -89,6 +97,7 @@ namespace tj {
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetVersion() const;
 				virtual bool IsDynamic() const;
+				virtual EPMediationLevel GetMediationLevel() const;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
 				virtual void Load(TiXmlElement* me);
@@ -99,6 +108,7 @@ namespace tj {
 				tj::shared::String _namespace;
 				tj::shared::String _friendlyName;
 				tj::shared::String _version;
+				EPMediationLevel _level;
 				bool _dynamic;
 				std::vector< tj::shared::ref<EPMethod> > _methods;
 				std::vector< tj::shared::ref<EPTransport> > _transports;
@@ -146,7 +156,7 @@ namespace tj {
 		class EP_EXPORTED EPParameterDefinition: public EPParameter, public tj::shared::Serializable {
 			public:
 				EPParameterDefinition();
-				EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue);
+				EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, bool discrete = false);
 				virtual ~EPParameterDefinition();
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetType() const;
@@ -154,6 +164,7 @@ namespace tj {
 				virtual tj::shared::Any GetMinimumValue() const;
 				virtual tj::shared::Any GetMaximumValue() const;
 				virtual tj::shared::Any GetDefaultValue() const;
+				virtual bool IsDiscrete() const;
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
 			
@@ -163,6 +174,7 @@ namespace tj {
 				tj::shared::String _minimumValue;
 				tj::shared::String _maximumValue;
 				tj::shared::String _defaultValue;
+				bool _discrete;
 		};
 		
 		class EP_EXPORTED EPTransportDefinition: public EPTransport, public tj::shared::Serializable {

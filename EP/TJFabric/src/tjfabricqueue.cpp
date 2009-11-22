@@ -75,9 +75,9 @@ void Queue::Add(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc)
 	SignalWorkAdded();
 }
 
-void Queue::AddTimedScriptCall(const Date& date, ref<ScriptDelegate> dlg, ref<ScriptScope> sc) {
+void Queue::AddTimed(const Date& date, strong<Timed> t) {
 	ThreadLock lock(&_lock);
-	_timerQueue.insert(std::pair<Date, ScriptCall>(date, ScriptCall(dlg,sc)));
+	_timerQueue.insert(std::pair<Date, ref<Timed> >(date,t));
 	SignalWorkAdded();
 }
 
@@ -207,24 +207,34 @@ void Queue::AddDeferredScriptCall(ref<ScriptDelegate> dlg, ref<ScriptScope> scop
 	}
 }
 
-void Queue::ProcessScriptCall(Queue::ScriptCall& call) {
+void Queue::ProcessScriptCall(strong<ScriptDelegate> dlg, ref<ScriptScope> scope) {
 	ThreadLock lock(&_lock);
-	
-	try {
-		ref<ScriptContext> ctx = call.first->GetContext();
-		if(ctx) {
-			ref<ScriptScope> sc = GC::Hold(new ScriptScope());
-			sc->Set(L"globals", _global);
-			sc->SetPrevious(call.second);
-			ctx->Execute(call.first->GetScript(), sc);
+	ref<ScriptContext> ctx = dlg->GetContext();
+	if(ctx) {
+		ref<ScriptScope> sc = GC::Hold(new ScriptScope());
+		sc->Set(L"globals", _global);
+		sc->SetPrevious(scope);
+		Log::Write(L"TJFabric/Queue", L"Will process script call");
+		ctx->Execute(dlg->GetScript(), sc);
+	}
+	else {
+		Throw(L"No context set for asynchronous script delegate; script not executed", ExceptionTypeError);
+	}
+}
+
+void Queue::ProcessTimed(ref<Timed> call) {
+	ThreadLock lock(&_lock);
+	if(call) {
+		try {
+			if(call->IsCancelled()) {
+				Throw(L"Timer was cancelled!", ExceptionTypeError);
+			}
+			call->Run();
 		}
-		else {
-			Throw(L"No context set for asynchronous script delegate; script not executed", ExceptionTypeError);
+		catch(const Exception& e) {
+			Log::Write(L"TJFabric/Queue", std::wstring(L"Exception occurred while executing asynchronous script:") + e.GetMsg());
 		}
 	}
-	catch(const Exception& e) {
-		Log::Write(L"TJFabric/Queue", std::wstring(L"Exception occurred while executing asynchronous script:") + e.GetMsg());
-	}	
 }
 
 /** QueueThread **/
@@ -281,27 +291,24 @@ void QueueThread::Run() {
 			}
 			
 			ThreadLock lock(&(q->_lock));
-			
-			// Process timed scripts
+			// Process timed items
 			if(q->_timerQueue.size()>0) {
 				Date now;
-				std::multimap<Date, Queue::ScriptCall>::iterator it = q->_timerQueue.begin();
+				std::multimap<Date,ref<Timed> >::iterator it = q->_timerQueue.begin();
 				while(it!=q->_timerQueue.end()) {
 					if((it->first).ToAbsoluteDate() < (now.ToAbsoluteDate()+KTimerPrecisionSeconds)) {
 						// Run and delete
-						Log::Write(L"TJFabric/Queue", L"Timer for "+(it->first.ToFriendlyString())+L" run at "+(now.ToFriendlyString()));
-						q->ProcessScriptCall(it->second);
+						Log::Write(L"TJFabric/Queue", L"Timer for "+Date(it->first.ToAbsoluteDate()).ToFriendlyString()+L" run at "+Date(now.ToAbsoluteDate()).ToFriendlyString());
+						
+						q->ProcessTimed(it->second);
 						q->_timerQueue.erase(it++);
 					}
-					++it;
-				}
-				
-				if(q->_timerQueue.size()>0) {
-					hasNextTimer = true;
-					nextTimer = (q->_timerQueue.begin())->first.ToAbsoluteDate();
-				}
-				else {
-					hasNextTimer = false;
+					else {
+						AbsoluteDate nd = it->first.ToAbsoluteDate();
+						nextTimer = hasNextTimer ? Util::Min(nextTimer, nd) : nd;
+						hasNextTimer = true;
+						++it;
+					}
 				}
 			}
 			
@@ -311,7 +318,7 @@ void QueueThread::Run() {
 				while(it!=q->_asyncScriptsQueue.end()) {
 					Queue::ScriptCall& call = *it;
 					if(call.first) {
-						q->ProcessScriptCall(call);
+						q->ProcessScriptCall(call.first, call.second);
 					}
 					++it;
 				}
@@ -351,10 +358,26 @@ void QueueThread::Run() {
 			Date now;
 			AbsoluteDateInterval seconds = nextTimer - now.ToAbsoluteDate();
 			int ms = Util::Max(int(KTimerPrecisionSeconds*1000.0), Util::Min(int(KMaxWaitSeconds*1000.0), int(seconds*1000.0)));
+			//Log::Write(L"TJFabric/QueueThread", L"Next at "+Stringify(seconds)+L" Will wait "+Stringify(ms)+L"ms");
 			_signal.Wait(ms);
 		}
 		else {
 			_signal.Wait();
 		}
 	}
+}
+
+/** Timed **/
+Timed::Timed(): _cancelled(false) {
+}
+
+Timed::~Timed() {
+}
+
+bool Timed::IsCancelled() const {
+	return _cancelled;
+}
+
+void Timed::Cancel() {
+	_cancelled = true;
 }

@@ -1,8 +1,8 @@
 #import "MWEndpoint.h"
 #include "../../../Libraries/TinyXML/tinyxml.h"
-#include "../../../Libraries/OSCPack/osc/OscOutboundPacketStream.h"
-#include "../../../Libraries/OSCPack/ip/IpEndpointName.h"
-#include "../../../Libraries/OSCPack/ip/UdpSocket.h"
+#include "../../../Libraries/OSCPack/src/OscOutboundPacketStream.h"
+#include "../../../Libraries/OSCPack/src/IpEndpointName.h"
+#include "../../../Libraries/OSCPack/src/UdpSocket.h"
 #include <arpa/inet.h>
 
 using namespace osc;

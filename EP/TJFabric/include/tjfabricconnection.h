@@ -24,7 +24,7 @@ namespace tj {
 				ConnectedGroup(tj::shared::strong<Group> g);
 				virtual ~ConnectedGroup();
 				virtual void Connect(bool t, tj::shared::strong<FabricEngine> fe);
-				virtual void Send(tj::shared::strong<tj::ep::Message> m, tj::shared::strong<FabricEngine> fe, tj::shared::ref< tj::ep::ReplyHandler > rh);
+			virtual void Send(tj::shared::strong<tj::ep::Message> m, tj::shared::strong<FabricEngine> fe, tj::shared::ref< tj::ep::ReplyHandler > rh, tj::ep::EPMediationLevel ourOwnLevel = tj::ep::EPMediationLevelIgnore);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::MessageNotification& data);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> source, const tj::ep::DiscoveryNotification& data);
 			
@@ -38,7 +38,7 @@ namespace tj {
 				tj::shared::strong<Group> _group;
 				bool _shouldStillConnectOutbound;
 				std::map< tj::shared::ref<tj::ep::ConnectionDefinition>, tj::shared::ref<tj::ep::Connection> > _connections;
-				std::deque< tj::shared::ref<tj::ep::Connection> > _discoveredConnections;
+				std::deque< std::pair<tj::ep::EPMediationLevel, tj::shared::ref<tj::ep::Connection> > > _discoveredConnections;
 				std::map< tj::shared::ref<tj::ep::DiscoveryDefinition>, tj::shared::ref<tj::ep::Discovery> > _discoveries;
 		};
 	}

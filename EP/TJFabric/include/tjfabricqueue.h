@@ -16,6 +16,18 @@ namespace tj {
 		class Rule;
 		class FabricEngine;
 		class Fabric;
+		
+		class Timed: public virtual Object {
+			public:
+				virtual ~Timed();
+				virtual void Run() = 0;
+				virtual bool IsCancelled() const;
+				virtual void Cancel();
+			
+			protected:
+				Timed();
+				bool _cancelled;
+		};
 
 		class QueuedMessage: public virtual Object {
 			friend class Queue;
@@ -50,10 +62,10 @@ namespace tj {
 		class Queue: public virtual Object {
 			friend class QueueThread;
 			friend class QueueGlobalScriptable;
+			friend class TimedScriptExecution;
+			typedef std::pair< ref<ScriptDelegate>, ref<ScriptScope> > ScriptCall;
 			
 			public:
-				typedef std::pair< ref<ScriptDelegate>, ref<ScriptScope> > ScriptCall;
-			
 				Queue(ref<FabricEngine> f);
 				virtual ~Queue();
 				virtual void OnCreated();
@@ -63,7 +75,7 @@ namespace tj {
 				virtual void Add(strong<Message> m, ref<Connection> source, ref<ConnectionChannel> sourceChannel);
 				virtual void AddReply(strong<QueuedReply> m);
 				virtual void AddDiscoveryScriptCall(ref<DiscoveryDefinition> def, ref<Connection> connection, const String& source);
-				virtual void AddTimedScriptCall(const Date& at, ref<ScriptDelegate> dlg, ref<ScriptScope> sc);
+				virtual void AddTimed(const Date& at, strong<Timed> t);
 				virtual void AddDeferredScriptCall(ref<ScriptDelegate> dlg, ref<ScriptScope> sc);
 			
 				virtual void WaitForCompletion();
@@ -73,7 +85,8 @@ namespace tj {
 				virtual void SignalWorkAdded();
 				virtual void ProcessMessage(strong<QueuedMessage> m);
 				virtual void ProcessReply(strong<QueuedReply> r);
-				virtual void ProcessScriptCall(ScriptCall& call);
+				virtual void ProcessTimed(ref<Timed> t);
+				virtual void ProcessScriptCall(strong<ScriptDelegate> dlg, ref<ScriptScope> scope);
 				
 
 				CriticalSection _lock;
@@ -86,7 +99,7 @@ namespace tj {
 				std::deque< ref<QueuedMessage> > _queue;
 				std::deque< ref<QueuedReply> > _replyQueue;
 				std::deque<ScriptCall> _asyncScriptsQueue;
-				std::multimap<tj::shared::Date, ScriptCall> _timerQueue;
+				std::multimap<tj::shared::Date, ref<Timed> > _timerQueue;
 		};
 		
 		class QueueReplyHandler: public ReplyHandler {

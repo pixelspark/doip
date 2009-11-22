@@ -11,7 +11,7 @@ ConnectedGroup::ConnectedGroup(strong<Group> g): _group(g), _shouldStillConnectO
 ConnectedGroup::~ConnectedGroup() {
 }
 
-void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyHandler> rh) {
+void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyHandler> rh, EPMediationLevel ourOwnMediationLevel) {
 	if((_group->GetDirection() & DirectionOutbound) != 0) {
 		if(_group->PassesFilter(m->GetPath())) {
 			ThreadLock lock(&_lock);
@@ -31,12 +31,29 @@ void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyH
 				++it;
 			}
 			
-			// Send to all discovered connections in this group
-			std::deque< ref<Connection> >::iterator cit = _discoveredConnections.begin();
+			// Send to all discovered connections in this group that have the highest
+			// mediation level below ours
+			bool ignoreMediationLevel = (ourOwnMediationLevel < 0);
+			int highestMediationLevel = 0;
+			std::deque< std::pair< EPMediationLevel, ref<Connection> > >::iterator cit = _discoveredConnections.begin();
+			
+			if(!ignoreMediationLevel) {
+				while(cit!=_discoveredConnections.end()) {
+					EPMediationLevel epm = cit->first;
+					if(epm > highestMediationLevel && epm < ourOwnMediationLevel) {
+						highestMediationLevel = epm;
+					}
+					++cit;
+				}
+				cit = _discoveredConnections.begin();
+			}
+			
 			while(cit!=_discoveredConnections.end()) {
-				ref<Connection> conn = *cit;
-				if(conn) {
-					conn->Send(m, rh);
+				if(ignoreMediationLevel || cit->first==highestMediationLevel) {
+					ref<Connection> conn = cit->second;
+					if(conn) {
+						conn->Send(m, rh);
+					}
 				}
 				
 				++cit;
@@ -60,7 +77,7 @@ void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data)
 
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
 	if(data.added) {
-		_discoveredConnections.push_back(data.connection);
+		_discoveredConnections.push_back(std::pair<EPMediationLevel, ref<Connection> >(data.mediationLevel, data.connection));
 		
 		// If there was a discovery script, run it
 		if(source.IsCastableTo<Discovery>()) {
@@ -89,9 +106,9 @@ void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& dat
 		ThreadLock lock(&_lock);
 		
 		// remove connection from _discoveredConnections
-		std::deque< ref<Connection> >::iterator it = _discoveredConnections.begin();
+		std::deque< std::pair<EPMediationLevel, ref<Connection> > >::iterator it = _discoveredConnections.begin();
 		while(it!=_discoveredConnections.end()) {
-			if(*it == ref<Connection>(data.connection)) {
+			if(it->first == ref<Connection>(data.connection)) {
 				_discoveredConnections.erase(it++);
 			}
 			else {
