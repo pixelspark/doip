@@ -14,12 +14,46 @@
 };
 
 - (id) initWithFrame:(CGRect)rect parameter:(MWParameter*)parameter immediate:(bool)imm {
-	const static int KLabelWidth = 64;
+	const static int KLabelWidth = 32;
+	const static int KButtonWidth = 32;
 	
 	if(self = [super initWithFrame:rect]) {
+		int x = 0;
+		int w = rect.size.width;
 		_parameter = parameter;
 		[_parameter retain];
-		_slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, rect.size.width-KLabelWidth, rect.size.height)];
+		
+		// Add label and +/- buttons
+		if([parameter discrete]) {
+			_label = [[UILabel alloc] initWithFrame:CGRectMake(w-KLabelWidth, 0, KLabelWidth, rect.size.height)];
+			w -= KLabelWidth;
+			[_label setBackgroundColor:[UIColor clearColor]];
+			[_label setOpaque:FALSE];
+			[_label setTextColor:[UIColor whiteColor]];
+			[_label setTextAlignment:UITextAlignmentRight];
+			[_label setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+			[self addSubview:_label];
+			[self updateLabel];
+			
+			_plusButton = [[UIButton alloc] initWithFrame:CGRectMake(w-KButtonWidth, 0, KButtonWidth, rect.size.height)];
+			[_plusButton setTitle:@"+" forState:UIControlStateNormal];
+			[_plusButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+			[_plusButton addTarget:self action:@selector(increment:event:) forControlEvents:UIControlEventTouchUpInside];
+			[_plusButton setShowsTouchWhenHighlighted:YES];
+			[self addSubview:_plusButton];
+			w -= KButtonWidth;
+			
+			_minButton = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, KButtonWidth, rect.size.height)];
+			[_minButton setTitle:@"-" forState:UIControlStateNormal];
+			[_minButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+			[_minButton addTarget:self action:@selector(decrement:event:) forControlEvents:UIControlEventTouchUpInside];
+			[_minButton setShowsTouchWhenHighlighted:YES];
+			[self addSubview:_minButton];
+			x += KButtonWidth;
+			w -= KButtonWidth;
+		}
+		
+		_slider = [[UISlider alloc] initWithFrame:CGRectMake(x, 0, w, rect.size.height)];
 		[_slider setMinimumValue:[[parameter minimumValue] floatValue]];
 		[_slider setMaximumValue:[[parameter maximumValue] floatValue]];
 		[_slider setValue:[[parameter value] floatValue]];
@@ -29,16 +63,6 @@
 		}
 		[_slider setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
 		[self addSubview:_slider];
-		
-		// Add label
-		_label = [[UILabel alloc] initWithFrame:CGRectMake(rect.size.width-KLabelWidth, 0, KLabelWidth, rect.size.height)];
-		[_label setBackgroundColor:[UIColor clearColor]];
-		[_label setOpaque:FALSE];
-		[_label setTextColor:[UIColor whiteColor]];
-		[_label setTextAlignment:UITextAlignmentRight];
-		[_label setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-		[self updateLabel];
-		[self addSubview:_label];
 	}
 	return self;
 }
@@ -47,11 +71,36 @@
 	[self updateLabel];
 };
 
+- (void) increment: (UIView*)view event:(UIEvent*)evt {
+	float val = [[_parameter value] floatValue];
+	float maxVal = [[_parameter maximumValue] floatValue];
+	val += 1.0f;
+	if(val > maxVal) {
+		val = maxVal;
+	}
+	[_parameter setValue:[NSString stringWithFormat:@"%f",val]];
+	[_slider setValue:val];
+	[self updateLabel];
+}
+
+- (void) decrement: (UIView*)view event:(UIEvent*)evt {
+	float val = [[_parameter value] floatValue];
+	float minVal = [[_parameter minimumValue] floatValue];
+	val -= 1.0f;
+	if(val < minVal) {
+		val = minVal;
+	}
+	[_parameter setValue:[NSString stringWithFormat:@"%f",val]];
+	[_slider setValue:val];
+	[self updateLabel];
+}
 
 - (void) dealloc {
 	[_parameter release];
 	[_slider release];
 	[_label release];
+	[_minButton release];
+	[_plusButton release];
 	[super dealloc];
 }
 
@@ -97,8 +146,8 @@
 		return sv;
 	}
 	else if([_type isEqualToString:@"bool"]) {
-		UISwitch* sw = [[UISwitch alloc] initWithFrame:rect];
-		[sw setOn:[_default boolValue]];
+		UISwitch* sw = [[UISwitch alloc] initWithFrame:CGRectMake(rect.size.width+rect.origin.x-96, rect.origin.y, 96, rect.size.height)];
+		[sw setOn:[_default isEqualToString:@"yes"]];
 		[sw autorelease];
 		[sw addTarget:self action:@selector(switchValueChanged:event:) forControlEvents:UIControlEventValueChanged];
 		if(imm) {
@@ -163,13 +212,30 @@
 
 @end
 
-
 @implementation MWMethod
+
+static NSMutableDictionary* _icons;
 
 @synthesize pattern = _pattern;
 @synthesize parameters = _parameters;
 @synthesize friendlyName = _friendly;
 @synthesize parent = _parent;
+
++ (void) initialize {
+	NSDictionary* icons = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ep-icons" ofType:@"plist"]];
+	_icons = [[NSMutableDictionary alloc] initWithCapacity:[icons count]];
+	for(NSString* key in [icons keyEnumerator]) {
+		NSString* path = [icons objectForKey:key];
+		NSString* pngPath = [[NSBundle mainBundle] pathForResource:path ofType:@"png"];
+		UIImage* icon = [UIImage imageWithContentsOfFile:pngPath];
+		if(icon!=nil) {
+			[_icons setObject:icon forKey:key];
+		}
+		else {
+			NSLog(@"Could not load icon with key %@ path: %@ realpath: %@", key, path, pngPath);
+		}
+	}
+}
 
 - (id) initWithPattern:(NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)endpoint {
 	if(self = [super init]) {
@@ -194,6 +260,13 @@
 	cell.textLabel.textColor = [UIColor whiteColor];
 	[[cell.contentView viewWithTag:1337] removeFromSuperview];
 	
+	if([_icons objectForKey:self.pattern]!=nil) {
+		cell.imageView.image = [_icons objectForKey:self.pattern];
+	}
+	else {
+		cell.imageView.image = nil;
+	}
+	
 	// Add buttons, sliders, etc to the view
 	if([_parameters count]==0) {
 		// Do nothing
@@ -210,7 +283,7 @@
 		}
 	}
 	else {
-		[cell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 	}
 }
 

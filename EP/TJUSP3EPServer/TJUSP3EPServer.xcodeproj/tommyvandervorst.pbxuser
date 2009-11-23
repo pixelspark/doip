@@ -56,16 +56,16 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 280617588;
-			PBXWorkspaceStateSaveDate = 280617588;
+			PBXPerProjectTemplateStateSaveDate = 280665108;
+			PBXWorkspaceStateSaveDate = 280665108;
 		};
 		perUserProjectItems = {
-			B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
-			B46CBD0410A461CF00CDE29F /* PBXTextBookmark */ = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
-			B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */ = B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */;
-			B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */ = B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */;
-			B4F0AF1510B9E46200351BAA /* XCBuildMessageTextBookmark */ = B4F0AF1510B9E46200351BAA /* XCBuildMessageTextBookmark */;
-			B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */ = B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */;
+			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
+			B46CBD0410A461CF00CDE29F = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
+			B4B03D9510ADA39A00C7AB53 = B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */;
+			B4B03D9610ADA39A00C7AB53 = B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */;
+			B4F0AF1510B9E46200351BAA = B4F0AF1510B9E46200351BAA /* PBXTextBookmark */;
+			B4F0AF3F10B9E74F00351BAA = B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */;
 		};
 		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
 		userBuildSettings = {
@@ -194,11 +194,10 @@
 		vrLen = 564;
 		vrLoc = 0;
 	};
-	B4F0AF1510B9E46200351BAA /* XCBuildMessageTextBookmark */ = {
+	B4F0AF1510B9E46200351BAA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Cannot allocate an object of abstract type 'USPEndpoint'";
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
 		rLoc = 185;
 		rType = 1;

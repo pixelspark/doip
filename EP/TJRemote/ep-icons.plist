@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>/ep/basic/color/set</key>
+	<string>ep-color</string>
+	<key>/ep/basic/color/fade</key>
+	<string>ep-fade</string>
+	<key>/ep/basic/dim</key>
+	<string>ep-dim</string>
+	<key>/ep/basic/power/sleep</key>
+	<string>ep-sleep</string>
+	<key>/ep/basic/reset</key>
+	<string>ep-reset</string>
+	<key>/ep/basic/power/off</key>
+	<string>ep-power-off</string>
+</dict>
+</plist>

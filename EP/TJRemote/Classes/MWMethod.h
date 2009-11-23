@@ -10,6 +10,8 @@ class TiXmlElement;
 @interface MWSliderView: UIView {
 	UISlider* _slider;
 	UILabel* _label;
+	UIButton* _plusButton;
+	UIButton* _minButton;
 	MWParameter* _parameter;
 }
 

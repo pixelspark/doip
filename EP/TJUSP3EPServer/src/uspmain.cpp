@@ -183,7 +183,7 @@ int main (int argc, char * const argv[]) {
 		String hs = Wcs(serialDevicePath);
 		String idh = StringifyHex(hash.Calculate(hs));
 		Log::Write(L"TJUSP3EPServer/Main", L"hash for path "+Wcs(serialDevicePath)+L" is "+idh);
-		ref<USPEndpoint> uspe = GC::Hold(new USPEndpoint(idh, L"com.tjshow.usp3epd", L"USP3 lights", serialDevicePath));
+		ref<USPEndpoint> uspe = GC::Hold(new USPEndpoint(idh, L"com.tjshow.usp3epd", L"LEDs", serialDevicePath));
 		ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 		Log::Write(L"TJUSP3EPServer/Main", L"Running");
 		daemon->Run();

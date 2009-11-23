@@ -25,6 +25,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)a {
+	[self.tableView setAllowsSelection:NO];
 	[self.tableView reloadData];
 	[self.tableView setSeparatorColor:[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:0.4f]];
 }
@@ -68,7 +69,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (void)dealloc {

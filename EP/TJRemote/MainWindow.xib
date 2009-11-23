@@ -2,19 +2,16 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">528</int>
-		<string key="IBDocument.SystemVersion">10B504</string>
+		<string key="IBDocument.SystemVersion">10C540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.2</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.AppKitVersion">1038.25</string>
+		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">62</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="106"/>
-			<integer value="17"/>
-			<integer value="139"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -118,7 +115,6 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">Network.png</string>
 						</object>
-						<reference key="IBUITabBar"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="510342896"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -139,6 +135,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{320, 411}</string>
 								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MSAwAA</bytes>
@@ -158,7 +155,6 @@
 								<float key="IBUISectionFooterHeight">22</float>
 							</object>
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="326907012">
-								<reference key="IBUINavigationBar"/>
 								<string key="IBUITitle">Devices</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="849794990"/>
@@ -183,10 +179,9 @@
 			</object>
 			<object class="IBUITableViewController" id="370445989">
 				<object class="IBUITableView" key="IBUIView" id="377511583">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
 					<string key="NSFrameSize">{320, 480}</string>
-					<reference key="NSSuperview"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MSAwAA</bytes>
@@ -206,7 +201,6 @@
 					<float key="IBUISectionFooterHeight">22</float>
 				</object>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="411077645">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Methods</string>
 				</object>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -224,6 +218,7 @@
 					<int key="NSvFlags">274</int>
 					<string key="NSFrameSize">{320, 431}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MSAwAA</bytes>
@@ -237,17 +232,15 @@
 					<double key="IBUIContentInset.right">0.0</double>
 					<int key="IBUISeparatorStyle">1</int>
 					<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
-					<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
 					<float key="IBUIRowHeight">44</float>
 					<float key="IBUISectionHeaderHeight">22</float>
 					<float key="IBUISectionFooterHeight">22</float>
 				</object>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="829890504">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Title</string>
 					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="617854629">
 						<int key="IBUIStyle">2</int>
-						<int key="IBUISystemItemIdentifier">17</int>
+						<int key="IBUISystemItemIdentifier">0</int>
 					</object>
 				</object>
 				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
@@ -673,8 +666,6 @@
 							<string>endpointsController</string>
 							<string>endpointsNavigationController</string>
 							<string>regularBackground</string>
-							<string>servicesController</string>
-							<string>servicesNavigationController</string>
 							<string>splashBackground</string>
 							<string>splashThrobber</string>
 							<string>tabController</string>
@@ -685,8 +676,6 @@
 							<string>MWEndpointsTableViewController</string>
 							<string>UINavigationController</string>
 							<string>UIView</string>
-							<string>UITableViewController</string>
-							<string>UINavigationController</string>
 							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIViewController</string>
