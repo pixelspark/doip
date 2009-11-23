@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -301,7 +303,7 @@
 							<real>185</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>-40 17 1280 909 0 0 1280 1002 </string>
+						<string>-3 62 1280 909 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -329,7 +331,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4F0AF1610B9E46200351BAA</string>
+										<string>B4F0AF3F10B9E74F00351BAA</string>
 										<key>history</key>
 										<array>
 											<string>B46CBCEE10A4603F00CDE29F</string>
@@ -352,7 +354,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1073, 506}}</string>
 								<key>RubberWindowFrame</key>
-								<string>-40 17 1280 909 0 0 1280 1002 </string>
+								<string>-3 62 1280 909 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -431,7 +433,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {1073, 330}}</string>
 										<key>RubberWindowFrame</key>
-										<string>-40 17 1280 909 0 0 1280 1002 </string>
+										<string>-3 62 1280 909 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -657,7 +659,7 @@
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJUSP3EPServer/TJUSP3EPServer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>-40 17 1280 909 0 0 1280 1002 </string>
+	<string>-3 62 1280 909 0 0 1280 1002 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
