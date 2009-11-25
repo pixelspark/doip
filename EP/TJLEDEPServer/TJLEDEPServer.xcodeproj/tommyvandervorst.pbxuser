@@ -1,0 +1,240 @@
+// !$*UTF8*$!
+{
+	08FB7793FE84155DC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeExecutable = B46CBC8A10A45B2100CDE29F /* TJLEDEPServer */;
+		activeTarget = 8DD76F620486A84900D96B5E /* TJLEDEPServer */;
+		addToTargets = (
+			8DD76F620486A84900D96B5E /* TJLEDEPServer */,
+		);
+		codeSenseManager = B46CBC9610A45B2400CDE29F /* Code sense */;
+		executables = (
+			B46CBC8A10A45B2100CDE29F /* TJLEDEPServer */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					834,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					794,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 280871852;
+			PBXWorkspaceStateSaveDate = 280871852;
+		};
+		perUserProjectItems = {
+			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
+			B46CBD0410A461CF00CDE29F = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
+			B4B03D9510ADA39A00C7AB53 = B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */;
+			B4B03D9610ADA39A00C7AB53 = B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */;
+			B4F0AF1510B9E46200351BAA = B4F0AF1510B9E46200351BAA /* PBXTextBookmark */;
+			B4F0AF3F10B9E74F00351BAA = B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */;
+		};
+		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8DD76F620486A84900D96B5E /* TJLEDEPServer */ = {
+		activeExec = 0;
+		executables = (
+			B46CBC8A10A45B2100CDE29F /* TJLEDEPServer */,
+		);
+	};
+	B46CBC8A10A45B2100CDE29F /* TJLEDEPServer */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = TJLEDEPServer;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	B46CBC9510A45B2400CDE29F /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	B46CBC9610A45B2400CDE29F /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	B46CBCBE10A45C2800CDE29F /* uspmain.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = uspmain.cpp;
+		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/uspmain.cpp;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1853, 2600}}";
+			sepNavSelRange = "{1631, 0}";
+			sepNavVisRange = "{80, 1555}";
+			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
+		};
+	};
+	B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCEF10A4603F00CDE29F /* tjwebserver.h */;
+		name = "tjwebserver.h: 49";
+		rLen = 68;
+		rLoc = 1282;
+		rType = 0;
+		vrLen = 1498;
+		vrLoc = 660;
+	};
+	B46CBCEF10A4603F00CDE29F /* tjwebserver.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = tjwebserver.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/include/tjwebserver.h;
+		sourceTree = "<absolute>";
+	};
+	B46CBD0410A461CF00CDE29F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBD0510A461CF00CDE29F /* tjsocket.h */;
+		name = "tjsocket.h: 33";
+		rLen = 64;
+		rLoc = 557;
+		rType = 0;
+		vrLen = 950;
+		vrLoc = 0;
+	};
+	B46CBD0510A461CF00CDE29F /* tjsocket.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = tjsocket.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/include/tjsocket.h;
+		sourceTree = "<absolute>";
+	};
+	B46CBD5910A46A5900CDE29F /* usp3.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = usp3.cpp;
+		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/usp3.cpp;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 1976}}";
+			sepNavSelRange = "{382, 0}";
+			sepNavVisRange = "{0, 564}";
+		};
+	};
+	B46CBD5A10A46A5900CDE29F /* usp3.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = usp3.h;
+		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/usp3.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 780}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{506, 1342}";
+		};
+	};
+	B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBD5A10A46A5900CDE29F /* usp3.h */;
+		name = "usp3.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1342;
+		vrLoc = 506;
+	};
+	B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBD5910A46A5900CDE29F /* usp3.cpp */;
+		name = "usp3.cpp: 26";
+		rLen = 0;
+		rLoc = 382;
+		rType = 0;
+		vrLen = 564;
+		vrLoc = 0;
+	};
+	B4F0AF1510B9E46200351BAA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Cannot allocate an object of abstract type 'USPEndpoint'";
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		rLen = 1;
+		rLoc = 185;
+		rType = 1;
+	};
+	B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
+		name = "uspmain.cpp: 38";
+		rLen = 0;
+		rLoc = 1631;
+		rType = 0;
+		vrLen = 1555;
+		vrLoc = 80;
+	};
+	B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1853, 2613}}";
+			sepNavSelRange = "{232, 0}";
+			sepNavVisRange = "{0, 2114}";
+		};
+	};
+}
