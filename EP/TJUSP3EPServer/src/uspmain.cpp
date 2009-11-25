@@ -31,7 +31,9 @@ class USPEndpoint: public EPEndpointServer<USPEndpoint> {
 		float _dim, _r, _g, _b;
 };
 
-USPEndpoint::USPEndpoint(const std::wstring& id, const std::wstring& nsp, const std::wstring& friendlyName, const std::string& devicePath): EPEndpointServer<USPEndpoint>(id,nsp,friendlyName), _device(devicePath.c_str()), _dim(1.0f), _r(0.0f), _g(0.0f), _b(0.0f) {
+USPEndpoint::USPEndpoint(const std::wstring& id, const std::wstring& nsp, const std::wstring& friendlyName, const std::string& devicePath): 
+	EPEndpointServer<USPEndpoint>(id,nsp,friendlyName), 
+	_device(devicePath.c_str()), _dim(1.0f), _r(0.0f), _g(0.0f), _b(0.0f) {
 }
 
 EPMediationLevel USPEndpoint::GetMediationLevel() const {

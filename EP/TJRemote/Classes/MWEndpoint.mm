@@ -65,13 +65,20 @@ using namespace osc;
 - (void) createSocket {
 	if(_socket!=0) {
 		delete _socket;
+		_socket = 0;
 	}
-	_socket = new UdpSocket();
-	if([_transportAddress length]>0) {
-		_socket->Connect(IpEndpointName([_transportAddress UTF8String], _transportPort));
+	
+	try {
+		_socket = new UdpSocket();
+		if([_transportAddress length]>0) {
+			_socket->Connect(IpEndpointName([_transportAddress UTF8String], _transportPort));
+		}
+		else {
+			_socket->Connect(IpEndpointName([[_service hostName] UTF8String], _transportPort));
+		}
 	}
-	else {
-		_socket->Connect(IpEndpointName([[_service hostName] UTF8String], _transportPort));
+	catch(const std::exception& e) {
+		NSLog(@"Error when creating socket: %s",e.what());
 	}
 }
 
