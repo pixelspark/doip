@@ -26,6 +26,14 @@ String Fabric::GetPackage() const {
 	return _package;
 }
 
+void Fabric::GetTags(std::set<EPTag>& tagList) const {
+	std::set<EPTag>::const_iterator it = _tags.begin();
+	while(it!=_tags.end()) {
+		tagList.insert(*it);
+		++it;
+	}
+}
+
 void Fabric::Load(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	_id = LoadAttributeSmall(me, "id", _id);
@@ -37,6 +45,15 @@ void Fabric::Load(TiXmlElement* me) {
 		_author = LoadAttribute<std::wstring>(info, "author", L"");
 		_title = LoadAttribute<std::wstring>(info, "title", L"");
 		_version = LoadAttribute<unsigned int>(info, "version", 0);
+		
+		TiXmlElement* tag = info->FirstChildElement("tag");
+		while(tag!=0) {
+			TiXmlNode* text = tag->FirstChild();
+			if(text!=0) {
+				_tags.insert(Wcs(text->Value() == 0 ? "" : std::string(text->Value())));
+			}
+			tag = tag->NextSiblingElement("tag");
+		}
 	}
 	
 	TiXmlElement* groups = me->FirstChildElement("groups");
@@ -102,6 +119,16 @@ void Fabric::SaveFabric(TiXmlElement* me) {
 	SaveAttribute(&infoElement, "author", _author);
 	SaveAttribute(&infoElement, "title", _title);
 	SaveAttribute(&infoElement, "version", _version);
+	
+	std::set<EPTag>::const_iterator it = _tags.begin();
+	while(it!=_tags.end()) {
+		TiXmlElement tag("tag");
+		TiXmlText tagName(Mbs(*it));
+		tag.InsertEndChild(tagName);
+		infoElement.InsertEndChild(tag);
+		++it;
+	}
+	
 	me->InsertEndChild(infoElement);
 	
 	if(_groups.size()>0) {
@@ -151,13 +178,14 @@ String Fabric::GetVersion() const {
 	return Stringify(_version);
 }
 
-void Fabric::GetAllMatchingRules(const String& msg, const String& tags, std::deque< ref<Rule> >& results) {
+void Fabric::GetAllMatchingRules(strong<Message> msg, std::deque< ref<Rule> >& results) {
 	ThreadLock lock(&_lock);
+	
 	std::deque< ref<Rule> >::iterator it = _rules.begin();
 	while(it!=_rules.end()) {
 		ref<Rule> rule = *it;
 		if(rule) {
-			if(rule->IsEnabled() && rule->Matches(msg, tags)) {
+			if(rule->IsEnabled() && rule->Matches(msg)) {
 				results.push_back(rule);
 			}
 		}

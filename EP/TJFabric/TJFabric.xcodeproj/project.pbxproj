@@ -14,7 +14,6 @@
 		B40227B21069316500137628 /* tjfabricqueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40227B11069316500137628 /* tjfabricqueue.cpp */; };
 		B40229A41069653500137628 /* tjfabricmessagescriptable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40229A31069653500137628 /* tjfabricmessagescriptable.cpp */; };
 		B423B7F1106E0E4200147974 /* tjfabricutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B423B7F0106E0E4200147974 /* tjfabricutil.cpp */; };
-		B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4461F7B10979C500061A082 /* tjfabricregistry.cpp */; };
 		B47B74CB10AB5B110031263D /* tjfabricscriptables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47B74CA10AB5B110031263D /* tjfabricscriptables.cpp */; };
 		B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */; };
 		B49776AA1097789400FA1B69 /* TinyXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49776781097776300FA1B69 /* TinyXML.framework */; };
@@ -126,8 +125,6 @@
 		B40229A31069653500137628 /* tjfabricmessagescriptable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricmessagescriptable.cpp; path = src/tjfabricmessagescriptable.cpp; sourceTree = "<group>"; };
 		B423B7EE106E0DFC00147974 /* tjfabricutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricutil.h; path = include/tjfabricutil.h; sourceTree = "<group>"; };
 		B423B7F0106E0E4200147974 /* tjfabricutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricutil.cpp; path = src/tjfabricutil.cpp; sourceTree = "<group>"; };
-		B4461F7A10979BF60061A082 /* tjfabricregistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricregistry.h; path = include/tjfabricregistry.h; sourceTree = "<group>"; };
-		B4461F7B10979C500061A082 /* tjfabricregistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricregistry.cpp; path = src/tjfabricregistry.cpp; sourceTree = "<group>"; };
 		B47B74CA10AB5B110031263D /* tjfabricscriptables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjfabricscriptables.cpp; path = src/tjfabricscriptables.cpp; sourceTree = "<group>"; };
 		B47B74CC10AB5B1B0031263D /* tjfabricscriptables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricscriptables.h; path = include/tjfabricscriptables.h; sourceTree = "<group>"; };
 		B4818676106BC29100EAEE19 /* tjfabricgroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tjfabricgroup.h; path = include/tjfabricgroup.h; sourceTree = "<group>"; };
@@ -192,7 +189,6 @@
 				B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */,
 				B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */,
 				B423B7F0106E0E4200147974 /* tjfabricutil.cpp */,
-				B4461F7B10979C500061A082 /* tjfabricregistry.cpp */,
 				B47B74CA10AB5B110031263D /* tjfabricscriptables.cpp */,
 			);
 			name = src;
@@ -209,7 +205,6 @@
 				B4818676106BC29100EAEE19 /* tjfabricgroup.h */,
 				B4D0F249106CB3FB0053A1BA /* tjfabricconnection.h */,
 				B423B7EE106E0DFC00147974 /* tjfabricutil.h */,
-				B4461F7A10979BF60061A082 /* tjfabricregistry.h */,
 				B47B74CC10AB5B1B0031263D /* tjfabricscriptables.h */,
 			);
 			name = include;
@@ -372,7 +367,6 @@
 				B481867C106BC3A200EAEE19 /* tjfabricgroup.cpp in Sources */,
 				B4D0F24B106CB5530053A1BA /* tjfabricconnection.cpp in Sources */,
 				B423B7F1106E0E4200147974 /* tjfabricutil.cpp in Sources */,
-				B4461F7C10979C500061A082 /* tjfabricregistry.cpp in Sources */,
 				B47B74CB10AB5B110031263D /* tjfabricscriptables.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

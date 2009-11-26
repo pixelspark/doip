@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>B4FBEA4310BDD93E00DDCE96</string>
+						<string>B4FBEAC510BDF22E00DDCE96</string>
 						<key>history</key>
 						<array>
 							<string>B4528CF410BA9FBB009605EC</string>
@@ -372,7 +372,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4FBEA4210BDD93E00DDCE96</string>
+										<string>B4FBEAC410BDF22E00DDCE96</string>
 										<key>history</key>
 										<array>
 											<string>B4F699351068143500A32B2B</string>
@@ -724,10 +724,9 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>B4FBEA3B10BDD91000DDCE96</string>
-		<string>B4FBEA3C10BDD91000DDCE96</string>
 		<string>B4FBEA3D10BDD91000DDCE96</string>
-		<string>B4528BD810BA8FA8009605EC</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJRemote/Remote.xcodeproj</string>
+		<string>B4528BD810BA8FA8009605EC</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 97 1280 905 0 0 1280 1002 </string>

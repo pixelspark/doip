@@ -31,9 +31,35 @@ namespace tj {
 				EPLogicOp _op;
 		};
 		
+		class EP_EXPORTED EPHasTagCondition: public EPCondition {
+			public:
+				EPHasTagCondition(const EPTag& tag = L"");
+				virtual ~EPHasTagCondition();
+				virtual void Load(TiXmlElement* you);
+				virtual void Save(TiXmlElement* you);
+				virtual bool Matches(tj::shared::strong<EPEndpoint> ep);
+			
+			protected:
+				EPTag _tag;
+		};
+		
+		class EP_EXPORTED EPSpecificCondition: public EPCondition {
+			public:
+				EPSpecificCondition(const tj::shared::String& epid = L"", const tj::shared::String& nsp = L"");
+				virtual ~EPSpecificCondition();
+				virtual void Load(TiXmlElement* you);
+				virtual void Save(TiXmlElement* me);
+				virtual bool Matches(tj::shared::strong<EPEndpoint> ep);
+			
+			protected:
+				tj::shared::String _epid;
+				tj::shared::String _namespace;
+		};
+		
 		class EP_EXPORTED EPSupportsCondition: public EPCondition {
 			public:
 				EPSupportsCondition();
+				virtual ~EPSupportsCondition();
 				virtual void Load(TiXmlElement* you);
 				virtual void Save(TiXmlElement* parent);
 				virtual bool Matches(tj::shared::strong<EPEndpoint> ep);

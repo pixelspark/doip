@@ -319,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>B46CBC8F10A45B2400CDE29F</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>uspmain.cpp</string>
+								<string>toscd.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,18 +327,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B46CBC9010A45B2400CDE29F</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>uspmain.cpp</string>
+										<string>toscd.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4FBE9B810BDB6B600DDCE96</string>
+										<string>B4FBEABC10BDF22E00DDCE96</string>
 										<key>history</key>
 										<array>
 											<string>B46CBCEE10A4603F00CDE29F</string>
 											<string>B46CBD0410A461CF00CDE29F</string>
 											<string>B4B03D9510ADA39A00C7AB53</string>
 											<string>B4B03D9610ADA39A00C7AB53</string>
-											<string>B4528CF810BA9FBC009605EC</string>
+											<string>B4FBEAB910BDF22E00DDCE96</string>
+											<string>B4FBEABA10BDF22E00DDCE96</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -352,18 +353,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 488}}</string>
+								<string>{{0, 0}, {1073, 717}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 89 1280 909 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>488pt</string>
+							<string>717pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>375pt</string>
+							<string>146pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -378,8 +379,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1073, 348}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 89 1280 909 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -433,7 +432,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 330}}</string>
+										<string>{{10, 27}, {1073, 119}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 89 1280 909 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -615,14 +616,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4F0AF1710B9E46200351BAA</string>
+				<string>B4FBEABE10BDF22E00DDCE96</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>B4F0AF1810B9E46200351BAA</string>
-				<string>B4F0AF1910B9E46200351BAA</string>
-				<string>B4F0AF1A10B9E46200351BAA</string>
-				<string>B4F0AF1B10B9E46200351BAA</string>
-				<string>B4F0AF1C10B9E46200351BAA</string>
+				<string>B4FBEABF10BDF22E00DDCE96</string>
+				<string>B4FBEAC010BDF22E00DDCE96</string>
+				<string>B4FBEAC110BDF22E00DDCE96</string>
+				<string>B4FBEAC210BDF22E00DDCE96</string>
+				<string>B4FBEAC310BDF22E00DDCE96</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>

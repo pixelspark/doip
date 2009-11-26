@@ -56,18 +56,17 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 280868393;
-			PBXWorkspaceStateSaveDate = 280868393;
+			PBXPerProjectTemplateStateSaveDate = 280924157;
+			PBXWorkspaceStateSaveDate = 280924157;
 		};
 		perUserProjectItems = {
-			B4528CF710BA9FBC009605EC = B4528CF710BA9FBC009605EC /* PBXTextBookmark */;
-			B4528CF810BA9FBC009605EC = B4528CF810BA9FBC009605EC /* PBXTextBookmark */;
 			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
 			B46CBD0410A461CF00CDE29F = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
 			B4B03D9510ADA39A00C7AB53 = B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */;
 			B4B03D9610ADA39A00C7AB53 = B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */;
-			B4FBE9B410BDB62B00DDCE96 /* PBXTextBookmark */ = B4FBE9B410BDB62B00DDCE96 /* PBXTextBookmark */;
-			B4FBE9B810BDB6B600DDCE96 /* PBXTextBookmark */ = B4FBE9B810BDB6B600DDCE96 /* PBXTextBookmark */;
+			B4FBEAB910BDF22E00DDCE96 = B4FBEAB910BDF22E00DDCE96 /* PBXTextBookmark */;
+			B4FBEABA10BDF22E00DDCE96 = B4FBEABA10BDF22E00DDCE96 /* PBXTextBookmark */;
+			B4FBEABC10BDF22E00DDCE96 = B4FBEABC10BDF22E00DDCE96 /* PBXTextBookmark */;
 		};
 		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
 		userBuildSettings = {
@@ -78,26 +77,6 @@
 		executables = (
 			B46CBC8A10A45B2100CDE29F /* TJUSP3EPServer */,
 		);
-	};
-	B4528CF710BA9FBC009605EC /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		name = "uspmain.cpp: 38";
-		rLen = 0;
-		rLoc = 1635;
-		rType = 0;
-		vrLen = 1516;
-		vrLoc = 118;
-	};
-	B4528CF810BA9FBC009605EC /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		name = "uspmain.cpp: 186";
-		rLen = 0;
-		rLoc = 6659;
-		rType = 0;
-		vrLen = 1114;
-		vrLoc = 5801;
 	};
 	B46CBC8A10A45B2100CDE29F /* TJUSP3EPServer */ = {
 		isa = PBXExecutable;
@@ -142,9 +121,9 @@
 	};
 	B46CBCBE10A45C2800CDE29F /* uspmain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1090, 2730}}";
-			sepNavSelRange = "{5924, 17}";
-			sepNavVisRange = "{5691, 706}";
+			sepNavIntBoundsRect = "{{0, 0}, {1090, 2704}}";
+			sepNavSelRange = "{232, 0}";
+			sepNavVisRange = "{0, 2120}";
 			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
 		};
 	};
@@ -216,24 +195,53 @@
 		vrLen = 564;
 		vrLoc = 0;
 	};
-	B4FBE9B410BDB62B00DDCE96 /* PBXTextBookmark */ = {
+	B4FBEAB910BDF22E00DDCE96 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		name = "uspmain.cpp: 186";
+		name = "uspmain.cpp: 155";
 		rLen = 0;
-		rLoc = 6659;
-		rType = 0;
-		vrLen = 1071;
-		vrLoc = 5844;
-	};
-	B4FBE9B810BDB6B600DDCE96 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		name = "uspmain.cpp: 160";
-		rLen = 17;
-		rLoc = 5924;
+		rLoc = 5801;
 		rType = 0;
 		vrLen = 706;
 		vrLoc = 5691;
+	};
+	B4FBEABA10BDF22E00DDCE96 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4FBEABB10BDF22E00DDCE96 /* toscd.cpp */;
+		name = "toscd.cpp: 17";
+		rLen = 0;
+		rLoc = 355;
+		rType = 0;
+		vrLen = 1666;
+		vrLoc = 0;
+	};
+	B4FBEABB10BDF22E00DDCE96 /* toscd.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = toscd.cpp;
+		path = "/Volumes/tommy/local/tj-epd/tubled/toscd.cpp";
+		sourceTree = "<absolute>";
+	};
+	B4FBEABC10BDF22E00DDCE96 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4FBEABD10BDF22E00DDCE96 /* toscd.cpp */;
+		name = "toscd.cpp: 17";
+		rLen = 0;
+		rLoc = 355;
+		rType = 0;
+		vrLen = 1666;
+		vrLoc = 0;
+	};
+	B4FBEABD10BDF22E00DDCE96 /* toscd.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = toscd.cpp;
+		path = "/Volumes/tommy/local/tj-epd/tubled/toscd.cpp";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 2860}}";
+			sepNavSelRange = "{355, 0}";
+			sepNavVisRange = "{0, 1666}";
+		};
 	};
 }

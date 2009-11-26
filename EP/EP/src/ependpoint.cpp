@@ -25,6 +25,9 @@ String EPEndpoint::GetFullIdentifier() const {
 	return wos.str();
 }
 
+void EPEndpoint::GetTags(std::set<EPTag>& tagList) const {
+}
+
 /** EPReply **/
 EPReply::~EPReply() {
 }
@@ -86,6 +89,22 @@ wchar_t EPParameter::GetValueTypeTag() const {
 	}
 }
 
+bool EPParameter::IsValueValid(const Any& value) const {
+	Any::Type vt = GetValueType();
+	Any forced = value.Force(vt);
+	if(vt==Any::TypeInteger || vt==Any::TypeDouble) {
+		if(forced > GetMaximumValue()) {
+			return false;
+		}
+		
+		if(forced < GetMinimumValue()) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
 Any::Type EPParameter::GetValueType() const {
 	String type = GetType();
 	if(type==L"string") {
@@ -124,6 +143,14 @@ void EPEndpointDefinition::Save(TiXmlElement* me) {
 	EPEndpoint::Save(me);
 }
 
+void EPEndpointDefinition::GetTags(std::set<EPTag>& tagList) const {
+	std::set<EPTag>::const_iterator it = _tags.begin();
+	while(it!=_tags.end()) {
+		tagList.insert(*it);
+		++it;
+	}
+}
+
 void EPEndpointDefinition::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall(me, "id", _id);
 	_friendlyName = LoadAttributeSmall(me, "friendly-name", _friendlyName);
@@ -131,6 +158,18 @@ void EPEndpointDefinition::Load(TiXmlElement* me) {
 	_version = LoadAttributeSmall(me, "version", _version);
 	_dynamic = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "dynamic", Bool::ToString(_dynamic)).c_str());
 	_level = LoadAttributeSmall(me, "mediation-level", _level);
+	
+	TiXmlElement* tags = me->FirstChildElement("tags");
+	if(tags!=0) {
+		TiXmlElement* tag = tags->FirstChildElement("tag");
+		while(tag!=0) {
+			TiXmlNode* text = tag->FirstChild();
+			if(text!=0) {
+				_tags.insert(Wcs(text->Value() == 0 ? "" : std::string(text->Value())));
+			}
+			tag = tag->NextSiblingElement("tag");
+		}
+	}
 	
 	TiXmlElement* methods = me->FirstChildElement("methods");
 	if(methods!=0) {
@@ -162,6 +201,21 @@ void EPEndpoint::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "version", GetVersion());
 	SaveAttributeSmall(me, "dynamic", std::wstring(Bool::ToString(IsDynamic())));
 	SaveAttributeSmall(me, "mediation-level", GetMediationLevel());
+	
+	std::set<EPTag> tags;
+	GetTags(tags);
+	if(tags.size()>0) {
+		TiXmlElement tagsElement("tags");
+		std::set<EPTag>::const_iterator it = tags.begin();
+		while(it!=tags.end()) {
+			TiXmlElement tag("tag");
+			TiXmlText text(Mbs(*it));
+			tag.InsertEndChild(text);
+			tagsElement.InsertEndChild(tag);
+			++it;
+		}
+		me->InsertEndChild(tagsElement);
+	}
 	
 	TiXmlElement methodsElement("methods");
 	std::vector< ref<EPMethod> > methods;
@@ -329,6 +383,41 @@ bool EPMethod::Matches(const String& msg, const String& tags) const {
 	return false;
 }
 
+bool EPMethod::Matches(tj::shared::strong<Message> msg) const {
+	// Check if the path matches with a pattern
+	if(!Matches(msg->GetPath())) {
+		Log::Write(L"EPFramework/EPMethod", L"Message does not match method: path doesn't match");
+		return false;
+	}
+	
+	// Check if there are enough parameters given
+	std::vector< ref<EPParameter> > params;
+	GetParameters(params);
+	if(msg->GetParameterCount() != params.size()) {
+		Log::Write(L"EPFramework/EPMethod", L"Message does not match method: parameter count is not equal ("+Stringify(msg->GetParameterCount())+L" vs. "+Stringify(params.size())+L")");
+		return false;
+	}
+	
+	// Check each value whether it matches the parameter limits
+	std::vector< ref<EPParameter> >::iterator it = params.begin();
+	unsigned int idx = 0;
+	while(it!=params.end()) {
+		ref<EPParameter> param = *it;
+		if(param) {
+			const Any& value = msg->GetParameter(idx);
+			if(!param->IsValueValid(value)) {
+				Log::Write(L"EPFramework/EPMethod", L"Message does not match method: parameter idx="+Stringify(idx)+L" invalid value");
+				return false;
+			}
+		}
+		++idx;
+		++it;
+	}
+	
+	// Well, if the message got at this point, it's probably good...
+	return true;
+}
+
 bool EPMethod::Matches(const std::wstring& msg) const {
 	std::set<EPPath> pathList;
 	GetPaths(pathList);
@@ -433,6 +522,8 @@ EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyN
 	_maximumValue(maxValue),
 	_defaultValue(defaultValue),
 	_discrete(discrete) {
+		
+	_runtimeDefaultValue = Any(_defaultValue).Force(GetValueType());
 }
 
 EPParameterDefinition::~EPParameterDefinition() {
@@ -477,7 +568,11 @@ Any EPParameterDefinition::GetMaximumValue() const {
 }
 
 Any EPParameterDefinition::GetDefaultValue() const {
-	return Any(_defaultValue).Force(GetValueType());
+	return _runtimeDefaultValue;
+}
+
+void EPParameterDefinition::SetDefaultValue(const Any& val) {
+	_runtimeDefaultValue = val.Force(GetValueType());
 }
 
 void EPParameterDefinition::Save(TiXmlElement* me) {

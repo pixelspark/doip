@@ -13,7 +13,7 @@ namespace tj {
 	namespace ep {
 		class EP_EXPORTED EPPublication {
 			public:
-				EPPublication(tj::shared::strong<EPEndpoint> ep);
+				EPPublication(tj::shared::strong<EPEndpoint> ep, const std::wstring& magicPostfix = L"");
 				virtual ~EPPublication();
 				
 			protected:

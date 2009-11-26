@@ -2,6 +2,7 @@
 #define _TJ_EP_EPENDPOINT_H
 
 #include "epinternal.h"
+#include "epmessage.h"
 
 #pragma warning (push)
 #pragma warning (disable: 4251 4275)
@@ -9,6 +10,7 @@
 namespace tj {
 	namespace ep {
 		typedef tj::shared::String EPPath;
+		typedef tj::shared::String EPTag;
 		typedef int EPMediationLevel;
 		
 		enum EPMediationLevels {
@@ -35,8 +37,10 @@ namespace tj {
 				virtual tj::shared::Any GetMinimumValue() const = 0;
 				virtual tj::shared::Any GetMaximumValue() const = 0;
 				virtual tj::shared::Any GetDefaultValue() const = 0;
+				virtual void SetDefaultValue(const tj::shared::Any& val) = 0;
 				virtual bool IsDiscrete() const = 0;
 			
+				virtual bool IsValueValid(const tj::shared::Any& val) const;
 				virtual void Save(TiXmlElement* me);
 				virtual wchar_t GetValueTypeTag() const;
 				virtual tj::shared::Any::Type GetValueType() const;
@@ -67,6 +71,7 @@ namespace tj {
 				virtual void GetReplies(std::vector< tj::shared::ref<EPReply> >& replyList) const;
 				virtual bool Matches(const tj::shared::String& path) const;
 				virtual bool Matches(const tj::shared::String& path, const tj::shared::String& ptags) const;
+				virtual bool Matches(tj::shared::strong<Message> msg) const;
 		};
 		
 		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object {
@@ -80,6 +85,7 @@ namespace tj {
 				virtual EPMediationLevel GetMediationLevel() const = 0;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const = 0;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const = 0;
+				virtual void GetTags(std::set<EPTag>& tagList) const;
 			
 				virtual void Save(TiXmlElement* me);
 				virtual tj::shared::String GetFullIdentifier() const;
@@ -100,6 +106,8 @@ namespace tj {
 				virtual EPMediationLevel GetMediationLevel() const;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
+				virtual void GetTags(std::set<EPTag>& tagList) const;
+			
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
 			
@@ -112,6 +120,7 @@ namespace tj {
 				bool _dynamic;
 				std::vector< tj::shared::ref<EPMethod> > _methods;
 				std::vector< tj::shared::ref<EPTransport> > _transports;
+				std::set<EPTag> _tags;
 		};
 		
 		class EP_EXPORTED EPMethodDefinition: public EPMethod, public tj::shared::Serializable {
@@ -164,6 +173,7 @@ namespace tj {
 				virtual tj::shared::Any GetMinimumValue() const;
 				virtual tj::shared::Any GetMaximumValue() const;
 				virtual tj::shared::Any GetDefaultValue() const;
+				virtual void SetDefaultValue(const tj::shared::Any& val);
 				virtual bool IsDiscrete() const;
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
@@ -174,6 +184,7 @@ namespace tj {
 				tj::shared::String _minimumValue;
 				tj::shared::String _maximumValue;
 				tj::shared::String _defaultValue;
+				tj::shared::Any _runtimeDefaultValue;
 				bool _discrete;
 		};
 		

@@ -6,6 +6,20 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		B4D894DD10BEA1AA00E8820E /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B4D894E210BEA1C800E8820E /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				B4D894DC10BEA1AA00E8820E /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		B419EE591099F5BF00FE1A72 /* epcondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B419EE581099F5BF00FE1A72 /* epcondition.cpp */; };
 		B462AEF31098E00E00484C29 /* ependpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AEF11098E00E00484C29 /* ependpoint.cpp */; };
@@ -14,6 +28,7 @@
 		B462AF5C1098E17000484C29 /* TJNP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B462AF5B1098E16E00484C29 /* TJNP.framework */; };
 		B462AF621098E20300484C29 /* epdownload.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B462AF611098E20300484C29 /* epdownload.cpp */; };
 		B469547810A6CDF20045DB2D /* eppublication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B469547710A6CDF20045DB2D /* eppublication.cpp */; };
+		B47A681E10BEA3CA0060D38F /* doxygen.config in Resources */ = {isa = PBXBuildFile; fileRef = B47A681D10BEA3CA0060D38F /* doxygen.config */; };
 		B4CAA88410AD65B000385A5F /* include in Resources */ = {isa = PBXBuildFile; fileRef = B4CAA87310AD65B000385A5F /* include */; };
 		B4CAA88710AD65B700385A5F /* include in Headers */ = {isa = PBXBuildFile; fileRef = B4CAA87310AD65B000385A5F /* include */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4CD44B3109AEDBE004B3BBB /* epconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */; };
@@ -22,7 +37,6 @@
 		B4CD44D2109AEF72004B3BBB /* epdnssddiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */; };
 		B4CD44FC109AF911004B3BBB /* eposcipconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */; };
 		B4CD450E109AFAAD004B3BBB /* epconnectionsregistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */; };
-		B4CD4512109AFB6D004B3BBB /* epserverconnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */; };
 		B4CD4516109AFC5A004B3BBB /* epservermanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */; };
 		B4CD4550109B0228004B3BBB /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CD454F109B0223004B3BBB /* TJScout.framework */; };
 		B4CD455C109B0249004B3BBB /* OSCPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CD455B109B0246004B3BBB /* OSCPack.framework */; };
@@ -111,6 +125,7 @@
 		B462AF561098E16E00484C29 /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B462AF611098E20300484C29 /* epdownload.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epdownload.cpp; sourceTree = "<group>"; };
 		B469547710A6CDF20045DB2D /* eppublication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eppublication.cpp; sourceTree = "<group>"; };
+		B47A681D10BEA3CA0060D38F /* doxygen.config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doxygen.config; sourceTree = "<group>"; };
 		B4CAA87310AD65B000385A5F /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = SOURCE_ROOT; };
 		B4CD44B2109AEDBE004B3BBB /* epconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epconnection.cpp; sourceTree = "<group>"; };
 		B4CD44BE109AEE40004B3BBB /* epmessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epmessage.cpp; sourceTree = "<group>"; };
@@ -118,7 +133,6 @@
 		B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epdnssddiscovery.cpp; sourceTree = "<group>"; };
 		B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eposcipconnection.cpp; sourceTree = "<group>"; };
 		B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epconnectionsregistry.cpp; sourceTree = "<group>"; };
-		B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epserverconnection.cpp; sourceTree = "<group>"; };
 		B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epservermanager.cpp; sourceTree = "<group>"; };
 		B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -151,6 +165,7 @@
 		0867D691FE84028FC02AAC07 /* EPFramework */ = {
 			isa = PBXGroup;
 			children = (
+				B47A681D10BEA3CA0060D38F /* doxygen.config */,
 				B4CAA87310AD65B000385A5F /* include */,
 				B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */,
 				B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */,
@@ -192,7 +207,6 @@
 				B4CD44C8109AEF20004B3BBB /* epdiscovery.cpp */,
 				B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */,
 				B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */,
-				B4CD4511109AFB6D004B3BBB /* epserverconnection.cpp */,
 				B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */,
 				B469547710A6CDF20045DB2D /* eppublication.cpp */,
 			);
@@ -313,6 +327,7 @@
 			projectRoot = "";
 			targets = (
 				8DC2EF4F0486A6940098B216 /* EP */,
+				B4D894DD10BEA1AA00E8820E /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -361,10 +376,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4CAA88410AD65B000385A5F /* include in Resources */,
+				B47A681E10BEA3CA0060D38F /* doxygen.config in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B4D894DC10BEA1AA00E8820E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#  Build the doxygen documentation for the project and load the docset into Xcode.\nif ! [ -f $SOURCE_ROOT/doxygen.config ] \nthen \n  echo doxygen config file does not exist\n  exit 0\nfi\n\n$DOXYGEN_PATH $SOURCE_ROOT/doxygen.config\nmkdir -p $BUILT_PRODUCTS_DIR/docs/EPFramework/html\nmake -C $BUILT_PRODUCTS_DIR/docs/EPFramework/html install\n\nexit 0\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DC2EF540486A6940098B216 /* Sources */ = {
@@ -380,7 +412,6 @@
 				B4CD44D2109AEF72004B3BBB /* epdnssddiscovery.cpp in Sources */,
 				B4CD44FC109AF911004B3BBB /* eposcipconnection.cpp in Sources */,
 				B4CD450E109AFAAD004B3BBB /* epconnectionsregistry.cpp in Sources */,
-				B4CD4512109AFB6D004B3BBB /* epserverconnection.cpp in Sources */,
 				B4CD4516109AFC5A004B3BBB /* epservermanager.cpp in Sources */,
 				B469547810A6CDF20045DB2D /* eppublication.cpp in Sources */,
 			);
@@ -484,6 +515,28 @@
 			};
 			name = Release;
 		};
+		B4D894DE10BEA1AA00E8820E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Documentation;
+			};
+			name = Debug;
+		};
+		B4D894DF10BEA1AA00E8820E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DOXYGEN_PATH = /Applications/Doxygen.app/Contents/Resources/doxygen;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = Documentation;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -501,6 +554,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B4D894E210BEA1C800E8820E /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4D894DE10BEA1AA00E8820E /* Debug */,
+				B4D894DF10BEA1AA00E8820E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

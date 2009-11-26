@@ -144,7 +144,7 @@ void Queue::ProcessMessage(strong<QueuedMessage> qm) {
 		if(fe) {
 			ref<Fabric> f = fe->GetFabric();
 			if(f) {
-				f->GetAllMatchingRules(m->GetPath(), m->GetParameterTags(), matchingRules);
+				f->GetAllMatchingRules(m, matchingRules);
 				std::deque< ref<Rule> >::iterator it = matchingRules.begin();
 				while(it!=matchingRules.end()) {
 					ref<Rule> rule = *it;

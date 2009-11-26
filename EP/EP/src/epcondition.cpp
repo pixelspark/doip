@@ -8,8 +8,64 @@ using namespace tj::np::pattern;
 EPCondition::~EPCondition() {
 }
 
+/** EPHasTagCondition **/
+EPHasTagCondition::EPHasTagCondition(const EPTag& tag): _tag(tag) {
+}
+
+EPHasTagCondition::~EPHasTagCondition() {
+}
+
+void EPHasTagCondition::Load(TiXmlElement* you) {
+	_tag = LoadAttributeSmall(you, "tag", _tag);
+}
+
+void EPHasTagCondition::Save(TiXmlElement* you) {
+	SaveAttributeSmall(you,"tag", _tag);
+}
+
+bool EPHasTagCondition::Matches(strong<EPEndpoint> ep) {
+	std::set<EPTag> tags;
+	ep->GetTags(tags);
+	std::set<EPTag>::const_iterator it = tags.find(_tag);
+	return it!=tags.end();
+}
+
+/** EPSpecificCondition **/
+EPSpecificCondition::EPSpecificCondition(const String& epid, const String& nsp): _epid(epid), _namespace(nsp) {
+}
+
+EPSpecificCondition::~EPSpecificCondition() {
+}
+
+void EPSpecificCondition::Load(TiXmlElement* you) {
+	_epid = LoadAttributeSmall(you, "id", _epid);
+	_namespace = LoadAttributeSmall(you, "namespace", _namespace);
+}
+
+void EPSpecificCondition::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "id", _epid);
+	SaveAttributeSmall(me, "namespace", _namespace);
+}
+
+bool EPSpecificCondition::Matches(tj::shared::strong<EPEndpoint> ep) {
+	if(_namespace.length()>0) {
+		if(ep->GetNamespace()!=_namespace) {
+			return false;
+		}
+	}
+	
+	if(ep->GetID()!=_epid) {
+		return false;
+	}
+	
+	return true;
+}
+
 /** EPSupportsCondition **/
 EPSupportsCondition::EPSupportsCondition() {
+}
+
+EPSupportsCondition::~EPSupportsCondition() {
 }
 
 void EPSupportsCondition::Load(TiXmlElement* me) {
@@ -76,6 +132,16 @@ ref<EPCondition> EPConditionFactory::Load(TiXmlElement* root) {
 	}
 	else if(elementName=="supports") {
 		ref<EPCondition> epc = GC::Hold(new EPSupportsCondition());
+		epc->Load(root);
+		return epc;
+	}
+	else if(elementName=="specific") {
+		ref<EPCondition> epc = GC::Hold(new EPSpecificCondition());
+		epc->Load(root);
+		return epc;
+	}
+	else if(elementName=="has-tag") {
+		ref<EPCondition> epc = GC::Hold(new EPHasTagCondition());
 		epc->Load(root);
 		return epc;
 	}

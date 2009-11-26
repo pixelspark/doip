@@ -27,7 +27,6 @@ namespace tj {
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
 				
-				
 			protected:
 				typedef typename std::map<tj::shared::ref<EPMethod>, Member> MemberMap;
 				typedef typename std::map<tj::shared::ref<EPTransport>, tj::shared::ref<Connection> > TransportMap;
@@ -36,9 +35,10 @@ namespace tj {
 				tj::shared::String _id;
 				tj::shared::String _ns;
 				tj::shared::String _friendlyName;
+				bool _updateDefaultValuesToState;
 		};
 		
-		template<class T> EPEndpointServer<T>::EPEndpointServer(const tj::shared::String& id, const tj::shared::String& ns, const tj::shared::String& friendlyName): _id(id), _friendlyName(friendlyName), _ns(ns) {
+		template<class T> EPEndpointServer<T>::EPEndpointServer(const tj::shared::String& id, const tj::shared::String& ns, const tj::shared::String& friendlyName): _id(id), _friendlyName(friendlyName), _ns(ns), _updateDefaultValuesToState(true) {
 		}
 		
 		template<class T> EPEndpointServer<T>::~EPEndpointServer() {
@@ -102,6 +102,28 @@ namespace tj {
 				while(it!=_members.end()) {
 					tj::shared::ref<EPMethod> epm = it->first;
 					if(epm && epm->Matches(path)) {
+						// Check input values against parameter limits and (optionally) update parameter default values
+						std::vector< tj::shared::ref<EPParameter> > parameters;
+						epm->GetParameters(parameters);
+						std::vector< tj::shared::ref<EPParameter> >::iterator pit = parameters.begin();
+						unsigned int idx = 0;
+						while(pit!=parameters.end()) {
+							tj::shared::ref<EPParameter> parameter = *pit;
+							if(parameter) {
+								const tj::shared::Any& valueGiven = m->GetParameter(idx);
+								if(!parameter->IsValueValid(valueGiven)) {
+									return;
+								}
+								
+								if(_updateDefaultValuesToState) {
+									parameter->SetDefaultValue(valueGiven);
+								}
+							}
+							++idx;
+							++pit;
+						}
+						
+						// Execute the associated handler
 						Member mem = it->second;
 						if(mem!=0) {
 							(static_cast<T*>(this)->*mem)(data.message, data.source, data.channel);
