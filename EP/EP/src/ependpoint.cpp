@@ -386,7 +386,6 @@ bool EPMethod::Matches(const String& msg, const String& tags) const {
 bool EPMethod::Matches(tj::shared::strong<Message> msg) const {
 	// Check if the path matches with a pattern
 	if(!Matches(msg->GetPath())) {
-		Log::Write(L"EPFramework/EPMethod", L"Message does not match method: path doesn't match");
 		return false;
 	}
 	
@@ -394,7 +393,7 @@ bool EPMethod::Matches(tj::shared::strong<Message> msg) const {
 	std::vector< ref<EPParameter> > params;
 	GetParameters(params);
 	if(msg->GetParameterCount() != params.size()) {
-		Log::Write(L"EPFramework/EPMethod", L"Message does not match method: parameter count is not equal ("+Stringify(msg->GetParameterCount())+L" vs. "+Stringify(params.size())+L")");
+		//Log::Write(L"EPFramework/EPMethod", L"Message does not match method: parameter count is not equal ("+Stringify(msg->GetParameterCount())+L" vs. "+Stringify(params.size())+L")");
 		return false;
 	}
 	

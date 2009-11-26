@@ -50,7 +50,7 @@ void DNSSDDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::Resolv
 	}
 }
 
-void DNSSDDiscovery::Create(tj::shared::strong<DiscoveryDefinition> def) {
+void DNSSDDiscovery::Create(tj::shared::strong<DiscoveryDefinition> def, const tj::shared::String& ownMagic) {
 	if(ref<DiscoveryDefinition>(def).IsCastableTo<DNSSDDiscoveryDefinition>()) {
 		ServiceDescription sd;
 		ref<DNSSDDiscoveryDefinition> dsd = ref<DiscoveryDefinition>(def);
@@ -95,8 +95,9 @@ EPDiscovery::EPDiscovery() {
 EPDiscovery::~EPDiscovery() {
 }
 
-void EPDiscovery::Create(tj::shared::strong<DiscoveryDefinition> def) {
-	DNSSDDiscovery::Create(def);
+void EPDiscovery::Create(tj::shared::strong<DiscoveryDefinition> def, const String& ownMagic) {
+	DNSSDDiscovery::Create(def, ownMagic);
+	_ownMagic = ownMagic;
 	
 	if(def.IsCastableTo<EPDiscoveryDefinition>()) {
 		ref<EPDiscoveryDefinition> edd = ref<DiscoveryDefinition>(def);
@@ -158,7 +159,8 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		ref<Service> service = data.service;
 		
 		// Check whether this is a service that is published from this process
-		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==EPServerManager::Instance()->GetServerMagic()) {
+		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==_ownMagic) {
+			Log::Write(L"EPFramework/EPDiscovery", L"Magic number of discovered service is equal to own magic number; not adding, since this is a service we provide ourselves");
 			return;
 		}
 		

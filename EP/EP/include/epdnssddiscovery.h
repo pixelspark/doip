@@ -27,7 +27,7 @@ namespace tj {
 			public:
 				DNSSDDiscovery();
 				virtual ~DNSSDDiscovery();
-				virtual void Create(tj::shared::strong<DiscoveryDefinition> def);
+				virtual void Create(tj::shared::strong<DiscoveryDefinition> def, const tj::shared::String& ownMagic);
 				virtual void Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRequest::ServiceNotification& data);
 				
 			protected:
@@ -51,12 +51,13 @@ namespace tj {
 			public:
 				EPDiscovery();
 				virtual ~EPDiscovery();
-				virtual void Create(tj::shared::strong<DiscoveryDefinition> def);
+				virtual void Create(tj::shared::strong<DiscoveryDefinition> def, const tj::shared::String& ownMagic);
 				virtual void Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRequest::ServiceNotification& data);
 				virtual void Notify(tj::shared::ref<Object> src, const EPDownloadedDefinition::EPDownloadNotification& data);
 				
 			protected:
 				tj::shared::CriticalSection _lock;
+				tj::shared::String _ownMagic;
 				std::set< tj::shared::ref<EPDownloadedDefinition> > _downloading;
 				tj::shared::ref<EPCondition> _condition;
 		};

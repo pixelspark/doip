@@ -51,11 +51,11 @@ DiscoveryNotification::DiscoveryNotification(const Timestamp& ts, strong<Connect
 DiscoveryFactory::~DiscoveryFactory() {
 }
 
-ref<Discovery> DiscoveryFactory::CreateFromDefinition(strong<DiscoveryDefinition> cd) {
+ref<Discovery> DiscoveryFactory::CreateFromDefinition(strong<DiscoveryDefinition> cd, const String& ownMagic) {
 	std::wstring type = cd->GetType();
 	ref<Discovery> conn = CreateObjectOfType(type);
 	if(conn) {
-		conn->Create(cd);
+		conn->Create(cd, ownMagic);
 	}
 	return conn;
 }

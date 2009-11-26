@@ -41,7 +41,7 @@ namespace tj {
 		class EP_EXPORTED Discovery: public virtual tj::shared::Object {
 			public:
 				virtual ~Discovery();
-				virtual void Create(tj::shared::strong<DiscoveryDefinition> def) = 0;
+				virtual void Create(tj::shared::strong<DiscoveryDefinition> def, const tj::shared::String& ownMagic) = 0;
 				
 				tj::shared::Listenable<DiscoveryNotification> EventDiscovered;
 		};
@@ -49,7 +49,7 @@ namespace tj {
 		class EP_EXPORTED DiscoveryFactory: public virtual tj::shared::PrototypeBasedFactory< Discovery > {
 			public:
 				virtual ~DiscoveryFactory();
-				virtual tj::shared::ref<Discovery> CreateFromDefinition(tj::shared::strong<DiscoveryDefinition> cd);
+				virtual tj::shared::ref<Discovery> CreateFromDefinition(tj::shared::strong<DiscoveryDefinition> cd, const tj::shared::String& ownMagic = L"");
 				static tj::shared::strong< DiscoveryFactory > Instance();
 				
 			protected:

@@ -1,5 +1,6 @@
 #include "../include/tjfabricconnection.h"
 #include "../include/tjfabricengine.h"
+#include <EP/include/epservermanager.h>
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;
@@ -153,9 +154,10 @@ void ConnectedGroup::CreateConnections(strong<FabricEngine> fe) {
 
 void ConnectedGroup::Connect(bool t, strong<FabricEngine> fe) {
 	ThreadLock lock(&_lock);
-	
+
 	if(t) {
 		_shouldStillConnectOutbound = true;
+		String serverMagic = EPServerManager::Instance()->GetServerMagic() + L"-" + fe->GetFabric()->GetID();
 		
 		if(!(_group->IsLazy() && _group->GetDirection()==DirectionOutbound)) {
 			// Do not connect lazily, instead, do it now
@@ -174,7 +176,7 @@ void ConnectedGroup::Connect(bool t, strong<FabricEngine> fe) {
 						newDiscoveries[cd] = eit->second;
 					}
 					else {
-						ref<Discovery> conn = DiscoveryFactory::Instance()->CreateFromDefinition(cd);
+						ref<Discovery> conn = DiscoveryFactory::Instance()->CreateFromDefinition(cd, serverMagic);
 						
 						if(conn) {
 							conn->EventDiscovered.AddListener(ref<ConnectedGroup>(this));
