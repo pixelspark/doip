@@ -19,8 +19,6 @@ void Rule::GetReplies(std::vector< tj::shared::ref<tj::ep::EPReply> >& replyList
 	}
 }
 
-
-
 void Rule::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall<std::wstring>(me, "id", L"");
 	_script = LoadAttribute<std::wstring>(me, "script", L"");

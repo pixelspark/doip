@@ -383,6 +383,36 @@ bool EPMethod::Matches(const String& msg, const String& tags) const {
 	return false;
 }
 
+bool EPMethod::PersistDefaultValues(strong<Message> msg) {
+	// Check if there are enough parameters given
+	std::vector< ref<EPParameter> > params;
+	GetParameters(params);
+	if(msg->GetParameterCount() != params.size()) {
+		return false;
+	}
+	
+	// Check each value whether it matches the parameter limits
+	std::vector< ref<EPParameter> >::iterator it = params.begin();
+	unsigned int idx = 0;
+	while(it!=params.end()) {
+		ref<EPParameter> param = *it;
+		if(param) {
+			const Any& value = msg->GetParameter(idx);
+			if(!param->IsValueValid(value)) {
+				Log::Write(L"EPFramework/EPMethod", L"Message does not match method: parameter idx="+Stringify(idx)+L" invalid value");
+			}
+			else {
+				//Log::Write(L"EPFramework/EPMethod", L"Set default parameter i="+Stringify(idx)+L" v="+value.ToString()+L" t="+Stringify(value.GetType())+L" x="+Stringify(param->GetValueType()));
+				param->SetDefaultValue(value);
+			}
+		}
+		++idx;
+		++it;
+	}
+	
+	return true;
+}
+
 bool EPMethod::Matches(tj::shared::strong<Message> msg) const {
 	// Check if the path matches with a pattern
 	if(!Matches(msg->GetPath())) {

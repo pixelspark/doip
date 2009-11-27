@@ -72,6 +72,7 @@ namespace tj {
 				virtual bool Matches(const tj::shared::String& path) const;
 				virtual bool Matches(const tj::shared::String& path, const tj::shared::String& ptags) const;
 				virtual bool Matches(tj::shared::strong<Message> msg) const;
+				virtual bool PersistDefaultValues(tj::shared::strong<Message> msg);
 		};
 		
 		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object {

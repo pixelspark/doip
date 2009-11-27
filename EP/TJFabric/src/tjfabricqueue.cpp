@@ -149,6 +149,7 @@ void Queue::ProcessMessage(strong<QueuedMessage> qm) {
 				while(it!=matchingRules.end()) {
 					ref<Rule> rule = *it;
 					if(rule) {
+						rule->PersistDefaultValues(m);
 						ExecuteScript(rule, GetScriptForRule(rule), qm);
 					}
 					++it;
