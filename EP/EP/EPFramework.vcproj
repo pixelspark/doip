@@ -210,7 +210,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\epserverconnection.cpp"
+				RelativePath=".\src\eppublication.cpp"
 				>
 			</File>
 			<File
@@ -256,7 +256,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\epserverconnection.h"
+				RelativePath=".\include\eppublication.h"
 				>
 			</File>
 			<File

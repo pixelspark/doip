@@ -203,10 +203,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\tjfabricregistry.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\tjfabricrule.cpp"
 				>
 			</File>
@@ -246,10 +242,6 @@
 			</File>
 			<File
 				RelativePath=".\include\tjfabricqueue.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\tjfabricregistry.h"
 				>
 			</File>
 			<File
