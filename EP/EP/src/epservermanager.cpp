@@ -46,16 +46,16 @@ std::ostream& operator<< (std::ostream& out, const TiXmlNode& doc) {
 	return out;
 }
 
-EPDefinitionResolver::EPDefinitionResolver(ref<EPEndpoint> model): _endpoint(model) {
+EPDefinitionWebItem::EPDefinitionWebItem(ref<EPEndpoint> model): WebItemResource(L"", model->GetFriendlyName(), L"text/xml", 0), _endpoint(model) {
 }
 
-EPDefinitionResolver::~EPDefinitionResolver() {
+EPDefinitionWebItem::~EPDefinitionWebItem() {
 }
 
-FileRequestResolver::Resolution EPDefinitionResolver::Resolve(ref<FileRequest> frq, std::wstring& file, std::wstring& error, char** data, unsigned int& dataLength) {
+Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, unsigned int& dataLength) {
 	if(!_endpoint) {
 		error = L"No endpoint in EPDefinitionResolver!";
-		return FileRequestResolver::ResolutionNone;
+		return ResolutionNone;
 	}
 	
 	TiXmlDocument doc;
@@ -70,9 +70,13 @@ FileRequestResolver::Resolution EPDefinitionResolver::Resolve(ref<FileRequest> f
 	std::string dataString = xos.str();
 	
 	dataLength = dataString.length();
-	char* nd = new char[dataLength+2];
-	strncpy(nd, dataString.c_str(), dataLength);
+	char* nd = new char[dataLength+1];
+	const char* dataStringCstr = dataString.c_str();
+	for(unsigned int a=0;a<dataLength+1;a++) {
+		nd[a] = dataStringCstr[a];
+	}
+	nd[dataLength] = '\0';
 	*data = nd;
 	
-	return FileRequestResolver::ResolutionData;
+	return ResolutionData;
 }

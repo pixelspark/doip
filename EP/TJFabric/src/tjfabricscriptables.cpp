@@ -79,7 +79,7 @@ ref<Scriptable> DateScriptable::SDayOfMonth(ref<ParameterList> p) {
 	return GC::Hold(new ScriptInt(_date.GetDayOfMonth()));
 }
 ref<Scriptable> DateScriptable::SYear(ref<ParameterList> p) {
-	return GC::Hold(new ScriptInt(_date.GetYear()));
+	return GC::Hold(new ScriptInt(int(_date.GetYear())));
 }
 ref<Scriptable> DateScriptable::SDayOfWeek(ref<ParameterList> p) {
 	return GC::Hold(new ScriptInt(_date.GetDayOfWeek()));
@@ -94,7 +94,7 @@ ref<Scriptable> DateScriptable::SMinute(ref<ParameterList> p) {
 }
 
 ref<Scriptable> DateScriptable::SSecond(ref<ParameterList> p) {
-	return GC::Hold(new ScriptInt(_date.GetSeconds()));
+	return GC::Hold(new ScriptDouble(double(_date.GetSeconds())));
 }
 
 /** TimedScriptExecution **/

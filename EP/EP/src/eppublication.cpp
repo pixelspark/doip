@@ -7,9 +7,9 @@ using namespace tj::scout;
 
 EPPublication::EPPublication(strong<EPEndpoint> ep, const std::wstring& magicPostfix) {
 	_ws = EPServerManager::Instance()->CreateServer(EPServerManager::KPortDontCare);
-	ref<EPDefinitionResolver> resolver = GC::Hold(new EPDefinitionResolver(ep));
+	ref<EPDefinitionWebItem> resolver = GC::Hold(new EPDefinitionWebItem(ep));
 	std::wstring definitionPath = L"/ep/" + ep->GetFullIdentifier() + L"/definition.xml";
-	_ws->AddResolver(definitionPath,ref<FileRequestResolver>(resolver));
+	_ws->AddResolver(definitionPath,ref<WebItem>(resolver));
 	
 	// Advertise the service
 	std::map<std::wstring, std::wstring> attributes;

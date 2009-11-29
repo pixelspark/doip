@@ -109,7 +109,7 @@ void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& dat
 		// remove connection from _discoveredConnections
 		std::deque< std::pair<EPMediationLevel, ref<Connection> > >::iterator it = _discoveredConnections.begin();
 		while(it!=_discoveredConnections.end()) {
-			if(it->first == ref<Connection>(data.connection)) {
+			if(it->second == ref<Connection>(data.connection)) {
 				_discoveredConnections.erase(it++);
 			}
 			else {

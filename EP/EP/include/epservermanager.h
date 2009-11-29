@@ -32,11 +32,11 @@ namespace tj {
 		};
 		
 		/** Serves an XML-file containing the definitions of the messages this fabric will accept **/
-		class EP_EXPORTED EPDefinitionResolver: public tj::np::FileRequestResolver {
+		class EP_EXPORTED EPDefinitionWebItem: public tj::np::WebItemResource {
 			public:
-				EPDefinitionResolver(tj::shared::ref<EPEndpoint> model);
-				virtual ~EPDefinitionResolver();
-				virtual tj::np::FileRequestResolver::Resolution Resolve(tj::shared::ref<tj::np::FileRequest> frq, std::wstring& file, std::wstring& error, char** data, unsigned int& dataLength);
+				EPDefinitionWebItem(tj::shared::ref<EPEndpoint> model);
+				virtual ~EPDefinitionWebItem();
+				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, unsigned int& dataLength);
 				
 			protected:
 				tj::shared::ref<EPEndpoint> _endpoint;
