@@ -31,6 +31,11 @@ namespace tj {
 		
 		class EP_EXPORTED EPParameter: public virtual tj::shared::Object {
 			public:
+				enum Nature {
+					NatureUnknown = 0,
+					NatureDiscrete,
+				};
+			
 				virtual ~EPParameter();
 				virtual tj::shared::String GetFriendlyName() const = 0;
 				virtual tj::shared::String GetType() const = 0;
@@ -38,7 +43,7 @@ namespace tj {
 				virtual tj::shared::Any GetMaximumValue() const = 0;
 				virtual tj::shared::Any GetDefaultValue() const = 0;
 				virtual void SetDefaultValue(const tj::shared::Any& val) = 0;
-				virtual bool IsDiscrete() const = 0;
+				virtual Nature GetNature() const = 0;
 			
 				virtual bool IsValueValid(const tj::shared::Any& val) const;
 				virtual void Save(TiXmlElement* me);
@@ -67,6 +72,7 @@ namespace tj {
 				virtual tj::shared::String GetFriendlyName() const = 0;
 				virtual void GetPaths(std::set<EPPath>& pathList) const = 0;
 				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const = 0;
+				virtual tj::shared::String GetDescription() const = 0;
 				virtual void Save(TiXmlElement* me);
 				virtual void GetReplies(std::vector< tj::shared::ref<EPReply> >& replyList) const;
 				virtual bool Matches(const tj::shared::String& path) const;
@@ -131,6 +137,7 @@ namespace tj {
 				virtual ~EPMethodDefinition();
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetFriendlyName() const;
+				virtual tj::shared::String GetDescription() const;
 				virtual void  GetPaths(std::set<EPPath>& pathList) const;
 				virtual void GetParameters(std::vector< tj::shared::ref<EPParameter> >& parameterList) const;
 				virtual void Load(TiXmlElement* me);
@@ -139,6 +146,7 @@ namespace tj {
 			
 				virtual void SetID(const tj::shared::String& i);
 				virtual void SetFriendlyName(const tj::shared::String& fn);
+				virtual void SetDescription(const tj::shared::String& ds);
 				virtual void AddPath(const EPPath& pt);
 				virtual void AddParameter(tj::shared::ref<EPParameter> p);
 			
@@ -146,6 +154,7 @@ namespace tj {
 				tj::shared::String _id;
 				tj::shared::String _friendlyName;
 				std::set<EPPath> _paths;
+				tj::shared::String _description;
 				std::vector< tj::shared::ref<EPParameter> > _parameters;
 		};
 
@@ -166,7 +175,7 @@ namespace tj {
 		class EP_EXPORTED EPParameterDefinition: public EPParameter, public tj::shared::Serializable {
 			public:
 				EPParameterDefinition();
-				EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, bool discrete = false);
+			EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, EPParameter::Nature = EPParameter::NatureUnknown);
 				virtual ~EPParameterDefinition();
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetType() const;
@@ -175,7 +184,7 @@ namespace tj {
 				virtual tj::shared::Any GetMaximumValue() const;
 				virtual tj::shared::Any GetDefaultValue() const;
 				virtual void SetDefaultValue(const tj::shared::Any& val);
-				virtual bool IsDiscrete() const;
+				virtual EPParameter::Nature GetNature() const;
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
 			
@@ -186,7 +195,7 @@ namespace tj {
 				tj::shared::String _maximumValue;
 				tj::shared::String _defaultValue;
 				tj::shared::Any _runtimeDefaultValue;
-				bool _discrete;
+				EPParameter::Nature _nature;
 		};
 		
 		class EP_EXPORTED EPTransportDefinition: public EPTransport, public tj::shared::Serializable {

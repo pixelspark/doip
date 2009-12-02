@@ -58,6 +58,34 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
+		B4A98BA810C6F291001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473 /* libEPMobile.a */;
+			remoteInfo = EPMobile;
+		};
+		B4A98BAB10C6F291001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9887110C661C3001CF473 /* libTJScoutMobile.a */;
+			remoteInfo = TJScoutMobile;
+		};
+		B4A98BAF10C6F291001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteInfo = TJSharedMobile;
+		};
+		B4A98BBC10C6F2A8001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteInfo = TJNPMobile;
+		};
 		B4CAAA8410AD68DB00385A5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
@@ -137,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				B46CBCA610A45B6700CDE29F /* TJNP.framework */,
+				B4A98BBD10C6F2A8001CF473 /* libTJNPMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				B46CBCA910A45B6700CDE29F /* TJShared.framework */,
+				B4A98BB010C6F291001CF473 /* libTJSharedMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				B46CBD3B10A4683F00CDE29F /* TJScout.framework */,
+				B4A98BAC10C6F291001CF473 /* libTJScoutMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				B4CAAA8510AD68DB00385A5F /* EP.framework */,
+				B4A98BA910C6F291001CF473 /* libEPMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +287,34 @@
 			fileType = wrapper.framework;
 			path = TJScout.framework;
 			remoteRef = B46CBD3A10A4683F00CDE29F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98BA910C6F291001CF473 /* libEPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEPMobile.a;
+			remoteRef = B4A98BA810C6F291001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98BAC10C6F291001CF473 /* libTJScoutMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJScoutMobile.a;
+			remoteRef = B4A98BAB10C6F291001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98BB010C6F291001CF473 /* libTJSharedMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJSharedMobile.a;
+			remoteRef = B4A98BAF10C6F291001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98BBD10C6F2A8001CF473 /* libTJNPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJNPMobile.a;
+			remoteRef = B4A98BBC10C6F2A8001CF473 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B4CAAA8510AD68DB00385A5F /* EP.framework */ = {

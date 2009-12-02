@@ -85,28 +85,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CAAA6910AD68BE00385A5F /* EPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A988EE10C6622C001CF473 /* libEPMobile.a */;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473;
 			remoteInfo = EPMobile;
 		};
 		B4A988F510C6624B001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776611097776300FA1B69 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9875D10C65E8A001CF473 /* libTinyXMLMobile.a */;
+			remoteGlobalIDString = B4A9875D10C65E8A001CF473;
 			remoteInfo = TinyXMLMobile;
 		};
 		B4A988F910C6624B001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteGlobalIDString = B4A9883210C66144001CF473;
 			remoteInfo = TJNPMobile;
 		};
 		B4A988FE10C6624B001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
 			remoteInfo = TJSharedMobile;
 		};
 		B4CAAA6D10AD68BE00385A5F /* PBXContainerItemProxy */ = {
@@ -379,8 +379,7 @@
 		B4A988F310C6622D001CF473 /* libEPMobile.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = libEPMobile.a;
-			path = ../../../../../../build/Release/libEPMobile.a;
+			path = libEPMobile.a;
 			remoteRef = B4A988F210C6622D001CF473 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

@@ -129,42 +129,42 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A989AB10C6C9DA001CF473 /* libOSCPackMobile.a */;
+			remoteGlobalIDString = B4A989AB10C6C9DA001CF473;
 			remoteInfo = OSCPackMobile;
 		};
 		B4A989CF10C6CA20001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD454A109B0223004B3BBB /* TJScoutFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A9887010C661C3001CF473 /* TJScoutMobile */;
+			remoteGlobalIDString = B4A9887010C661C3001CF473;
 			remoteInfo = TJScoutMobile;
 		};
 		B4A989D110C6CA20001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B462AEFA1098E09B00484C29 /* TJSharedFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A987C310C65F70001CF473 /* TJSharedMobile */;
+			remoteGlobalIDString = B4A987C310C65F70001CF473;
 			remoteInfo = TJSharedMobile;
 		};
 		B4A989D310C6CA20001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CD4556109B0246004B3BBB /* OSCPackFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A989AA10C6C9DA001CF473 /* OSCPackMobile */;
+			remoteGlobalIDString = B4A989AA10C6C9DA001CF473;
 			remoteInfo = OSCPackMobile;
 		};
 		B4A989D510C6CA20001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B462AF561098E16E00484C29 /* TJNPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A9883110C66144001CF473 /* TJNPMobile */;
+			remoteGlobalIDString = B4A9883110C66144001CF473;
 			remoteInfo = TJNPMobile;
 		};
 		B4A989D710C6CA20001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B462AF061098E0BE00484C29 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A9875C10C65E8A001CF473 /* TinyXMLMobile */;
+			remoteGlobalIDString = B4A9875C10C65E8A001CF473;
 			remoteInfo = TinyXMLMobile;
 		};
 		B4CD454E109B0223004B3BBB /* PBXContainerItemProxy */ = {
@@ -512,8 +512,7 @@
 		B4A989AE10C6C9DB001CF473 /* libOSCPackMobile.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = libOSCPackMobile.a;
-			path = ../../../../../../build/Release/libOSCPackMobile.a;
+			path = libOSCPackMobile.a;
 			remoteRef = B4A989AD10C6C9DB001CF473 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

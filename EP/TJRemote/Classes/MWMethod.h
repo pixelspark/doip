@@ -27,7 +27,7 @@ class TiXmlElement;
 	NSString* _max;
 	NSString* _default;
 	NSString* _value;
-	bool _discrete;
+	NSString* _nature;
 	MWMethod* _parent;
 }
 
@@ -47,12 +47,14 @@ class TiXmlElement;
 @property (nonatomic, retain) NSString* value;
 @property (nonatomic, retain) NSString* identifier;
 @property (nonatomic, readonly) bool discrete;
+@property (nonatomic, retain) NSString* nature;
 
 @end
 
 @interface MWMethod : NSObject {
 	NSString* _pattern;
 	NSString* _friendly;
+	NSString* _description;
 	NSMutableArray* _parameters;
 	MWEndpoint* _parent;
 }
@@ -60,6 +62,7 @@ class TiXmlElement;
 @property (nonatomic, retain) NSString* pattern;
 @property (nonatomic, retain) NSMutableArray* parameters;
 @property (nonatomic, retain) NSString* friendlyName;
+@property (nonatomic, retain) NSString* friendlyDescription;
 @property (nonatomic, assign) MWEndpoint* parent;
 
 - (id) initWithPattern: (NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)e;

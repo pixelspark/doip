@@ -166,6 +166,15 @@ using namespace osc;
 							MWMethod* mt = [[MWMethod alloc] initWithPattern:[NSString stringWithUTF8String:firstPatternText->Value()] friendlyName:[NSString stringWithUTF8String:method->Attribute("friendly-name")] endpoint:self];
 							[_methods addObject:mt];
 							
+							// Load description
+							TiXmlElement* description = method->FirstChildElement("description");
+							if(description!=0) {
+								TiXmlNode* descriptionText = description->FirstChild();
+								if(descriptionText!=0) {
+									mt.friendlyDescription = [NSString stringWithUTF8String:descriptionText->Value()];
+								}
+							}
+							
 							// Load parameters
 							TiXmlElement* firstParameter = method->FirstChildElement("parameter");
 							while(firstParameter!=0) {

@@ -37,6 +37,7 @@
 		B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */; };
 		B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */; };
 		B4A98AB610C6E707001CF473 /* libTJSharedMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */; };
+		B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */; };
 		B4E617B3108270C8004D7C02 /* MWEndpointsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */; };
 		B4E618841082779C004D7C02 /* MWEndpoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E618831082779C004D7C02 /* MWEndpoint.mm */; };
 /* End PBXBuildFile section */
@@ -46,84 +47,84 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* EP.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = EP;
 		};
 		B4A9897B10C6C99C001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A988EE10C6622C001CF473 /* libEPMobile.a */;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473;
 			remoteInfo = EPMobile;
 		};
 		B4A9897D10C6C9B5001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A988ED10C6622C001CF473 /* EPMobile */;
+			remoteGlobalIDString = B4A988ED10C6622C001CF473;
 			remoteInfo = EPMobile;
 		};
 		B4A98A7310C6E614001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TinyXML.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TinyXML;
 		};
 		B4A98A7510C6E614001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9875D10C65E8A001CF473 /* libTinyXMLMobile.a */;
+			remoteGlobalIDString = B4A9875D10C65E8A001CF473;
 			remoteInfo = TinyXMLMobile;
 		};
 		B4A98A7C10C6E621001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPack.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = OSCPack;
 		};
 		B4A98A7E10C6E621001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A989AB10C6C9DA001CF473 /* libOSCPackMobile.a */;
+			remoteGlobalIDString = B4A989AB10C6C9DA001CF473;
 			remoteInfo = OSCPackMobile;
 		};
 		B4A98A8210C6E638001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A989AA10C6C9DA001CF473 /* OSCPackMobile */;
+			remoteGlobalIDString = B4A989AA10C6C9DA001CF473;
 			remoteInfo = OSCPackMobile;
 		};
 		B4A98A8410C6E638001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A9875C10C65E8A001CF473 /* TinyXMLMobile */;
+			remoteGlobalIDString = B4A9875C10C65E8A001CF473;
 			remoteInfo = TinyXMLMobile;
 		};
 		B4A98AB210C6E702001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJShared;
 		};
 		B4A98AB410C6E702001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
 			remoteInfo = TJSharedMobile;
 		};
 		B4A98AB710C6E70F001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = B4A987C310C65F70001CF473 /* TJSharedMobile */;
+			remoteGlobalIDString = B4A987C310C65F70001CF473;
 			remoteInfo = TJSharedMobile;
 		};
 /* End PBXContainerItemProxy section */
@@ -168,6 +169,8 @@
 		B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHeaderView.h; sourceTree = "<group>"; };
+		B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWHeaderView.m; sourceTree = "<group>"; };
 		B4E617B1108270C8004D7C02 /* MWEndpointsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWEndpointsTableViewController.h; sourceTree = "<group>"; };
 		B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWEndpointsTableViewController.mm; sourceTree = "<group>"; };
 		B4E618821082779C004D7C02 /* MWEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWEndpoint.h; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */,
+				B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */,
 				B4E617B1108270C8004D7C02 /* MWEndpointsTableViewController.h */,
 				B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */,
 				1D3623240D0F684500981E51 /* MWAppDelegate.h */,
@@ -476,6 +481,7 @@
 				B46AC61D10838C8C00EAE42C /* MWMethodTableViewController.mm in Sources */,
 				B499D012108BA6F5002E1F92 /* MWParameterTableViewController.mm in Sources */,
 				B48DC250108CC6B1002AB313 /* MWDownload.mm in Sources */,
+				B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

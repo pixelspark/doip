@@ -23,6 +23,7 @@ void Rule::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall<std::wstring>(me, "id", L"");
 	_script = LoadAttribute<std::wstring>(me, "script", L"");
 	_name = LoadAttributeSmall<std::wstring>(me, "name", L"");
+	_description = LoadAttribute<std::wstring>(me,"description", L"");
 	_isEnabled = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "enabled", Bool::ToString(true)).c_str());
 	_isPublic = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "public", Bool::ToString(true)).c_str());
 	
@@ -50,6 +51,10 @@ void Rule::Load(TiXmlElement* me) {
 		_replies.push_back(erp);
 		reply = reply->NextSiblingElement("reply");
 	}
+}
+
+String Rule::GetDescription() const {
+	return _description;
 }
 
 String Rule::GetFriendlyName() const {

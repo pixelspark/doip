@@ -464,6 +464,7 @@ bool EPMethod::Matches(const std::wstring& msg) const {
 void EPMethod::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "id", GetID());
 	SaveAttributeSmall(me, "friendly-name", GetFriendlyName());
+	SaveAttribute(me, "description", GetDescription());
 	
 	std::set<EPPath> paths;
 	GetPaths(paths);
@@ -506,9 +507,18 @@ void EPMethod::Save(TiXmlElement* me) {
 	}
 }
 
+String EPMethodDefinition::GetDescription() const {
+	return _description;
+}
+
+void EPMethodDefinition::SetDescription(const String& ds) {
+	_description = ds;
+}
+
 void EPMethodDefinition::Load(TiXmlElement* me) {
 	_id = LoadAttributeSmall(me, "id", _id);
 	_friendlyName = LoadAttributeSmall(me, "friendly-name", _friendlyName);
+	_description = LoadAttribute(me, "description", _description);
 	
 	TiXmlElement* path = me->FirstChildElement("path");
 	while(path!=0) {
@@ -541,25 +551,21 @@ void EPMethodDefinition::Clone() {
 }
 
 /** EPParameterDefinition **/
-EPParameterDefinition::EPParameterDefinition(): _discrete(false) {
+EPParameterDefinition::EPParameterDefinition(): _nature(NatureUnknown) {
 }
 
-EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, bool discrete):
+EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, Nature nature):
 	_friendlyName(friendlyName),
 	_type(type),
 	_minimumValue(minValue),
 	_maximumValue(maxValue),
 	_defaultValue(defaultValue),
-	_discrete(discrete) {
+	_nature(nature) {
 		
 	_runtimeDefaultValue = Any(_defaultValue).Force(GetValueType());
 }
 
 EPParameterDefinition::~EPParameterDefinition() {
-}
-
-bool EPParameterDefinition::IsDiscrete() const {
-	return _discrete;
 }
 
 String EPParameterDefinition::GetFriendlyName() const {
@@ -614,7 +620,18 @@ void EPParameterDefinition::Load(TiXmlElement* me) {
 	_minimumValue = LoadAttributeSmall(me, "min", _minimumValue);
 	_maximumValue = LoadAttributeSmall(me, "max", _maximumValue);
 	_defaultValue = LoadAttributeSmall(me, "default", _defaultValue);
-	_discrete = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "discrete", Bool::ToString(false)).c_str());
+	
+	std::wstring natureString = LoadAttributeSmall<std::wstring>(me, "nature", L"");
+	if(natureString==L"discrete") {
+		_nature = NatureDiscrete;
+	}
+	else {
+		_nature = NatureUnknown;
+	}
+}
+
+EPParameter::Nature EPParameterDefinition::GetNature() const {
+	return _nature;
 }
 
 void EPParameter::Save(TiXmlElement* me) {
@@ -623,7 +640,13 @@ void EPParameter::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "min", GetMinimumValue().ToString());
 	SaveAttributeSmall(me, "max", GetMaximumValue().ToString());
 	SaveAttributeSmall(me, "default", GetDefaultValue().ToString());
-	SaveAttributeSmall(me, "discrete", std::wstring(Bool::ToString(IsDiscrete())));
+	
+	std::wstring natureString = L"default";
+	Nature nature = GetNature();
+	if(nature==NatureDiscrete) {
+		natureString = L"discrete";
+	}
+	SaveAttributeSmall(me, "nature", natureString);
 }
 
 /** EPTransportDefinition **/

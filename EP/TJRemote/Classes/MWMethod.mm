@@ -116,7 +116,12 @@
 @synthesize parent = _parent;
 @synthesize value = _value;
 @synthesize identifier = _id;
-@synthesize discrete = _discrete;
+@synthesize nature = _nature;
+@dynamic discrete;
+
+- (bool) discrete {
+	return [_nature isEqualToString:@"discrete"];
+}
 
 - (void) textValueChanged: (UIView*)view event:(UIEvent*)evt {
 	self.value = [(UITextField*)view text];
@@ -187,10 +192,7 @@
 			self.minimumValue = [self attribute:"min" fromElement:def defaultsTo:@""];
 			self.maximumValue = [self attribute:"max" fromElement:def defaultsTo:@""];
 			self.identifier = [self attribute:"id" fromElement:def defaultsTo:@""];
-			_discrete = false;
-			if(def->Attribute("discrete")!=0) {
-				_discrete = [[NSString stringWithUTF8String:def->Attribute("discrete")] isEqualToString:@"yes"];
-			}
+			self.nature = [self attribute:"nature" fromElement:def defaultsTo:@""];
 		}
 		@catch (NSException * e) {
 			NSLog(@"Invalid parameter specification, an attribute is probably missing; error was %@", [e reason]);
@@ -205,6 +207,7 @@
 	[_max release];
 	[_id release];
 	[_type release];
+	[_nature release];
 	[_value release];
 	[super dealloc];
 }
@@ -219,6 +222,7 @@ static NSMutableDictionary* _icons;
 @synthesize parameters = _parameters;
 @synthesize friendlyName = _friendly;
 @synthesize parent = _parent;
+@synthesize friendlyDescription = _description;
 
 + (void) initialize {
 	NSDictionary* icons = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ep-icons" ofType:@"plist"]];
@@ -255,6 +259,7 @@ static NSMutableDictionary* _icons;
 }
 
 - (void) setupCell:(UITableViewCell *)cell {
+	cell.detailTextLabel.text = [self friendlyDescription];
 	cell.textLabel.text = [self friendlyName];
 	cell.textLabel.textColor = [UIColor whiteColor];
 	[[cell.contentView viewWithTag:1337] removeFromSuperview];

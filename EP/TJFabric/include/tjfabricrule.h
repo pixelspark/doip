@@ -15,6 +15,7 @@ namespace tj {
 				virtual void SaveRule(TiXmlElement* me);
 				virtual void Clone();
 				virtual tj::shared::String GetID() const;
+				virtual tj::shared::String GetDescription() const;
 				virtual tj::shared::String GetScriptSource() const;
 				virtual bool IsEnabled() const;
 				virtual bool IsPublic() const;
@@ -30,6 +31,7 @@ namespace tj {
 				std::deque< tj::shared::ref<tj::ep::EPParameterDefinition> > _parameters;
 				std::vector< tj::shared::ref<tj::ep::EPReply> > _replies;
 				std::wstring _script;
+				std::wstring _description;
 				bool _isEnabled;
 				bool _isPublic;
 				std::wstring _name;
