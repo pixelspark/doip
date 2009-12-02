@@ -5,6 +5,7 @@
 #include <TJNP/include/tjnetworkaddress.h>
 #include <TJNP/include/tjsocket.h>
 #include <TJNP/include/tjhttp.h>
+#include <TJNP/include/tjwebserver.h>
 #include <EP/include/epmessage.h>
 
 #include <iomanip>
@@ -32,6 +33,17 @@ int main(int argc, char** argv) {
 				runningAsDaemon = true;
 			}
 		}
+		
+		// WebServer test
+		ref<WebServer> ws = GC::Hold(new WebServer(2122));
+		ref<WebItemCollection> wc = GC::Hold(new WebItemCollection(L"", L"Folder",L""));
+		Flags<WebItem::Permission> perms;
+		perms.Set(WebItem::PermissionGet, true);
+		perms.Set(WebItem::PermissionPropertyRead, true);
+		perms.Set(WebItem::PermissionPropertyWrite, true);
+		perms.Set(WebItem::PermissionDelete, true);
+		wc->SetPermissions(perms);
+		ws->AddResolver(L"/dav", ref<WebItem>(wc));
 		
 		// Load fabric configuration files
 		std::map<std::string, ref<FabricEngine> > fabrics;

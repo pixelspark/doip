@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* MWAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MWAppDelegate.mm */; };
-		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -33,20 +33,100 @@
 		B47F0A320FB6295700DB3BEE /* MWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = B47F0A310FB6295700DB3BEE /* MWClient.mm */; };
 		B48DC250108CC6B1002AB313 /* MWDownload.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48DC24F108CC6B1002AB313 /* MWDownload.mm */; };
 		B499D012108BA6F5002E1F92 /* MWParameterTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */; };
-		B4E6177010826EDE004D7C02 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4E6176A10826EDE004D7C02 /* tinystr.cpp */; };
-		B4E6177110826EDE004D7C02 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4E6176C10826EDE004D7C02 /* tinyxml.cpp */; };
-		B4E6177210826EDE004D7C02 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4E6176E10826EDE004D7C02 /* tinyxmlerror.cpp */; };
-		B4E6177310826EDE004D7C02 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4E6176F10826EDE004D7C02 /* tinyxmlparser.cpp */; };
+		B4A98A6910C6E5EF001CF473 /* libEPMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A9897C10C6C99C001CF473 /* libEPMobile.a */; };
+		B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */; };
+		B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */; };
+		B4A98AB610C6E707001CF473 /* libTJSharedMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */; };
 		B4E617B3108270C8004D7C02 /* MWEndpointsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */; };
 		B4E618841082779C004D7C02 /* MWEndpoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E618831082779C004D7C02 /* MWEndpoint.mm */; };
-		B4F0AE8710B9E1BA00351BAA /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE7210B9E1BA00351BAA /* IpEndpointName.cpp */; };
-		B4F0AE8810B9E1BA00351BAA /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE7810B9E1BA00351BAA /* OscOutboundPacketStream.cpp */; };
-		B4F0AE8910B9E1BA00351BAA /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE7B10B9E1BA00351BAA /* OscPrintReceivedElements.cpp */; };
-		B4F0AE8A10B9E1BA00351BAA /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE7D10B9E1BA00351BAA /* OscReceivedElements.cpp */; };
-		B4F0AE8B10B9E1BA00351BAA /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE7F10B9E1BA00351BAA /* OscTypes.cpp */; };
-		B4F0AE8C10B9E1BA00351BAA /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE8310B9E1BA00351BAA /* NetworkingUtils.cpp */; };
-		B4F0AE8D10B9E1BA00351BAA /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F0AE8410B9E1BA00351BAA /* UdpSocket.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B4A9897910C6C99C001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* EP.framework */;
+			remoteInfo = EP;
+		};
+		B4A9897B10C6C99C001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473 /* libEPMobile.a */;
+			remoteInfo = EPMobile;
+		};
+		B4A9897D10C6C9B5001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B4A988ED10C6622C001CF473 /* EPMobile */;
+			remoteInfo = EPMobile;
+		};
+		B4A98A7310C6E614001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TinyXML.framework */;
+			remoteInfo = TinyXML;
+		};
+		B4A98A7510C6E614001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9875D10C65E8A001CF473 /* libTinyXMLMobile.a */;
+			remoteInfo = TinyXMLMobile;
+		};
+		B4A98A7C10C6E621001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPack.framework */;
+			remoteInfo = OSCPack;
+		};
+		B4A98A7E10C6E621001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A989AB10C6C9DA001CF473 /* libOSCPackMobile.a */;
+			remoteInfo = OSCPackMobile;
+		};
+		B4A98A8210C6E638001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B4A989AA10C6C9DA001CF473 /* OSCPackMobile */;
+			remoteInfo = OSCPackMobile;
+		};
+		B4A98A8410C6E638001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B4A9875C10C65E8A001CF473 /* TinyXMLMobile */;
+			remoteInfo = TinyXMLMobile;
+		};
+		B4A98AB210C6E702001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteInfo = TJShared;
+		};
+		B4A98AB410C6E702001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteInfo = TJSharedMobile;
+		};
+		B4A98AB710C6E70F001CF473 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B4A987C310C65F70001CF473 /* TJSharedMobile */;
+			remoteInfo = TJSharedMobile;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,7 +136,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B413B95E1046C3F500587E77 /* Network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Network.png; path = Resources/Network.png; sourceTree = "<group>"; };
@@ -84,36 +164,14 @@
 		B48DC24F108CC6B1002AB313 /* MWDownload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWDownload.mm; sourceTree = "<group>"; };
 		B499D010108BA6F5002E1F92 /* MWParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameterTableViewController.h; sourceTree = "<group>"; };
 		B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWParameterTableViewController.mm; sourceTree = "<group>"; };
-		B4E6176A10826EDE004D7C02 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinystr.cpp; path = ../../Libraries/TinyXML/tinystr.cpp; sourceTree = SOURCE_ROOT; };
-		B4E6176B10826EDE004D7C02 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinystr.h; path = ../../Libraries/TinyXML/tinystr.h; sourceTree = SOURCE_ROOT; };
-		B4E6176C10826EDE004D7C02 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml.cpp; path = ../../Libraries/TinyXML/tinyxml.cpp; sourceTree = SOURCE_ROOT; };
-		B4E6176D10826EDE004D7C02 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml.h; path = ../../Libraries/TinyXML/tinyxml.h; sourceTree = SOURCE_ROOT; };
-		B4E6176E10826EDE004D7C02 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxmlerror.cpp; path = ../../Libraries/TinyXML/tinyxmlerror.cpp; sourceTree = SOURCE_ROOT; };
-		B4E6176F10826EDE004D7C02 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxmlparser.cpp; path = ../../Libraries/TinyXML/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
+		B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EP/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4E617B1108270C8004D7C02 /* MWEndpointsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWEndpointsTableViewController.h; sourceTree = "<group>"; };
 		B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWEndpointsTableViewController.mm; sourceTree = "<group>"; };
 		B4E618821082779C004D7C02 /* MWEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWEndpoint.h; sourceTree = "<group>"; };
 		B4E618831082779C004D7C02 /* MWEndpoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWEndpoint.mm; sourceTree = "<group>"; };
-		B4F0AE7210B9E1BA00351BAA /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IpEndpointName.cpp; path = ../../Libraries/OSCPack/IpEndpointName.cpp; sourceTree = SOURCE_ROOT; };
-		B4F0AE7310B9E1BA00351BAA /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IpEndpointName.h; path = ../../Libraries/OSCPack/IpEndpointName.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7410B9E1BA00351BAA /* MessageMappingOscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageMappingOscPacketListener.h; path = ../../Libraries/OSCPack/MessageMappingOscPacketListener.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7510B9E1BA00351BAA /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkingUtils.h; path = ../../Libraries/OSCPack/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7610B9E1BA00351BAA /* OscException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscException.h; path = ../../Libraries/OSCPack/OscException.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7710B9E1BA00351BAA /* OscHostEndianness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscHostEndianness.h; path = ../../Libraries/OSCPack/OscHostEndianness.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7810B9E1BA00351BAA /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscOutboundPacketStream.cpp; path = ../../Libraries/OSCPack/OscOutboundPacketStream.cpp; sourceTree = SOURCE_ROOT; };
-		B4F0AE7910B9E1BA00351BAA /* OscOutboundPacketStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscOutboundPacketStream.h; path = ../../Libraries/OSCPack/OscOutboundPacketStream.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7A10B9E1BA00351BAA /* OscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscPacketListener.h; path = ../../Libraries/OSCPack/OscPacketListener.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7B10B9E1BA00351BAA /* OscPrintReceivedElements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscPrintReceivedElements.cpp; path = ../../Libraries/OSCPack/OscPrintReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
-		B4F0AE7C10B9E1BA00351BAA /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscPrintReceivedElements.h; path = ../../Libraries/OSCPack/OscPrintReceivedElements.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7D10B9E1BA00351BAA /* OscReceivedElements.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscReceivedElements.cpp; path = ../../Libraries/OSCPack/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
-		B4F0AE7E10B9E1BA00351BAA /* OscReceivedElements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscReceivedElements.h; path = ../../Libraries/OSCPack/OscReceivedElements.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE7F10B9E1BA00351BAA /* OscTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscTypes.cpp; path = ../../Libraries/OSCPack/OscTypes.cpp; sourceTree = SOURCE_ROOT; };
-		B4F0AE8010B9E1BA00351BAA /* OscTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscTypes.h; path = ../../Libraries/OSCPack/OscTypes.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE8110B9E1BA00351BAA /* PacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PacketListener.h; path = ../../Libraries/OSCPack/PacketListener.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE8310B9E1BA00351BAA /* NetworkingUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtils.cpp; sourceTree = "<group>"; };
-		B4F0AE8410B9E1BA00351BAA /* UdpSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocket.cpp; sourceTree = "<group>"; };
-		B4F0AE8510B9E1BA00351BAA /* TimerListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerListener.h; path = ../../Libraries/OSCPack/TimerListener.h; sourceTree = SOURCE_ROOT; };
-		B4F0AE8610B9E1BA00351BAA /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UdpSocket.h; path = ../../Libraries/OSCPack/UdpSocket.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +179,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4A98AB610C6E707001CF473 /* libTJSharedMobile.a in Frameworks */,
+				B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */,
+				B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */,
+				B4A98A6910C6E5EF001CF473 /* libEPMobile.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -164,9 +226,11 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */,
+				B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */,
+				B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */,
+				B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				B4E617AB10826FE6004D7C02 /* OSCPack */,
-				B4E6176910826EC8004D7C02 /* TinyXML */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -180,7 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
+				29B97316FDCFA39411CA2CEA /* main.mm */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -218,54 +282,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B4E6176910826EC8004D7C02 /* TinyXML */ = {
+		B4A9894A10C6C99C001CF473 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B4E6176A10826EDE004D7C02 /* tinystr.cpp */,
-				B4E6176B10826EDE004D7C02 /* tinystr.h */,
-				B4E6176C10826EDE004D7C02 /* tinyxml.cpp */,
-				B4E6176D10826EDE004D7C02 /* tinyxml.h */,
-				B4E6176E10826EDE004D7C02 /* tinyxmlerror.cpp */,
-				B4E6176F10826EDE004D7C02 /* tinyxmlparser.cpp */,
+				B4A9897A10C6C99C001CF473 /* EP.framework */,
+				B4A9897C10C6C99C001CF473 /* libEPMobile.a */,
 			);
-			name = TinyXML;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		B4E617AB10826FE6004D7C02 /* OSCPack */ = {
+		B4A98A6F10C6E614001CF473 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B4F0AE7210B9E1BA00351BAA /* IpEndpointName.cpp */,
-				B4F0AE7310B9E1BA00351BAA /* IpEndpointName.h */,
-				B4F0AE7410B9E1BA00351BAA /* MessageMappingOscPacketListener.h */,
-				B4F0AE7510B9E1BA00351BAA /* NetworkingUtils.h */,
-				B4F0AE7610B9E1BA00351BAA /* OscException.h */,
-				B4F0AE7710B9E1BA00351BAA /* OscHostEndianness.h */,
-				B4F0AE7810B9E1BA00351BAA /* OscOutboundPacketStream.cpp */,
-				B4F0AE7910B9E1BA00351BAA /* OscOutboundPacketStream.h */,
-				B4F0AE7A10B9E1BA00351BAA /* OscPacketListener.h */,
-				B4F0AE7B10B9E1BA00351BAA /* OscPrintReceivedElements.cpp */,
-				B4F0AE7C10B9E1BA00351BAA /* OscPrintReceivedElements.h */,
-				B4F0AE7D10B9E1BA00351BAA /* OscReceivedElements.cpp */,
-				B4F0AE7E10B9E1BA00351BAA /* OscReceivedElements.h */,
-				B4F0AE7F10B9E1BA00351BAA /* OscTypes.cpp */,
-				B4F0AE8010B9E1BA00351BAA /* OscTypes.h */,
-				B4F0AE8110B9E1BA00351BAA /* PacketListener.h */,
-				B4F0AE8210B9E1BA00351BAA /* posix */,
-				B4F0AE8510B9E1BA00351BAA /* TimerListener.h */,
-				B4F0AE8610B9E1BA00351BAA /* UdpSocket.h */,
+				B4A98A7410C6E614001CF473 /* TinyXML.framework */,
+				B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */,
 			);
-			name = OSCPack;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		B4F0AE8210B9E1BA00351BAA /* posix */ = {
+		B4A98A7810C6E621001CF473 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B4F0AE8310B9E1BA00351BAA /* NetworkingUtils.cpp */,
-				B4F0AE8410B9E1BA00351BAA /* UdpSocket.cpp */,
+				B4A98A7D10C6E621001CF473 /* OSCPack.framework */,
+				B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */,
 			);
-			name = posix;
-			path = ../../Libraries/OSCPack/posix;
-			sourceTree = SOURCE_ROOT;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4A98AAD10C6E702001CF473 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4A98AB310C6E702001CF473 /* TJShared.framework */,
+				B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -281,6 +332,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				B4A9897E10C6C9B5001CF473 /* PBXTargetDependency */,
+				B4A98A8310C6E638001CF473 /* PBXTargetDependency */,
+				B4A98A8510C6E638001CF473 /* PBXTargetDependency */,
+				B4A98AB810C6E70F001CF473 /* PBXTargetDependency */,
 			);
 			name = TJShowRemote;
 			productName = TJShowConnect;
@@ -297,12 +352,89 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B4A9894A10C6C99C001CF473 /* Products */;
+					ProjectRef = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4A98A7810C6E621001CF473 /* Products */;
+					ProjectRef = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4A98A6F10C6E614001CF473 /* Products */;
+					ProjectRef = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4A98AAD10C6E702001CF473 /* Products */;
+					ProjectRef = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* TJShowRemote */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B4A9897A10C6C99C001CF473 /* EP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EP.framework;
+			remoteRef = B4A9897910C6C99C001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A9897C10C6C99C001CF473 /* libEPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEPMobile.a;
+			remoteRef = B4A9897B10C6C99C001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98A7410C6E614001CF473 /* TinyXML.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TinyXML.framework;
+			remoteRef = B4A98A7310C6E614001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTinyXMLMobile.a;
+			remoteRef = B4A98A7510C6E614001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98A7D10C6E621001CF473 /* OSCPack.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OSCPack.framework;
+			remoteRef = B4A98A7C10C6E621001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOSCPackMobile.a;
+			remoteRef = B4A98A7E10C6E621001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98AB310C6E702001CF473 /* TJShared.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJShared.framework;
+			remoteRef = B4A98AB210C6E702001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJSharedMobile.a;
+			remoteRef = B4A98AB410C6E702001CF473 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -335,30 +467,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				1D3623260D0F684500981E51 /* MWAppDelegate.mm in Sources */,
 				B47F0A320FB6295700DB3BEE /* MWClient.mm in Sources */,
-				B4E6177010826EDE004D7C02 /* tinystr.cpp in Sources */,
-				B4E6177110826EDE004D7C02 /* tinyxml.cpp in Sources */,
-				B4E6177210826EDE004D7C02 /* tinyxmlerror.cpp in Sources */,
-				B4E6177310826EDE004D7C02 /* tinyxmlparser.cpp in Sources */,
 				B4E617B3108270C8004D7C02 /* MWEndpointsTableViewController.mm in Sources */,
 				B4E618841082779C004D7C02 /* MWEndpoint.mm in Sources */,
 				B46AC5F21083899A00EAE42C /* MWMethod.mm in Sources */,
 				B46AC61D10838C8C00EAE42C /* MWMethodTableViewController.mm in Sources */,
 				B499D012108BA6F5002E1F92 /* MWParameterTableViewController.mm in Sources */,
 				B48DC250108CC6B1002AB313 /* MWDownload.mm in Sources */,
-				B4F0AE8710B9E1BA00351BAA /* IpEndpointName.cpp in Sources */,
-				B4F0AE8810B9E1BA00351BAA /* OscOutboundPacketStream.cpp in Sources */,
-				B4F0AE8910B9E1BA00351BAA /* OscPrintReceivedElements.cpp in Sources */,
-				B4F0AE8A10B9E1BA00351BAA /* OscReceivedElements.cpp in Sources */,
-				B4F0AE8B10B9E1BA00351BAA /* OscTypes.cpp in Sources */,
-				B4F0AE8C10B9E1BA00351BAA /* NetworkingUtils.cpp in Sources */,
-				B4F0AE8D10B9E1BA00351BAA /* UdpSocket.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B4A9897E10C6C9B5001CF473 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EPMobile;
+			targetProxy = B4A9897D10C6C9B5001CF473 /* PBXContainerItemProxy */;
+		};
+		B4A98A8310C6E638001CF473 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OSCPackMobile;
+			targetProxy = B4A98A8210C6E638001CF473 /* PBXContainerItemProxy */;
+		};
+		B4A98A8510C6E638001CF473 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TinyXMLMobile;
+			targetProxy = B4A98A8410C6E638001CF473 /* PBXContainerItemProxy */;
+		};
+		B4A98AB810C6E70F001CF473 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJSharedMobile;
+			targetProxy = B4A98AB710C6E70F001CF473 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
@@ -398,6 +542,10 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Libraries/,
+					../../,
+				);
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.1.2;
@@ -426,6 +574,10 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Libraries/,
+					../../,
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
@@ -441,6 +593,10 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Libraries/,
+					../../,
+				);
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.1.2;

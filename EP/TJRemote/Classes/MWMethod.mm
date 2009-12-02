@@ -147,7 +147,7 @@
 	}
 	else if([_type isEqualToString:@"bool"]) {
 		UISwitch* sw = [[UISwitch alloc] initWithFrame:CGRectMake(rect.size.width+rect.origin.x-96, rect.origin.y, 96, rect.size.height)];
-		[sw setOn:[_default isEqualToString:@"yes"]];
+		[sw setOn:[_default isEqualToString:@"yes"] || [_default isEqualToString:@"1"]];
 		[sw autorelease];
 		[sw addTarget:self action:@selector(switchValueChanged:event:) forControlEvents:UIControlEventValueChanged];
 		if(imm) {
@@ -190,7 +190,6 @@
 			_discrete = false;
 			if(def->Attribute("discrete")!=0) {
 				_discrete = [[NSString stringWithUTF8String:def->Attribute("discrete")] isEqualToString:@"yes"];
-				NSLog(@"Method is discrete? %d", _discrete);
 			}
 		}
 		@catch (NSException * e) {

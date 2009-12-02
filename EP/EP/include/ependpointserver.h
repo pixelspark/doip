@@ -101,27 +101,8 @@ namespace tj {
 				typename MemberMap::iterator it = _members.begin();
 				while(it!=_members.end()) {
 					tj::shared::ref<EPMethod> epm = it->first;
-					if(epm && epm->Matches(path)) {
-						// Check input values against parameter limits and (optionally) update parameter default values
-						std::vector< tj::shared::ref<EPParameter> > parameters;
-						epm->GetParameters(parameters);
-						std::vector< tj::shared::ref<EPParameter> >::iterator pit = parameters.begin();
-						unsigned int idx = 0;
-						while(pit!=parameters.end()) {
-							tj::shared::ref<EPParameter> parameter = *pit;
-							if(parameter) {
-								const tj::shared::Any& valueGiven = m->GetParameter(idx);
-								if(!parameter->IsValueValid(valueGiven)) {
-									return;
-								}
-								
-								if(_updateDefaultValuesToState) {
-									parameter->SetDefaultValue(valueGiven);
-								}
-							}
-							++idx;
-							++pit;
-						}
+					if(epm && epm->Matches(m)) {
+						epm->PersistDefaultValues(m);						
 						
 						// Execute the associated handler
 						Member mem = it->second;
