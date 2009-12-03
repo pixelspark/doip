@@ -11,6 +11,7 @@ typedef class UdpSocket;
 	NSNetService* _service;
 	MWDownload* _download;
 	NSData* _definitionFileData;
+	NSString* _id;
 	NSString* _transportAddress;
 	NSString* _transportType;
 	NSString* _transportFormat;
@@ -23,12 +24,14 @@ typedef class UdpSocket;
 - (NSString*) name;
 - (NSNetService*) service;
 - (void) executeMethod: (MWMethod*)method;
+- (bool) executeFavorite:(MWFavorite*)favorite;
 
 @property (nonatomic, retain) NSString* transportAddress;
 @property (nonatomic, retain) NSString* transportType;
 @property (nonatomic, retain) NSString* transportFormat;
 @property (nonatomic, readonly) NSMutableArray* methods;
 @property (nonatomic, retain) MWDownload* download;
+@property (nonatomic, readonly) NSString* endpointIdentifier;
 
 @end
 

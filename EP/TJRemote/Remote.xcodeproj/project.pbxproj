@@ -38,8 +38,15 @@
 		B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */; };
 		B4A98AB610C6E707001CF473 /* libTJSharedMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */; };
 		B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */; };
+		B4B99F9D10C7AFFC0048EC2D /* FavoriteAll.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */; };
+		B4B99F9E10C7AFFC0048EC2D /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9C10C7AFFC0048EC2D /* Favorite.png */; };
+		B4B9A0D110C7BFCA0048EC2D /* MWInputAlertView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4B9A0D010C7BFCA0048EC2D /* MWInputAlertView.mm */; };
 		B4E617B3108270C8004D7C02 /* MWEndpointsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */; };
 		B4E618841082779C004D7C02 /* MWEndpoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E618831082779C004D7C02 /* MWEndpoint.mm */; };
+		B4FF221410C702D8000D47B6 /* Run.png in Resources */ = {isa = PBXBuildFile; fileRef = B4FF221310C702D8000D47B6 /* Run.png */; };
+		B4FF229B10C71B12000D47B6 /* MWFavoritesTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */; };
+		B4FF22E510C71ED0000D47B6 /* MWFavorite.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4FF22E410C71ED0000D47B6 /* MWFavorite.mm */; };
+		B4FF231510C721E2000D47B6 /* MWSliderView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4FF231410C721E2000D47B6 /* MWSliderView.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,10 +178,21 @@
 		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHeaderView.h; sourceTree = "<group>"; };
 		B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWHeaderView.m; sourceTree = "<group>"; };
+		B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FavoriteAll.png; path = Resources/FavoriteAll.png; sourceTree = "<group>"; };
+		B4B99F9C10C7AFFC0048EC2D /* Favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Favorite.png; path = Resources/Favorite.png; sourceTree = "<group>"; };
+		B4B9A0CF10C7BFCA0048EC2D /* MWInputAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWInputAlertView.h; sourceTree = "<group>"; };
+		B4B9A0D010C7BFCA0048EC2D /* MWInputAlertView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWInputAlertView.mm; sourceTree = "<group>"; };
 		B4E617B1108270C8004D7C02 /* MWEndpointsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWEndpointsTableViewController.h; sourceTree = "<group>"; };
 		B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWEndpointsTableViewController.mm; sourceTree = "<group>"; };
 		B4E618821082779C004D7C02 /* MWEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWEndpoint.h; sourceTree = "<group>"; };
 		B4E618831082779C004D7C02 /* MWEndpoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWEndpoint.mm; sourceTree = "<group>"; };
+		B4FF221310C702D8000D47B6 /* Run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Run.png; path = Resources/Run.png; sourceTree = "<group>"; };
+		B4FF229910C71B12000D47B6 /* MWFavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFavoritesTableViewController.h; sourceTree = "<group>"; };
+		B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWFavoritesTableViewController.mm; sourceTree = "<group>"; };
+		B4FF22E310C71ED0000D47B6 /* MWFavorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFavorite.h; sourceTree = "<group>"; };
+		B4FF22E410C71ED0000D47B6 /* MWFavorite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWFavorite.mm; sourceTree = "<group>"; };
+		B4FF231310C721E2000D47B6 /* MWSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSliderView.h; sourceTree = "<group>"; };
+		B4FF231410C721E2000D47B6 /* MWSliderView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWSliderView.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +216,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B4B9A0CF10C7BFCA0048EC2D /* MWInputAlertView.h */,
+				B4B9A0D010C7BFCA0048EC2D /* MWInputAlertView.mm */,
 				B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */,
 				B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */,
 				B4E617B1108270C8004D7C02 /* MWEndpointsTableViewController.h */,
@@ -216,6 +236,12 @@
 				B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */,
 				B48DC24E108CC6B1002AB313 /* MWDownload.h */,
 				B48DC24F108CC6B1002AB313 /* MWDownload.mm */,
+				B4FF229910C71B12000D47B6 /* MWFavoritesTableViewController.h */,
+				B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */,
+				B4FF22E310C71ED0000D47B6 /* MWFavorite.h */,
+				B4FF22E410C71ED0000D47B6 /* MWFavorite.mm */,
+				B4FF231310C721E2000D47B6 /* MWSliderView.h */,
+				B4FF231410C721E2000D47B6 /* MWSliderView.mm */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -257,6 +283,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */,
+				B4B99F9C10C7AFFC0048EC2D /* Favorite.png */,
+				B4FF221310C702D8000D47B6 /* Run.png */,
 				B4528CCF10BA9B87009605EC /* ep-color.png */,
 				B4528CC010BA9AA1009605EC /* ep-dim.png */,
 				B4528CC110BA9AA1009605EC /* ep-fade.png */,
@@ -462,6 +491,9 @@
 				B4528CC210BA9AA1009605EC /* ep-dim.png in Resources */,
 				B4528CC310BA9AA1009605EC /* ep-fade.png in Resources */,
 				B4528CD010BA9B87009605EC /* ep-color.png in Resources */,
+				B4FF221410C702D8000D47B6 /* Run.png in Resources */,
+				B4B99F9D10C7AFFC0048EC2D /* FavoriteAll.png in Resources */,
+				B4B99F9E10C7AFFC0048EC2D /* Favorite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +514,10 @@
 				B499D012108BA6F5002E1F92 /* MWParameterTableViewController.mm in Sources */,
 				B48DC250108CC6B1002AB313 /* MWDownload.mm in Sources */,
 				B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */,
+				B4FF229B10C71B12000D47B6 /* MWFavoritesTableViewController.mm in Sources */,
+				B4FF22E510C71ED0000D47B6 /* MWFavorite.mm in Sources */,
+				B4FF231510C721E2000D47B6 /* MWSliderView.mm in Sources */,
+				B4B9A0D110C7BFCA0048EC2D /* MWInputAlertView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

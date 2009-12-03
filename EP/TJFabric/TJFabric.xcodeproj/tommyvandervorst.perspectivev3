@@ -279,8 +279,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>19</integer>
-									<integer>18</integer>
+									<integer>11</integer>
+									<integer>8</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -313,12 +313,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>B40226201068F01300137628</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>tjwebcontent.cpp</string>
+								<string>tjfabricrule.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +328,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B40226211068F01300137628</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>tjwebcontent.cpp</string>
+										<string>tjfabricrule.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4A98B8C10C6F115001CF473</string>
+										<string>B4A98CA910C6FF59001CF473</string>
 										<key>history</key>
 										<array>
 											<string>B402274C10691D6500137628</string>
@@ -391,18 +393,18 @@
 											<string>B4D8947710BE930D00E8820E</string>
 											<string>B4D8947910BE930D00E8820E</string>
 											<string>B4DB0B4F10BF37BC00680151</string>
-											<string>B4DB0B5010BF37BC00680151</string>
 											<string>B4DB0B5110BF37BC00680151</string>
 											<string>B4DB0B5210BF37BC00680151</string>
 											<string>B4DB0B5310BF37BC00680151</string>
-											<string>B4DB0B5410BF37BC00680151</string>
-											<string>B4FF78A710C027C100A2E442</string>
 											<string>B4FF78A810C027C100A2E442</string>
 											<string>B4708BEB10C5134500A1F8B4</string>
 											<string>B4708C3D10C52C1F00A1F8B4</string>
 											<string>B4708C7C10C52D5200A1F8B4</string>
 											<string>B4708C8A10C52E2800A1F8B4</string>
-											<string>B4A9892910C662D5001CF473</string>
+											<string>B4A98CA510C6FF59001CF473</string>
+											<string>B4A98CA610C6FF59001CF473</string>
+											<string>B4A98CA710C6FF59001CF473</string>
+											<string>B4A98CA810C6FF59001CF473</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -681,14 +683,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4A9892E10C662D5001CF473</string>
+				<string>B4A98CAA10C6FF59001CF473</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>B4A9892F10C662D5001CF473</string>
-				<string>B4A9893010C662D5001CF473</string>
-				<string>B4A9893110C662D5001CF473</string>
-				<string>B4A9893210C662D5001CF473</string>
-				<string>B4A9893310C662D5001CF473</string>
+				<string>B4A98CAB10C6FF59001CF473</string>
+				<string>B4A98CAC10C6FF59001CF473</string>
+				<string>B4A98CAD10C6FF59001CF473</string>
+				<string>B4A98CAE10C6FF59001CF473</string>
+				<string>B4A98CAF10C6FF59001CF473</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>

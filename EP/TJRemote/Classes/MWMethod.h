@@ -5,21 +5,11 @@
 @class MWEndpoint;
 @class MWMethod;
 @class MWParameter;
+@class MWFavorite;
 class TiXmlElement;
+@class MWSliderView;
 
-@interface MWSliderView: UIView {
-	UISlider* _slider;
-	UILabel* _label;
-	UIButton* _plusButton;
-	UIButton* _minButton;
-	MWParameter* _parameter;
-}
-
-- (id) initWithFrame:(CGRect)rect parameter:(MWParameter*)p immediate:(bool)imm;
-
-@end;
-
-@interface MWParameter: NSObject <UITextFieldDelegate> {
+@interface MWParameter: NSObject <UITextFieldDelegate, NSCoding> {
 	NSString* _friendly;
 	NSString* _id;
 	NSString* _type;
@@ -37,6 +27,10 @@ class TiXmlElement;
 - (void) sliderValueChanged: (UIView*)slider event:(UIEvent*)evt;
 - (void) executeHandler: (UIView*)vw event:(UIEvent*)evt;
 - (void) switchValueChanged: (UISwitch*)sw event:(UIEvent*)evt;
+- (MWParameter*) clone;
+
+- (id) initWithCoder:(NSCoder *)aDecoder;
+- (void) encodeWithCoder:(NSCoder *)aCoder;
 
 @property (nonatomic, retain) NSString* friendlyName;
 @property (nonatomic, retain) NSString* minimumValue;
@@ -69,6 +63,7 @@ class TiXmlElement;
 - (void) setupCell: (UITableViewCell*)cell;
 - (bool) parametersFitInCell;
 - (void) execute;
+- (MWFavorite*) createFavorite;
 
 @end
 

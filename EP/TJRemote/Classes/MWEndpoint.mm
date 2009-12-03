@@ -1,4 +1,5 @@
 #import "MWEndpoint.h"
+#import "MWFavorite.h"
 #include "../../../Libraries/TinyXML/tinyxml.h"
 #include "../../../Libraries/OSCPack/OscOutboundPacketStream.h"
 #include "../../../Libraries/OSCPack/IpEndpointName.h"
@@ -14,6 +15,7 @@ using namespace osc;
 @synthesize transportFormat = _transportFormat;
 @synthesize transportType = _transportType;
 @synthesize download = _download;
+@synthesize endpointIdentifier = _id;
 
 - (id) initWithService:(NSNetService*)service {
 	if(self = [super init]) {
@@ -28,6 +30,32 @@ using namespace osc;
 	return self;
 }
 
+- (bool) executeFavorite:(MWFavorite *)favorite {
+	// Find a method matching the path of the favorite
+	for (MWMethod* method in _methods) {
+		if([[method pattern] isEqualToString:favorite.messagePath]) {
+			// Found; set all the parameters and run it!
+			int i =0;
+			for(MWParameter* parameter in [method parameters]) {
+				MWParameter* savedParameter = [[favorite messageArguments] objectAtIndex:i];
+				if(savedParameter==nil) {
+					return false; // Not enough parameters
+				}
+				else {
+					if([parameter.identifier isEqualToString:savedParameter.identifier]) {
+						parameter.value = savedParameter.value;
+					}
+				}
+				++i;
+			}
+			[self executeMethod:method];
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 - (void) executeMethod:(MWMethod *)method {
 	if(_socket!=0) {
 		char buffer[4096];
@@ -36,7 +64,6 @@ using namespace osc;
 		
 		// Enumerate parameters and send values
 		for (MWParameter* parameter in method.parameters) {
-			NSLog(@"Parameter");
 			if([parameter.type isEqualToString:@"int32"]) {
 				NSNumber* value = (NSNumber*)parameter.value;
 				if(value!=nil) {
@@ -56,7 +83,6 @@ using namespace osc;
 				}
 			}
 		}
-		
 		ops << osc::EndMessage;
 		_socket->Send(ops.Data(), ops.Size());
 	}
@@ -124,6 +150,11 @@ using namespace osc;
 		if(root!=0) {
 			int version = 0;
 			root->Attribute("version", &version);
+			const char* endpointID = root->Attribute("id");
+			if(endpointID!=0) {
+				[_id release];
+				_id = [[NSString stringWithUTF8String:endpointID] retain];
+			}
 		
 			// Find a UDP4 transport mechanism that we can use
 			TiXmlElement* transports = root->FirstChildElement("transports");
@@ -207,6 +238,7 @@ using namespace osc;
 }
 
 - (void) dealloc {
+	[_id release];
 	[_service stopMonitoring];
 	[_service release];
 	[_transportAddress release];

@@ -7,15 +7,16 @@
     if (self = [super initWithFrame:frame]) {
 		// create the button object
 		self.opaque = NO;
+		self.backgroundColor = [UIColor clearColor];
 		UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		headerLabel.backgroundColor = [UIColor clearColor];
 		headerLabel.opaque = NO;
 		headerLabel.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5];
-		headerLabel.shadowColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.8];
-		headerLabel.shadowOffset = CGSizeMake(-0.5, 0.5);
+		headerLabel.shadowColor = [UIColor blackColor];
+		headerLabel.shadowOffset = CGSizeMake(0.5, 0.5);
 		headerLabel.highlightedTextColor = [UIColor whiteColor];
 		headerLabel.font = [UIFont boldSystemFontOfSize:15];
-		headerLabel.frame = CGRectMake(10.0, 0.0, 300.0, 27.0);
+		headerLabel.frame = CGRectMake(10.0, -1.0, 300.0, 27.0);
 		headerLabel.text = title;
 		[self addSubview:headerLabel];
     }

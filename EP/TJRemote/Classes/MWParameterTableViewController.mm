@@ -1,9 +1,24 @@
 #import "MWParameterTableViewController.h"
 #import "MWMethod.h"
 #import "MWHeaderView.h"
+#import "MWFavoritesTableViewController.h"
+#import "MWEndpoint.h"
+#import "MWInputAlertView.h"
+
+static UIImage* runImage;
+static UIImage* favoriteImage;
 
 @implementation MWParameterTableViewController
 @dynamic method;
+@synthesize favorites;
+
++ (void) initialize {
+	NSString* pngPath = [[NSBundle mainBundle] pathForResource:@"Run" ofType:@"png"];
+	runImage = [[UIImage imageWithContentsOfFile:pngPath] retain];
+	
+	pngPath = [[NSBundle mainBundle] pathForResource:@"FavoriteAll" ofType:@"png"];
+	favoriteImage = [[UIImage imageWithContentsOfFile:pngPath] retain];
+}
 
 - (MWMethod*) method {
 	return _method;
@@ -28,7 +43,7 @@
 - (void)viewWillAppear:(BOOL)a {
 	[self.tableView setAllowsSelection:YES];
 	[self.tableView reloadData];
-	[self.tableView setSeparatorColor:[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:0.4f]];
+	[self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -44,16 +59,12 @@
 	}
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-	[self setMethod:nil];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if(section==0) {
 		return (_method!=nil) ? [_method.parameters count] : 0;
 	}
 	else {
-		return (_method!=nil) ? 1 : 0;
+		return (_method!=nil) ? 2 : 0;
 	}
 }
 
@@ -73,6 +84,7 @@
 		
 		cell.textLabel.textColor = [UIColor whiteColor];
 		[[cell.contentView viewWithTag:1337] removeFromSuperview];
+		cell.imageView.image = nil;
 		
 		MWParameter* parameter = [_method.parameters objectAtIndex:indexPath.row];
 		if(parameter!=nil) {
@@ -95,12 +107,55 @@
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		}
+		
+		
 		cell.textLabel.textColor = [UIColor whiteColor];
-		[[cell.contentView viewWithTag:1337] removeFromSuperview];
-		cell.textLabel.text = @"Confirm";
+		if(indexPath.row==0) {
+			cell.imageView.image = runImage;
+			cell.textLabel.text = @"Run right now";
+		}
+		else if(indexPath.row==1) {
+			cell.imageView.image = favoriteImage;
+			cell.textLabel.text = @"Add to favorites";
+		}
 		return cell;
 	}
 	return nil;
+}
+
+- (void)inputAlert:(MWInputAlertView*)alert didClose:(NSString*)value withContext:(NSObject*)context {
+	if(context!=nil) {
+		MWFavorite* fav = (MWFavorite*)context;
+		fav.friendlyName = value;
+		[favorites addFavorite:fav];
+		[fav release];
+		_creatingFavorite = nil;
+	}
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if(buttonIndex==1) {
+		// Just this device; set specific device ID
+		_creatingFavorite.specificDevice = [[_method parent] endpointIdentifier];
+	}
+	
+	if(buttonIndex==2) {
+		// Cancel
+		[_creatingFavorite release];
+		_creatingFavorite = nil;
+		return;
+	}
+	
+	// Continue with asking for a name
+	MWInputAlertView* iv = [[MWInputAlertView alloc] initWithTitle:@"Add to favorites" placeholder:@"Enter name of favorite" value:[_method friendlyName] withContext:_creatingFavorite delegate:self];
+	[iv show];
+}
+
+- (void) addFavorite {
+	_creatingFavorite = [[_method createFavorite] retain];
+	UIActionSheet* as = [[UIActionSheet alloc] initWithTitle:@"Do you want this favorite to run on all devices that support this command, or just this device?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"All supported devices",@"Just this device",nil];
+	[as setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+	[as showInView:self.tableView];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,13 +163,18 @@
 		[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 	}
 	else if(indexPath.section==1) {
-		// Something else
-		[self doExecute];
+		if(indexPath.row==0) {
+			[self doExecute];
+		}
+		else if(indexPath.row==1) {
+			[self addFavorite];
+		}
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }
 
 - (void)dealloc {
+	[_creatingFavorite release];
 	[_method release];
     [super dealloc];
 }

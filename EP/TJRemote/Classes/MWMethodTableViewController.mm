@@ -26,7 +26,7 @@
 
 - (void)viewWillAppear:(BOOL)a {
 	[self.tableView reloadData];
-	[self.tableView setSeparatorColor:[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:0.4f]];
+	[self.tableView setSeparatorColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2f]];
 }
 
 - (void)viewDidUnload {
@@ -58,6 +58,14 @@
 	MWMethod* method = [[self.endpoint methods] objectAtIndex:indexPath.row];
 	[method setupCell:cell];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+	if(indexPath.row<[[self.endpoint methods] count]) {
+		MWMethod* method = [[self.endpoint methods] objectAtIndex:[indexPath row]];
+		_parameterViewController.method = method;
+		[self.navigationController pushViewController:_parameterViewController animated:YES];
+	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
