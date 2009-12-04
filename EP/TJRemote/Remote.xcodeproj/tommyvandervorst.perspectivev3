@@ -331,7 +331,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B468B2D210C980E400EFA99B</string>
+										<string>B468B30310C9954800EFA99B</string>
 										<key>history</key>
 										<array>
 											<string>B4F699351068143500A32B2B</string>
@@ -383,7 +383,7 @@
 											<string>B468B2A310C97AB900EFA99B</string>
 											<string>B468B2A810C97B7500EFA99B</string>
 											<string>B468B2B710C97C7400EFA99B</string>
-											<string>B468B2B810C97C7400EFA99B</string>
+											<string>B468B2D210C980E400EFA99B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -397,18 +397,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1071, 577}}</string>
+								<string>{{0, 0}, {1071, 571}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 109 1278 871 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>577pt</string>
+							<string>571pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>248pt</string>
+							<string>254pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -422,7 +422,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1071, 221}}</string>
+										<string>{{10, 27}, {1071, 227}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 109 1278 871 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -477,8 +479,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1071, 221}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 109 1278 871 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -506,11 +506,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B468B06910C9517300EFA99B</string>
+				<string>B468B2FA10C9953F00EFA99B</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B468B06A10C9517300EFA99B</string>
+				<string>B468B2FB10C9953F00EFA99B</string>
 				<string>B4D5CA8F1066DE1E00D3D893</string>
-				<string>B468B06B10C9517300EFA99B</string>
+				<string>B468B2FC10C9953F00EFA99B</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -699,8 +699,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B468B16310C96E0B00EFA99B</string>
-		<string>B468B16410C96E0B00EFA99B</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJRemote/Remote.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
