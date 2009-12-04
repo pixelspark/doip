@@ -5,7 +5,7 @@
 @implementation MWAppDelegate
 @synthesize window;
 @synthesize tabController, endpointsController;
-@synthesize endpointsNavigationController;
+@synthesize endpointsNavigationController, chooserController;
 @synthesize splashThrobber, splashBackground, regularBackground;
 
 - (void) timeoutTimer:(NSTimer*)timer {

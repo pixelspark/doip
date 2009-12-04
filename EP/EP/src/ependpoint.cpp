@@ -93,12 +93,14 @@ bool EPParameter::IsValueValid(const Any& value) const {
 	Any::Type vt = GetValueType();
 	Any forced = value.Force(vt);
 	if(vt==Any::TypeInteger || vt==Any::TypeDouble) {
-		if(forced > GetMaximumValue()) {
-			return false;
-		}
-		
-		if(forced < GetMinimumValue()) {
-			return false;
+		if(GetMaximumValue()>GetMinimumValue()) {
+			if(forced > GetMaximumValue()) {
+				return false;
+			}
+			
+			if(forced < GetMinimumValue()) {
+				return false;
+			}
 		}
 	}
 	
@@ -551,7 +553,7 @@ void EPMethodDefinition::Clone() {
 }
 
 /** EPParameterDefinition **/
-EPParameterDefinition::EPParameterDefinition(): _nature(NatureUnknown) {
+EPParameterDefinition::EPParameterDefinition(): _nature(NatureUnknown), _minimumValue(L"0"), _maximumValue(L"-1") {
 }
 
 EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, Nature nature):
@@ -574,6 +576,22 @@ String EPParameterDefinition::GetFriendlyName() const {
 
 String EPParameterDefinition::GetType() const {
 	return _type;
+}
+
+bool EPParameterDefinition::HasOptions() const {
+	return _options.size()>0;
+}
+
+void EPParameterDefinition::GetOptions(std::set< EPOption >& optionList) const {
+	std::set<EPOption>::const_iterator it = _options.begin();
+	while(it!=_options.end()) {
+		optionList.insert(*it);
+		++it;
+	}
+}
+
+void EPParameterDefinition::AddOption(const EPOption& epo) {
+	_options.insert(epo);
 }
 
 Any::Type EPParameterDefinition::GetValueType() const {
@@ -628,6 +646,16 @@ void EPParameterDefinition::Load(TiXmlElement* me) {
 	else {
 		_nature = NatureUnknown;
 	}
+	
+	TiXmlElement* option = me->FirstChildElement("option");
+	Any::Type type = GetValueType();
+	while(option!=0) {
+		EPOption op;
+		op.first = LoadAttributeSmall<String>(option, "name", L"");
+		op.second = Any(LoadAttributeSmall<String>(option, "value", L"")).Force(type);
+		_options.insert(op);
+		option = option->NextSiblingElement("option");
+	}
 }
 
 EPParameter::Nature EPParameterDefinition::GetNature() const {
@@ -647,6 +675,17 @@ void EPParameter::Save(TiXmlElement* me) {
 		natureString = L"discrete";
 	}
 	SaveAttributeSmall(me, "nature", natureString);
+	
+	std::set<EPOption> options;
+	GetOptions(options);
+	std::set<EPOption>::const_iterator it = options.begin();
+	while(it!=options.end()) {
+		TiXmlElement option("option");
+		SaveAttributeSmall(&option, "name", it->first);
+		SaveAttributeSmall(&option, "value", it->second.ToString());
+		me->InsertEndChild(option);
+		++it;
+	}
 }
 
 /** EPTransportDefinition **/

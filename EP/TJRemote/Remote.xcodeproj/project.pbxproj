@@ -26,6 +26,9 @@
 		B4528CC210BA9AA1009605EC /* ep-dim.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CC010BA9AA1009605EC /* ep-dim.png */; };
 		B4528CC310BA9AA1009605EC /* ep-fade.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CC110BA9AA1009605EC /* ep-fade.png */; };
 		B4528CD010BA9B87009605EC /* ep-color.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CCF10BA9B87009605EC /* ep-color.png */; };
+		B468B07710C952A300EFA99B /* MWOptionView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B07610C952A300EFA99B /* MWOptionView.mm */; };
+		B468B07B10C9537D00EFA99B /* MWParameter.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B07A10C9537D00EFA99B /* MWParameter.mm */; };
+		B468B10F10C96A0B00EFA99B /* MWChooserController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B10E10C96A0B00EFA99B /* MWChooserController.mm */; };
 		B46AC5F21083899A00EAE42C /* MWMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC5F11083899A00EAE42C /* MWMethod.mm */; };
 		B46AC61D10838C8C00EAE42C /* MWMethodTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */; };
 		B47F09D90FB625FB00DB3BEE /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B47F09D80FB625FB00DB3BEE /* Logo.png */; };
@@ -160,6 +163,12 @@
 		B4528CC010BA9AA1009605EC /* ep-dim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ep-dim.png"; path = "Resources/Icons/ep-dim.png"; sourceTree = "<group>"; };
 		B4528CC110BA9AA1009605EC /* ep-fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ep-fade.png"; path = "Resources/Icons/ep-fade.png"; sourceTree = "<group>"; };
 		B4528CCF10BA9B87009605EC /* ep-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ep-color.png"; path = "Resources/Icons/ep-color.png"; sourceTree = "<group>"; };
+		B468B07510C952A300EFA99B /* MWOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWOptionView.h; sourceTree = "<group>"; };
+		B468B07610C952A300EFA99B /* MWOptionView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWOptionView.mm; sourceTree = "<group>"; };
+		B468B07910C9537D00EFA99B /* MWParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameter.h; sourceTree = "<group>"; };
+		B468B07A10C9537D00EFA99B /* MWParameter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWParameter.mm; sourceTree = "<group>"; };
+		B468B10D10C96A0B00EFA99B /* MWChooserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWChooserController.h; sourceTree = "<group>"; };
+		B468B10E10C96A0B00EFA99B /* MWChooserController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWChooserController.mm; sourceTree = "<group>"; };
 		B46AC5F01083899A00EAE42C /* MWMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWMethod.h; sourceTree = "<group>"; };
 		B46AC5F11083899A00EAE42C /* MWMethod.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWMethod.mm; sourceTree = "<group>"; };
 		B46AC61B10838C8C00EAE42C /* MWMethodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWMethodTableViewController.h; sourceTree = "<group>"; };
@@ -241,7 +250,13 @@
 				B4FF22E310C71ED0000D47B6 /* MWFavorite.h */,
 				B4FF22E410C71ED0000D47B6 /* MWFavorite.mm */,
 				B4FF231310C721E2000D47B6 /* MWSliderView.h */,
+				B468B07510C952A300EFA99B /* MWOptionView.h */,
+				B468B07610C952A300EFA99B /* MWOptionView.mm */,
 				B4FF231410C721E2000D47B6 /* MWSliderView.mm */,
+				B468B07910C9537D00EFA99B /* MWParameter.h */,
+				B468B07A10C9537D00EFA99B /* MWParameter.mm */,
+				B468B10D10C96A0B00EFA99B /* MWChooserController.h */,
+				B468B10E10C96A0B00EFA99B /* MWChooserController.mm */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -518,6 +533,9 @@
 				B4FF22E510C71ED0000D47B6 /* MWFavorite.mm in Sources */,
 				B4FF231510C721E2000D47B6 /* MWSliderView.mm in Sources */,
 				B4B9A0D110C7BFCA0048EC2D /* MWInputAlertView.mm in Sources */,
+				B468B07710C952A300EFA99B /* MWOptionView.mm in Sources */,
+				B468B07B10C9537D00EFA99B /* MWParameter.mm in Sources */,
+				B468B10F10C96A0B00EFA99B /* MWChooserController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

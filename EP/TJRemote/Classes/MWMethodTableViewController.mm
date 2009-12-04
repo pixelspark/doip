@@ -56,7 +56,7 @@
     }
 	
 	MWMethod* method = [[self.endpoint methods] objectAtIndex:indexPath.row];
-	[method setupCell:cell];
+	[method setupCell:cell inController:self];
     return cell;
 }
 

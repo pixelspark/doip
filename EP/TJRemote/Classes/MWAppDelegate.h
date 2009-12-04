@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "MWClient.h"
 
+@class MWChooserController;
 @class MWEndpointsTableViewController;
 
 @interface MWAppDelegate : NSObject <UIApplicationDelegate, MWClientDelegate> {
@@ -9,6 +10,7 @@
 	MWEndpointsTableViewController* endpointsController;
 	UINavigationController* endpointsNavigationController;
 	bool startingUp;
+	MWChooserController* chooserController;
 	
 	
 	// Splash screen items
@@ -24,6 +26,7 @@
 @property (nonatomic, retain) IBOutlet UIView* splashThrobber;
 @property (nonatomic, retain) IBOutlet MWEndpointsTableViewController* endpointsController;
 @property (nonatomic, retain) IBOutlet UINavigationController* endpointsNavigationController;
+@property (nonatomic, retain) IBOutlet MWChooserController* chooserController;
 
 @end
 

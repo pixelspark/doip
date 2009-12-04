@@ -17,6 +17,8 @@ namespace tj {
 			EPMediationLevelDefault = 0,
 			EPMediationLevelIgnore = -1,
 		};
+		
+		typedef std::pair< tj::shared::String, tj::shared::Any > EPOption;
 
 		class EP_EXPORTED EPTransport: public virtual tj::shared::Object {
 			public:
@@ -44,6 +46,8 @@ namespace tj {
 				virtual tj::shared::Any GetDefaultValue() const = 0;
 				virtual void SetDefaultValue(const tj::shared::Any& val) = 0;
 				virtual Nature GetNature() const = 0;
+				virtual bool HasOptions() const = 0;
+				virtual void GetOptions(std::set< EPOption >& optionList) const = 0;
 			
 				virtual bool IsValueValid(const tj::shared::Any& val) const;
 				virtual void Save(TiXmlElement* me);
@@ -175,7 +179,7 @@ namespace tj {
 		class EP_EXPORTED EPParameterDefinition: public EPParameter, public tj::shared::Serializable {
 			public:
 				EPParameterDefinition();
-			EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, EPParameter::Nature = EPParameter::NatureUnknown);
+				EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, EPParameter::Nature = EPParameter::NatureUnknown);
 				virtual ~EPParameterDefinition();
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetType() const;
@@ -187,6 +191,9 @@ namespace tj {
 				virtual EPParameter::Nature GetNature() const;
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
+				virtual bool HasOptions() const;
+				virtual void GetOptions(std::set< EPOption >& optionList) const;
+				virtual void AddOption(const EPOption& epo);
 			
 			protected:
 				tj::shared::String _friendlyName;
@@ -195,6 +202,7 @@ namespace tj {
 				tj::shared::String _maximumValue;
 				tj::shared::String _defaultValue;
 				tj::shared::Any _runtimeDefaultValue;
+				std::set< EPOption > _options;
 				EPParameter::Nature _nature;
 		};
 		

@@ -89,7 +89,7 @@ static UIImage* favoriteImage;
 		MWParameter* parameter = [_method.parameters objectAtIndex:indexPath.row];
 		if(parameter!=nil) {
 			CGRect rect = CGRectMake(100, 8, 210, 28);
-			UIView* pv = [parameter createView:rect immediate:FALSE];
+			UIView* pv = [parameter createView:rect immediate:FALSE inController:self];
 			if(pv!=nil) {
 				pv.tag = 1337;
 				[cell.contentView addSubview:pv];
