@@ -127,10 +127,8 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 				if(trp) {
 					connection = ConnectionFactory::Instance()->CreateForTransport(trp, edd->GetAddress());
 					if(connection) {
-						// TODO FIXME this reads the mediation level from the definition file, but it is also defined
-						// in service attributes; fix this to use the service attribute and not the value in the
-						// endpoint definition.
-						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), connection, true,epe->GetMediationLevel()));
+						_discovered.insert(std::pair< ref<Service>, weak<Connection> >(data.service, connection));
+						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), connection, true, epe->GetMediationLevel()));
 						break;
 					}
 				}
@@ -151,12 +149,12 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 
 void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRequest::ServiceNotification& data) {
 	ThreadLock lock(&_lock);
+	ref<Service> service = data.service;
 	
 	if(data.online) {
 		std::wstring defPath;
 		std::wstring magicNumber;
 		std::wstring protocol;
-		ref<Service> service = data.service;
 		
 		// Check whether this is a service that is published from this process
 		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==_ownMagic) {
@@ -175,10 +173,40 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		
 		if(service->GetAttribute(L"EPDefinitionPath", defPath)) {
 			Log::Write(L"TJFabric/EPDiscovery", L"Found EP endpoint; will download definitions at http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
-			ref<EPDownloadedDefinition> epd = GC::Hold(new EPDownloadedDefinition(NetworkAddress(service->GetHostName()), service->GetPort(), defPath));
+			ref<EPDownloadedDefinition> epd = GC::Hold(new EPDownloadedDefinition(service, defPath));
 			
 			epd->EventDownloaded.AddListener(this);
 			_downloading.insert(epd);
+		}
+	}
+	else {
+		// Remove any pending download action
+		std::set< ref<EPDownloadedDefinition> >::iterator it = _downloading.begin();
+		while(it!=_downloading.end()) {
+			ref<EPDownloadedDefinition> edd = *it;
+			if(edd->GetService()->GetID()==service->GetID()) {
+				_downloading.erase(it);
+				break;
+			}
+			++it;
+		}
+		
+		// Remove discovered connection
+		ref<Connection> removedConnection;
+		std::map< ref<Service>, weak<Connection> >::iterator dit = _discovered.begin();
+		while(dit!=_discovered.end()) {
+			ref<Service> s = dit->first;
+			if(s && s->GetID()==service->GetID()) {
+				removedConnection = dit->second;
+				_discovered.erase(dit);
+				break;
+			}
+			
+			dit++;
+		}
+		
+		if(removedConnection) {
+			EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), removedConnection, false, EPMediationLevelIgnore));
 		}
 	}
 }

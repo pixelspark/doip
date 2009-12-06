@@ -183,8 +183,7 @@ int main (int argc, char * const argv[]) {
 		Hash hash;
 		String hs = Wcs(serialDevicePath);
 		String idh = StringifyHex(hash.Calculate(hs));
-		Log::Write(L"TJLEDEPServer/Main", L"hash for path "+Wcs(serialDevicePath)+L" is "+idh);
-		ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.usp3epd", L"LEDs", serialDevicePath));
+		ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.leds", L"LEDs", serialDevicePath));
 		ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 		Log::Write(L"TJLEDEPServer/Main", L"Running");
 		daemon->Run();

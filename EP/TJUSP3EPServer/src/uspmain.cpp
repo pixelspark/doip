@@ -157,7 +157,7 @@ USPEndpoint::~USPEndpoint() {
 
 int main (int argc, char * const argv[]) {
 	if(argc<2) {
-		Log::Write(L"TJUSP3EPServer/Main", L"Usage: tjusp3epserverd /dev/serialdevice");
+		Log::Write(L"TJUSP3EPServer/Main", L"Usage: tjusp3epd /dev/serialdevice");
 		return 1;
 	}
 	
@@ -185,7 +185,7 @@ int main (int argc, char * const argv[]) {
 		String hs = Wcs(serialDevicePath);
 		String idh = StringifyHex(hash.Calculate(hs));
 		Log::Write(L"TJUSP3EPServer/Main", L"hash for path "+Wcs(serialDevicePath)+L" is "+idh);
-		ref<USPEndpoint> uspe = GC::Hold(new USPEndpoint(idh, L"com.tjshow.usp3epd", L"LEDs", serialDevicePath));
+		ref<USPEndpoint> uspe = GC::Hold(new USPEndpoint(idh, L"com.tjshow.leds.usp3", L"LEDs", serialDevicePath));
 		ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 		Log::Write(L"TJUSP3EPServer/Main", L"Running");
 		daemon->Run();

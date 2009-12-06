@@ -310,8 +310,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -329,7 +327,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B468B21510C9733500EFA99B</string>
+										<string>B468B30B10C9ABAA00EFA99B</string>
 										<key>history</key>
 										<array>
 											<string>B46954CD10A6E40D0045DB2D</string>
@@ -366,7 +364,7 @@
 											<string>B4A98B5810C6F073001CF473</string>
 											<string>B4A98C9510C6FF59001CF473</string>
 											<string>B4B9A15710C865FC0048EC2D</string>
-											<string>B468B21410C9733500EFA99B</string>
+											<string>B468B30A10C9ABAA00EFA99B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -406,8 +404,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1073, 219}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 93 1280 909 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -461,7 +457,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 213}}</string>
+										<string>{{10, 27}, {1073, 219}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 93 1280 909 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>

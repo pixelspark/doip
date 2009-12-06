@@ -56,8 +56,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 280871852;
-			PBXWorkspaceStateSaveDate = 280871852;
+			PBXPerProjectTemplateStateSaveDate = 281790571;
+			PBXWorkspaceStateSaveDate = 281790571;
 		};
 		perUserProjectItems = {
 			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
@@ -125,12 +125,6 @@
 		name = uspmain.cpp;
 		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/uspmain.cpp;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1853, 2600}}";
-			sepNavSelRange = "{1631, 0}";
-			sepNavVisRange = "{80, 1555}";
-			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
-		};
 	};
 	B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -173,11 +167,6 @@
 		name = usp3.cpp;
 		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/usp3.cpp;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 1976}}";
-			sepNavSelRange = "{382, 0}";
-			sepNavVisRange = "{0, 564}";
-		};
 	};
 	B46CBD5A10A46A5900CDE29F /* usp3.h */ = {
 		isa = PBXFileReference;
@@ -186,11 +175,6 @@
 		name = usp3.h;
 		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/usp3.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 780}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{506, 1342}";
-		};
 	};
 	B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -235,6 +219,20 @@
 			sepNavIntBoundsRect = "{{0, 0}, {1853, 2613}}";
 			sepNavSelRange = "{232, 0}";
 			sepNavVisRange = "{0, 2114}";
+		};
+	};
+	B4FBE9F510BDC45400DDCE96 /* leds.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 465}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 461}";
+		};
+	};
+	B4FBE9F610BDC45400DDCE96 /* leds.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 598}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{196, 1096}";
 		};
 	};
 }

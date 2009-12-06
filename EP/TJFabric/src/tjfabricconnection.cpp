@@ -108,12 +108,17 @@ void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& dat
 		
 		// remove connection from _discoveredConnections
 		std::deque< std::pair<EPMediationLevel, ref<Connection> > >::iterator it = _discoveredConnections.begin();
-		while(it!=_discoveredConnections.end()) {
-			if(it->second == ref<Connection>(data.connection)) {
-				_discoveredConnections.erase(it++);
-			}
-			else {
-				++it;
+		ref<Connection> removedConnection = ref<Connection>(data.connection);
+		if(removedConnection) {
+			while(it!=_discoveredConnections.end()) {
+				if(it->second == removedConnection) {
+					_discoveredConnections.erase(it);
+					Log::Write(L"TJFabric/ConnectedGroup", L"Removed connection");
+					break;
+				}
+				else {
+					++it;
+				}
 			}
 		}
 	}

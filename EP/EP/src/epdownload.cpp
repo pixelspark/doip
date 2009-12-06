@@ -2,12 +2,19 @@
 using namespace tj::shared;
 using namespace tj::ep;
 using namespace tj::np;
+using namespace tj::scout;
 
-EPDownloadedDefinition::EPDownloadNotification::EPDownloadNotification(ref<EPEndpoint> t): endpoint(t) {
+EPDownloadedDefinition::EPDownloadNotification::EPDownloadNotification(ref<EPEndpoint> t, strong<Service> s): endpoint(t), service(s) {
 }
 
-EPDownloadedDefinition::EPDownloadedDefinition(const tj::np::NetworkAddress& host, unsigned short port, const tj::shared::String& path):
-	Download(host, path, port) {
+EPDownloadedDefinition::EPDownloadedDefinition(strong<Service> service, const tj::shared::String& path):
+	Download(NetworkAddress(service->GetHostName()), path, service->GetPort()),
+	_service(service) {
+		
+}
+
+strong<Service> EPDownloadedDefinition::GetService() {
+	return _service;
 }
 
 EPDownloadedDefinition::~EPDownloadedDefinition() {
@@ -28,7 +35,7 @@ void EPDownloadedDefinition::OnDownloadComplete(ref<CodeWriter> cw) {
 		if(root!=0) {
 			ref<EPEndpointDefinition> epd = GC::Hold(new EPEndpointDefinition());
 			epd->Load(root);
-			EventDownloaded.Fire(this, EPDownloadNotification(epd));
+			EventDownloaded.Fire(this, EPDownloadNotification(epd, _service));
 			return;
 		}
 		else {
@@ -36,5 +43,5 @@ void EPDownloadedDefinition::OnDownloadComplete(ref<CodeWriter> cw) {
 		}
 	}
 
-	EventDownloaded.Fire(this, EPDownloadNotification(null));
+	EventDownloaded.Fire(this, EPDownloadNotification(null, _service));
 }

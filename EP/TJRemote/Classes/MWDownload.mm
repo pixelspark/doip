@@ -7,6 +7,7 @@
 
 - (id)initWithURL:(NSURL *)url delegate:(id<MWDownloadDelegate>)d {
 	if(self = [super init]) {
+		NSLog(@"MWDownload %@", [url absoluteURL]);
 		NSURLRequest* request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
 		_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 		self.delegate = d;

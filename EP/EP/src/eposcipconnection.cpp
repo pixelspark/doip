@@ -431,35 +431,46 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 	}
 	
 	// Create the OSC representation of the message
+	bool isDebug = Zones::IsDebug();
 	char buffer[2048];
 	char* packetBuffer = buffer;
 	bool deletePacketBuffer = false;
 	osc::OutboundPacketStream outPacket(&(buffer[0]), 2047);
 	outPacket << osc::BeginMessage(Mbs(msg->GetPath()).c_str());
 	std::wostringstream wos;
-	wos << StringifyHex(outSocket) << L"<= " << msg->GetPath() << L",";
+	if(isDebug) {
+		wos << StringifyHex(outSocket) << L"<= " << msg->GetPath() << L",";
+	}
 	
 	for(unsigned int a=0;a<msg->GetParameterCount();a++) {
 		Any value = msg->GetParameter(a);
 		switch(value.GetType()) {
 			case Any::TypeBool:
 				outPacket << (bool)value;
-				wos << L'b';
+				if(isDebug) {
+					wos << L'b';
+				}
 				break;
 				
 			case Any::TypeDouble:
 				outPacket << (double)value;
-				wos << L'd';
+				if(isDebug) {
+					wos << L'd';
+				}
 				break;
 				
 			case Any::TypeInteger:
 				outPacket << (osc::int32)(int)value;
-				wos << L'i';
+				if(isDebug) {
+					wos << L'i';
+				}
 				break;
 				
 			case Any::TypeString:
 				outPacket << Mbs(value.ToString()).c_str();
-				wos << L's';
+				if(isDebug) {
+					wos << L's';
+				}
 				break;
 				
 			default:
@@ -467,7 +478,9 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 			case Any::TypeTuple:
 			case Any::TypeNull:
 				outPacket << osc::Nil;
-				wos << L'0';
+				if(isDebug) {
+					wos << L'0';
+				}
 				break;
 		};
 	}
@@ -506,21 +519,26 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 		}
 		
 		if(sendto(outSocket, (const char*)packetBuffer, packetSize, 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
-			Log::Write(L"TJFabric/OSCOverIPConnection", L"sendto() failed, error="+Util::GetDescriptionOfSystemError(errno));
+			Log::Write(L"EPFramework/OSCOverIPConnection", L"sendto() failed, error="+Util::GetDescriptionOfSystemError(errno));
 		}
 		
-		wos << L" => " << _toAddress.ToString();
+		if(isDebug) {
+			wos << L" => " << _toAddress.ToString() << L":" << _toPort;
+		}
 	}
 	else {
 		if(send(outSocket, (const char*)packetBuffer, packetSize, 0)==-1) {
-			Log::Write(L"TJFabric/OSCOverIPConnection", L"send() failed, error="+Stringify(errno));
+			Log::Write(L"EPFramework/OSCOverIPConnection", L"send() failed, error="+Stringify(errno));
 		}
 	}
 	
 	if(deletePacketBuffer) {
 		delete[] packetBuffer;
 	}
-	Log::Write(L"TJFabric/OSCOverIPConnection", wos.str());
+	
+	if(isDebug) {
+		Log::Write(L"EPFramework/OSCOverIPConnection", wos.str());
+	}
 
 	// Register reply handler
 	if(IsHandlingReplies()) {
@@ -585,12 +603,12 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 		int on = 1;
 		outSocket = socket((networkAddress.GetAddressFamily()==AddressFamilyIPv6) ? AF_INET6 : AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 		if(outSocket==-1) {
-			Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not create UDP socket");
+			Log::Write(L"EPFramework/OSCOverUDPConnection", L"Could not create UDP socket");
 		}
 		
 		setsockopt(outSocket, SOL_SOCKET, SO_BROADCAST, (const char*)&on, sizeof(int));
 		setsockopt(outSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
-		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
+		Log::Write(L"EPFramework/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
 		StartOutbound(networkAddress, port, outSocket, true);
 	}
 	
@@ -612,7 +630,7 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 			// Bind IPv6 socket
 			int err = bind(inSocket, (sockaddr*)&addr, sizeof(addr));
 			if(err==-1) {
-				Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
+				Log::Write(L"EPFramework/OSCOverUDPConnection", L"Could not bind IPv6 server socket, error="+Stringify(errno));
 				return;
 			}
 			
@@ -641,7 +659,7 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 			// Bind IPv4 socket
 			int err = bind(inSocket, (sockaddr*)&addr4, sizeof(addr4));
 			if(err==-1) {
-				Log::Write(L"TJFabric/OSCOverUDPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
+				Log::Write(L"EPFramework/OSCOverUDPConnection", L"Could not bind IPv4 server socket, error="+Stringify(errno));
 				return;
 			}
 			
@@ -660,7 +678,7 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 		}
 		
 		StartInbound(inSocket, false);
-		Log::Write(L"TJFabric/OSCOverUDPConnection", std::wstring(L"Connected inbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
+		Log::Write(L"EPFramework/OSCOverUDPConnection", std::wstring(L"Connected inbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
 	}	
 }
 
@@ -721,7 +739,7 @@ void OSCOverTCPConnection::OnReceive(NativeSocket ns) {
 				AddInboundConnection(cs);
 			}
 			else {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Accept failed: errno="+Stringify(errno));
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Accept failed: errno="+Stringify(errno));
 			}
 		}
 		else {
@@ -832,18 +850,18 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 				#endif
 				
 				#ifdef TJ_OS_WIN
-					Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(WSAGetLastError()));
+					Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not connect TCP socket; error="+Stringify(WSAGetLastError()));
 					closesocket(outSocket);
 				#endif
 			}
 			else {
 				StartOutbound(networkAddress, port, outSocket, false);
-				Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected outbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
+				Log::Write(L"EPFramework/OSCOverTCPConnection", std::wstring(L"Connected outbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
 
 				if((direction & DirectionInbound)!=0) {
 					// Also listen for replies
 					StartInboundReplies(outSocket);
-					Log::Write(L"TJFabric/OSCOverTCPConnection",L"Will also listen for replies");
+					Log::Write(L"EPFramework/OSCOverTCPConnection",L"Will also listen for replies");
 				}
 			}
 		}
@@ -864,13 +882,13 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			// Bind IPv6 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr, sizeof(addr));
 			if(err==-1) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv6 server socket, error="+Util::GetDescriptionOfSystemError(errno));
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not bind IPv6 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 			
 			// Listen IPv6 socket
 			err = listen(_inServerSocket, 10);
 			if(err!=0) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Util::GetDescriptionOfSystemError(errno));
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not listen IPv6 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 		}
 		else if(networkAddress.GetAddressFamily()==AddressFamilyIPv4) {
@@ -886,13 +904,13 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 			// Bind IPv4 socket
 			int err = bind(_inServerSocket, (sockaddr*)&addr4, sizeof(addr4));
 			if(err==-1) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not bind IPv4 server socket, error="+Util::GetDescriptionOfSystemError(errno));
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not bind IPv4 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 			
 			// Listen IPv4 socket
 			err = listen(_inServerSocket, 10);
 			if(err!=0) {
-				Log::Write(L"TJFabric/OSCOverTCPConnection", L"Could not listen IPv4 server socket, error="+Util::GetDescriptionOfSystemError(errno));
+				Log::Write(L"EPFramework/OSCOverTCPConnection", L"Could not listen IPv4 server socket, error="+Util::GetDescriptionOfSystemError(errno));
 			}
 		}
 		else {
@@ -900,7 +918,7 @@ void OSCOverTCPConnection::Create(const NetworkAddress& networkAddress, unsigned
 		}
 		
 		StartInbound(_inServerSocket, (direction & DirectionOutbound)!=0);
-		Log::Write(L"TJFabric/OSCOverTCPConnection", std::wstring(L"Connected inbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
+		Log::Write(L"EPFramework/OSCOverTCPConnection", std::wstring(L"Connected inbound OSC-over-TCP (")+networkAddress.ToString()+L":"+Stringify(port)+L")");
 	}
 }
 

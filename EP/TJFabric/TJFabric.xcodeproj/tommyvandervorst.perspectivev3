@@ -332,7 +332,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B468B24810C9737300EFA99B</string>
+										<string>B468B30C10C9ABAA00EFA99B</string>
 										<key>history</key>
 										<array>
 											<string>B402274C10691D6500137628</string>
@@ -443,8 +443,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1047, 250}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 91 1280 905 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -498,7 +496,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1047, 243}}</string>
+										<string>{{10, 27}, {1047, 250}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 91 1280 905 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
