@@ -1,0 +1,11 @@
+import os;
+env = Environment();
+#env.Append( LINKFLAGS = Split('-z origin'));
+env.Append( RPATH = env.Literal(os.path.join('\\$$ORIGIN'))); # os.path.join('\\$$ORIGIN','lib');
+
+VariantDir('build', 'src', duplicate=0);
+
+sources = Glob("build/*.cpp");
+env.Program('#build/tjusp3epd', sources, LIBS=["gcc_s", "gcc", "stdc++", "dns_sd", "epframework",  "pthread", "tjshared", "tinyxml", "oscpack", "tjscript", "tjnp", "tjscout"],  LIBPATH=['#build', '#Libraries/mDNS/Release'], CPPPATH=['#','#Libraries','#EP'], CCFLAGS="-DTJ_OS_LINUX -DTJ_OS_POSIX -march=armv4 -mno-thumb-interwork");
+
+
