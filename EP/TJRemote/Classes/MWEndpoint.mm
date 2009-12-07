@@ -153,7 +153,15 @@ using namespace osc;
 			const char* endpointID = root->Attribute("id");
 			if(endpointID!=0) {
 				[_id release];
-				_id = [[NSString stringWithUTF8String:endpointID] retain];
+				NSString* epid = [NSString stringWithUTF8String:endpointID];
+				const char* nsp = root->Attribute("namespace");
+				if(nsp!=0) {
+					NSString* nspid = [NSString stringWithUTF8String:nsp];
+					_id = [[NSString stringWithFormat:@"%@.%@", nspid, epid] retain];
+				}
+				else {
+					_id = [epid retain];
+				}
 			}
 		
 			// Find a UDP4 transport mechanism that we can use

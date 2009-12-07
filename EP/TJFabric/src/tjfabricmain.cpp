@@ -21,6 +21,10 @@ int main(int argc, char** argv) {
 	try {
 		Log::SetLogToConsole(true);
 		Log::Write(L"TJFabric/Main", std::wstring(L"Starting at ")+Date().ToFriendlyString());
+		
+		String userSettingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ",L"Fabric",L"appsettings");
+		File::CreateDirectoryAtPath(File::GetDirectory(userSettingsPath), true);
+		Log::Write(L"TJFabric/Main", L"User settings path: "+userSettingsPath);
 		strong<Daemon> daemon = Daemon::Instance();
 		
 		bool runningAsDaemon = false;

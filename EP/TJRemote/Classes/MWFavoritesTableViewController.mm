@@ -97,6 +97,7 @@ static UIImage* favoriteAllImage;
 		for(MWEndpoint* ep in [client resolvedEndpoints]) {
 			if(!fav.specificDevice || [ep.endpointIdentifier isEqualToString:fav.specificDevice]) {
 				success = [ep executeFavorite:fav] || success;
+				NSLog(@"Run favorite on ep=%@", ep.endpointIdentifier);
 			}
 		}
 		

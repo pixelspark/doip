@@ -60,12 +60,12 @@
 			PBXWorkspaceStateSaveDate = 281790571;
 		};
 		perUserProjectItems = {
-			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
-			B46CBD0410A461CF00CDE29F = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
-			B4B03D9510ADA39A00C7AB53 = B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */;
-			B4B03D9610ADA39A00C7AB53 = B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */;
-			B4F0AF1510B9E46200351BAA = B4F0AF1510B9E46200351BAA /* PBXTextBookmark */;
-			B4F0AF3F10B9E74F00351BAA = B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */;
+			B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
+			B46CBD0410A461CF00CDE29F /* PBXTextBookmark */ = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
+			B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */ = B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */;
+			B4E0324010CBCA50000A59A5 /* PBXTextBookmark */ = B4E0324010CBCA50000A59A5 /* PBXTextBookmark */;
+			B4E0324110CBCA50000A59A5 /* PBXBookmark */ = B4E0324110CBCA50000A59A5 /* PBXBookmark */;
+			B4E0324210CBCA50000A59A5 /* PBXTextBookmark */ = B4E0324210CBCA50000A59A5 /* PBXTextBookmark */;
 		};
 		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
 		userBuildSettings = {
@@ -118,14 +118,6 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
-	B46CBCBE10A45C2800CDE29F /* uspmain.cpp */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = uspmain.cpp;
-		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/uspmain.cpp;
-		sourceTree = "<absolute>";
-	};
 	B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B46CBCEF10A4603F00CDE29F /* tjwebserver.h */;
@@ -160,65 +152,45 @@
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/include/tjsocket.h;
 		sourceTree = "<absolute>";
 	};
-	B46CBD5910A46A5900CDE29F /* usp3.cpp */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = usp3.cpp;
-		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/usp3.cpp;
-		sourceTree = "<absolute>";
-	};
-	B46CBD5A10A46A5900CDE29F /* usp3.h */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.c.h;
-		name = usp3.h;
-		path = /Volumes/tommy/local/tj/EP/TJLEDEPServer/src/usp3.h;
-		sourceTree = "<absolute>";
-	};
-	B4B03D9510ADA39A00C7AB53 /* PBXTextBookmark */ = {
+	B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = B46CBD5A10A46A5900CDE29F /* usp3.h */;
-		name = "usp3.h: 1";
+		fRef = B4FBE9F510BDC45400DDCE96 /* leds.h */;
+		name = "leds.h: 1";
 		rLen = 0;
 		rLoc = 0;
 		rType = 0;
-		vrLen = 1342;
-		vrLoc = 506;
-	};
-	B4B03D9610ADA39A00C7AB53 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B46CBD5910A46A5900CDE29F /* usp3.cpp */;
-		name = "usp3.cpp: 26";
-		rLen = 0;
-		rLoc = 382;
-		rType = 0;
-		vrLen = 564;
+		vrLen = 461;
 		vrLoc = 0;
 	};
-	B4F0AF1510B9E46200351BAA /* PBXTextBookmark */ = {
+	B4E0324010CBCA50000A59A5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		comments = "Cannot allocate an object of abstract type 'USPEndpoint'";
-		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		rLen = 1;
-		rLoc = 185;
-		rType = 1;
-	};
-	B4F0AF3F10B9E74F00351BAA /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B46CBCBE10A45C2800CDE29F /* uspmain.cpp */;
-		name = "uspmain.cpp: 38";
+		fRef = B4FBE9F610BDC45400DDCE96 /* leds.cpp */;
+		name = "leds.cpp: 1";
 		rLen = 0;
-		rLoc = 1631;
+		rLoc = 0;
 		rType = 0;
-		vrLen = 1555;
-		vrLoc = 80;
+		vrLen = 1096;
+		vrLoc = 196;
+	};
+	B4E0324110CBCA50000A59A5 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
+	};
+	B4E0324210CBCA50000A59A5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
+		name = "ledepmain.cpp: 125";
+		rLen = 1;
+		rLoc = 4935;
+		rType = 0;
+		vrLen = 976;
+		vrLoc = 5654;
 	};
 	B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1853, 2613}}";
-			sepNavSelRange = "{232, 0}";
-			sepNavVisRange = "{0, 2114}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 3263}}";
+			sepNavSelRange = "{4935, 1}";
+			sepNavVisRange = "{5654, 976}";
 		};
 	};
 	B4FBE9F510BDC45400DDCE96 /* leds.h */ = {
