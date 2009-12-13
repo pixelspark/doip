@@ -28,7 +28,7 @@ namespace tj {
 			
 			protected:
 				tj::shared::strong<tj::scout::Service> _service;
-				virtual void OnDownloadComplete(tj::shared::ref<tj::shared::CodeWriter> cw);
+				virtual void OnDownloadComplete(tj::shared::ref<tj::shared::DataWriter> cw);
 		};
 	}
 }

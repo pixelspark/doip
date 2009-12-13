@@ -26,7 +26,7 @@ void EPDownloadedDefinition::OnCreated() {
 	Start();
 }
 
-void EPDownloadedDefinition::OnDownloadComplete(ref<CodeWriter> cw) {
+void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
 	if(cw) {
 		TiXmlDocument doc;
 		std::string data((const char*)cw->GetBuffer(), 0, cw->GetSize());

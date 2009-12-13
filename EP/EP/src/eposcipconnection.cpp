@@ -491,10 +491,10 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 	// also, it would be nice if the resulting Framing object could be cached
 	unsigned int packetSize = outPacket.Size();
 	if(_framing==L"slip") {
-		ref<CodeWriter> cw = GC::Hold(new CodeWriter(4096));
+		ref<DataWriter> cw = GC::Hold(new DataWriter(4096));
 		SLIPFrameDecoder::EncodeSLIPFrame((const unsigned char*)buffer, packetSize, cw);
 		packetSize = cw->GetSize();
-		packetBuffer = cw->TakeOverBuffer();
+		packetBuffer = cw->TakeOverBuffer(true);
 		deletePacketBuffer = true;
 	}
 	
@@ -778,7 +778,7 @@ void OSCOverTCPConnection::OnReceive(NativeSocket ns) {
 				decoder->Append((const unsigned char*)buffer, r);
 					
 				// Process any finished messages
-				ref<Code> buffer = decoder->NextPacket();
+				ref<DataReader> buffer = decoder->NextPacket();
 				while(buffer) {
 					osc::ReceivedPacket msg(buffer->GetBuffer(), buffer->GetSize());
 					if(msg.IsBundle()) {
