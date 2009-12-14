@@ -179,7 +179,7 @@ int main (int argc, char * const argv[]) {
 	}
 	
 	if(settingsPath.length()<1) {
-		settingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ", L"LEDEPD", L"global.xml");
+		settingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ", L"LEDEPD", L"global");
 	}
 	
 	Log::Write(L"TJLEDEPServer/Main", L"Loading server settings from "+settingsPath);

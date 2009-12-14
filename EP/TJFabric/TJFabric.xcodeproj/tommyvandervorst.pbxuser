@@ -32,6 +32,7 @@
 			B419EF31109A175F00FE1A72 /* ependpoint.cpp:112 */,
 			B419EF33109A176000FE1A72 /* ependpoint.cpp:111 */,
 			B419EF37109A178B00FE1A72 /* tjservice.cpp:61 */,
+			B474BA1F10D6B19600FA7D4C /* tjwebserver.cpp:842 */,
 		);
 		codeSenseManager = B40225CD1068E85F00137628 /* Code sense */;
 		executables = (
@@ -205,6 +206,9 @@
 			B4708BEB10C5134500A1F8B4 = B4708BEB10C5134500A1F8B4 /* PBXTextBookmark */;
 			B4708C3D10C52C1F00A1F8B4 = B4708C3D10C52C1F00A1F8B4 /* PBXTextBookmark */;
 			B4720F80108C6C3E002DEC9F = B4720F80108C6C3E002DEC9F /* PBXTextBookmark */;
+			B474BA2310D6B1AB00FA7D4C /* PBXTextBookmark */ = B474BA2310D6B1AB00FA7D4C /* PBXTextBookmark */;
+			B474BA2410D6B1AB00FA7D4C /* XCBuildMessageTextBookmark */ = B474BA2410D6B1AB00FA7D4C /* XCBuildMessageTextBookmark */;
+			B474BA2510D6B1AB00FA7D4C /* PBXTextBookmark */ = B474BA2510D6B1AB00FA7D4C /* PBXTextBookmark */;
 			B475110E10CCEF33008A801F = B475110E10CCEF33008A801F /* PBXTextBookmark */;
 			B475117B10CD0F1F008A801F = B475117B10CD0F1F008A801F /* PBXTextBookmark */;
 			B475117C10CD0F1F008A801F = B475117C10CD0F1F008A801F /* PBXTextBookmark */;
@@ -1497,6 +1501,11 @@
 		name = tjwebserver.cpp;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/src/tjwebserver.cpp;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {986, 12311}}";
+			sepNavSelRange = "{18385, 0}";
+			sepNavVisRange = "{17814, 1321}";
+		};
 	};
 	B4720F80108C6C3E002DEC9F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1514,6 +1523,50 @@
 		name = AppKit.h;
 		path = /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.h;
 		sourceTree = "<absolute>";
+	};
+	B474BA1F10D6B19600FA7D4C /* tjwebserver.cpp:842 */ = {
+		isa = PBXFileBreakpoint;
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = B4708C3E10C52C1F00A1F8B4 /* tjwebserver.cpp */;
+		functionName = "WebServerThread::OnReceive(NativeSocket ns)";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 842;
+		modificationTime = 282505622.782561;
+		originalNumberOfMultipleMatches = 0;
+		state = 1;
+	};
+	B474BA2310D6B1AB00FA7D4C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4708C3E10C52C1F00A1F8B4 /* tjwebserver.cpp */;
+		name = "tjwebserver.cpp: 612";
+		rLen = 0;
+		rLoc = 18385;
+		rType = 0;
+		vrLen = 1321;
+		vrLoc = 17814;
+	};
+	B474BA2410D6B1AB00FA7D4C /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Unused variable 'foundExistingItem'";
+		fRef = B4A9892A10C662D5001CF473 /* tjwebcontent.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 287;
+		rType = 1;
+	};
+	B474BA2510D6B1AB00FA7D4C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4A9892A10C662D5001CF473 /* tjwebcontent.cpp */;
+		name = "tjwebcontent.cpp: 277";
+		rLen = 0;
+		rLoc = 6860;
+		rType = 0;
+		vrLen = 906;
+		vrLoc = 4037;
 	};
 	B475110E10CCEF33008A801F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1688,6 +1741,11 @@
 		name = tjwebcontent.cpp;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/src/tjwebcontent.cpp;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {986, 6422}}";
+			sepNavSelRange = "{6860, 0}";
+			sepNavVisRange = "{4037, 906}";
+		};
 	};
 	B4A98CA510C6FF59001CF473 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
