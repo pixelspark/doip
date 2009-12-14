@@ -76,28 +76,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A988EE10C6622C001CF473 /* libEPMobile.a */;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473;
 			remoteInfo = EPMobile;
 		};
 		B4E031B610CBC86B000A59A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9887110C661C3001CF473 /* libTJScoutMobile.a */;
+			remoteGlobalIDString = B4A9887110C661C3001CF473;
 			remoteInfo = TJScoutMobile;
 		};
 		B4E031BA10CBC86B000A59A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
 			remoteInfo = TJSharedMobile;
 		};
 		B4E031C110CBC889000A59A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteGlobalIDString = B4A9883210C66144001CF473;
 			remoteInfo = TJNPMobile;
 		};
 /* End PBXContainerItemProxy section */

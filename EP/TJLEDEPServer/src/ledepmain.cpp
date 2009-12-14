@@ -156,14 +156,14 @@ LEDEndpoint::~LEDEndpoint() {
 
 int main (int argc, char * const argv[]) {
 	if(argc<2) {
-		Log::Write(L"TJLEDEPServer/Main", L"Usage: tjledepd /dev/serialdevice");
+		Log::Write(L"TJLEDEPServer/Main", L"Usage: tjledepd [--daemon] [settings.xml]");
 		return 1;
 	}
 	
 	strong<Daemon> daemon = Daemon::Instance();
 	
 	Log::Write(L"TJLEDEPServer/Main", L"Starting at "+Date().ToFriendlyString());
-	std::string serialDevicePath;
+	std::wstring settingsPath;
 	std::string firstParameter = argv[1];
 	if(firstParameter=="--daemon") {
 		if(!daemon->Fork(L"tjledepd",true)) {
@@ -171,19 +171,37 @@ int main (int argc, char * const argv[]) {
 		}
 		
 		if(argc>2) {
-			serialDevicePath = argv[2];
+			settingsPath = Wcs(argv[2]);
 		}
 	}
 	else {
-		serialDevicePath = argv[1];
+		settingsPath = Wcs(argv[1]);
 	}
+	
+	if(settingsPath.length()<1) {
+		settingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ", L"LEDEPD", L"global.xml");
+	}
+	
+	Log::Write(L"TJLEDEPServer/Main", L"Loading server settings from "+settingsPath);
+	
+	ref<SettingsStorage> st = GC::Hold(new SettingsStorage());
+	st->SetValue(L"ep.friendly-name", L"LEDs");
+	st->SetValue(L"led.device-path", L"/dev/ttyUSB0");
+	try {
+		st->LoadFile(settingsPath);
+	}
+	catch(...) {
+		Log::Write(L"TJLEDEPServer/Main", L"Could not load settings file at path "+settingsPath+L"; using defaults");
+	}
+	st->SaveFile(settingsPath);
 	
 	// Publish endpoint
 	try {
 		Hash hash;
-		String hs = Wcs(serialDevicePath);
-		String idh = StringifyHex(hash.Calculate(hs));
-		ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.leds", L"LEDs", serialDevicePath));
+		String serialDevicePath = st->GetValue(L"led.device-path");
+		String idh = StringifyHex(hash.Calculate(serialDevicePath));
+		Log::Write(L"TJLEDEPServer/Main", L"Using serial device path "+serialDevicePath+L" ID="+idh);
+		ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.leds", st->GetValue(L"ep.friendly-name"), Mbs(serialDevicePath)));
 		ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 		Log::Write(L"TJLEDEPServer/Main", L"Running");
 		daemon->Run();

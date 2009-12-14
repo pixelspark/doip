@@ -228,7 +228,7 @@ using namespace osc;
 					}
 					method = method->NextSiblingElement("method");
 				}
-			}
+			} 
 			
 		}
 		
