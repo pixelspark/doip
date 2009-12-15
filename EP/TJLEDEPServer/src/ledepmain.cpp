@@ -44,7 +44,7 @@ void LEDEndpoint::OnCreated() {
 	
 	// Create an inbound UDP connection with a random port number
 	ref<OSCOverUDPConnectionDefinition> udpd = GC::Hold(new OSCOverUDPConnectionDefinition());
-	udpd->SetAddress(L"");
+	udpd->SetAddress(L"127.0.0.1"); // force IPv4
 	udpd->SetPort(0);
 	udpd->SetFormat(L"osc");
 	udpd->SetFraming(L"");
@@ -53,6 +53,7 @@ void LEDEndpoint::OnCreated() {
 	if(inConnection) {
 		inConnection->EventMessageReceived.AddListener(this);
 		udpd->SetPort(inConnection->GetInboundPort());
+		udpd->SetAddress(L"");
 		AddTransport(ref<EPTransport>(udpd), inConnection);
 	}
 	
