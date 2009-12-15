@@ -204,7 +204,6 @@ int main (int argc, char * const argv[]) {
 		String idh = StringifyHex(hash.Calculate(serialDevicePath));
 		Log::Write(L"TJLEDEPServer/Main", L"Using serial device path "+serialDevicePath+L" ID="+idh);
 		ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.leds", st->GetValue(L"ep.friendly-name"), Mbs(serialDevicePath)));
-		//ref<tj::np::WebServer> ws = GC::Hold(new tj::np::WebServer(2122));
 		ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 		Log::Write(L"TJLEDEPServer/Main", L"Running");
 		daemon->Run();

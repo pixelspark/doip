@@ -158,14 +158,14 @@ USPEndpoint::~USPEndpoint() {
 
 int main (int argc, char * const argv[]) {
 	if(argc<2) {
-		Log::Write(L"TJUSP3EPServer/Main", L"Usage: tjusp3epd /dev/serialdevice");
+		Log::Write(L"TJUSP3EPServer/Main", L"Usage: tjusp3epd [--daemon] settings.xml");
 		return 1;
 	}
 	
 	strong<Daemon> daemon = Daemon::Instance();
 	
 	Log::Write(L"TJUSP3EPServer/Main", L"Starting at "+Date().ToFriendlyString());
-	std::string serialDevicePath;
+	std::wstring settingsPath;
 	std::string firstParameter = argv[1];
 	if(firstParameter=="--daemon") {
 		if(!daemon->Fork(L"tjusp3epserverd",true)) {
@@ -173,20 +173,41 @@ int main (int argc, char * const argv[]) {
 		}
 		
 		if(argc>2) {
-			serialDevicePath = argv[2];
+			settingsPath = Wcs(argv[2]);
 		}
 	}
 	else {
-		serialDevicePath = argv[1];
+		settingsPath = Wcs(argv[1]);
 	}
+	
+	// Load settings file (if any specified)
+	if(settingsPath.length()<1) {
+		settingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ", L"USP3EPD", L"global");
+	}
+	
+	Log::Write(L"TJUSP3EPServer/Main", L"Loading server settings from "+settingsPath);
+	
+	ref<SettingsStorage> st = GC::Hold(new SettingsStorage());
+	st->SetValue(L"ep.friendly-name", L"LEDs");
+	st->SetValue(L"led.device-path", L"/dev/ttyUSB0");
+	
+	try {
+		st->LoadFile(settingsPath);
+	}
+	catch(...) {
+		Log::Write(L"TJUSP3EPServer/Main", L"Could not load settings file at path "+settingsPath+L"; using defaults");
+	}
+	
+	st->SaveFile(settingsPath);
+	
 	
 	// Publish endpoint
 	try {
+		std::wstring serialDevicePath = st->GetValue(L"led.device-path");
 		Hash hash;
-		String hs = Wcs(serialDevicePath);
-		String idh = StringifyHex(hash.Calculate(hs));
-		Log::Write(L"TJUSP3EPServer/Main", L"hash for path "+Wcs(serialDevicePath)+L" is "+idh);
-		ref<USPEndpoint> uspe = GC::Hold(new USPEndpoint(idh, L"com.tjshow.leds.usp3", L"LEDs", serialDevicePath));
+		String idh = StringifyHex(hash.Calculate(serialDevicePath));
+		Log::Write(L"TJUSP3EPServer/Main", L"Using serial device at "+serialDevicePath+L"; ID is "+idh);
+		ref<USPEndpoint> uspe = GC::Hold(new USPEndpoint(idh, L"com.tjshow.leds.usp3", st->GetValue(L"ep.friendly-name"), Mbs(serialDevicePath)));
 		ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 		Log::Write(L"TJUSP3EPServer/Main", L"Running");
 		daemon->Run();

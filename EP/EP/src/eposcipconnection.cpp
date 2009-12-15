@@ -572,6 +572,7 @@ OSCOverUDPConnection::~OSCOverUDPConnection() {
 }
 
 void OSCOverUDPConnection::OnReceive(NativeSocket ns) {
+	Log::Write(L"EPFramework/OSCOverUDPConnection",L"Onreceive "+StringifyHex(ns));
 	ThreadLock lock(&_lock);
 	
 	if((GetDirection() & DirectionInbound)!=0) {
