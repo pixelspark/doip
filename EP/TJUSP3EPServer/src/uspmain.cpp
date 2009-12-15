@@ -45,7 +45,7 @@ void USPEndpoint::OnCreated() {
 	
 	// Create an inbound UDP connection with a random port number
 	ref<OSCOverUDPConnectionDefinition> udpd = GC::Hold(new OSCOverUDPConnectionDefinition());
-	udpd->SetAddress(L"");
+	udpd->SetAddress(L"127.0.0.1"); // Force IPv4
 	udpd->SetPort(0);
 	udpd->SetFormat(L"osc");
 	udpd->SetFraming(L"");
@@ -53,6 +53,7 @@ void USPEndpoint::OnCreated() {
 	
 	if(inConnection) {
 		inConnection->EventMessageReceived.AddListener(this);
+		udpd->SetAddress(L"");
 		udpd->SetPort(inConnection->GetInboundPort());
 		AddTransport(ref<EPTransport>(udpd), inConnection);
 	}
