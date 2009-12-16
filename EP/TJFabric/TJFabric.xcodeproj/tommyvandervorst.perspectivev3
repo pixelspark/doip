@@ -280,7 +280,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>7</integer>
+									<integer>25</integer>
+									<integer>20</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -313,12 +314,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>B40226201068F01300137628</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>tjfabric.h</string>
+								<string>tjfabricqueue.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B40226211068F01300137628</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>tjfabric.h</string>
+										<string>tjfabricqueue.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4C89BBC10D78BBB00176287</string>
+										<string>B476DB7210D96AC5003BC1C0</string>
 										<key>history</key>
 										<array>
 											<string>B402274C10691D6500137628</string>
@@ -385,7 +388,6 @@
 											<string>B4FBEAC710BDF22F00DDCE96</string>
 											<string>B4DB0B5310BF37BC00680151</string>
 											<string>B4708BEB10C5134500A1F8B4</string>
-											<string>B4A98CA610C6FF59001CF473</string>
 											<string>B4B9A16D10C878240048EC2D</string>
 											<string>B468B24610C9737300EFA99B</string>
 											<string>B4E0322E10CBCA4E000A59A5</string>
@@ -394,11 +396,12 @@
 											<string>B4E0323110CBCA4E000A59A5</string>
 											<string>B4E0323310CBCA4E000A59A5</string>
 											<string>B4E0323410CBCA4E000A59A5</string>
-											<string>B475110E10CCEF33008A801F</string>
-											<string>B46BB5B110D649760077ABBA</string>
-											<string>B46BB5B210D649760077ABBA</string>
 											<string>B46BB5B310D649760077ABBA</string>
-											<string>B474BA3F10D6D9D200FA7D4C</string>
+											<string>B476DB6610D969E6003BC1C0</string>
+											<string>B476DB6D10D96AB7003BC1C0</string>
+											<string>B476DB6F10D96AB7003BC1C0</string>
+											<string>B476DB7110D96AC5003BC1C0</string>
+											<string>B476DB6E10D96AB7003BC1C0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -412,18 +415,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1047, 547}}</string>
+								<string>{{0, 0}, {1047, 539}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 92 1280 905 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>547pt</string>
+							<string>539pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>312pt</string>
+							<string>320pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -437,7 +440,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1047, 285}}</string>
+										<string>{{10, 27}, {1047, 293}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -491,7 +494,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1047, 285}}</string>
+										<string>{{10, 27}, {1047, 293}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 92 1280 905 0 0 1280 1002 </string>
 									</dict>
@@ -521,11 +524,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4C89BBD10D78BBB00176287</string>
+				<string>B476DAFB10D94060003BC1C0</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B4C89BBE10D78BBB00176287</string>
+				<string>B476DAFC10D94060003BC1C0</string>
 				<string>B40226201068F01300137628</string>
-				<string>B4C89BBF10D78BBB00176287</string>
+				<string>B476DAFD10D94060003BC1C0</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>

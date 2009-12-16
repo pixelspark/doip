@@ -61,16 +61,14 @@
 			PBXWorkspaceStateSaveDate = 282561388;
 		};
 		perUserProjectItems = {
-			B46CBCEE10A4603F00CDE29F = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
-			B46CBD0410A461CF00CDE29F = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
-			B474BA4010D6D9D200FA7D4C = B474BA4010D6D9D200FA7D4C /* PBXTextBookmark */;
-			B474BA4210D6D9D200FA7D4C = B474BA4210D6D9D200FA7D4C /* PBXTextBookmark */;
-			B474BA4310D6D9D200FA7D4C = B474BA4310D6D9D200FA7D4C /* PBXTextBookmark */;
-			B474BA4510D6D9D200FA7D4C = B474BA4510D6D9D200FA7D4C /* PBXTextBookmark */;
-			B474BA4610D6D9D200FA7D4C = B474BA4610D6D9D200FA7D4C /* PBXTextBookmark */;
-			B4C89BCA10D7906500176287 /* PBXTextBookmark */ = B4C89BCA10D7906500176287 /* PBXTextBookmark */;
-			B4C89BCB10D7906500176287 /* PBXTextBookmark */ = B4C89BCB10D7906500176287 /* PBXTextBookmark */;
-			B4E0323F10CBCA50000A59A5 = B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */;
+			B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */ = B46CBCEE10A4603F00CDE29F /* PBXTextBookmark */;
+			B46CBD0410A461CF00CDE29F /* PBXTextBookmark */ = B46CBD0410A461CF00CDE29F /* PBXTextBookmark */;
+			B474BA4010D6D9D200FA7D4C /* PBXTextBookmark */ = B474BA4010D6D9D200FA7D4C /* PBXTextBookmark */;
+			B474BA4310D6D9D200FA7D4C /* PBXTextBookmark */ = B474BA4310D6D9D200FA7D4C /* PBXTextBookmark */;
+			B4C89BF210D7ABB800176287 /* PBXTextBookmark */ = B4C89BF210D7ABB800176287 /* PBXTextBookmark */;
+			B4C89BF310D7ABB800176287 /* PBXTextBookmark */ = B4C89BF310D7ABB800176287 /* PBXTextBookmark */;
+			B4C89BF410D7ABB800176287 /* PBXTextBookmark */ = B4C89BF410D7ABB800176287 /* PBXTextBookmark */;
+			B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */ = B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */;
 		};
 		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
 		userBuildSettings = {
@@ -174,16 +172,6 @@
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/build/Release/TJShared.framework/Versions/A/Headers/include/tjsettings.h;
 		sourceTree = "<absolute>";
 	};
-	B474BA4210D6D9D200FA7D4C /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
-		name = "ledepmain.cpp: 185";
-		rLen = 0;
-		rLoc = 6309;
-		rType = 0;
-		vrLen = 1097;
-		vrLoc = 4973;
-	};
 	B474BA4310D6D9D200FA7D4C /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B474BA4410D6D9D200FA7D4C /* tjwebserver.cpp */;
@@ -201,45 +189,35 @@
 		path = /Volumes/tommy/local/tj/TJNP/src/tjwebserver.cpp;
 		sourceTree = "<absolute>";
 	};
-	B474BA4510D6D9D200FA7D4C /* PBXTextBookmark */ = {
+	B4C89BF210D7ABB800176287 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B4FBE9F610BDC45400DDCE96 /* leds.cpp */;
-		name = "leds.cpp: 1";
+		name = "leds.cpp: 32";
 		rLen = 0;
-		rLoc = 0;
+		rLoc = 786;
 		rType = 0;
 		vrLen = 1235;
 		vrLoc = 57;
 	};
-	B474BA4610D6D9D200FA7D4C /* PBXTextBookmark */ = {
+	B4C89BF310D7ABB800176287 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = B4FBE9F610BDC45400DDCE96 /* leds.cpp */;
-		name = "leds.cpp: 19";
+		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
+		name = "ledepmain.cpp: 184";
 		rLen = 0;
-		rLoc = 355;
+		rLoc = 6309;
 		rType = 0;
-		vrLen = 1235;
-		vrLoc = 57;
+		vrLen = 1060;
+		vrLoc = 5021;
 	};
-	B4C89BCA10D7906500176287 /* PBXTextBookmark */ = {
+	B4C89BF410D7ABB800176287 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = B4FBE9F610BDC45400DDCE96 /* leds.cpp */;
-		name = "leds.cpp: 19";
+		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
+		name = "ledepmain.cpp: 169";
 		rLen = 0;
-		rLoc = 355;
+		rLoc = 6044;
 		rType = 0;
-		vrLen = 1274;
-		vrLoc = 18;
-	};
-	B4C89BCB10D7906500176287 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4FBE9F610BDC45400DDCE96 /* leds.cpp */;
-		name = "leds.cpp: 19";
-		rLen = 0;
-		rLoc = 355;
-		rType = 0;
-		vrLen = 1273;
-		vrLoc = 18;
+		vrLen = 1215;
+		vrLoc = 5754;
 	};
 	B4E0323F10CBCA50000A59A5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -253,9 +231,9 @@
 	};
 	B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 3263}}";
-			sepNavSelRange = "{6309, 0}";
-			sepNavVisRange = "{4973, 1097}";
+			sepNavIntBoundsRect = "{{0, 0}, {1853, 3055}}";
+			sepNavSelRange = "{6044, 0}";
+			sepNavVisRange = "{5754, 1215}";
 		};
 	};
 	B4FBE9F510BDC45400DDCE96 /* leds.h */ = {
@@ -268,8 +246,8 @@
 	B4FBE9F610BDC45400DDCE96 /* leds.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1012, 598}}";
-			sepNavSelRange = "{355, 0}";
-			sepNavVisRange = "{18, 1273}";
+			sepNavSelRange = "{786, 0}";
+			sepNavVisRange = "{57, 1235}";
 		};
 	};
 }

@@ -76,8 +76,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 281788270;
-			PBXWorkspaceStateSaveDate = 281788270;
+			PBXPerProjectTemplateStateSaveDate = 282684116;
+			PBXWorkspaceStateSaveDate = 282684116;
 		};
 		perUserProjectItems = {
 			B447FF8510C4885200D88EE6 /* PBXTextBookmark */ = B447FF8510C4885200D88EE6 /* PBXTextBookmark */;
@@ -89,6 +89,9 @@
 			B46954CF10A6E40D0045DB2D /* PBXTextBookmark */ = B46954CF10A6E40D0045DB2D /* PBXTextBookmark */;
 			B4708C3110C52BDE00A1F8B4 /* PBXTextBookmark */ = B4708C3110C52BDE00A1F8B4 /* PBXTextBookmark */;
 			B4708C3310C52BDE00A1F8B4 /* PBXTextBookmark */ = B4708C3310C52BDE00A1F8B4 /* PBXTextBookmark */;
+			B476DB5310D941B6003BC1C0 /* PBXTextBookmark */ = B476DB5310D941B6003BC1C0 /* PBXTextBookmark */;
+			B476DB5410D941B6003BC1C0 /* PBXTextBookmark */ = B476DB5410D941B6003BC1C0 /* PBXTextBookmark */;
+			B476DB8610D96AEB003BC1C0 /* PBXTextBookmark */ = B476DB8610D96AEB003BC1C0 /* PBXTextBookmark */;
 			B497DA0010AD599800EB9CB8 /* PlistBookmark */ = B497DA0010AD599800EB9CB8 /* PlistBookmark */;
 			B497DB2410AD601D00EB9CB8 /* PBXTextBookmark */ = B497DB2410AD601D00EB9CB8 /* PBXTextBookmark */;
 			B497DB2710AD601D00EB9CB8 /* PBXTextBookmark */ = B497DB2710AD601D00EB9CB8 /* PBXTextBookmark */;
@@ -113,8 +116,6 @@
 			B4E0321B10CBCA4D000A59A5 /* PBXTextBookmark */ = B4E0321B10CBCA4D000A59A5 /* PBXTextBookmark */;
 			B4E0321C10CBCA4D000A59A5 /* PBXTextBookmark */ = B4E0321C10CBCA4D000A59A5 /* PBXTextBookmark */;
 			B4E0321D10CBCA4D000A59A5 /* PBXTextBookmark */ = B4E0321D10CBCA4D000A59A5 /* PBXTextBookmark */;
-			B4E0321E10CBCA4D000A59A5 /* PBXTextBookmark */ = B4E0321E10CBCA4D000A59A5 /* PBXTextBookmark */;
-			B4E0321F10CBCA4D000A59A5 /* PBXTextBookmark */ = B4E0321F10CBCA4D000A59A5 /* PBXTextBookmark */;
 		};
 		sourceControlManager = B462AEC61098DF3D00484C29 /* Source Control */;
 		userBuildSettings = {
@@ -320,11 +321,6 @@
 		name = epdnssddiscovery.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/include/epdnssddiscovery.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 884}}";
-			sepNavSelRange = "{2269, 0}";
-			sepNavVisRange = "{533, 1818}";
-		};
 	};
 	B45F04EB10B4520F0077D851 /* epdiscovery.h */ = {
 		isa = PBXFileReference;
@@ -332,11 +328,6 @@
 		name = epdiscovery.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/src/../include/epdiscovery.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1118, 806}}";
-			sepNavSelRange = "{1207, 0}";
-			sepNavVisRange = "{453, 1604}";
-		};
 	};
 	B45F04EC10B4520F0077D851 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -474,11 +465,36 @@
 		name = epdownload.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/include/epdownload.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 584}}";
-			sepNavSelRange = "{588, 0}";
-			sepNavVisRange = "{0, 1103}";
-		};
+	};
+	B476DB5310D941B6003BC1C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */;
+		name = "eposcipconnection.cpp: 554";
+		rLen = 0;
+		rLoc = 15003;
+		rType = 0;
+		vrLen = 1257;
+		vrLoc = 14307;
+	};
+	B476DB5410D941B6003BC1C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */;
+		name = "eposcipconnection.cpp: 555";
+		rLen = 0;
+		rLoc = 15034;
+		rType = 0;
+		vrLen = 1222;
+		vrLoc = 14612;
+	};
+	B476DB8610D96AEB003BC1C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */;
+		name = "eposcipconnection.cpp: 555";
+		rLen = 0;
+		rLoc = 15034;
+		rType = 0;
+		vrLen = 1175;
+		vrLoc = 14612;
 	};
 	B47A681D10BEA3CA0060D38F /* doxygen.config */ = {
 		uiCtxt = {
@@ -630,9 +646,9 @@
 	};
 	B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1055, 12376}}";
-			sepNavSelRange = "{15003, 0}";
-			sepNavVisRange = "{14303, 1257}";
+			sepNavIntBoundsRect = "{{0, 0}, {1055, 12350}}";
+			sepNavSelRange = "{15034, 0}";
+			sepNavVisRange = "{14612, 1175}";
 		};
 	};
 	B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */ = {
@@ -682,11 +698,6 @@
 		name = eposcipconnection.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/include/eposcipconnection.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1034, 1781}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{3457, 1909}";
-		};
 	};
 	B4D8946C10BE923200E8820E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -844,26 +855,6 @@
 		rType = 0;
 		vrLen = 1808;
 		vrLoc = 0;
-	};
-	B4E0321E10CBCA4D000A59A5 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */;
-		name = "eposcipconnection.cpp: 905";
-		rLen = 0;
-		rLoc = 27563;
-		rType = 0;
-		vrLen = 1898;
-		vrLoc = 22480;
-	};
-	B4E0321F10CBCA4D000A59A5 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */;
-		name = "eposcipconnection.cpp: 554";
-		rLen = 0;
-		rLoc = 15003;
-		rType = 0;
-		vrLen = 1257;
-		vrLoc = 14303;
 	};
 	B4FF78B010C027C100A2E442 /* ependpointserver.h */ = {
 		isa = PBXFileReference;

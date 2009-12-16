@@ -100,6 +100,9 @@ namespace tj {
 				std::deque< ref<QueuedReply> > _replyQueue;
 				std::deque<ScriptCall> _asyncScriptsQueue;
 				std::multimap<tj::shared::Date, ref<Timed> > _timerQueue;
+			
+				unsigned int _messageCount;
+				tj::shared::Date _runningSince;
 		};
 		
 		class QueueReplyHandler: public ReplyHandler {

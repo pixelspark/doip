@@ -43,9 +43,8 @@ QueuedMessage::~QueuedMessage() {
 }
 
 /* Queue */
-Queue::Queue(ref<FabricEngine> f): _engine(f) {
+Queue::Queue(ref<FabricEngine> f): _engine(f), _messageCount(0), _runningSince(false) {
 }
-
 
 Queue::~Queue() {
 }
@@ -53,6 +52,7 @@ Queue::~Queue() {
 void Queue::Stop() {
 	if(_thread) {
 		_thread->Stop();
+		_runningSince = Date(0);
 	}
 }
 
@@ -71,6 +71,7 @@ void Queue::AddReply(strong<QueuedReply> m) {
 
 void Queue::Add(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
 	ThreadLock lock(&_lock);
+	++_messageCount;
 	_queue.push_back(GC::Hold(new QueuedMessage(m, c, cc)));
 	SignalWorkAdded();
 }
@@ -215,7 +216,6 @@ void Queue::ProcessScriptCall(strong<ScriptDelegate> dlg, ref<ScriptScope> scope
 		ref<ScriptScope> sc = GC::Hold(new ScriptScope());
 		sc->Set(L"globals", _global);
 		sc->SetPrevious(scope);
-		Log::Write(L"TJFabric/Queue", L"Will process script call");
 		ctx->Execute(dlg->GetScript(), sc);
 	}
 	else {
@@ -299,7 +299,7 @@ void QueueThread::Run() {
 				while(it!=q->_timerQueue.end()) {
 					if((it->first).ToAbsoluteDate() < (now.ToAbsoluteDate()+KTimerPrecisionSeconds)) {
 						// Run and delete
-						Log::Write(L"TJFabric/Queue", L"Timer for "+Date(it->first.ToAbsoluteDate()).ToFriendlyString()+L" run at "+Date(now.ToAbsoluteDate()).ToFriendlyString());
+						//Log::Write(L"TJFabric/Queue", L"Timer for "+Date(it->first.ToAbsoluteDate()).ToFriendlyString()+L" run at "+Date(now.ToAbsoluteDate()).ToFriendlyString());
 						
 						q->ProcessTimed(it->second);
 						q->_timerQueue.erase(it++);
@@ -332,7 +332,7 @@ void QueueThread::Run() {
 				while(it!=q->_replyQueue.end()) {
 					ref<QueuedReply> msg = *it;
 					if(msg) {
-						Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process reply: ")+msg->_replyMessage->GetPath()+L" to: "+msg->_originalMessage->GetPath());
+						//Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process reply: ")+msg->_replyMessage->GetPath()+L" to: "+msg->_originalMessage->GetPath());
 						q->ProcessReply(msg);
 					}
 					++it;
@@ -346,7 +346,7 @@ void QueueThread::Run() {
 				while(it!=q->_queue.end()) {
 					ref<QueuedMessage> msg = *it;
 					if(msg) {
-						Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process message: ")+msg->_message->GetPath());
+						//Log::Write(L"TJFabric/QueueThread", std::wstring(L"Process message: ")+msg->_message->GetPath());
 						q->ProcessMessage(msg);
 					}
 					++it;
