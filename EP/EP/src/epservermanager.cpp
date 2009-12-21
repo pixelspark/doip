@@ -52,7 +52,7 @@ EPDefinitionWebItem::EPDefinitionWebItem(ref<EPEndpoint> model): WebItemResource
 EPDefinitionWebItem::~EPDefinitionWebItem() {
 }
 
-Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, unsigned int& dataLength) {
+Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
 	if(!_endpoint) {
 		error = L"No endpoint in EPDefinitionResolver!";
 		return ResolutionNone;
@@ -70,7 +70,7 @@ Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, ch
 	std::string dataString = xos.str();
 	
 	dataLength = dataString.length();
-	char* nd = new char[dataLength+1];
+	char* nd = new char[(unsigned int)(dataLength+1)];
 	const char* dataStringCstr = dataString.c_str();
 	for(unsigned int a=0;a<dataLength+1;a++) {
 		nd[a] = dataStringCstr[a];

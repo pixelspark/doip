@@ -29,7 +29,7 @@ void EPDownloadedDefinition::OnCreated() {
 void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
 	if(cw) {
 		TiXmlDocument doc;
-		std::string data((const char*)cw->GetBuffer(), 0, cw->GetSize());
+		std::string data((const char*)cw->GetBuffer(), 0, (unsigned int)cw->GetSize());
 		doc.Parse(data.c_str());
 		TiXmlElement* root = doc.FirstChildElement("endpoint");
 		if(root!=0) {

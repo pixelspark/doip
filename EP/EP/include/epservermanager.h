@@ -36,7 +36,7 @@ namespace tj {
 			public:
 				EPDefinitionWebItem(tj::shared::ref<EPEndpoint> model);
 				virtual ~EPDefinitionWebItem();
-				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, unsigned int& dataLength);
+				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, tj::shared::Bytes& dataLength);
 				
 			protected:
 				tj::shared::ref<EPEndpoint> _endpoint;

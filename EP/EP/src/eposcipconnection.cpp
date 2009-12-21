@@ -489,10 +489,10 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 	// Framing
 	// TODO: use some kind of FramingFactory, so all other connection types can benefit from this
 	// also, it would be nice if the resulting Framing object could be cached
-	unsigned int packetSize = outPacket.Size();
+	Bytes packetSize = outPacket.Size();
 	if(_framing==L"slip") {
 		ref<DataWriter> cw = GC::Hold(new DataWriter(4096));
-		SLIPFrameDecoder::EncodeSLIPFrame((const unsigned char*)buffer, packetSize, cw);
+		SLIPFrameDecoder::EncodeSLIPFrame((const unsigned char*)buffer, (Bytes)packetSize, cw);
 		packetSize = cw->GetSize();
 		packetBuffer = cw->TakeOverBuffer(true);
 		deletePacketBuffer = true;
@@ -518,7 +518,7 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 			toAddressSize = sizeof(sockaddr_in);
 		}
 		
-		if(sendto(outSocket, (const char*)packetBuffer, packetSize, 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
+		if(sendto(outSocket, (const char*)packetBuffer, (int)packetSize, 0, reinterpret_cast<const sockaddr*>(toAddress), toAddressSize)==-1) {
 			Log::Write(L"EPFramework/OSCOverIPConnection", L"sendto() failed, error="+Util::GetDescriptionOfSystemError(errno));
 		}
 		
@@ -527,7 +527,7 @@ void OSCOverIPConnection::Send(strong<Message> msg, ref<ReplyHandler> rh, ref<Co
 		}
 	}
 	else {
-		if(send(outSocket, (const char*)packetBuffer, packetSize, 0)==-1) {
+		if(send(outSocket, (const char*)packetBuffer, (int)packetSize, 0)==-1) {
 			Log::Write(L"EPFramework/OSCOverIPConnection", L"send() failed, error="+Stringify(errno));
 		}
 	}
@@ -780,7 +780,7 @@ void OSCOverTCPConnection::OnReceive(NativeSocket ns) {
 				// Process any finished messages
 				ref<DataReader> buffer = decoder->NextPacket();
 				while(buffer) {
-					osc::ReceivedPacket msg(buffer->GetBuffer(), buffer->GetSize());
+					osc::ReceivedPacket msg(buffer->GetBuffer(), (unsigned int)buffer->GetSize());
 					if(msg.IsBundle()) {
 						OnReceiveBundle(osc::ReceivedBundle(msg), isReply, isReply, ns);
 					}
