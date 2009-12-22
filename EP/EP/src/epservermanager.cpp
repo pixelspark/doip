@@ -53,7 +53,8 @@ EPDefinitionWebItem::~EPDefinitionWebItem() {
 }
 
 Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
-	if(!_endpoint) {
+	ref<EPEndpoint> endpoint = _endpoint;
+	if(!endpoint) {
 		error = L"No endpoint in EPDefinitionResolver!";
 		return ResolutionNone;
 	}
@@ -62,7 +63,7 @@ Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, ch
 	TiXmlDeclaration decl("1.0", "", "no");
 	doc.InsertEndChild(decl);
 	TiXmlElement dashboardElement("endpoint");
-	_endpoint->Save(&dashboardElement);
+	endpoint->Save(&dashboardElement);
 	doc.InsertEndChild(dashboardElement);
 	
 	std::ostringstream xos;

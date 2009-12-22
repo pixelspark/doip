@@ -39,7 +39,7 @@ namespace tj {
 				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, tj::shared::Bytes& dataLength);
 				
 			protected:
-				tj::shared::ref<EPEndpoint> _endpoint;
+				tj::shared::weak<EPEndpoint> _endpoint;
 		};
 	}
 }

@@ -26,6 +26,7 @@ namespace tj {
 				virtual bool IsDynamic() const;
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
+				virtual void RemoveAllMethods();
 				
 			protected:
 				typedef typename std::map<tj::shared::ref<EPMethod>, Member> MemberMap;
@@ -36,6 +37,7 @@ namespace tj {
 				tj::shared::String _ns;
 				tj::shared::String _friendlyName;
 				bool _updateDefaultValuesToState;
+				mutable tj::shared::CriticalSection _lock;
 		};
 		
 		template<class T> EPEndpointServer<T>::EPEndpointServer(const tj::shared::String& id, const tj::shared::String& ns, const tj::shared::String& friendlyName): _id(id), _friendlyName(friendlyName), _ns(ns), _updateDefaultValuesToState(true) {
@@ -65,14 +67,21 @@ namespace tj {
 		}
 		
 		template<class T> void EPEndpointServer<T>::AddMethod(tj::shared::strong<EPMethod> epm, Member m) {
+			tj::shared::ThreadLock lock(&_lock);
 			_members[tj::shared::ref<EPMethod>(epm)] = m;
 		}
 		
 		template<class T> void EPEndpointServer<T>::AddTransport(tj::shared::strong<EPTransport> ept, tj::shared::ref<Connection> epc) {
+			tj::shared::ThreadLock lock(&_lock);
 			_transports[ept] = epc;
+		}
+
+		template<class T> void EPEndpointServer<T>::RemoveAllMethods() {
+			_members.clear();
 		}
 		
 		template<class T> void EPEndpointServer<T>::GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const {
+			tj::shared::ThreadLock lock(&_lock);
 			typename MemberMap::const_iterator it = _members.begin();
 			while(it!=_members.end()) {
 				tj::shared::ref<EPMethod> epm = it->first;
@@ -84,6 +93,7 @@ namespace tj {
 		}
 		
 		template<class T> void EPEndpointServer<T>::GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const {
+			tj::shared::ThreadLock lock(&_lock);
 			typename TransportMap::const_iterator it = _transports.begin();
 			while(it!=_transports.end()) {
 				tj::shared::ref<EPTransport> ept = it->first;
@@ -95,6 +105,7 @@ namespace tj {
 		}
 		
 		template<class T> void EPEndpointServer<T>::Notify(tj::shared::ref<tj::shared::Object> src, const MessageNotification& data) {
+			tj::shared::ThreadLock lock(&_lock);
 			tj::shared::ref<Message> m = data.message;
 			if(m) {
 				tj::shared::String path = m->GetPath();
@@ -109,6 +120,8 @@ namespace tj {
 						if(mem!=0) {
 							(static_cast<T*>(this)->*mem)(data.message, data.source, data.channel);
 						}
+
+						return;
 					}
 					++it;
 				}
