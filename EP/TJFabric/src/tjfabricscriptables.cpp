@@ -136,7 +136,6 @@ QueueGlobalScriptable::~QueueGlobalScriptable() {
 void QueueGlobalScriptable::Initialize() {
 	Bind(L"print", &QueueGlobalScriptable::SPrint);
 	Bind(L"send", &QueueGlobalScriptable::SSend);
-	Bind(L"defer", &QueueGlobalScriptable::SDefer);
 	Bind(L"schedule", &QueueGlobalScriptable::SSchedule);
 }
 
@@ -169,27 +168,6 @@ ref<Scriptable> QueueGlobalScriptable::SSchedule(ref<ParameterList> p) {
 		return ScriptConstants::Null;
 	}
 	Throw(L"Invalid arguments to schedule(at,call,..); should be a date and a delegate!", ExceptionTypeError);
-}
-
-ref<Scriptable> QueueGlobalScriptable::SDefer(ref<ParameterList> p) {
-	ref<Scriptable> dlg = p->Get(L"0");
-	
-	if(!dlg) {
-		dlg = p->Get(L"call");
-	}
-	
-	if(dlg) {
-		if(!dlg.IsCastableTo<ScriptDelegate>()) {
-			Throw(L"Call parameter is not a ScriptDelegate", ExceptionTypeError);
-		}
-		
-		ref<Queue> q = _queue;
-		if(q) {
-			q->AddDeferredScriptCall(ref<ScriptDelegate>(dlg), p);
-		}
-		return ScriptConstants::Null;
-	}
-	Throw(L"Invalid arguments to defer(call,...); should be a delegate!", ExceptionTypeError);
 }
 
 ref<Scriptable> QueueGlobalScriptable::SSend(ref<ParameterList> p) {	

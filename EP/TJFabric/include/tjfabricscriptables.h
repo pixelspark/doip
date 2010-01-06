@@ -77,7 +77,6 @@ namespace tj {
 				static void Initialize();
 				virtual ref<Scriptable> SPrint(ref<ParameterList> p);
 				virtual ref<Scriptable> SSend(ref<ParameterList> p);
-				virtual ref<Scriptable> SDefer(ref<ParameterList> p);
 				virtual ref<Scriptable> SSchedule(ref<ParameterList> p);
 				
 			protected:

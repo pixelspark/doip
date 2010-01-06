@@ -296,9 +296,8 @@ void OSCOverIPConnection::StartInboundReplies(NativeSocket outSocket) {
 	_handlingReplies = true;
 	
 	// Start listener thread
-	_listenerThread = GC::Hold(new SocketListenerThread());
+	_listenerThread = SocketListenerThread::DefaultInstance();
 	_listenerThread->AddListener(outSocket, this);
-	_listenerThread->Start();
 }
 
 void OSCOverIPConnection::StartInbound(NativeSocket inSocket, bool handleReplies) {
@@ -319,14 +318,13 @@ void OSCOverIPConnection::StartInbound(NativeSocket inSocket, bool handleReplies
 	_inSocket = inSocket;
 	
 	
-	// Start listener thread
-	_listenerThread = GC::Hold(new SocketListenerThread());
+	// Start listener thread or use the default one
+	_listenerThread = SocketListenerThread::DefaultInstance();
 	_listenerThread->AddListener(inSocket, this);
 	if(handleReplies) {
 		_listenerThread->AddListener(_outSocket, this);
 		_handlingReplies = true;
 	}
-	_listenerThread->Start();
 }
 
 void OSCOverIPConnection::OnReceiveMessage(osc::ReceivedMessage rm, bool isReply, bool endReply, NativeSocket ns) {

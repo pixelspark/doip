@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -278,8 +276,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>30</integer>
-									<integer>28</integer>
+									<integer>19</integer>
+									<integer>15</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -312,12 +310,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>B462AED11098DF9200484C29</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>eposcipconnection.cpp</string>
+								<string>epcondition.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +325,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B462AED21098DF9200484C29</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>eposcipconnection.cpp</string>
+										<string>epcondition.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B476DB8610D96AEB003BC1C0</string>
+										<string>B476DB9D10D974EB003BC1C0</string>
 										<key>history</key>
 										<array>
 											<string>B46954CD10A6E40D0045DB2D</string>
@@ -350,10 +350,8 @@
 											<string>B4A98ADE10C6E84F001CF473</string>
 											<string>B4A98AE110C6E84F001CF473</string>
 											<string>B4A98AE310C6E84F001CF473</string>
-											<string>B4A98B5810C6F073001CF473</string>
 											<string>B4B9A15710C865FC0048EC2D</string>
 											<string>B4E0321110CBCA4D000A59A5</string>
-											<string>B4E0321210CBCA4D000A59A5</string>
 											<string>B4E0321310CBCA4D000A59A5</string>
 											<string>B4E0321410CBCA4D000A59A5</string>
 											<string>B4E0321510CBCA4D000A59A5</string>
@@ -362,10 +360,12 @@
 											<string>B4E0321810CBCA4D000A59A5</string>
 											<string>B4E0321910CBCA4D000A59A5</string>
 											<string>B4E0321A10CBCA4D000A59A5</string>
-											<string>B4E0321B10CBCA4D000A59A5</string>
-											<string>B4E0321C10CBCA4D000A59A5</string>
 											<string>B4E0321D10CBCA4D000A59A5</string>
-											<string>B476DB5410D941B6003BC1C0</string>
+											<string>B476DB9910D974EB003BC1C0</string>
+											<string>B476DB9A10D974EB003BC1C0</string>
+											<string>B476DB9B10D974EB003BC1C0</string>
+											<string>B476DB9C10D974EB003BC1C0</string>
+											<string>B4E0321B10CBCA4D000A59A5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
