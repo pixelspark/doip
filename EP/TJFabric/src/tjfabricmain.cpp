@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
 		
 		String userSettingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ",L"Fabric",L"appsettings");
 		File::CreateDirectoryAtPath(File::GetDirectory(userSettingsPath), true);
-		Log::Write(L"TJFabric/Main", L"User settings path: "+userSettingsPath);
 		strong<Daemon> daemon = Daemon::Instance();
 		
 		bool runningAsDaemon = false;
@@ -38,17 +37,6 @@ int main(int argc, char** argv) {
 			}
 		}
 		
-		// WebServer test
-		ref<WebServer> ws = GC::Hold(new WebServer(2122));
-		ref<WebItemCollection> wc = GC::Hold(new WebItemCollection(L"", L"Folder",L""));
-		Flags<WebItem::Permission> perms;
-		perms.Set(WebItem::PermissionGet, true);
-		perms.Set(WebItem::PermissionPropertyRead, true);
-		perms.Set(WebItem::PermissionPropertyWrite, true);
-		perms.Set(WebItem::PermissionDelete, true);
-		wc->SetPermissions(perms);
-		ws->AddResolver(L"/dav", ref<WebItem>(wc));
-		
 		// Load fabric configuration files
 		std::map<std::string, ref<FabricEngine> > fabrics;
 		for(int a=(runningAsDaemon ? 2 : 1); a < argc; a++) {
@@ -57,11 +45,6 @@ int main(int argc, char** argv) {
 			Fabric::LoadRecursive(argv[a], fabric);
 			engine->Connect(true);
 			fabrics[argv[a]] = engine;
-
-			if(a==(argc-1)) {
-				// Last fabric, send init message
-				engine->GetQueue()->Add(GC::Hold(new Message(L"init")), null, null);
-			}
 		}
 		
 		daemon->Run();
