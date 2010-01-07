@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,7 +282,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>1</integer>
+									<integer>7</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -318,7 +320,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>B40226201068F01300137628</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>tjfabricqueue.cpp</string>
+								<string>tjdispatch.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +328,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B40226211068F01300137628</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>tjfabricqueue.cpp</string>
+										<string>tjdispatch.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B41AE34910F5186600F886F0</string>
+										<string>B41AE42A10F547DB00F886F0</string>
 										<key>history</key>
 										<array>
 											<string>B402274C10691D6500137628</string>
@@ -377,28 +379,29 @@
 											<string>B4CAA93110AD67C100385A5F</string>
 											<string>B4CAA93C10AD67C100385A5F</string>
 											<string>B4F0AD8C10B9D18100351BAA</string>
-											<string>B4F0AD8D10B9D18100351BAA</string>
 											<string>B4F0ADE710B9D25B00351BAA</string>
 											<string>B4A2F80E10BBCBF300D9EB3C</string>
 											<string>B4FBEA7B10BDE20200DDCE96</string>
-											<string>B4FBEA8110BDE36200DDCE96</string>
 											<string>B4FBEAC710BDF22F00DDCE96</string>
 											<string>B4DB0B5310BF37BC00680151</string>
 											<string>B4708BEB10C5134500A1F8B4</string>
 											<string>B4B9A16D10C878240048EC2D</string>
 											<string>B468B24610C9737300EFA99B</string>
 											<string>B4E0322E10CBCA4E000A59A5</string>
-											<string>B4E0322F10CBCA4E000A59A5</string>
 											<string>B4E0323010CBCA4E000A59A5</string>
 											<string>B4E0323110CBCA4E000A59A5</string>
 											<string>B4E0323310CBCA4E000A59A5</string>
-											<string>B4E0323410CBCA4E000A59A5</string>
 											<string>B46BB5B310D649760077ABBA</string>
 											<string>B476DB6610D969E6003BC1C0</string>
 											<string>B476DB6D10D96AB7003BC1C0</string>
 											<string>B476DB6F10D96AB7003BC1C0</string>
 											<string>B476DB7110D96AC5003BC1C0</string>
-											<string>B476DB9E10D974EC003BC1C0</string>
+											<string>B41AE42310F547DB00F886F0</string>
+											<string>B41AE42410F547DB00F886F0</string>
+											<string>B41AE42510F547DB00F886F0</string>
+											<string>B41AE42610F547DB00F886F0</string>
+											<string>B41AE42710F547DB00F886F0</string>
+											<string>B41AE42810F547DB00F886F0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

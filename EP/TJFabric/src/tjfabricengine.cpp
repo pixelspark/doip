@@ -65,7 +65,11 @@ void FabricEngine::Notify(ref<Object> source, const DiscoveryScriptNotification&
 
 void FabricEngine::Connect(bool t) {
 	if(t) {
-		_publication = GC::Hold(new EPPublication(strong<EPEndpoint>(ref<EPEndpoint>(_fabric)), _fabric->GetID()));
+		/* Don't advertise the service if the mediation level is below zero (which means 
+		that this fabric does not participate at all in mediation */
+		if(_fabric->GetMediationLevel()>=0) {
+			_publication = GC::Hold(new EPPublication(strong<EPEndpoint>(ref<EPEndpoint>(_fabric)), _fabric->GetID()));
+		}
 		
 		// Iterate through all groups and connect them
 		std::map< ref<Group>, ref<ConnectedGroup> > newGroups;
