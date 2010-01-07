@@ -76,15 +76,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 284498959;
-			PBXWorkspaceStateSaveDate = 284498959;
+			PBXPerProjectTemplateStateSaveDate = 284547225;
+			PBXWorkspaceStateSaveDate = 284547225;
 		};
 		perUserProjectItems = {
 			B41AE43310F547DC00F886F0 /* PBXTextBookmark */ = B41AE43310F547DC00F886F0 /* PBXTextBookmark */;
 			B41AE43410F547DC00F886F0 /* PBXTextBookmark */ = B41AE43410F547DC00F886F0 /* PBXTextBookmark */;
 			B41AE43510F547DC00F886F0 /* PBXTextBookmark */ = B41AE43510F547DC00F886F0 /* PBXTextBookmark */;
 			B41AE43710F547DC00F886F0 /* PBXTextBookmark */ = B41AE43710F547DC00F886F0 /* PBXTextBookmark */;
-			B41AE43810F547DC00F886F0 /* PBXTextBookmark */ = B41AE43810F547DC00F886F0 /* PBXTextBookmark */;
 			B41AE43910F547DC00F886F0 /* PBXTextBookmark */ = B41AE43910F547DC00F886F0 /* PBXTextBookmark */;
 			B447FF8510C4885200D88EE6 /* PBXTextBookmark */ = B447FF8510C4885200D88EE6 /* PBXTextBookmark */;
 			B45F04E310B4520F0077D851 /* PBXTextBookmark */ = B45F04E310B4520F0077D851 /* PBXTextBookmark */;
@@ -103,6 +102,7 @@
 			B4A98AE110C6E84F001CF473 /* PBXTextBookmark */ = B4A98AE110C6E84F001CF473 /* PBXTextBookmark */;
 			B4A98AE310C6E84F001CF473 /* PBXTextBookmark */ = B4A98AE310C6E84F001CF473 /* PBXTextBookmark */;
 			B4B9A15710C865FC0048EC2D /* PBXTextBookmark */ = B4B9A15710C865FC0048EC2D /* PBXTextBookmark */;
+			B4CDDF0D10F5D9A000458471 /* PBXTextBookmark */ = B4CDDF0D10F5D9A000458471 /* PBXTextBookmark */;
 			B4D8946210BE923200E8820E /* PBXTextBookmark */ = B4D8946210BE923200E8820E /* PBXTextBookmark */;
 			B4D8946410BE923200E8820E /* PBXTextBookmark */ = B4D8946410BE923200E8820E /* PBXTextBookmark */;
 			B4D8946C10BE923200E8820E /* PBXTextBookmark */ = B4D8946C10BE923200E8820E /* PBXTextBookmark */;
@@ -140,11 +140,11 @@
 		delayBeforeContinue = 0;
 		fileReference = B462AF611098E20300484C29 /* epdownload.cpp */;
 		functionName = "EPDownloadedDefinition::OnDownloadComplete(ref<CodeWriter> cw)";
-		hitCount = 0;
+		hitCount = 1;
 		ignoreCount = 0;
 		lineNumber = 36;
 		location = EP;
-		modificationTime = 281636384.053263;
+		modificationTime = 284547519.952059;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -158,11 +158,11 @@
 		delayBeforeContinue = 0;
 		fileReference = B462AF611098E20300484C29 /* epdownload.cpp */;
 		functionName = "EPDownloadedDefinition::OnDownloadComplete(ref<CodeWriter> cw)";
-		hitCount = 0;
+		hitCount = 1;
 		ignoreCount = 0;
 		lineNumber = 37;
 		location = EP;
-		modificationTime = 281636384.059848;
+		modificationTime = 284547521.28092;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -180,7 +180,7 @@
 		ignoreCount = 0;
 		lineNumber = 37;
 		location = EP;
-		modificationTime = 281636384.055433;
+		modificationTime = 284547494.282357;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -198,7 +198,7 @@
 		ignoreCount = 0;
 		lineNumber = 131;
 		location = EPFramework;
-		modificationTime = 281636358.150117;
+		modificationTime = 284547493.700946;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -216,7 +216,7 @@
 		ignoreCount = 0;
 		lineNumber = 136;
 		location = EPFramework;
-		modificationTime = 281636358.1505489;
+		modificationTime = 284547493.701399;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -230,11 +230,11 @@
 		delayBeforeContinue = 0;
 		fileReference = B462AEF11098E00E00484C29 /* ependpoint.cpp */;
 		functionName = "EPEndpointDefinition::Load(TiXmlElement* me)";
-		hitCount = 0;
+		hitCount = 1;
 		ignoreCount = 0;
 		lineNumber = 156;
 		location = EP;
-		modificationTime = 281636384.053967;
+		modificationTime = 284547521.705939;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -252,7 +252,7 @@
 		ignoreCount = 0;
 		lineNumber = 155;
 		location = EP;
-		modificationTime = 281636384.0602;
+		modificationTime = 284547494.341281;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -280,14 +280,15 @@
 		isa = PBXTextBookmark;
 		fRef = B41AE43610F547DC00F886F0 /* tjhttp.h */;
 		name = "tjhttp.h: 70";
-		rLen = 6;
-		rLoc = 2328;
+		rLen = 0;
+		rLoc = 2310;
 		rType = 0;
 		vrLen = 1245;
 		vrLoc = 2112;
 	};
 	B41AE43610F547DC00F886F0 /* tjhttp.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = tjhttp.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/include/tjhttp.h;
 		sourceTree = "<absolute>";
@@ -301,16 +302,6 @@
 		rType = 0;
 		vrLen = 1204;
 		vrLoc = 15360;
-	};
-	B41AE43810F547DC00F886F0 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */;
-		name = "epdnssddiscovery.cpp: 192";
-		rLen = 0;
-		rLoc = 6425;
-		rType = 0;
-		vrLen = 996;
-		vrLoc = 2268;
 	};
 	B41AE43910F547DC00F886F0 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -667,9 +658,9 @@
 	};
 	B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1251, 2769}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1251, 2782}}";
 			sepNavSelRange = "{5709, 0}";
-			sepNavVisRange = "{4430, 1730}";
+			sepNavVisRange = "{4563, 1597}";
 		};
 	};
 	B4CD44FB109AF911004B3BBB /* eposcipconnection.cpp */ = {
@@ -692,6 +683,16 @@
 			sepNavSelRange = "{303, 0}";
 			sepNavVisRange = "{0, 1079}";
 		};
+	};
+	B4CDDF0D10F5D9A000458471 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4CD44D0109AEF72004B3BBB /* epdnssddiscovery.cpp */;
+		name = "epdnssddiscovery.cpp: 173";
+		rLen = 0;
+		rLoc = 5709;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 4563;
 	};
 	B4D8946210BE923200E8820E /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
