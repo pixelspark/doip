@@ -1,9 +1,38 @@
-#include "usp3.h"
+#include "../include/usp3leds.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 
 using namespace usp3;
+using namespace tj::ep::leds;
+
+USP3LED::USP3LED(const char* path): _device(path), _r(0.0f), _g(0.0f), _b(0.0f)  {
+}
+
+USP3LED::~USP3LED() {
+}
+
+void USP3LED::SetColorFading(unsigned char r, unsigned char g, unsigned char b) {	
+	_r = r;
+	_g = g;
+	_b = b;
+	UpdateColor(true);
+}
+
+void USP3LED::SetColorDirectly(unsigned char r, unsigned char g, unsigned char b) {	
+	_r = r;
+	_g = g;
+	_b = b;
+	UpdateColor(false);
+}
+
+void USP3LED::UpdateColor(bool fading) {
+	_device.WriteRegister(usp3::ChromoflexStripeDevice::KRegisterStatus, 0x01);
+	_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterSetR, _r, _g, _b, 0x00);
+	if(!fading) {
+		_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterLevelR, _r, _g, _b, 0x00);
+	}
+}
 
 /** Packet **/
 Packet::Packet(): index(0), crc(0xFFFF) {

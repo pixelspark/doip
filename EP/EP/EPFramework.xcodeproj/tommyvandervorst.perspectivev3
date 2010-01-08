@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -327,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4CDDF0D10F5D9A000458471</string>
+										<string>B4CDDF7610F6A20C00458471</string>
 										<key>history</key>
 										<array>
 											<string>B46954CD10A6E40D0045DB2D</string>
@@ -363,7 +365,7 @@
 											<string>B41AE43410F547DC00F886F0</string>
 											<string>B41AE43510F547DC00F886F0</string>
 											<string>B41AE43710F547DC00F886F0</string>
-											<string>B41AE43910F547DC00F886F0</string>
+											<string>B4CDDF0D10F5D9A000458471</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -377,23 +379,21 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 592}}</string>
+								<string>{{0, 0}, {1073, 585}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 93 1280 909 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>592pt</string>
+							<string>585pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>271pt</string>
+							<string>278pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
@@ -404,7 +404,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 244}}</string>
+										<string>{{10, 27}, {1073, 251}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 93 1280 909 0 0 1280 1002 </string>
 									</dict>
@@ -488,11 +488,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4CDDF0E10F5D9A000458471</string>
+				<string>B4CDDF7710F6A20C00458471</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B4CDDF0F10F5D9A000458471</string>
+				<string>B4CDDF7810F6A20C00458471</string>
 				<string>B462AED11098DF9200484C29</string>
-				<string>B4CDDF1010F5D9A000458471</string>
+				<string>B4CDDF7910F6A20C00458471</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>

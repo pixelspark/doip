@@ -4,6 +4,8 @@
 #include <string>
 #include <stdio.h>
 
+#include "leds.h"
+
 namespace usp3 {
 	class Packet {
 		public:
@@ -55,6 +57,26 @@ namespace usp3 {
 		protected:
 			FILE* _fp;
 	};
+}
+
+namespace tj {
+	namespace ep {
+		namespace leds {
+			class USP3LED: public LED {
+				public:
+					USP3LED(const char* dev);
+					virtual ~USP3LED();
+					virtual void SetColorFading(unsigned char r, unsigned char g, unsigned char b);
+					virtual void SetColorDirectly(unsigned char r, unsigned char g, unsigned char b);
+				
+				protected:
+					void UpdateColor(bool fading);
+				
+					usp3::ChromoflexStripeDevice _device;
+					float _r, _g, _b;
+			};
+		}
+	}
 }
 
 #endif
