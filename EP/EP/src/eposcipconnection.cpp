@@ -191,7 +191,8 @@ Direction OSCOverIPConnection::GetDirection() const {
 
 void OSCOverIPConnection::StopInbound() {
 	if((_direction & DirectionInbound) !=0) {
-		_listenerThread->Stop();
+		_listenerThread->RemoveListener(_inSocket);
+		_listenerThread = null;
 		_handlingReplies = false;
 		_inPort = 0;
 		_listenerThread = null; // This will call ~SocketListenerThread => Thread::WaitForCompletion on the thread
