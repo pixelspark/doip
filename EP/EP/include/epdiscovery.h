@@ -34,6 +34,7 @@ namespace tj {
 			
 			tj::shared::Timestamp when;
 			tj::shared::strong<Connection> connection;
+			tj::shared::ref<EPEndpoint> endpoint;
 			bool added;
 			EPMediationLevel mediationLevel;
 		};

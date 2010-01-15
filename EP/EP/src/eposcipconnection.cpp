@@ -253,13 +253,13 @@ void OSCOverIPConnection::RemoveInboundConnection(NativeSocket ns) {
 		_listenerThread->RemoveListener(ns);
 	}
 	
-#ifdef TJ_OS_POSIX
-	close(ns);
-#endif
-	
-#ifdef TJ_OS_WIN
-	closesocket(ns);
-#endif
+	#ifdef TJ_OS_POSIX
+		close(ns);
+	#endif
+		
+	#ifdef TJ_OS_WIN
+		closesocket(ns);
+	#endif
 }
 
 void OSCOverIPConnection::StopOutbound() {

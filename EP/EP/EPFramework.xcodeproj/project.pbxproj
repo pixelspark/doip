@@ -686,7 +686,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = .;
+				INSTALL_PATH = "@executable_path";
 				PRODUCT_NAME = EP;
 				WRAPPER_EXTENSION = framework;
 			};

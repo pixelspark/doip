@@ -128,7 +128,9 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 					connection = ConnectionFactory::Instance()->CreateForTransport(trp, edd->GetAddress());
 					if(connection) {
 						_discovered.insert(std::pair< ref<Service>, weak<Connection> >(data.service, connection));
-						EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), connection, true, epe->GetMediationLevel()));
+						DiscoveryNotification dn(Timestamp(true), connection, true, epe->GetMediationLevel());
+						dn.endpoint = epe;
+						EventDiscovered.Fire(this, dn);
 						break;
 					}
 				}

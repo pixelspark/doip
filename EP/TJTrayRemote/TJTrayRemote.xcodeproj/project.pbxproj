@@ -1,0 +1,654 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		256AC3DA0F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		B401A25F11009D1C00B2B77A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B401A25E11009D1C00B2B77A /* icon.png */; };
+		B401A27A11009F6600B2B77A /* icon-high.png in Resources */ = {isa = PBXBuildFile; fileRef = B401A27911009F6600B2B77A /* icon-high.png */; };
+		B401A5A9110104AF00B2B77A /* TJShared.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A58B1101038600B2B77A /* TJShared.framework */; };
+		B401A5AA110104AF00B2B77A /* EP.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A5811101037800B2B77A /* EP.framework */; };
+		B401A646110106DC00B2B77A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A645110106DC00B2B77A /* Cocoa.framework */; };
+		B401A64E110106F800B2B77A /* Fabric.icns in Resources */ = {isa = PBXBuildFile; fileRef = B401A64D110106F800B2B77A /* Fabric.icns */; };
+		B401A6711101080700B2B77A /* TJShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A58B1101038600B2B77A /* TJShared.framework */; };
+		B401A6721101080700B2B77A /* EP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A5811101037800B2B77A /* EP.framework */; };
+		B401A70E11010A9E00B2B77A /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A70B11010A9800B2B77A /* TJScout.framework */; };
+		B401A70F11010A9E00B2B77A /* TJNP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A70211010A8300B2B77A /* TJNP.framework */; };
+		B401A71411010AB200B2B77A /* TJScout.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A70B11010A9800B2B77A /* TJScout.framework */; };
+		B401A71511010AB200B2B77A /* TJNP.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A70211010A8300B2B77A /* TJNP.framework */; };
+		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
+		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B401A5801101037800B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5511101037800B2B77A /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = EP;
+		};
+		B401A5821101037800B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5511101037800B2B77A /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473;
+			remoteInfo = EPMobile;
+		};
+		B401A58A1101038600B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJShared;
+		};
+		B401A58C1101038600B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
+			remoteInfo = TJSharedMobile;
+		};
+		B401A58E1101039500B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = TJShared;
+		};
+		B401A5901101039500B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5511101037800B2B77A /* EPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = EP;
+		};
+		B401A70111010A8300B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJNP;
+		};
+		B401A70311010A8300B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9883210C66144001CF473;
+			remoteInfo = TJNPMobile;
+		};
+		B401A70A11010A9800B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = TJScoutFramework;
+		};
+		B401A70C11010A9800B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9887110C661C3001CF473;
+			remoteInfo = TJScoutMobile;
+		};
+		B401A71011010AAB00B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = TJScoutFramework;
+		};
+		B401A71211010AAB00B2B77A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = TJNP;
+		};
+		B4D65D7111011E97008FD68C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TinyXML.framework */;
+			remoteInfo = TinyXML;
+		};
+		B4D65D7311011E97008FD68C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9875D10C65E8A001CF473 /* libTinyXMLMobile.a */;
+			remoteInfo = TinyXMLMobile;
+		};
+		B4D65D7A11011EA4008FD68C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPack.framework */;
+			remoteInfo = OSCPack;
+		};
+		B4D65D7C11011EA4008FD68C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A989AB10C6C9DA001CF473 /* libOSCPackMobile.a */;
+			remoteInfo = OSCPackMobile;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B401A63B1101069D00B2B77A /* Copy Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */,
+				B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */,
+				B401A71411010AB200B2B77A /* TJScout.framework in Copy Executables */,
+				B401A71511010AB200B2B77A /* TJNP.framework in Copy Executables */,
+				B401A5A9110104AF00B2B77A /* TJShared.framework in Copy Executables */,
+				B401A5AA110104AF00B2B77A /* EP.framework in Copy Executables */,
+			);
+			name = "Copy Executables";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		256AC3D80F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJTrayRemoteAppDelegate.h; sourceTree = "<group>"; };
+		256AC3D90F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TJTrayRemoteAppDelegate.mm; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* TJTrayRemote-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TJTrayRemote-Info.plist"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* TJTrayRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJTrayRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B401A25E11009D1C00B2B77A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icon.png; sourceTree = "<group>"; };
+		B401A27911009F6600B2B77A /* icon-high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-high.png"; path = "Resources/icon-high.png"; sourceTree = "<group>"; };
+		B401A5511101037800B2B77A /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EP/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B401A645110106DC00B2B77A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		B401A64D110106F800B2B77A /* Fabric.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fabric.icns; sourceTree = "<group>"; };
+		B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B401A70E11010A9E00B2B77A /* TJScout.framework in Frameworks */,
+				B401A70F11010A9E00B2B77A /* TJNP.framework in Frameworks */,
+				B401A6711101080700B2B77A /* TJShared.framework in Frameworks */,
+				B401A6721101080700B2B77A /* EP.framework in Frameworks */,
+				B401A646110106DC00B2B77A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				256AC3D80F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.h */,
+				256AC3D90F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* TJTrayRemote.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* TJTrayRemote */ = {
+			isa = PBXGroup;
+			children = (
+				B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */,
+				B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */,
+				B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */,
+				B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */,
+				B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */,
+				B401A5511101037800B2B77A /* EPFramework.xcodeproj */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				B401A645110106DC00B2B77A /* Cocoa.framework */,
+			);
+			name = TJTrayRemote;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B401A64D110106F800B2B77A /* Fabric.icns */,
+				B401A27911009F6600B2B77A /* icon-high.png */,
+				B401A25E11009D1C00B2B77A /* icon.png */,
+				8D1107310486CEB800E47090 /* TJTrayRemote-Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B401A5521101037800B2B77A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B401A5811101037800B2B77A /* EP.framework */,
+				B401A5831101037800B2B77A /* libEPMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B401A5851101038600B2B77A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B401A58B1101038600B2B77A /* TJShared.framework */,
+				B401A58D1101038600B2B77A /* libTJSharedMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B401A6FC11010A8300B2B77A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B401A70211010A8300B2B77A /* TJNP.framework */,
+				B401A70411010A8300B2B77A /* libTJNPMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B401A70611010A9800B2B77A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B401A70B11010A9800B2B77A /* TJScout.framework */,
+				B401A70D11010A9800B2B77A /* libTJScoutMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4D65D6D11011E97008FD68C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4D65D7211011E97008FD68C /* TinyXML.framework */,
+				B4D65D7411011E97008FD68C /* libTinyXMLMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4D65D7611011EA4008FD68C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4D65D7B11011EA4008FD68C /* OSCPack.framework */,
+				B4D65D7D11011EA4008FD68C /* libOSCPackMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* TJTrayRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TJTrayRemote" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				B401A63B1101069D00B2B77A /* Copy Executables */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B401A58F1101039500B2B77A /* PBXTargetDependency */,
+				B401A5911101039500B2B77A /* PBXTargetDependency */,
+				B401A71111010AAB00B2B77A /* PBXTargetDependency */,
+				B401A71311010AAB00B2B77A /* PBXTargetDependency */,
+			);
+			name = TJTrayRemote;
+			productInstallPath = "$(HOME)/Applications";
+			productName = TJTrayRemote;
+			productReference = 8D1107320486CEB800E47090 /* TJTrayRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TJTrayRemote" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* TJTrayRemote */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B401A5521101037800B2B77A /* Products */;
+					ProjectRef = B401A5511101037800B2B77A /* EPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4D65D7611011EA4008FD68C /* Products */;
+					ProjectRef = B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B4D65D6D11011E97008FD68C /* Products */;
+					ProjectRef = B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B401A6FC11010A8300B2B77A /* Products */;
+					ProjectRef = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B401A70611010A9800B2B77A /* Products */;
+					ProjectRef = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B401A5851101038600B2B77A /* Products */;
+					ProjectRef = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* TJTrayRemote */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B401A5811101037800B2B77A /* EP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EP.framework;
+			remoteRef = B401A5801101037800B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A5831101037800B2B77A /* libEPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEPMobile.a;
+			remoteRef = B401A5821101037800B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A58B1101038600B2B77A /* TJShared.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJShared.framework;
+			remoteRef = B401A58A1101038600B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A58D1101038600B2B77A /* libTJSharedMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJSharedMobile.a;
+			remoteRef = B401A58C1101038600B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A70211010A8300B2B77A /* TJNP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJNP.framework;
+			remoteRef = B401A70111010A8300B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A70411010A8300B2B77A /* libTJNPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJNPMobile.a;
+			remoteRef = B401A70311010A8300B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A70B11010A9800B2B77A /* TJScout.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJScout.framework;
+			remoteRef = B401A70A11010A9800B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B401A70D11010A9800B2B77A /* libTJScoutMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJScoutMobile.a;
+			remoteRef = B401A70C11010A9800B2B77A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4D65D7211011E97008FD68C /* TinyXML.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TinyXML.framework;
+			remoteRef = B4D65D7111011E97008FD68C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4D65D7411011E97008FD68C /* libTinyXMLMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTinyXMLMobile.a;
+			remoteRef = B4D65D7311011E97008FD68C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4D65D7B11011EA4008FD68C /* OSCPack.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OSCPack.framework;
+			remoteRef = B4D65D7A11011EA4008FD68C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4D65D7D11011EA4008FD68C /* libOSCPackMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOSCPackMobile.a;
+			remoteRef = B4D65D7C11011EA4008FD68C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				B401A25F11009D1C00B2B77A /* icon.png in Resources */,
+				B401A27A11009F6600B2B77A /* icon-high.png in Resources */,
+				B401A64E110106F800B2B77A /* Fabric.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				256AC3DA0F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B401A58F1101039500B2B77A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJShared;
+			targetProxy = B401A58E1101039500B2B77A /* PBXContainerItemProxy */;
+		};
+		B401A5911101039500B2B77A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EP;
+			targetProxy = B401A5901101039500B2B77A /* PBXContainerItemProxy */;
+		};
+		B401A71111010AAB00B2B77A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJScoutFramework;
+			targetProxy = B401A71011010AAB00B2B77A /* PBXContainerItemProxy */;
+		};
+		B401A71311010AAB00B2B77A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJNP;
+			targetProxy = B401A71211010AAB00B2B77A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "TJTrayRemote-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = TJTrayRemote;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "TJTrayRemote-Info.plist";
+				INSTALL_PATH = .;
+				PRODUCT_NAME = TJTrayRemote;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TJTrayRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TJTrayRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
