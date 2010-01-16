@@ -1,40 +1,6 @@
 #import "TJTrayRemoteAppDelegate.h"
+#import "TTMethodMenuItem.h"
 #include <EP/include/epdnssddiscovery.h>
-
-@interface MethodMenuItem: NSMenuItem {
-	ref<EPMethod> _method;
-	ref<EPEndpoint> _endpoint;
-}
-
-
-- (id) initWithMethod:(ref<EPMethod>)method endpoint:(ref<EPEndpoint>)ep;
-- (ref<EPEndpoint>) endpoint;
-- (ref<EPMethod>) method;
-
-@end
-
-@implementation MethodMenuItem
-
-- (id) initWithMethod:(ref<EPMethod>)m endpoint:(ref<EPEndpoint>)ep {
-	std::string methodName = Mbs(m->GetFriendlyName());
-	if(self = [super initWithTitle:[NSString stringWithUTF8String:methodName.c_str()] action:nil keyEquivalent:@""]) {
-		_method = m;
-		_endpoint = ep;
-	}
-	
-	return self;
-}
-
-- (ref<EPEndpoint>) endpoint {
-	return _endpoint;
-}
-
-- (ref<EPMethod>) method {
-	return _method;
-}
-
-@end
-
 
 TTDiscovery::TTDiscovery() {
 	_slt = SocketListenerThread::DefaultInstance();
@@ -68,40 +34,44 @@ TTDiscovery::~TTDiscovery() {
 	[NSApp terminate:nil];
 }
 
+- (ref<Connection>) connectionForEndpoint: (ref<EPEndpoint>) enp {
+	std::multimap< ref<EPEndpoint>, ref<Connection> >& cons = _discovery->_connections;
+	if(enp) {
+		std::multimap< ref<EPEndpoint>, ref<Connection> >::iterator it = cons.find(enp);
+		if(it!=cons.end()) {
+			std::pair< ref<EPEndpoint>, ref<Connection> > data = *it;
+			ref<Connection> con = it->second;
+			if(con) {
+				return con;
+			}
+		}
+	}
+	return ref<Connection>(0);
+}
+
 - (void) execute: (id)sender {
-	MethodMenuItem* mi = sender;
+	TTMethodMenuItem* mi = sender;
 	if(mi!=0) {
 		// Find the first connection for the endpoint
-		std::multimap< ref<EPEndpoint>, ref<Connection> >& cons = _discovery->_connections;
 		ref<EPEndpoint> enp = [mi endpoint];
 		if(enp) {
 			bool noConnection = true;
-			std::multimap< ref<EPEndpoint>, ref<Connection> >::iterator it = cons.find(enp);
-			if(it!=cons.end()) {
-				std::pair< ref<EPEndpoint>, ref<Connection> > data = *it;
-				ref<Connection> con = it->second;
-				if(con) {
-					ref<EPMethod> method = [mi method];
-					if(method) {
-						std::set<EPPath> paths;
-						method->GetPaths(paths);
-						if(paths.size()==0) {
-							noConnection = true;
-						}
-						else {
-							std::vector< tj::shared::ref<EPParameter> > parameterList;
-							method->GetParameters(parameterList);
-							if(parameterList.size()==0) {
-								ref<Message> msg = GC::Hold(new Message(*(paths.begin())));
-								con->Send(msg);
-								noConnection = false;
-							}
-							else {
-								// Some form or a warning
-								NSAlert* na = [NSAlert alertWithMessageText:@"In the current version, it is not yet possible to execute methods that require parameters." defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The method will not be executed right now."];
-								[na runModal];
-								noConnection = false;
-							}
+			ref<Connection> con = [self connectionForEndpoint:enp];
+			if(con) {
+				ref<EPMethod> method = [mi method];
+				if(method) {
+					std::set<EPPath> paths;
+					method->GetPaths(paths);
+					if(paths.size()==0) {
+						noConnection = true;
+					}
+					else {
+						noConnection = false;
+						std::vector< tj::shared::ref<EPParameter> > parameterList;
+						method->GetParameters(parameterList);
+						if(parameterList.size()==0) {
+							ref<Message> msg = GC::Hold(new Message(*(paths.begin())));
+							con->Send(msg);
 						}
 					}
 				}
@@ -137,7 +107,8 @@ TTDiscovery::~TTDiscovery() {
 					while(mit!=methods.end()) {
 						ref<EPMethod> method = *mit;
 						if(method) {
-							MethodMenuItem* methodItem = [[MethodMenuItem alloc] initWithMethod:method endpoint:enp];
+							ref<Connection> connection = [self connectionForEndpoint:enp];
+							TTMethodMenuItem* methodItem = [[TTMethodMenuItem alloc] initWithMethod:method endpoint:enp connection:connection];
 							[methodItem setTarget:self];
 							[methodItem setAction:@selector(execute:)];
 							[methodsMenu addItem:methodItem];
