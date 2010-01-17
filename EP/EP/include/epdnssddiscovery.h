@@ -60,6 +60,7 @@ namespace tj {
 				tj::shared::String _ownMagic;
 				std::set< tj::shared::ref<EPDownloadedDefinition> > _downloading;
 				std::map< tj::shared::ref<tj::scout::Service>, tj::shared::weak<Connection> > _discovered;
+				std::map< tj::shared::ref<tj::scout::Service>, tj::shared::weak<EPEndpoint> > _discoveredEndpoints;
 				tj::shared::ref<EPCondition> _condition;
 		};
 	}

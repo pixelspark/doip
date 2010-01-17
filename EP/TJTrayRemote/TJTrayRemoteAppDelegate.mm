@@ -10,28 +10,33 @@ void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 	ThreadLock lock(&_lock);
 	
 	ref<EPEndpoint> enp = dn.endpoint;
-	if(enp) {
-		if(dn.added && dn.connection) {
+	if(dn.added) {
+		if(enp && dn.connection) {
 			_endpoints.insert(enp);
 			_connections.insert(std::pair<ref<EPEndpoint>, ref<Connection> >(enp, dn.connection));
 		}
-		else {
+	}
+	else {
+		if(enp) {
 			std::set<ref<EPEndpoint> >::iterator eit = _endpoints.find(enp);
 			if(eit!=_endpoints.end()) {
 				_endpoints.erase(eit);
 			}
-			
-			std::multimap< ref<EPEndpoint>, ref<Connection> >::iterator it = _connections.begin();
-			while(it!=_connections.end()) {
-				ref<EPEndpoint> itep = it->first;
-				ref<Connection> itcon = it->second;
-				if(itep==enp || itcon==dn.connection) {
-					_connections.erase(it);
-					it = _connections.begin();
-				}
-				else {
-					++it;
-				}
+		}
+		else {
+			Log::Write(L"TJTrayRemote/TTDiscovery", L"Endpoint leaving, but no endpoint referenced");
+		}
+		
+		std::multimap< ref<EPEndpoint>, ref<Connection> >::iterator it = _connections.begin();
+		while(it!=_connections.end()) {
+			ref<EPEndpoint> itep = it->first;
+			ref<Connection> itcon = it->second;
+			if(itep==enp || itcon==dn.connection) {
+				_connections.erase(it);
+				it = _connections.begin();
+			}
+			else {
+				++it;
 			}
 		}
 	}

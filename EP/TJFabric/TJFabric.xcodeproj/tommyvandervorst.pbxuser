@@ -246,6 +246,9 @@
 			B47AF0D310ACB82500D6281B = B47AF0D310ACB82500D6281B /* PBXTextBookmark */;
 			B47B754110AB72F20031263D = B47B754110AB72F20031263D /* PBXTextBookmark */;
 			B47B754410AB72F20031263D = B47B754410AB72F20031263D /* PBXTextBookmark */;
+			B4900F661103317900925122 /* PBXTextBookmark */ = B4900F661103317900925122 /* PBXTextBookmark */;
+			B4900F671103317900925122 /* PBXTextBookmark */ = B4900F671103317900925122 /* PBXTextBookmark */;
+			B4900F75110331FC00925122 /* PBXTextBookmark */ = B4900F75110331FC00925122 /* PBXTextBookmark */;
 			B4A2F80E10BBCBF300D9EB3C = B4A2F80E10BBCBF300D9EB3C /* PBXTextBookmark */;
 			B4C595BF1072B51C000A3E6E = B4C595BF1072B51C000A3E6E /* PBXTextBookmark */;
 			B4CAA92E10AD67C100385A5F = B4CAA92E10AD67C100385A5F /* PBXTextBookmark */;
@@ -302,7 +305,7 @@
 		ignoreCount = 0;
 		lineNumber = 59;
 		location = TJNP;
-		modificationTime = 285281615.056892;
+		modificationTime = 285421923.231621;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -320,7 +323,7 @@
 		ignoreCount = 0;
 		lineNumber = 65;
 		location = TJNP;
-		modificationTime = 285281615.060505;
+		modificationTime = 285421923.233109;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -338,7 +341,7 @@
 		ignoreCount = 0;
 		lineNumber = 61;
 		location = TJNP;
-		modificationTime = 285281615.063817;
+		modificationTime = 285421923.234411;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -356,7 +359,7 @@
 		ignoreCount = 0;
 		lineNumber = 62;
 		location = TJNP;
-		modificationTime = 285281615.067306;
+		modificationTime = 285421923.235708;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -374,7 +377,7 @@
 		ignoreCount = 0;
 		lineNumber = 63;
 		location = TJNP;
-		modificationTime = 285281615.07769;
+		modificationTime = 285421923.236925;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -392,7 +395,7 @@
 		ignoreCount = 0;
 		lineNumber = 77;
 		location = TJScout;
-		modificationTime = 285281615.0815589;
+		modificationTime = 285421931.049725;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -406,11 +409,11 @@
 		delayBeforeContinue = 0;
 		fileReference = B4CDDEB710F5D60800458471 /* epdownload.cpp */;
 		functionName = "EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw)";
-		hitCount = 0;
+		hitCount = 1;
 		ignoreCount = 0;
 		lineNumber = 38;
 		location = EP;
-		modificationTime = 285281615.087255;
+		modificationTime = 285421940.754556;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -424,11 +427,11 @@
 		delayBeforeContinue = 0;
 		fileReference = B4CDDEB710F5D60800458471 /* epdownload.cpp */;
 		functionName = "EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw)";
-		hitCount = 0;
+		hitCount = 1;
 		ignoreCount = 0;
 		lineNumber = 39;
 		location = EP;
-		modificationTime = 285281615.089992;
+		modificationTime = 285421942.288968;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -446,7 +449,7 @@
 		ignoreCount = 0;
 		lineNumber = 49;
 		location = TJNP;
-		modificationTime = 285281703.535853;
+		modificationTime = 285421923.241927;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -877,7 +880,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 18;
-		modificationTime = 285281713.9725209;
+		modificationTime = 285422074.022985;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -909,7 +912,7 @@
 		ignoreCount = 0;
 		lineNumber = 130;
 		location = EP;
-		modificationTime = 285281614.94913;
+		modificationTime = 285421923.193246;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -927,7 +930,7 @@
 		ignoreCount = 0;
 		lineNumber = 129;
 		location = EP;
-		modificationTime = 285281614.958308;
+		modificationTime = 285421923.194242;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -945,7 +948,7 @@
 		ignoreCount = 0;
 		lineNumber = 128;
 		location = EP;
-		modificationTime = 285281614.960699;
+		modificationTime = 285421923.195421;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -963,7 +966,7 @@
 		ignoreCount = 0;
 		lineNumber = 125;
 		location = EP;
-		modificationTime = 285281614.963041;
+		modificationTime = 285421923.197886;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -981,7 +984,7 @@
 		ignoreCount = 0;
 		lineNumber = 124;
 		location = EP;
-		modificationTime = 285281614.965477;
+		modificationTime = 285421923.199075;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -999,7 +1002,7 @@
 		ignoreCount = 0;
 		lineNumber = 123;
 		location = EP;
-		modificationTime = 285281614.967954;
+		modificationTime = 285421923.200186;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1017,7 +1020,7 @@
 		ignoreCount = 0;
 		lineNumber = 121;
 		location = EP;
-		modificationTime = 285281614.9704139;
+		modificationTime = 285421923.201179;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1035,7 +1038,7 @@
 		ignoreCount = 0;
 		lineNumber = 122;
 		location = EP;
-		modificationTime = 285281614.9727861;
+		modificationTime = 285421923.202398;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1053,7 +1056,7 @@
 		ignoreCount = 0;
 		lineNumber = 116;
 		location = EPFramework;
-		modificationTime = 285281614.975377;
+		modificationTime = 285421923.203648;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1071,7 +1074,7 @@
 		ignoreCount = 0;
 		lineNumber = 117;
 		location = EPFramework;
-		modificationTime = 285281614.978471;
+		modificationTime = 285421923.20749;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1089,7 +1092,7 @@
 		ignoreCount = 0;
 		lineNumber = 118;
 		location = EPFramework;
-		modificationTime = 285281615.0262719;
+		modificationTime = 285421923.209126;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1107,7 +1110,7 @@
 		ignoreCount = 0;
 		lineNumber = 119;
 		location = EPFramework;
-		modificationTime = 285281615.0295451;
+		modificationTime = 285421923.211545;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1125,7 +1128,7 @@
 		ignoreCount = 0;
 		lineNumber = 114;
 		location = EPFramework;
-		modificationTime = 285281615.032465;
+		modificationTime = 285421923.212812;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1143,7 +1146,7 @@
 		ignoreCount = 0;
 		lineNumber = 113;
 		location = EPFramework;
-		modificationTime = 285281615.0350431;
+		modificationTime = 285421923.215497;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1161,7 +1164,7 @@
 		ignoreCount = 0;
 		lineNumber = 112;
 		location = EPFramework;
-		modificationTime = 285281615.038018;
+		modificationTime = 285421923.216775;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1179,7 +1182,7 @@
 		ignoreCount = 0;
 		lineNumber = 111;
 		location = EPFramework;
-		modificationTime = 285281615.04083;
+		modificationTime = 285421923.217862;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1197,7 +1200,7 @@
 		ignoreCount = 0;
 		lineNumber = 61;
 		location = TJScoutFramework;
-		modificationTime = 285281615.043653;
+		modificationTime = 285421923.219028;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1461,7 +1464,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 58;
-		modificationTime = 285281614.905498;
+		modificationTime = 285421923.183305;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -1478,7 +1481,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 57;
-		modificationTime = 285281614.91021;
+		modificationTime = 285421923.186214;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1494,7 +1497,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 18;
-		modificationTime = 285281614.914557;
+		modificationTime = 285421923.18782;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -1510,7 +1513,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 18;
-		modificationTime = 285281713.967546;
+		modificationTime = 285422074.024041;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1552,7 +1555,7 @@
 		ignoreCount = 0;
 		lineNumber = 87;
 		location = TJFabric;
-		modificationTime = 285281614.9237911;
+		modificationTime = 285421923.191332;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1709,7 +1712,7 @@
 		ignoreCount = 0;
 		lineNumber = 824;
 		location = TJNP;
-		modificationTime = 285281615.047004;
+		modificationTime = 285421923.228214;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1832,6 +1835,36 @@
 			sepNavVisRange = "{3041, 1653}";
 			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
 		};
+	};
+	B4900F661103317900925122 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B481867B106BC3A200EAEE19 /* tjfabricgroup.cpp */;
+		name = "tjfabricgroup.cpp: 130";
+		rLen = 68;
+		rLoc = 3641;
+		rType = 0;
+		vrLen = 1653;
+		vrLoc = 3041;
+	};
+	B4900F671103317900925122 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */;
+		name = "tjfabricconnection.cpp: 81";
+		rLen = 0;
+		rLoc = 2530;
+		rType = 0;
+		vrLen = 1343;
+		vrLoc = 2762;
+	};
+	B4900F75110331FC00925122 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */;
+		name = "tjfabricconnection.cpp: 81";
+		rLen = 0;
+		rLoc = 2530;
+		rType = 0;
+		vrLen = 1343;
+		vrLoc = 2762;
 	};
 	B4A2F80E10BBCBF300D9EB3C /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1983,7 +2016,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 22;
-		modificationTime = 285281713.964494;
+		modificationTime = 285422074.025134;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -1999,7 +2032,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 22;
-		modificationTime = 285281713.9699389;
+		modificationTime = 285422074.012754;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -2164,9 +2197,9 @@
 	};
 	B4D0F24A106CB5530053A1BA /* tjfabricconnection.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1034, 2652}}";
-			sepNavSelRange = "{3832, 0}";
-			sepNavVisRange = "{3243, 1466}";
+			sepNavIntBoundsRect = "{{0, 0}, {1034, 2678}}";
+			sepNavSelRange = "{2530, 0}";
+			sepNavVisRange = "{2762, 1343}";
 			sepNavWindowFrame = "{{15, 115}, {1260, 882}}";
 		};
 	};
@@ -2229,7 +2262,7 @@
 		fRef = B45F04D810B3FA790077D851 /* epdiscovery.h */;
 		name = "epdiscovery.h: 41";
 		rLen = 67;
-		rLoc = 1290;
+		rLoc = 1284;
 		rType = 0;
 		vrLen = 1595;
 		vrLoc = 456;

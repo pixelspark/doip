@@ -117,6 +117,10 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 		}
 		else {
 			Log::Write(L"TJFabric/EPDiscovery", L"Found suitable endpoint; friendly name="+epe->GetFriendlyName()+L" fqdn="+epe->GetFullIdentifier());
+			{
+				ThreadLock lock(&_lock);
+				_discoveredEndpoints.insert(std::pair< ref<Service>, weak<EPEndpoint> >(data.service, epe));
+			}
 			
 			ref<Connection> connection;
 			std::vector< ref<EPTransport> > transportsList;
@@ -127,7 +131,10 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 				if(trp) {
 					connection = ConnectionFactory::Instance()->CreateForTransport(trp, edd->GetAddress());
 					if(connection) {
-						_discovered.insert(std::pair< ref<Service>, weak<Connection> >(data.service, connection));
+						{
+							ThreadLock lock(&_lock);
+							_discovered.insert(std::pair< ref<Service>, weak<Connection> >(data.service, connection));
+						}
 						DiscoveryNotification dn(Timestamp(true), connection, true, epe->GetMediationLevel());
 						dn.endpoint = epe;
 						EventDiscovered.Fire(this, dn);
@@ -188,17 +195,28 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 	else {
 		Log::Write(L"EPFramework/EPDiscovery", L"Endpoint leaving: "+service->GetID());
 		// Remove any pending download action
-		ref<EPEndpoint> enp;
-		
 		std::set< ref<EPDownloadedDefinition> >::iterator it = _downloading.begin();
 		while(it!=_downloading.end()) {
 			ref<EPDownloadedDefinition> edd = *it;
 			if(edd && edd->GetService()->GetID()==service->GetID()) {
-				enp = edd->GetEndpoint();
 				_downloading.erase(it);
 				break;
 			}
 			++it;
+		}
+		
+		// Remove discovered endpoint
+		ref<EPEndpoint> removedEndpoint;
+		std::map< ref<Service>, weak<EPEndpoint> >::iterator deit = _discoveredEndpoints.begin();
+		while(deit!=_discoveredEndpoints.end()) {
+			ref<Service> s = deit->first;
+			if(s && s->GetID()==service->GetID()) {
+				removedEndpoint = deit->second;
+				_discoveredEndpoints.erase(deit);
+				break;
+			}
+			
+			deit++;
 		}
 		
 		// Remove discovered connection
@@ -218,7 +236,7 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		// Fire a notification that contains the removed connection (if any) and/or the removed endpoint
 		// Both can be null if the definition file was still being downloaded.
 		DiscoveryNotification dn(Timestamp(true), removedConnection, false, EPMediationLevelIgnore);
-		dn.endpoint = enp;
+		dn.endpoint = removedEndpoint;
 		EventDiscovered.Fire(this, dn);
 	}
 }
