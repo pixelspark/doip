@@ -32,6 +32,7 @@ void EPDownloadedDefinition::OnCreated() {
 
 void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
 	if(cw) {
+		Log::Write(L"EPFramework/EPDownloadedDefinition", L"Downloaded definition from service "+_service->GetFriendlyName());
 		TiXmlDocument doc;
 		std::string data((const char*)cw->GetBuffer(), 0, (unsigned int)cw->GetSize());
 		doc.Parse(data.c_str());

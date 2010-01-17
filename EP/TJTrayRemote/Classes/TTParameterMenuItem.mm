@@ -11,10 +11,10 @@
 	}
 	else {
 		if(_parameter->HasOptions()) {
-		
+			// TODO
 		}
 		else {
-			if(type==EPParameter::KTypeDouble) {
+			if(type==EPParameter::KTypeDouble || type==EPParameter::KTypeInt32) {
 				double value = _parameter->GetDefaultValue();
 				[(NSSlider*)_dataView setDoubleValue:value];
 			}
@@ -22,7 +22,7 @@
 	}
 	
 	if(_valueLabel!=nil) {
-		std::string value = Mbs(_parameter->GetDefaultValue().ToString());
+		std::string value = Mbs(_parameter->GetDefaultValue().Force(_parameter->GetValueType()).ToString());
 		[_valueLabel setTitleWithMnemonic:[NSString stringWithUTF8String:value.c_str()]];
 	}
 }
