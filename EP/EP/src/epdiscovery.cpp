@@ -44,7 +44,7 @@ tj::shared::strong<DiscoveryDefinitionFactory> DiscoveryDefinitionFactory::Insta
 Discovery::~Discovery() {
 }
 
-DiscoveryNotification::DiscoveryNotification(const Timestamp& ts, strong<Connection> m, bool a, EPMediationLevel ml): when(ts), connection(m), added(a), mediationLevel(ml) {
+DiscoveryNotification::DiscoveryNotification(const Timestamp& ts, ref<Connection> m, bool a, EPMediationLevel ml): when(ts), connection(m), added(a), mediationLevel(ml) {
 }
 
 /** DiscoveryFactory **/

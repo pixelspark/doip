@@ -30,10 +30,10 @@ namespace tj {
 		};
 		
 		struct EP_EXPORTED DiscoveryNotification {
-			DiscoveryNotification(const tj::shared::Timestamp& ts, tj::shared::strong<Connection> m, bool add, EPMediationLevel ml);
+			DiscoveryNotification(const tj::shared::Timestamp& ts, tj::shared::ref<Connection> m, bool add, EPMediationLevel ml);
 			
 			tj::shared::Timestamp when;
-			tj::shared::strong<Connection> connection;
+			tj::shared::ref<Connection> connection;
 			tj::shared::ref<EPEndpoint> endpoint;
 			bool added;
 			EPMediationLevel mediationLevel;
