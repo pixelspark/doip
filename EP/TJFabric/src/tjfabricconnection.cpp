@@ -78,30 +78,8 @@ void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data)
 
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
 	if(bool(data.added) && bool(data.connection)) {
+		ThreadLock lock(&_lock);
 		_discoveredConnections.push_back(std::pair<EPMediationLevel, ref<Connection> >(data.mediationLevel, data.connection));
-		
-		// If there was a discovery script, run it
-		if(source.IsCastableTo<Discovery>()) {
-			ThreadLock lock(&_lock);
-			String scriptSource;
-			
-			ref<Discovery> discovery = source;
-			std::map< ref<DiscoveryDefinition>, ref<Discovery> >::iterator it = _discoveries.begin();
-			while(it!=_discoveries.end()) {
-				if(discovery == it->second) {
-					ref<DiscoveryDefinition> def = it->first;
-					if(_group->GetDiscoveryScript(def, scriptSource)) {
-						DiscoveryScriptNotification dn;
-						dn.definition = def;
-						dn.connection = data.connection;
-						dn.scriptSource = scriptSource;
-						EventDiscoveryScript.Fire(this, dn);
-					}
-					break;
-				}
-				++it;
-			}
-		}
 	}
 	else {
 		ThreadLock lock(&_lock);
@@ -113,13 +91,35 @@ void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& dat
 			while(it!=_discoveredConnections.end()) {
 				if(it->second == removedConnection) {
 					_discoveredConnections.erase(it);
-					Log::Write(L"TJFabric/ConnectedGroup", L"Removed connection");
 					break;
 				}
 				else {
 					++it;
 				}
 			}
+		}
+	}
+	
+	// Queue discovery scripts
+	if(source.IsCastableTo<Discovery>()) {
+		ThreadLock lock(&_lock);
+		String scriptSource;
+		
+		ref<Discovery> discovery = source;
+		std::map< ref<DiscoveryDefinition>, ref<Discovery> >::iterator it = _discoveries.begin();
+		while(it!=_discoveries.end()) {
+			if(discovery == it->second) {
+				ref<DiscoveryDefinition> def = it->first;
+				if(_group->GetDiscoveryScript(def, scriptSource, data.added)) {
+					DiscoveryScriptNotification dn;
+					dn.definition = def;
+					dn.connection = data.connection;
+					dn.scriptSource = scriptSource; 
+					EventDiscoveryScript.Fire(this, dn);
+				}
+				break;
+			}
+			++it;
 		}
 	}
 }

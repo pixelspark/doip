@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -330,7 +332,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4901046110349F600925122</string>
+										<string>B49010D11103927000925122</string>
 										<key>history</key>
 										<array>
 											<string>B4977775109782A400FA1B69</string>
@@ -668,6 +670,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>B49010D21103927000925122</string>
+		<string>B49010D31103927000925122</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJFabricFrontend/Frontend.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

@@ -66,6 +66,8 @@ void Group::Save(TiXmlElement* me) {
 		if(cd) {
 			TiXmlElement connElement("discover");
 			DiscoveryDefinitionFactory::Instance()->Save(cd, &connElement);
+			
+			// TODO FIXME save the scripts!
 			me->InsertEndChild(connElement);
 		}
 		++dit;
@@ -81,12 +83,23 @@ void Group::Save(TiXmlElement* me) {
 	}
 }
 
-bool Group::GetDiscoveryScript(ref<DiscoveryDefinition> disco, String& scriptSource) const {
-	std::map< ref<DiscoveryDefinition>,String >::const_iterator it = _discoveryScripts.find(disco);
-	if(it!=_discoveryScripts.end()) {
-		scriptSource = it->second;
-		return true;
+bool Group::GetDiscoveryScript(ref<DiscoveryDefinition> disco, String& scriptSource, bool appear) const {
+	std::map< ref<DiscoveryDefinition>,String >::const_iterator it;
+	if(appear) {
+		it = _appearDiscoveryScripts.find(disco);
+		if(it!=_appearDiscoveryScripts.end()) {
+			scriptSource = it->second;
+			return true;
+		}
 	}
+	else {
+		it = _disappearDiscoveryScripts.find(disco);
+		if(it!=_disappearDiscoveryScripts.end()) {
+			scriptSource = it->second;
+			return true;
+		}
+	}
+	
 	return false;
 }
 
@@ -129,9 +142,12 @@ void Group::Load(TiXmlElement* me) {
 	while(disco!=0) {
 		ref<DiscoveryDefinition> cd = DiscoveryDefinitionFactory::Instance()->Load(disco);
 		if(cd) {
-			// Try to load a discovery script{
-			std::wstring script = LoadAttribute<std::wstring>(disco, "script", L"");
-			_discoveryScripts[cd] = script;
+			// Try to load a discovery script
+			std::wstring script = LoadAttribute<std::wstring>(disco, "entry", L"");
+			_appearDiscoveryScripts[cd] = script;
+			
+			std::wstring leaveScript = LoadAttribute<std::wstring>(disco, "exit", L"");
+			_disappearDiscoveryScripts[cd] = leaveScript;
 			_discoveries.push_back(cd);
 		}
 		else {

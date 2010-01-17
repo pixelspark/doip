@@ -116,6 +116,15 @@
 					[wrapper addSubview:slider];
 					_dataView = slider;
 				}
+				else if(type==EPParameter::KTypeString) {
+					NSTextField* text = [[NSTextField alloc] initWithFrame:rightFrame];
+					[text setEditable:YES];
+					[text setEnabled:YES];
+					[text setBezelStyle:NSTextFieldRoundedBezel];
+					[text setTitleWithMnemonic:[NSString stringWithUTF8String:Mbs(p->GetDefaultValue()).c_str()]];
+					[wrapper addSubview:text];
+					_dataView = text;
+				}
 			}
 			
 		}

@@ -54,8 +54,10 @@ bool EPSpecificCondition::Matches(tj::shared::strong<EPEndpoint> ep) {
 		}
 	}
 	
-	if(ep->GetID()!=_epid) {
-		return false;
+	if(_epid.length()>0) {
+		if(ep->GetID()!=_epid) {
+			return false;
+		}
 	}
 	
 	return true;

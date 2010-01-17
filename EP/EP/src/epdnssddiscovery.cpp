@@ -113,10 +113,10 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 	
 	if(epe) {
 		if(_condition && !_condition->Matches(epe)) {
-			Log::Write(L"TJFabric/EPDiscovery", L"Endpoint does not meet requirements");
+			// Endpoint does not meet requirements, ignore
 		}
 		else {
-			Log::Write(L"TJFabric/EPDiscovery", L"Found suitable endpoint; friendly name="+epe->GetFriendlyName()+L" fqdn="+epe->GetFullIdentifier());
+			Log::Write(L"TJFabric/EPDiscovery", L"Discovered endpoint '"+epe->GetFriendlyName()+L"' ["+epe->GetFullIdentifier()+L"]");
 			{
 				ThreadLock lock(&_lock);
 				_discoveredEndpoints.insert(std::pair< ref<Service>, weak<EPEndpoint> >(data.service, epe));
@@ -145,7 +145,7 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 			}
 			
 			if(!connection) {
-				Log::Write(L"TJFabric/EPDiscovery", L"Endpoint found that met requirements, but did not have a compatible transport available");
+				Log::Write(L"TJFabric/EPDiscovery", L"Endpoint found that met requirements ("+epe->GetFullIdentifier()+L"), but did not have a compatible transport available");
 			}
 		}
 	}
@@ -171,7 +171,6 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		
 		// Check whether this is a service that is published from this process
 		if(service->GetAttribute(L"EPMagicNumber", magicNumber) && magicNumber==_ownMagic) {
-			Log::Write(L"EPFramework/EPDiscovery", L"Magic number of discovered service is equal to own magic number; not adding, since this is a service we provide ourselves");
 			return;
 		}
 		
@@ -179,13 +178,13 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		if(service->GetAttribute(L"EPProtocol", protocol)) {
 			// If there is no protocol, assume HTTP; if there is something else in there, bail out
 			if(protocol!=L"HTTP") {
-				Log::Write(L"EPFramework/EPDiscovery", L"EP endpoint found, but negotiation protocol not supported ('"+protocol+L"')");
+				Log::Write(L"EPFramework/EPDiscovery", L"EP endpoint found ("+service->GetFriendlyName()+L"), but negotiation protocol not supported ('"+protocol+L"')");
 				return;
 			}
 		}
 		
 		if(service->GetAttribute(L"EPDefinitionPath", defPath)) {
-			Log::Write(L"TJFabric/EPDiscovery", L"Found EP endpoint; will download definitions at http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
+			Log::Write(L"TJFabric/EPDiscovery", L"Found EP endpoint; definition at http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
 			ref<EPDownloadedDefinition> epd = GC::Hold(new EPDownloadedDefinition(service, defPath));
 			
 			epd->EventDownloaded.AddListener(this);
@@ -193,7 +192,6 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		}
 	}
 	else {
-		Log::Write(L"EPFramework/EPDiscovery", L"Endpoint leaving: "+service->GetID());
 		// Remove any pending download action
 		std::set< ref<EPDownloadedDefinition> >::iterator it = _downloading.begin();
 		while(it!=_downloading.end()) {

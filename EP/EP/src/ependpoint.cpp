@@ -638,6 +638,7 @@ void EPParameterDefinition::Load(TiXmlElement* me) {
 	_minimumValue = LoadAttributeSmall(me, "min", _minimumValue);
 	_maximumValue = LoadAttributeSmall(me, "max", _maximumValue);
 	_defaultValue = LoadAttributeSmall(me, "default", _defaultValue);
+	_runtimeDefaultValue = Any(_defaultValue).Force(GetValueType());
 	
 	std::wstring natureString = LoadAttributeSmall<std::wstring>(me, "nature", L"");
 	if(natureString==L"discrete") {
