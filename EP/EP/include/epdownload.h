@@ -17,6 +17,7 @@ namespace tj {
 				virtual ~EPDownloadedDefinition();
 				virtual void OnCreated();
 				virtual tj::shared::strong<tj::scout::Service> GetService();
+				virtual tj::shared::ref<EPEndpoint> GetEndpoint();
 			
 				struct EPDownloadNotification {
 					EPDownloadNotification(tj::shared::ref<EPEndpoint> ep, tj::shared::strong<tj::scout::Service> service);
@@ -28,6 +29,7 @@ namespace tj {
 			
 			protected:
 				tj::shared::strong<tj::scout::Service> _service;
+				tj::shared::ref<EPEndpoint> _createdEndpoint;
 				virtual void OnDownloadComplete(tj::shared::ref<tj::shared::DataWriter> cw);
 		};
 	}

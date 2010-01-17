@@ -26,7 +26,7 @@ int main (int argc, char * const argv[]) {
 	std::string firstParameter = argv[1];
 	std::wstring serialDevicePath;
 	if(firstParameter=="--daemon") {
-		if(!daemon->Fork(L"tjusp3epserverd",true)) {
+		if(!daemon->Fork(L"tjledepd",true)) {
 			return 0;
 		}
 		

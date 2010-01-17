@@ -21,6 +21,10 @@ EPDownloadedDefinition::~EPDownloadedDefinition() {
 	Stop();
 }
 
+ref<EPEndpoint> EPDownloadedDefinition::GetEndpoint() {
+	return _createdEndpoint;
+}
+
 void EPDownloadedDefinition::OnCreated() {
 	Download::OnCreated();
 	Start();
@@ -35,7 +39,8 @@ void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
 		if(root!=0) {
 			ref<EPEndpointDefinition> epd = GC::Hold(new EPEndpointDefinition());
 			epd->Load(root);
-			EventDownloaded.Fire(this, EPDownloadNotification(epd, _service));
+			_createdEndpoint = epd;
+			EventDownloaded.Fire(this, EPDownloadNotification(_createdEndpoint, _service));
 			return;
 		}
 		else {

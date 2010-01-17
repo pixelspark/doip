@@ -11,8 +11,29 @@ void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 	
 	ref<EPEndpoint> enp = dn.endpoint;
 	if(enp) {
-		_endpoints.insert(enp);
-		_connections.insert(std::pair<ref<EPEndpoint>, ref<Connection> >(enp, dn.connection));
+		if(dn.added && dn.connection) {
+			_endpoints.insert(enp);
+			_connections.insert(std::pair<ref<EPEndpoint>, ref<Connection> >(enp, dn.connection));
+		}
+		else {
+			std::set<ref<EPEndpoint> >::iterator eit = _endpoints.find(enp);
+			if(eit!=_endpoints.end()) {
+				_endpoints.erase(eit);
+			}
+			
+			std::multimap< ref<EPEndpoint>, ref<Connection> >::iterator it = _connections.begin();
+			while(it!=_connections.end()) {
+				ref<EPEndpoint> itep = it->first;
+				ref<Connection> itcon = it->second;
+				if(itep==enp || itcon==dn.connection) {
+					_connections.erase(it);
+					it = _connections.begin();
+				}
+				else {
+					++it;
+				}
+			}
+		}
 	}
 }
 

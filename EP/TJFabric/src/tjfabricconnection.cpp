@@ -77,7 +77,7 @@ void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data)
 }
 
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
-	if(data.added) {
+	if(data.added && data.connection) {
 		_discoveredConnections.push_back(std::pair<EPMediationLevel, ref<Connection> >(data.mediationLevel, data.connection));
 		
 		// If there was a discovery script, run it

@@ -153,6 +153,10 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 	ThreadLock lock(&_lock);
 	ref<Service> service = data.service;
 	
+	if(!service) {
+		Throw(L"EP discovery notification was received, but without a service", ExceptionTypeError);
+	}
+	
 	if(data.online) {
 		std::wstring defPath;
 		std::wstring magicNumber;
@@ -182,11 +186,15 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		}
 	}
 	else {
+		Log::Write(L"EPFramework/EPDiscovery", L"Endpoint leaving: "+service->GetID());
 		// Remove any pending download action
+		ref<EPEndpoint> enp;
+		
 		std::set< ref<EPDownloadedDefinition> >::iterator it = _downloading.begin();
 		while(it!=_downloading.end()) {
 			ref<EPDownloadedDefinition> edd = *it;
-			if(edd->GetService()->GetID()==service->GetID()) {
+			if(edd && edd->GetService()->GetID()==service->GetID()) {
+				enp = edd->GetEndpoint();
 				_downloading.erase(it);
 				break;
 			}
@@ -207,8 +215,10 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 			dit++;
 		}
 		
-		if(removedConnection) {
-			EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), removedConnection, false, EPMediationLevelIgnore));
-		}
+		// Fire a notification that contains the removed connection (if any) and/or the removed endpoint
+		// Both can be null if the definition file was still being downloaded.
+		DiscoveryNotification dn(Timestamp(true), removedConnection, false, EPMediationLevelIgnore);
+		dn.endpoint = enp;
+		EventDiscovered.Fire(this, dn);
 	}
 }
