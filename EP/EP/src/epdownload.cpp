@@ -31,6 +31,7 @@ void EPDownloadedDefinition::OnCreated() {
 }
 
 void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
+	Download::OnDownloadComplete(cw);
 	if(cw) {
 		Log::Write(L"EPFramework/EPDownloadedDefinition", L"Downloaded definition from service "+_service->GetFriendlyName());
 		TiXmlDocument doc;
