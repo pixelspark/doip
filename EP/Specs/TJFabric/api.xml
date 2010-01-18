@@ -1,0 +1,332 @@
+<?xml version='1.0' ?>
+<?xml-stylesheet type="text/xsl" href="api.xsl" ?>
+
+<api name="TJFabric rule API 1.0">
+  <description>
+    This API defines the script objects and methods that can be used inside TJFabric rule handlers.
+  </description>
+
+  <class name="[global]">
+  	The 'global' namespace contains all the objects that are visible from script handlers inside a rule.
+  
+    <member name="print" type="void">
+	    Prints a message to the log of the server (in most cases, standard output or a log file) 
+      <param name="message" type="String">The message to display</param>
+    </member>
+    
+    <member name="schedule" type="TimedScriptable">
+		Schedules a delegate at a particular time. All parameters are directly passed as scope variables to the delegate when run. The
+		return value is a TimedScriptable, which can be used to cancel the appointment.
+		<param name="at" type="DateScriptable">The date at which to run the delegate</param>    
+		<param name="delegate" type="delegate">The delegate to run</param>
+    </member>
+    
+    <member name="send" type="void">
+        Sends a message to a group of devices. Each device will receive the message through a certain transport channel; the message can be recoded for each device if necessary.
+        <param name="group" type="string">The id of the group to send the message to</param>
+        <param name="message" type="MessageScriptable">The message to send</param>
+    </member>
+  </class>
+  
+  <class name="MessageScriptable">
+    Represents a generic EP message, that can be sent to and received from transport connections. When transporting the message over
+    a particular transport type, the message is recoded to the specific format.
+    
+    <member name="setPath" type="void">
+        <param name="path" type="string">The path to use</param>
+        Sets the path of this message.
+    </member>
+    
+    <member name="setParameter" type="void">
+        <param name="index" type="int">The index of the parameter to set</param>
+        <param name="value" type="any">The value to set</param>
+        Sets the value of a parameter.
+    </member>
+    
+    <member name="get" type="any">
+        Returns a paramter value with a particular index. Can also be used with the [] operator (use message[2] to get the parameter with index 2).
+        <param name="key" type="int">The index of the parameter to retrieve</param>
+    </member>
+    
+    <member name="path" type="string">
+        Returns the path of this message.
+    </member>
+    
+    <member name="parameterTypes" type="string">
+        Returns a string in which each character denotes the type of the parameter with that index, following OSC syntax.
+    </member>
+    
+    <member name="parameterCount" type="int">
+        Returns the number of parameters associated with this message.
+    </member>
+    
+    <member name="toString" type="string">
+        Returns a friendly string representation of this message.
+    </member>
+  </class>
+  
+  <class name="DateScriptable">
+  	Represents an absolute date and time and supports calculations with time and date. This date and time is
+  	always in GMT.
+  	
+  	<constructor>
+  		<param name="absolute" type="double">The number of seconds since the 1st Januari 2001, 00:00 GMT</param>
+  	</constructor>
+  	
+  	<constructor>
+  		Creates a date from a gregorian calendar date. The time will be set to 00:00:00.
+  		<param name="day" type="int">The day of month</param>
+  		<param name="month" type="int">The month (1=January)</param>
+  		<param name="year" type="int">The year</param>
+  	</constructor>
+  	
+  	<constructor>
+  		Create a date from a gregorian calendar date and time specification into the day.
+  		<param name="day" type="int">The day of month</param>
+  		<param name="month" type="int">The month (1=January)</param>
+  		<param name="year" type="int">The year</param>
+  		<param name="hours" type="int">The number of hours</param>
+  		<param name="minutes" type="int">The number of minutes</param>
+  		<param name="seconds" type="double">The number of seconds</param>
+  	</constructor>
+  	
+  	<member name="month" type="int">
+  		The month of this date
+  	</member>
+  	
+  	<member name="dayOfMonth" type="int">
+  		The day in this month
+  	</member>
+  	
+  	<member name="dayOfWeek" type="int">
+  		The day of the week for this date; monday is 0, tuesday is 1, and onwards
+  	</member>
+  	
+  	<member name="year" type="int">
+  		The year of this date
+  	</member>
+  	
+  	<member name="hour" type="int">
+  		The hour of this date
+  	</member>
+  	
+  	<member name="minute" type="int">
+  		The minutes for this date
+  	</member>
+  	
+  	<member name="second" type="double">
+  		The number of seconds
+  	</member>
+  	
+  	<member name="absolute" type="double">
+  		The absolute time of this date as seconds from 1st Januari 2001 00:00:00 GMT
+  	</member>
+  </class>
+  
+  <class name="TimedScriptable">
+  	Represents a scheduled action. This object cannot be created directly, use the schedule() method instead.
+  	
+  	<member name="cancel" type="void">
+  		Cancels a scheduled timed action.
+  	</member>
+  	
+  	<member name="isCancelled" type="boolean">
+  		True if this timed action was cancelled.
+  	</member>
+  </class>
+
+  <!-- Script internal -->
+  <class name="Map" internal="yes">
+    An ordered map containing string -&gt; object mappings.
+    
+    <constructor>
+      Creates a new, empty map. Every parameter given to the constructor will be added to the map as key-value mapping.
+    </constructor>
+    
+    <member name="get" type="any" operator="[]">
+      <param name="key" type="string"/>
+      Retrieves the object associated with the 'key' given.
+    </member>
+    
+    <member name="set" type="void">
+      Sets one or more key-value mappings in this map. Every parameter given to this method will be added to the array as key-value mapping.
+    </member>
+    
+    <member name="keys" type="Iterator">
+      Returns an iterator with which you can iterate over all the keys. The iterator thus returns objects of type string.
+    </member>
+    
+    <member name="keys" type="Iterator">
+      Returns an iterator with which you can iterate over all the values. The iterator thus returns objects of any type you put in the array.
+    </member>
+    
+    <member name="size" type="integer">Returns the number of key-value mappings in this map</member>
+  </class>
+
+  <class name="Array" internal="yes">
+    An ordered array of objects.
+    
+    <constructor>
+      Creates a new, empty array. Arrays can also be created using the array syntax: [1,2,3,4].
+    </constructor>
+
+    <member name="get" type="any" operator="[]">
+      <param name="key" type="string"/>  
+      Retrieves the object at the specified index (starting at index 0) from the array. Throws an exception of that index is out of bounds.
+    </member>
+
+    <member name="push" type="void">
+      <param name="object" type="any">The object to push</param>
+      Adds an object at the end of the array.
+    </member>
+
+    <member name="pop" type="any">
+      Returns the last object in this array, removing it from the array at the same time.
+    </member>
+
+    <member name="count" type="ínteger">
+      Returns the number of elements in this array.
+    </member>
+
+    <member name="implode" type="string">
+      <param name="glue" type="string">The separator to place between elements (default is ", ")</param>
+      <param name="nestBegin" type="string">The string to add in front of a nested array (default is "[")</param>
+      <param name="nestEnd" type="string">The string to add after a nested array(default is "]")</param>  
+      Concatenates the objects in the array as strings. If a nested array is encountered, the string specified by nestBegin
+      is added to the string, the nested array is imploded using the same parameters and nestEnd is added to the string. This works
+      recursively.
+    </member>
+
+    <member name="values" type="iterator">
+      Returns an iterator over all array elements.
+    </member>
+  </class>
+  
+  <class name="any" internal="yes"> 
+    Represents any object or object type, including internal values, functions or types. Can also be null.
+  </class>
+  
+  <class name="Iterator" internal="yes">
+    An iterator is an object that supports iterating. You can use it in for(var x: iterator) where iterator is the iterator for the collection you want to iterate.
+  </class>
+  
+  <class name="Hash" internal="yes">
+    <constructor>
+      Creates the hash of a given string.
+      <param name="data" type="string">The string to hash</param>
+    </constructor>
+    
+    <member name="toString" type="string">Returns the hash in string form</member>
+    <member name="toInt" type="integer">Returns the hash in integer form</member>
+    
+    The hash is a simple object to create a 32-bit (integer) hash of any string. It is immutable, which means that once the hash is created, it cannot be modified.
+  </class>
+  
+  <class name="Range" internal="yes">
+    <implements>Iterator</implements>
+    
+    <constructor>
+      <param name="from" type="integer"/>
+      <param name="to" type="integer"/>
+      Creates a new Range.
+    </constructor>
+
+    <member name="size" type="integer">The distance between from and to (the total number of integer elements this range contains)</member>
+    <member name="isInside" type="boolean">
+      <param name="value" type="integer">The integer to test for</param>
+      Returns true if the value is inside this range, otherwise false.
+    </member>
+    
+    A range represents a range of integer numbers, most commonly used in the for loop. The Range is inclusive (so [from,to]). Ranges are iterators, so you can use them in for-loops.
+  </class>
+  
+  <class name="Math" internal="yes">    
+    <member name="random" type="double" static="yes">
+      Returns a random number between from and to inclusive.
+      <param name="from" type="integer"/>
+      <param name="to" type="integer"/>
+    </member>
+
+    <member name="pi" type="double">Returns pi (3.14159)</member>
+    <member name="e" type="double">Returns e (2.718)</member>
+    
+    <member name="cos" static="yes" type="double"><param name="angle" type="double" />Returns the cosine of the angle specified</member>
+    <member name="sin" static="yes" type="double"><param name="angle" type="double" />Returns the sine of the angle specified</member>
+    <member name="tan" static="yes" type="double"><param name="angle" type="double" />Returns the tangens of the angle specified</member>
+    <member name="acos" static="yes" type="double"><param name="angle" type="double" />Returns the inverse (arc) cosine of the angle specified</member>
+    <member name="asin" static="yes" type="double"><param name="angle" type="double" />Returns the inverse (arc) sine of the angle specified</member>
+    <member name="atan" static="yes" type="double">Returns the inverse (arc) tangens of the angle specified<param name="angle" type="double" /></member>
+    
+    <member name="atan2" static="yes" type="double">
+      Returns the angle belonging to the point (x,y) 
+      <param name="x" type="double" />
+      <param name="y" type="double" />
+    </member>
+
+    <member name="pow" type="double" static="yes">
+      Returns a to the b'th power.
+      <param name="a" type="double"/>
+      <param name="b" type="double"/>
+    </member>
+    
+    <member name="fmod" type="double" static="yes">
+      Returns a mod b (or simply the 'rest' of a divided by b).
+      <param name="a" type="double"/>
+      <param name="b" type="double"/>
+    </member>
+  </class>
+  
+  <class name="ScriptScope" internal="yes"> 
+    A ScriptScope holds variables in a function call, if/else, for or scope block. If a variable cannot be found in it,
+    it will search in the linked 'previous' scriptscope. 
+    
+    <member name="delete" type="void">
+      Deletes a variable.
+      <param name="var" type="string">Name of the variable to delete</param>
+    </member>
+    
+    <member name="exists" type="boolean">
+      Returns true if the variable exists.
+      <param name="var" type="string">Name of the variable to check</param>
+    </member>
+  </class>
+  
+  <class name="integer" internal="yes">
+    Natural number, either positive or negative. Limited to 31 bits (so maximum/minimum value is +- 2^31). 
+  </class>
+  
+  <class name="double" internal="yes">
+  </class>
+  
+  <class name="int" internal="yes">
+  </class>
+  
+  <class name="void" internal="yes">
+    Indicates no return type (type is null)
+  </class>
+  
+  <class name="null" internal="yes">
+    This type has only one value: 'null'. 
+  </class>
+  
+  <class name="boolean" internal="yes">
+    Either 'true' or 'false'.
+  </class>
+  
+  <class name="string" internal="yes">
+    A string is any value with any characters (except ") placed between "". 
+    <member name="toUpper" type="string">Returns this string with all characters upper-cased.</member>
+    <member name="toLower" type="string">Returns this string with all characters lower-cased</member>
+    <member name="length" type="int">The length of this string</member>
+    <member name="explode" type="Array">
+      <param name="separator" type="string">The string on which to split this string (default is ',')</param>
+      Splits this string using the separator given and returns an array with the pieces.
+    </member>
+  </class>
+  
+  <class name="delegate" internal="yes">
+    A delegate is a separate script as a variable in another script. You can define one using a delegate {}-block. Any variables
+    referenced inside the delegate are resolved when the delegate is run, so the delegate cannot be 'connected' in any way to the 'outer'
+    script.
+  </class>
+</api>
