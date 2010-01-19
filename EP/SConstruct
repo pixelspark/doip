@@ -1,0 +1,6 @@
+SConscript([
+'EP/SConstruct',
+'TJFabric/SConstruct',
+'TJLEDEPServer/SConstruct',
+'TJBluetoothEPServer/SConstruct'
+]);
