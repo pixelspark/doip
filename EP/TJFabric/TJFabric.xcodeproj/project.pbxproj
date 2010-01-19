@@ -29,36 +29,57 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776B0109778B200FA1B69 /* TJScriptFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScript.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJScript;
 		};
 		B449293F1106463F0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJNP.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJNP;
 		};
 		B44929411106463F0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteGlobalIDString = B4A9883210C66144001CF473;
 			remoteInfo = TJNPMobile;
 		};
 		B4492948110646480096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJShared;
 		};
 		B449294A110646480096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
 			remoteInfo = TJSharedMobile;
+		};
+		B4492B991106665E0096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJShared */;
+			remoteInfo = TJShared;
+		};
+		B4492B9B1106665E0096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJNP */;
+			remoteInfo = TJNP;
+		};
+		B4492B9D1106665E0096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49776B0109778B200FA1B69 /* TJScriptFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScript */;
+			remoteInfo = TJScript;
 		};
 		B49776771097776300FA1B69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -277,6 +298,9 @@
 			dependencies = (
 				B49776971097777800FA1B69 /* PBXTargetDependency */,
 				B4CAAA7110AD68C900385A5F /* PBXTargetDependency */,
+				B4492B9A1106665E0096384E /* PBXTargetDependency */,
+				B4492B9C1106665E0096384E /* PBXTargetDependency */,
+				B4492B9E1106665E0096384E /* PBXTargetDependency */,
 			);
 			name = TJFabric;
 			productInstallPath = "$(HOME)/bin";
@@ -410,6 +434,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B4492B9A1106665E0096384E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJShared;
+			targetProxy = B4492B991106665E0096384E /* PBXContainerItemProxy */;
+		};
+		B4492B9C1106665E0096384E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJNP;
+			targetProxy = B4492B9B1106665E0096384E /* PBXContainerItemProxy */;
+		};
+		B4492B9E1106665E0096384E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJScript;
+			targetProxy = B4492B9D1106665E0096384E /* PBXContainerItemProxy */;
+		};
 		B49776971097777800FA1B69 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TinyXMLFramework;
@@ -463,9 +502,14 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Libraries,
+					../../Core,
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
 			};
 			name = Debug;
 		};
@@ -476,6 +520,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Libraries,
+					../../Core,
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
