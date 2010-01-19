@@ -39,7 +39,6 @@
 		B4A98A6910C6E5EF001CF473 /* libEPMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A9897C10C6C99C001CF473 /* libEPMobile.a */; };
 		B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */; };
 		B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */; };
-		B4A98AB610C6E707001CF473 /* libTJSharedMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */; };
 		B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */; };
 		B4B99F9D10C7AFFC0048EC2D /* FavoriteAll.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */; };
 		B4B99F9E10C7AFFC0048EC2D /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9C10C7AFFC0048EC2D /* Favorite.png */; };
@@ -53,6 +52,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B4492899110645070096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteInfo = TJShared;
+		};
+		B449289B110645070096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteInfo = TJSharedMobile;
+		};
 		B4A9897910C6C99C001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
@@ -116,27 +129,6 @@
 			remoteGlobalIDString = B4A9875C10C65E8A001CF473;
 			remoteInfo = TinyXMLMobile;
 		};
-		B4A98AB210C6E702001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = TJShared;
-		};
-		B4A98AB410C6E702001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473;
-			remoteInfo = TJSharedMobile;
-		};
-		B4A98AB710C6E70F001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B4A987C310C65F70001CF473;
-			remoteInfo = TJSharedMobile;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -184,7 +176,7 @@
 		B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EP/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHeaderView.h; sourceTree = "<group>"; };
 		B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWHeaderView.m; sourceTree = "<group>"; };
 		B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FavoriteAll.png; path = Resources/FavoriteAll.png; sourceTree = "<group>"; };
@@ -209,7 +201,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4A98AB610C6E707001CF473 /* libTJSharedMobile.a in Frameworks */,
 				B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */,
 				B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */,
 				B4A98A6910C6E5EF001CF473 /* libEPMobile.a in Frameworks */,
@@ -331,6 +322,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B4492894110645070096384E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B449289A110645070096384E /* TJShared.framework */,
+				B449289C110645070096384E /* libTJSharedMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B4A9894A10C6C99C001CF473 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,15 +358,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B4A98AAD10C6E702001CF473 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B4A98AB310C6E702001CF473 /* TJShared.framework */,
-				B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -384,7 +375,6 @@
 				B4A9897E10C6C9B5001CF473 /* PBXTargetDependency */,
 				B4A98A8310C6E638001CF473 /* PBXTargetDependency */,
 				B4A98A8510C6E638001CF473 /* PBXTargetDependency */,
-				B4A98AB810C6E70F001CF473 /* PBXTargetDependency */,
 			);
 			name = TJShowRemote;
 			productName = TJShowConnect;
@@ -415,7 +405,7 @@
 					ProjectRef = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
 				},
 				{
-					ProductGroup = B4A98AAD10C6E702001CF473 /* Products */;
+					ProductGroup = B4492894110645070096384E /* Products */;
 					ProjectRef = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
 				},
 			);
@@ -427,6 +417,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B449289A110645070096384E /* TJShared.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJShared.framework;
+			remoteRef = B4492899110645070096384E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B449289C110645070096384E /* libTJSharedMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJSharedMobile.a;
+			remoteRef = B449289B110645070096384E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B4A9897A10C6C99C001CF473 /* EP.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -467,20 +471,6 @@
 			fileType = archive.ar;
 			path = libOSCPackMobile.a;
 			remoteRef = B4A98A7E10C6E621001CF473 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B4A98AB310C6E702001CF473 /* TJShared.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TJShared.framework;
-			remoteRef = B4A98AB210C6E702001CF473 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B4A98AB510C6E702001CF473 /* libTJSharedMobile.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTJSharedMobile.a;
-			remoteRef = B4A98AB410C6E702001CF473 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -556,11 +546,6 @@
 			isa = PBXTargetDependency;
 			name = TinyXMLMobile;
 			targetProxy = B4A98A8410C6E638001CF473 /* PBXContainerItemProxy */;
-		};
-		B4A98AB810C6E70F001CF473 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TJSharedMobile;
-			targetProxy = B4A98AB710C6E70F001CF473 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

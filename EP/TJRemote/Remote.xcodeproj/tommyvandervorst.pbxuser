@@ -191,12 +191,13 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 281864753;
-			PBXWorkspaceStateSaveDate = 281864753;
+			PBXPerProjectTemplateStateSaveDate = 285623545;
+			PBXWorkspaceStateSaveDate = 285623545;
 		};
 		perUserProjectItems = {
 			B408C6F2108A6FA6005AC842 /* PBXTextBookmark */ = B408C6F2108A6FA6005AC842 /* PBXTextBookmark */;
 			B4161F2310A98A0400B39D1A /* PBXTextBookmark */ = B4161F2310A98A0400B39D1A /* PBXTextBookmark */;
+			B44929E5110647DA0096384E /* PBXTextBookmark */ = B44929E5110647DA0096384E /* PBXTextBookmark */;
 			B4528BAF10BA8E0F009605EC /* PBXTextBookmark */ = B4528BAF10BA8E0F009605EC /* PBXTextBookmark */;
 			B4528C9610BA97BE009605EC /* PBXBookmark */ = B4528C9610BA97BE009605EC /* PBXBookmark */;
 			B4528CCA10BA9AF8009605EC /* PBXBookmark */ = B4528CCA10BA9AF8009605EC /* PBXBookmark */;
@@ -217,10 +218,8 @@
 			B475109110CCEB82008A801F /* PBXTextBookmark */ = B475109110CCEB82008A801F /* PBXTextBookmark */;
 			B475109210CCEB82008A801F /* PBXTextBookmark */ = B475109210CCEB82008A801F /* PBXTextBookmark */;
 			B475118310CD0F86008A801F /* PBXTextBookmark */ = B475118310CD0F86008A801F /* PBXTextBookmark */;
-			B47511D910CD110B008A801F /* PBXTextBookmark */ = B47511D910CD110B008A801F /* PBXTextBookmark */;
 			B47511DA10CD110B008A801F /* PBXTextBookmark */ = B47511DA10CD110B008A801F /* PBXTextBookmark */;
 			B499CFFF108BA5DA002E1F92 /* PBXTextBookmark */ = B499CFFF108BA5DA002E1F92 /* PBXTextBookmark */;
-			B4A98ABD10C6E715001CF473 /* PBXTextBookmark */ = B4A98ABD10C6E715001CF473 /* PBXTextBookmark */;
 			B4A98AC010C6E715001CF473 /* PBXBookmark */ = B4A98AC010C6E715001CF473 /* PBXBookmark */;
 			B4B99F6D10C7AE300048EC2D /* PBXTextBookmark */ = B4B99F6D10C7AE300048EC2D /* PBXTextBookmark */;
 			B4B99F6E10C7AE300048EC2D /* PBXTextBookmark */ = B4B99F6E10C7AE300048EC2D /* PBXTextBookmark */;
@@ -298,6 +297,16 @@
 		name = NSRunLoop.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRunLoop.h;
 		sourceTree = "<absolute>";
+	};
+	B44929E5110647DA0096384E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */;
+		name = "MWFavoritesTableViewController.mm: 112";
+		rLen = 0;
+		rLoc = 3781;
+		rType = 0;
+		vrLen = 1375;
+		vrLoc = 2736;
 	};
 	B44DD3A4108B31CB00EBDC00 /* tubled.fabric */ = {
 		isa = PBXFileReference;
@@ -567,16 +576,6 @@
 		vrLen = 1468;
 		vrLoc = 3889;
 	};
-	B47511D910CD110B008A801F /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */;
-		name = "MWFavoritesTableViewController.mm: 86";
-		rLen = 0;
-		rLoc = 2781;
-		rType = 0;
-		vrLen = 1386;
-		vrLoc = 2725;
-	};
 	B47511DA10CD110B008A801F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */;
@@ -638,23 +637,6 @@
 			sepNavSelRange = "{2757, 0}";
 			sepNavVisRange = "{1822, 1273}";
 		};
-	};
-	B4A98A9610C6E658001CF473 /* tjnetwork.cpp */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = tjnetwork.cpp;
-		path = /Users/tommyvandervorst/Documents/Projecten/tj/TJNP/src/tjnetwork.cpp;
-		sourceTree = "<absolute>";
-	};
-	B4A98ABD10C6E715001CF473 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4A98A9610C6E658001CF473 /* tjnetwork.cpp */;
-		name = "tjnetwork.cpp: 11";
-		rLen = 0;
-		rLoc = 161;
-		rType = 0;
-		vrLen = 978;
-		vrLoc = 0;
 	};
 	B4A98AC010C6E715001CF473 /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -1116,9 +1098,9 @@
 	};
 	B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1209, 2106}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1209, 2041}}";
 			sepNavSelRange = "{3781, 0}";
-			sepNavVisRange = "{2725, 1386}";
+			sepNavVisRange = "{2736, 1375}";
 		};
 	};
 	B4FF22E310C71ED0000D47B6 /* MWFavorite.h */ = {

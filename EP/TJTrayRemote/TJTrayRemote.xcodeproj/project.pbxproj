@@ -13,18 +13,20 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		B401A25F11009D1C00B2B77A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B401A25E11009D1C00B2B77A /* icon.png */; };
 		B401A27A11009F6600B2B77A /* icon-high.png in Resources */ = {isa = PBXBuildFile; fileRef = B401A27911009F6600B2B77A /* icon-high.png */; };
-		B401A5A9110104AF00B2B77A /* TJShared.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A58B1101038600B2B77A /* TJShared.framework */; };
 		B401A5AA110104AF00B2B77A /* EP.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A5811101037800B2B77A /* EP.framework */; };
 		B401A646110106DC00B2B77A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A645110106DC00B2B77A /* Cocoa.framework */; };
 		B401A64E110106F800B2B77A /* Fabric.icns in Resources */ = {isa = PBXBuildFile; fileRef = B401A64D110106F800B2B77A /* Fabric.icns */; };
-		B401A6711101080700B2B77A /* TJShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A58B1101038600B2B77A /* TJShared.framework */; };
 		B401A6721101080700B2B77A /* EP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A5811101037800B2B77A /* EP.framework */; };
-		B401A70E11010A9E00B2B77A /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A70B11010A9800B2B77A /* TJScout.framework */; };
-		B401A70F11010A9E00B2B77A /* TJNP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A70211010A8300B2B77A /* TJNP.framework */; };
-		B401A71411010AB200B2B77A /* TJScout.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A70B11010A9800B2B77A /* TJScout.framework */; };
-		B401A71511010AB200B2B77A /* TJNP.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B401A70211010A8300B2B77A /* TJNP.framework */; };
 		B40868B71101BDA600F1F103 /* TTMethodMenuItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */; };
 		B40868EA1101BFC000F1F103 /* TTParameterMenuItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */; };
+		B449285B110644D70096384E /* OSCPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
+		B449285C110644D70096384E /* TinyXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
+		B449285D110644D70096384E /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4492842110644A60096384E /* TJScout.framework */; };
+		B449285E110644D70096384E /* TJNP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449284B110644B10096384E /* TJNP.framework */; };
+		B449285F110644D70096384E /* TJShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4492854110644BB0096384E /* TJShared.framework */; };
+		B44928F0110646030096384E /* TJScout.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4492842110644A60096384E /* TJScout.framework */; };
+		B44928F1110646030096384E /* TJNP.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B449284B110644B10096384E /* TJNP.framework */; };
+		B44928F2110646030096384E /* TJShared.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4492854110644BB0096384E /* TJShared.framework */; };
 		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
 /* End PBXBuildFile section */
@@ -44,27 +46,6 @@
 			remoteGlobalIDString = B4A988EE10C6622C001CF473;
 			remoteInfo = EPMobile;
 		};
-		B401A58A1101038600B2B77A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = TJShared;
-		};
-		B401A58C1101038600B2B77A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473;
-			remoteInfo = TJSharedMobile;
-		};
-		B401A58E1101039500B2B77A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = TJShared;
-		};
 		B401A5901101039500B2B77A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B401A5511101037800B2B77A /* EPFramework.xcodeproj */;
@@ -72,46 +53,81 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = EP;
 		};
-		B401A70111010A8300B2B77A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = TJNP;
-		};
-		B401A70311010A8300B2B77A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B4A9883210C66144001CF473;
-			remoteInfo = TJNPMobile;
-		};
-		B401A70A11010A9800B2B77A /* PBXContainerItemProxy */ = {
+		B4492841110644A60096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScout.framework */;
 			remoteInfo = TJScoutFramework;
 		};
-		B401A70C11010A9800B2B77A /* PBXContainerItemProxy */ = {
+		B4492843110644A60096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9887110C661C3001CF473;
+			remoteGlobalIDString = B4A9887110C661C3001CF473 /* libTJScoutMobile.a */;
 			remoteInfo = TJScoutMobile;
 		};
-		B401A71011010AAB00B2B77A /* PBXContainerItemProxy */ = {
+		B449284A110644B10096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJNP.framework */;
+			remoteInfo = TJNP;
+		};
+		B449284C110644B10096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteInfo = TJNPMobile;
+		};
+		B4492853110644BB0096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteInfo = TJShared;
+		};
+		B4492855110644BB0096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteInfo = TJSharedMobile;
+		};
+		B4492864110644E10096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* OSCPack */;
+			remoteInfo = OSCPack;
+		};
+		B4492866110644E10096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJShared */;
+			remoteInfo = TJShared;
+		};
+		B4492868110644E10096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScoutFramework */;
 			remoteInfo = TJScoutFramework;
 		};
-		B401A71211010AAB00B2B77A /* PBXContainerItemProxy */ = {
+		B449286A110644E10096384E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TinyXML */;
+			remoteInfo = TinyXML;
+		};
+		B449286C110644E10096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJNP */;
 			remoteInfo = TJNP;
 		};
 		B4D65D7111011E97008FD68C /* PBXContainerItemProxy */ = {
@@ -153,9 +169,9 @@
 			files = (
 				B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */,
 				B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */,
-				B401A71411010AB200B2B77A /* TJScout.framework in Copy Executables */,
-				B401A71511010AB200B2B77A /* TJNP.framework in Copy Executables */,
-				B401A5A9110104AF00B2B77A /* TJShared.framework in Copy Executables */,
+				B44928F0110646030096384E /* TJScout.framework in Copy Executables */,
+				B44928F1110646030096384E /* TJNP.framework in Copy Executables */,
+				B44928F2110646030096384E /* TJShared.framework in Copy Executables */,
 				B401A5AA110104AF00B2B77A /* EP.framework in Copy Executables */,
 			);
 			name = "Copy Executables";
@@ -178,11 +194,11 @@
 		B401A25E11009D1C00B2B77A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icon.png; sourceTree = "<group>"; };
 		B401A27911009F6600B2B77A /* icon-high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-high.png"; path = "Resources/icon-high.png"; sourceTree = "<group>"; };
 		B401A5511101037800B2B77A /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EP/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B401A645110106DC00B2B77A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B401A64D110106F800B2B77A /* Fabric.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fabric.icns; sourceTree = "<group>"; };
-		B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../Core/TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../Core/TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B40868B51101BDA600F1F103 /* TTMethodMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTMethodMenuItem.h; path = Classes/TTMethodMenuItem.h; sourceTree = "<group>"; };
 		B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTMethodMenuItem.mm; path = Classes/TTMethodMenuItem.mm; sourceTree = "<group>"; };
 		B40868E81101BFC000F1F103 /* TTParameterMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTParameterMenuItem.h; path = Classes/TTParameterMenuItem.h; sourceTree = "<group>"; };
@@ -196,9 +212,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B401A70E11010A9E00B2B77A /* TJScout.framework in Frameworks */,
-				B401A70F11010A9E00B2B77A /* TJNP.framework in Frameworks */,
-				B401A6711101080700B2B77A /* TJShared.framework in Frameworks */,
+				B449285B110644D70096384E /* OSCPack.framework in Frameworks */,
+				B449285C110644D70096384E /* TinyXML.framework in Frameworks */,
+				B449285D110644D70096384E /* TJScout.framework in Frameworks */,
+				B449285E110644D70096384E /* TJNP.framework in Frameworks */,
+				B449285F110644D70096384E /* TJShared.framework in Frameworks */,
 				B401A6721101080700B2B77A /* EP.framework in Frameworks */,
 				B401A646110106DC00B2B77A /* Cocoa.framework in Frameworks */,
 			);
@@ -304,29 +322,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B401A5851101038600B2B77A /* Products */ = {
+		B449283D110644A60096384E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B401A58B1101038600B2B77A /* TJShared.framework */,
-				B401A58D1101038600B2B77A /* libTJSharedMobile.a */,
+				B4492842110644A60096384E /* TJScout.framework */,
+				B4492844110644A60096384E /* libTJScoutMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B401A6FC11010A8300B2B77A /* Products */ = {
+		B4492845110644B10096384E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B401A70211010A8300B2B77A /* TJNP.framework */,
-				B401A70411010A8300B2B77A /* libTJNPMobile.a */,
+				B449284B110644B10096384E /* TJNP.framework */,
+				B449284D110644B10096384E /* libTJNPMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B401A70611010A9800B2B77A /* Products */ = {
+		B449284E110644BB0096384E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B401A70B11010A9800B2B77A /* TJScout.framework */,
-				B401A70D11010A9800B2B77A /* libTJScoutMobile.a */,
+				B4492854110644BB0096384E /* TJShared.framework */,
+				B4492856110644BB0096384E /* libTJSharedMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -364,10 +382,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				B401A58F1101039500B2B77A /* PBXTargetDependency */,
 				B401A5911101039500B2B77A /* PBXTargetDependency */,
-				B401A71111010AAB00B2B77A /* PBXTargetDependency */,
-				B401A71311010AAB00B2B77A /* PBXTargetDependency */,
+				B4492865110644E10096384E /* PBXTargetDependency */,
+				B4492867110644E10096384E /* PBXTargetDependency */,
+				B4492869110644E10096384E /* PBXTargetDependency */,
+				B449286B110644E10096384E /* PBXTargetDependency */,
+				B449286D110644E10096384E /* PBXTargetDependency */,
 			);
 			name = TJTrayRemote;
 			productInstallPath = "$(HOME)/Applications";
@@ -399,15 +419,15 @@
 					ProjectRef = B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */;
 				},
 				{
-					ProductGroup = B401A6FC11010A8300B2B77A /* Products */;
+					ProductGroup = B4492845110644B10096384E /* Products */;
 					ProjectRef = B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */;
 				},
 				{
-					ProductGroup = B401A70611010A9800B2B77A /* Products */;
+					ProductGroup = B449283D110644A60096384E /* Products */;
 					ProjectRef = B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */;
 				},
 				{
-					ProductGroup = B401A5851101038600B2B77A /* Products */;
+					ProductGroup = B449284E110644BB0096384E /* Products */;
 					ProjectRef = B401A5841101038600B2B77A /* TJSharedFramework.xcodeproj */;
 				},
 			);
@@ -433,46 +453,46 @@
 			remoteRef = B401A5821101037800B2B77A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B401A58B1101038600B2B77A /* TJShared.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TJShared.framework;
-			remoteRef = B401A58A1101038600B2B77A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B401A58D1101038600B2B77A /* libTJSharedMobile.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTJSharedMobile.a;
-			remoteRef = B401A58C1101038600B2B77A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B401A70211010A8300B2B77A /* TJNP.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TJNP.framework;
-			remoteRef = B401A70111010A8300B2B77A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B401A70411010A8300B2B77A /* libTJNPMobile.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTJNPMobile.a;
-			remoteRef = B401A70311010A8300B2B77A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B401A70B11010A9800B2B77A /* TJScout.framework */ = {
+		B4492842110644A60096384E /* TJScout.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TJScout.framework;
-			remoteRef = B401A70A11010A9800B2B77A /* PBXContainerItemProxy */;
+			remoteRef = B4492841110644A60096384E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B401A70D11010A9800B2B77A /* libTJScoutMobile.a */ = {
+		B4492844110644A60096384E /* libTJScoutMobile.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libTJScoutMobile.a;
-			remoteRef = B401A70C11010A9800B2B77A /* PBXContainerItemProxy */;
+			remoteRef = B4492843110644A60096384E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B449284B110644B10096384E /* TJNP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJNP.framework;
+			remoteRef = B449284A110644B10096384E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B449284D110644B10096384E /* libTJNPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJNPMobile.a;
+			remoteRef = B449284C110644B10096384E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4492854110644BB0096384E /* TJShared.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJShared.framework;
+			remoteRef = B4492853110644BB0096384E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4492856110644BB0096384E /* libTJSharedMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJSharedMobile.a;
+			remoteRef = B4492855110644BB0096384E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B4D65D7211011E97008FD68C /* TinyXML.framework */ = {
@@ -535,25 +555,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B401A58F1101039500B2B77A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TJShared;
-			targetProxy = B401A58E1101039500B2B77A /* PBXContainerItemProxy */;
-		};
 		B401A5911101039500B2B77A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = EP;
 			targetProxy = B401A5901101039500B2B77A /* PBXContainerItemProxy */;
 		};
-		B401A71111010AAB00B2B77A /* PBXTargetDependency */ = {
+		B4492865110644E10096384E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OSCPack;
+			targetProxy = B4492864110644E10096384E /* PBXContainerItemProxy */;
+		};
+		B4492867110644E10096384E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TJShared;
+			targetProxy = B4492866110644E10096384E /* PBXContainerItemProxy */;
+		};
+		B4492869110644E10096384E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TJScoutFramework;
-			targetProxy = B401A71011010AAB00B2B77A /* PBXContainerItemProxy */;
+			targetProxy = B4492868110644E10096384E /* PBXContainerItemProxy */;
 		};
-		B401A71311010AAB00B2B77A /* PBXTargetDependency */ = {
+		B449286B110644E10096384E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TinyXML;
+			targetProxy = B449286A110644E10096384E /* PBXContainerItemProxy */;
+		};
+		B449286D110644E10096384E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TJNP;
-			targetProxy = B401A71211010AAB00B2B77A /* PBXContainerItemProxy */;
+			targetProxy = B449286C110644E10096384E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

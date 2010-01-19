@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -274,20 +272,29 @@
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
+								<string>B4CAAABE10AD691700385A5F</string>
+								<string>B4720D37108C4B31002DEC9F</string>
+								<string>B4720D31108C4B25002DEC9F</string>
+								<string>B4720D2B108C4B1B002DEC9F</string>
+								<string>B4720D25108C4B0E002DEC9F</string>
+								<string>B4720D1F108C4B04002DEC9F</string>
+								<string>B4720D19108C4AF6002DEC9F</string>
 								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
+								<string>B44929C9110647570096384E</string>
+								<string>B44929CA110647570096384E</string>
+								<string>B44929CB110647570096384E</string>
 								<string>1C37FAAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>16</integer>
-									<integer>9</integer>
-									<integer>0</integer>
+									<integer>45</integer>
+									<integer>44</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {185, 846}}</string>
+							<string>{{0, 194}, {185, 846}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -332,16 +339,13 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B49010D11103927000925122</string>
+										<string>B44929E3110647D90096384E</string>
 										<key>history</key>
 										<array>
 											<string>B4977775109782A400FA1B69</string>
 											<string>B462ADF510984D7C00484C29</string>
 											<string>B4CD460B109B0D9D004B3BBB</string>
 											<string>B45CFB7710A1B154007CA879</string>
-											<string>B45CFB7810A1B154007CA879</string>
-											<string>B45CFB7A10A1B154007CA879</string>
-											<string>B477C2F710A3914200396B72</string>
 											<string>B46CBD9110A47B0600CDE29F</string>
 											<string>B47B752D10AB72F20031263D</string>
 											<string>B401A7AC11010DEB00B2B77A</string>
@@ -352,7 +356,7 @@
 											<string>B4901042110349F600925122</string>
 											<string>B4901043110349F600925122</string>
 											<string>B4901044110349F600925122</string>
-											<string>B4901045110349F600925122</string>
+											<string>B49010D11103927000925122</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -366,18 +370,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1072, 517}}</string>
+								<string>{{0, 0}, {1072, 509}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 97 1279 905 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>517pt</string>
+							<string>509pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>342pt</string>
+							<string>350pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -391,7 +395,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1072, 315}}</string>
+										<string>{{10, 27}, {1072, 323}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -445,7 +449,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1072, 315}}</string>
+										<string>{{10, 27}, {1072, 323}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 97 1279 905 0 0 1280 1002 </string>
 									</dict>
@@ -475,11 +479,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4901047110349F600925122</string>
+				<string>B44929CD110647570096384E</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B4901048110349F600925122</string>
+				<string>B44929CE110647570096384E</string>
 				<string>B4720CF4108C4A75002DEC9F</string>
-				<string>B4901049110349F600925122</string>
+				<string>B44929CF110647570096384E</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -670,8 +674,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B49010D21103927000925122</string>
-		<string>B49010D31103927000925122</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJFabricFrontend/Frontend.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
