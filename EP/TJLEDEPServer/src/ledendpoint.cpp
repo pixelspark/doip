@@ -35,19 +35,19 @@ void LEDEndpoint::OnCreated() {
 	
 	// Create the methods
 	ref<EPMethodDefinition> setColor = GC::Hold(new EPMethodDefinition(L"setColor", L"/ep/basic/color/set", L"Set color"));
-	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0")));
-	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0")));
-	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0")));
+	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0", EPParameter::NatureUnknown, L"r")));
+	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0", EPParameter::NatureUnknown, L"g")));
+	setColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0", EPParameter::NatureUnknown, L"b")));
 	AddMethod(ref<EPMethod>(setColor), &LEDEndpoint::MSetColor);
 	
 	ref<EPMethodDefinition> fadeColor = GC::Hold(new EPMethodDefinition(L"fadeColor", L"/ep/basic/color/fade", L"Fade to color"));
-	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0")));
-	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0")));
-	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0")));
+	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Red", L"int32", L"0", L"255", L"0", EPParameter::NatureUnknown, L"r")));
+	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Green", L"int32", L"0", L"255", L"0", EPParameter::NatureUnknown, L"g")));
+	fadeColor->AddParameter(GC::Hold(new EPParameterDefinition(L"Blue", L"int32", L"0", L"255", L"0", EPParameter::NatureUnknown, L"b")));
 	AddMethod(ref<EPMethod>(fadeColor), &LEDEndpoint::MFadeColor);
 	
 	ref<EPMethodDefinition> dim = GC::Hold(new EPMethodDefinition(L"dim", L"/ep/basic/dim", L"Dim light"));
-	dim->AddParameter(GC::Hold(new EPParameterDefinition(L"Value", L"double", L"0", L"1", L"1")));
+	dim->AddParameter(GC::Hold(new EPParameterDefinition(L"Value", L"double", L"0", L"1", L"1", EPParameter::NatureUnknown, L"dim")));
 	AddMethod(ref<EPMethod>(dim), &LEDEndpoint::MDim);
 	
 	ref<EPMethodDefinition> reset = GC::Hold(new EPMethodDefinition(L"reset", L"/ep/basic/reset", L"Reset device"));
@@ -58,11 +58,16 @@ void LEDEndpoint::OnCreated() {
 	
 	ref<EPMethodDefinition> powerOff = GC::Hold(new EPMethodDefinition(L"off", L"/ep/basic/power/off", L"Turn off device"));
 	AddMethod(ref<EPMethod>(powerOff), &LEDEndpoint::MPowerOff);
+	
+	BindVariable(L"dim", &_dim);
+	BindVariable(L"r", &_r);
+	BindVariable(L"g", &_g);
+	BindVariable(L"b", &_b);
 }
 
 void LEDEndpoint::PowerUp() {
-	if(_dim<0.0) {
-		_dim = -_dim;
+	if(double(_dim)<0.0) {
+		_dim = -double(_dim);
 	}
 }
 
@@ -71,9 +76,9 @@ void LEDEndpoint::UpdateColor(bool fading) {
 	if(dim<0.0f) {
 		dim = 0.0f;
 	}
-	unsigned char rc = int(_r * dim) & 0xFF;
-	unsigned char gc = int(_g * dim) & 0xFF;
-	unsigned char bc = int(_b * dim) & 0xFF;
+	unsigned char rc = int(float(_r) * dim) & 0xFF;
+	unsigned char gc = int(float(_g) * dim) & 0xFF;
+	unsigned char bc = int(float(_b) * dim) & 0xFF;
 	
 	if(fading) {
 		_device->SetColorFading(rc,gc,bc);

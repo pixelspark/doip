@@ -11,13 +11,27 @@
 
 namespace tj {
 	namespace ep {
-		class EP_EXPORTED EPPublication {
+		class EP_EXPORTED EPPublication: public virtual tj::shared::Object, public EPState {
 			public:
 				EPPublication(tj::shared::strong<EPEndpoint> ep, const std::wstring& magicPostfix = L"");
 				virtual ~EPPublication();
+				virtual void SetState(const EPState::ValueMap& values);
+				virtual void SetStateVariable(const tj::shared::String& key, const tj::shared::Any& value);
+				virtual void LoadState(TiXmlElement* root);
+				virtual void GetState(EPState::ValueMap& vals);
+				virtual tj::shared::Any GetValue(const tj::shared::String& key);
+				virtual tj::shared::ref<EPEndpoint> GetEndpoint();
 				
 			protected:
+				virtual void OnCreated();
+				virtual void PublishState();
+			
+				tj::shared::CriticalSection _lock;
+				tj::shared::String _stateVersion;
+				tj::shared::String _magicPostfix;
+				EPState::ValueMap _state;
 				tj::shared::ref<tj::np::WebServer> _ws;
+				tj::shared::weak<EPEndpoint> _ep;
 				tj::shared::ref<tj::scout::ServiceRegistration> _reg;
 		};
 	}

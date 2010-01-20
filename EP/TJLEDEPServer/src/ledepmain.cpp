@@ -84,6 +84,7 @@ int main (int argc, char * const argv[]) {
 		if(leds) {
 			ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.leds", st->GetValue(L"ep.friendly-name"), leds));
 			ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
+			uspe->Publish(pub);
 			Log::Write(L"TJLEDEPServer/Main", L"Running");
 			daemon->Run();
 		}

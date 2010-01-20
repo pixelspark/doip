@@ -3,10 +3,13 @@
 
 #include "epinternal.h"
 #include "ependpoint.h"
+#include "eppublication.h"
 #include <TJNP/include/tjwebserver.h>
 
 namespace tj {
 	namespace ep {
+		class EPPublication;
+		
 		/** The EPServerManager class generates a unique 'magic' key for each fabric process. This is
 		 used to prevent discovery of services published by the process itself: when the service supports
 		 it, services published from this process should have the EPMagicNumber attribute set to the
@@ -33,18 +36,18 @@ namespace tj {
 		
 		class EP_EXPORTED EPStateWebItem: public tj::np::WebItemResource {
 			public:
-				EPStateWebItem(tj::shared::ref<EPEndpoint> model, const tj::shared::String& fn);
+				EPStateWebItem(tj::shared::ref<EPPublication> model, const tj::shared::String& fn);
 				virtual ~EPStateWebItem();
 				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, tj::shared::Bytes& dataLength);
 				
 			protected:
-				tj::shared::weak<EPEndpoint> _endpoint;
+				tj::shared::weak<EPPublication> _publication;
 		};
 		
 		/** Serves an XML-file containing the definitions of the messages this fabric will accept **/
 		class EP_EXPORTED EPWebItem: public tj::np::WebItemResource {
 			public:
-				EPWebItem(tj::shared::ref<EPEndpoint> model);
+				EPWebItem(tj::shared::ref<EPPublication> publication);
 				virtual ~EPWebItem();
 				virtual tj::shared::ref<tj::np::WebItem> Resolve(const tj::shared::String& file);
 				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, tj::shared::Bytes& dataLength);
@@ -55,7 +58,7 @@ namespace tj {
 				const static wchar_t* KDefinitionPath;
 				const static wchar_t* KStatePath;
 				tj::shared::ref<EPStateWebItem> _stateItem;
-				tj::shared::weak<EPEndpoint> _endpoint;
+				tj::shared::weak<EPPublication> _publication;
 		};
 	}
 }

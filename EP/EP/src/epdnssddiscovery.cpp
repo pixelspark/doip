@@ -8,6 +8,93 @@ using namespace tj::ep;
 using namespace tj::scout;
 using namespace tj::np;
 
+/** DNSSDRemoteState **/
+class DNSSDRemoteState: public virtual Object, public EPRemoteState, 
+	public Listener<Service::UpdateNotification>,
+	public Listener<EPDownloadedState::EPStateDownloadNotification> {
+		
+	public:
+		DNSSDRemoteState(ref<EPEndpoint> ep, ref<Service> sd);
+		virtual ~DNSSDRemoteState();
+		virtual void OnCreated();
+		virtual void Download();
+		virtual void Notify(ref<Object> src, const EPDownloadedState::EPStateDownloadNotification& dn);
+		virtual void Notify(ref<Object> src, const Service::UpdateNotification& dn);
+		virtual void GetState(EPState::ValueMap& vals);
+		virtual tj::shared::Any GetValue(const tj::shared::String& key);
+	
+	protected:
+		CriticalSection _lock;
+		String _lastVersion;
+		ref<Service> _service;
+		EPState::ValueMap _values;
+		ref<EPDownloadedState> _state;
+};
+
+DNSSDRemoteState::DNSSDRemoteState(ref<EPEndpoint> ep, ref<Service> sd): EPRemoteState(ep), _service(sd) {
+}
+
+DNSSDRemoteState::~DNSSDRemoteState() {
+}
+
+void DNSSDRemoteState::OnCreated() {
+	if(_service) {
+		_service->EventUpdate.AddListener(this);
+		Download();
+	}
+}
+
+void DNSSDRemoteState::Download() {
+	ThreadLock lock(&_lock);
+	
+	if(!_state) {
+		String currentVersion;
+		if(!_service->GetAttribute(L"EPStateVersion", currentVersion)) {
+			Throw(L"DNSSDRemoteState: remote service doesn't supply a state version", ExceptionTypeError);
+		}
+		
+		if(_lastVersion!=currentVersion) {
+			_lastVersion = currentVersion;
+			String remoteStatePath;
+			if(!_service->GetAttribute(L"EPStatePath", remoteStatePath)) {
+				Throw(L"DNSSDRemoteState: remote service doesn't supply a state path", ExceptionTypeError);
+			}
+		
+			_state = GC::Hold(new EPDownloadedState(_service, remoteStatePath));
+			_state->EventDownloaded.AddListener(this);
+			_state->Start();
+		}
+	}
+}
+
+void DNSSDRemoteState::Notify(ref<Object> src, const Service::UpdateNotification& dn) {
+	Download();
+}
+
+void DNSSDRemoteState::Notify(ref<Object> src, const EPDownloadedState::EPStateDownloadNotification& dn) {
+	ThreadLock lock(&_lock);
+	if(_state) {
+		_state->GetState(_values);
+		_state = null;
+		EPStateChangeNotification en;
+		en.remoteState = ref<EPRemoteState>(this);
+		EPRemoteState::EventStateChanged.Fire(this, en);
+	}
+}
+
+void DNSSDRemoteState::GetState(EPState::ValueMap& vm) {
+	ThreadLock lock(&_lock);
+	vm = _values;
+}
+
+Any DNSSDRemoteState::GetValue(const tj::shared::String& key) {
+	EPState::ValueMap::const_iterator it = _values.find(key);
+	if(it!=_values.end()) {
+		return it->second;
+	}
+	return Any();
+}
+
 /** DNSSDDiscoveryDefinition **/
 DNSSDDiscoveryDefinition::DNSSDDiscoveryDefinition(): DiscoveryDefinition(L"dnssd"), _serviceType(L"_osc._udp") {
 }
@@ -46,7 +133,8 @@ void DNSSDDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::Resolv
 			mediationLevel = StringTo<EPMediationLevel>(mlString, mediationLevel);
 		}
 		
-		EventDiscovered.Fire(this, DiscoveryNotification(Timestamp(true), ref<Connection>(con), true, mediationLevel));
+		DiscoveryNotification dn(Timestamp(true), ref<Connection>(con), true, mediationLevel);
+		EventDiscovered.Fire(this, dn);
 	}
 }
 
@@ -137,6 +225,18 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 						}
 						DiscoveryNotification dn(Timestamp(true), connection, true, epe->GetMediationLevel());
 						dn.endpoint = epe;
+						
+						// If the remote service supports states, start a download and add a remote state to the notification
+						ref<Service> service = edd->GetService();
+						if(service) {
+							String remoteStatePath;
+							String remoteStateVersion;
+							if(service->GetAttribute(L"EPStatePath", remoteStatePath) && service->GetAttribute(L"EPStateVersion", remoteStateVersion)) {
+								ref<DNSSDRemoteState> dsd = GC::Hold(new DNSSDRemoteState(epe, service));
+								dn.remoteState = dsd;
+							}
+						}
+						
 						EventDiscovered.Fire(this, dn);
 						break;
 					}

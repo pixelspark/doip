@@ -3,6 +3,17 @@
 using namespace tj::shared;
 using namespace tj::ep;
 
+/** EPRemoteState **/
+EPRemoteState::EPRemoteState(ref<EPEndpoint> ep): _ep(ep) {
+}
+
+EPRemoteState::~EPRemoteState() {
+}
+
+ref<EPEndpoint> EPRemoteState::GetEndpoint() {
+	return _ep;
+}
+
 /** DiscoveryDefinition **/
 DiscoveryDefinition::~DiscoveryDefinition() {
 }

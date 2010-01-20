@@ -2,44 +2,61 @@
 
 @implementation TTParameterMenuItem
 
-- (void) update {
+- (void) update:(ref<EPRemoteState>)rs onlyState:(BOOL)stateOnly {
+	String valueBinding = _parameter->GetValueBinding();
 	std::wstring type = _parameter->GetType();
-	if(type==EPParameter::KTypeBoolean) {
-		// Boolean; simply set a check mark
-		bool defaultValue = (bool)_parameter->GetDefaultValue();
-		[(NSButton*)_dataView setState:(defaultValue ? NSOnState: NSOffState)];
+	
+	if(rs && valueBinding!=L"") {
+		Any boundValue = rs->GetValue(valueBinding);
+		
+		if(type==EPParameter::KTypeBoolean) {
+			[(NSButton*)_dataView setState:(bool(boundValue) ? NSOnState: NSOffState)];
+		}
+		else if(type==EPParameter::KTypeDouble || type==EPParameter::KTypeInt32) {
+			[(NSSlider*)_dataView setDoubleValue:double(boundValue)];
+		}
+		
+		if(_valueLabel!=nil) {
+			std::string value = Mbs(boundValue.Force(_parameter->GetValueType()).ToString());
+			[_valueLabel setTitleWithMnemonic:[NSString stringWithUTF8String:value.c_str()]];
+		}
 	}
-	else {
-		if(_parameter->HasOptions()) {
-			// TODO
+	else if(!stateOnly) {
+		if(type==EPParameter::KTypeBoolean) {
+			// Boolean; simply set a check mark
+			bool defaultValue = (bool)_parameter->GetDefaultValue();
+			[(NSButton*)_dataView setState:(defaultValue ? NSOnState: NSOffState)];
 		}
 		else {
-			if(type==EPParameter::KTypeDouble || type==EPParameter::KTypeInt32) {
-				double value = _parameter->GetDefaultValue();
-				[(NSSlider*)_dataView setDoubleValue:value];
+			if(_parameter->HasOptions()) {
+				// TODO
+			}
+			else {
+				if(type==EPParameter::KTypeDouble || type==EPParameter::KTypeInt32) {
+					double value = _parameter->GetDefaultValue();
+					[(NSSlider*)_dataView setDoubleValue:value];
+				}
 			}
 		}
-	}
 	
-	if(_valueLabel!=nil) {
-		std::string value = Mbs(_parameter->GetDefaultValue().Force(_parameter->GetValueType()).ToString());
-		[_valueLabel setTitleWithMnemonic:[NSString stringWithUTF8String:value.c_str()]];
+		if(_valueLabel!=nil) {
+			std::string value = Mbs(_parameter->GetDefaultValue().Force(_parameter->GetValueType()).ToString());
+			[_valueLabel setTitleWithMnemonic:[NSString stringWithUTF8String:value.c_str()]];
+		}
 	}
 }
 
 - (void) onCheckboxClick: (id)sender {
 	NSButton* checkbox = (NSButton*)sender;
 	_parameter->SetDefaultValue(Any(bool([checkbox state]==NSOnState)).Force(Any::TypeBool));
-	[self update];
 }
 
 - (void) onSliderChange: (id)sender {
 	NSSlider* slider = (NSSlider*)sender;
 	_parameter->SetDefaultValue(Any([slider doubleValue]));
-	[self update];
 }
 
-- (id) initWithParameter:(ref<EPParameter>)p {
+- (id) initWithParameter:(ref<EPParameter>)p state:(ref<EPRemoteState>)rs {
 	std::string parameterName = Mbs(p->GetFriendlyName());
 	if(self = [super initWithTitle:[NSString stringWithUTF8String:parameterName.c_str()] action:nil keyEquivalent:@""]) {
 		_parameter = p;
@@ -130,7 +147,7 @@
 		}
 		[self setView:wrapper];
 		[wrapper release];
-		[self update];
+		[self update:rs onlyState:FALSE];
 	}
 	
 	return self;

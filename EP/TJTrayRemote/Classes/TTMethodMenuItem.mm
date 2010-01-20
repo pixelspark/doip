@@ -3,6 +3,11 @@
 
 @implementation TTMethodMenuItem
 
+- (void) dealloc {
+	[_parameterItems release];
+	[super dealloc];
+}
+
 - (void) execute: (id)sender {
 	std::set< EPPath > paths;
 	_method->GetPaths(paths);
@@ -26,7 +31,14 @@
 	}
 }
 
-- (id) initWithMethod:(ref<EPMethod>)m endpoint:(ref<EPEndpoint>)ep connection:(ref<Connection>)c {
+- (void) update:(ref<EPRemoteState>)epr {
+	for(TTParameterMenuItem* tpi in _parameterItems) {
+		[tpi update:epr onlyState:YES];
+	}
+}
+
+- (id) initWithMethod:(ref<EPMethod>)m endpoint:(ref<EPEndpoint>)ep connection:(ref<Connection>)c state:(ref<EPRemoteState>)rs {
+	_parameterItems = [[NSMutableArray alloc] init];
 	std::string methodName = Mbs(m->GetFriendlyName());
 	if(self = [super initWithTitle:[NSString stringWithUTF8String:methodName.c_str()] action:nil keyEquivalent:@""]) {
 		_method = m;
@@ -45,8 +57,9 @@
 			while(it!=parameters.end()) {
 				ref<EPParameter> epp = *it;
 				if(epp) {
-					NSMenuItem* parameterItem = [[TTParameterMenuItem alloc] initWithParameter:epp];
+					NSMenuItem* parameterItem = [[TTParameterMenuItem alloc] initWithParameter:epp state:rs];
 					[parameterMenu addItem:parameterItem];
+					[_parameterItems addObject:parameterItem];
 					[parameterItem release];
 				}
 				++it;

@@ -6,6 +6,23 @@
 
 namespace tj {
 	namespace ep {
+		class EPRemoteState;
+		
+		struct EPStateChangeNotification {
+			tj::shared::ref<EPRemoteState> remoteState;
+		};
+		
+		class EP_EXPORTED EPRemoteState: public virtual tj::shared::Object, public EPState {
+			public:
+				EPRemoteState(tj::shared::ref<EPEndpoint> ep);
+				virtual ~EPRemoteState();
+				virtual tj::shared::ref<EPEndpoint> GetEndpoint();
+				tj::shared::Listenable<EPStateChangeNotification> EventStateChanged;
+			
+			private:
+				tj::shared::weak<EPEndpoint> _ep;
+		};
+		
 		class EP_EXPORTED DiscoveryDefinition: public virtual tj::shared::Object, public tj::shared::Serializable {
 			public:
 				virtual ~DiscoveryDefinition();
@@ -35,6 +52,7 @@ namespace tj {
 			tj::shared::Timestamp when;
 			tj::shared::ref<Connection> connection;
 			tj::shared::ref<EPEndpoint> endpoint;
+			tj::shared::ref<EPRemoteState> remoteState;
 			bool added;
 			EPMediationLevel mediationLevel;
 		};

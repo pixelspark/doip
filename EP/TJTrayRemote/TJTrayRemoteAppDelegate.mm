@@ -4,6 +4,17 @@
 
 TTDiscovery::TTDiscovery() {
 	_slt = SocketListenerThread::DefaultInstance();
+	_methodMenuItems = nil;
+}
+
+void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn) {
+	Log::Write(L"TTDiscovery", L"Received remote state update");
+	ref<EPRemoteState> epr = cn.remoteState;
+	if(epr && _methodMenuItems!=nil) {
+		for(TTMethodMenuItem* mi in _methodMenuItems) {
+			[mi update:epr];
+		}
+	}
 }
 
 void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
@@ -15,12 +26,22 @@ void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 			_endpoints.insert(enp);
 			_connections.insert(std::pair<ref<EPEndpoint>, ref<Connection> >(enp, dn.connection));
 		}
+		
+		if(enp && dn.remoteState) {
+			_remoteStates[enp] = dn.remoteState;
+			ref<EPRemoteState>(dn.remoteState)->EventStateChanged.AddListener(this);
+		}
 	}
 	else {
 		if(enp) {
 			std::set<ref<EPEndpoint> >::iterator eit = _endpoints.find(enp);
 			if(eit!=_endpoints.end()) {
 				_endpoints.erase(eit);
+			}
+			
+			std::map< ref<EPEndpoint>, ref<EPRemoteState> >::iterator sit = _remoteStates.find(enp);
+			if(sit!=_remoteStates.end()) {
+				_remoteStates.erase(sit);
 			}
 		}
 		else {
@@ -50,6 +71,7 @@ void TTDiscovery::OnCreated() {
 }
 
 TTDiscovery::~TTDiscovery() {
+	[_methodMenuItems release];
 }
 
 @implementation TJTrayRemoteAppDelegate
@@ -113,6 +135,8 @@ TTDiscovery::~TTDiscovery() {
 
 - (void) menuNeedsUpdate:(NSMenu *)menu {
 	[menu removeAllItems];
+	[_discovery->_methodMenuItems release];
+	_discovery->_methodMenuItems = [[NSMutableArray alloc] init];
 	
 	/* Add endpoints as items */
 	{
@@ -134,10 +158,17 @@ TTDiscovery::~TTDiscovery() {
 						ref<EPMethod> method = *mit;
 						if(method) {
 							ref<Connection> connection = [self connectionForEndpoint:enp];
-							TTMethodMenuItem* methodItem = [[TTMethodMenuItem alloc] initWithMethod:method endpoint:enp connection:connection];
+							ref<EPRemoteState> rs;
+							std::map< ref<EPEndpoint>, ref<EPRemoteState> >::iterator sit = _discovery->_remoteStates.find(enp);
+							if(sit!=_discovery->_remoteStates.end()) {
+								rs = sit->second;
+							}
+							
+							TTMethodMenuItem* methodItem = [[TTMethodMenuItem alloc] initWithMethod:method endpoint:enp connection:connection state:rs];
 							[methodItem setTarget:self];
 							[methodItem setAction:@selector(execute:)];
 							[methodsMenu addItem:methodItem];
+							[_discovery->_methodMenuItems addObject:methodItem];
 							[methodItem release];
 						}
 						++mit;

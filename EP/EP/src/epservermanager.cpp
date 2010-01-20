@@ -47,16 +47,39 @@ std::ostream& operator<< (std::ostream& out, const TiXmlNode& doc) {
 }
 
 /** EPStateWebItem **/
-EPStateWebItem::EPStateWebItem(ref<EPEndpoint> ep, const String& fn): WebItemResource(fn, fn, L"text/xml", 0), _endpoint(ep) {
+EPStateWebItem::EPStateWebItem(ref<EPPublication> pub, const String& fn): WebItemResource(fn, fn, L"text/xml", 0), _publication(pub) {
 }
 
 EPStateWebItem::~EPStateWebItem() {
 }
 
 Resolution EPStateWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
-	std::string message = "<?xml version=\"1.0\" ?>\r\n\r\n<state></state>";
-	*data = Util::CopyString(message.c_str());
-	dataLength = message.length();
+	ref<EPPublication> pub = _publication;
+	if(!pub) {
+		error = L"Publication doesn't exist anymore!";
+		return ResolutionNone;
+	}
+	
+	TiXmlDocument doc;
+	TiXmlDeclaration decl("1.0", "", "no");
+	doc.InsertEndChild(decl);
+	TiXmlElement stateElement("state");
+	pub->SaveState(&stateElement);
+	doc.InsertEndChild(stateElement);
+	
+	std::ostringstream xos;
+	xos << doc;
+	std::string dataString = xos.str();
+	
+	dataLength = dataString.length();
+	char* nd = new char[(unsigned int)(dataLength+1)];
+	const char* dataStringCstr = dataString.c_str();
+	for(unsigned int a=0;a<dataLength+1;a++) {
+		nd[a] = dataStringCstr[a];
+	}
+	nd[dataLength] = '\0';
+	*data = nd;
+	
 	return ResolutionData;
 }
 
@@ -64,7 +87,7 @@ Resolution EPStateWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** 
 const wchar_t* EPWebItem::KDefinitionPath = L"definition.xml";
 const wchar_t* EPWebItem::KStatePath = L"state.xml";
 
-EPWebItem::EPWebItem(ref<EPEndpoint> model): WebItemResource(L"", model->GetFriendlyName(), L"text/xml", 0), _endpoint(model) {
+EPWebItem::EPWebItem(ref<EPPublication> pub): WebItemResource(L"", pub->GetEndpoint()->GetFriendlyName(), L"text/xml", 0), _publication(pub) {
 }
 
 EPWebItem::~EPWebItem() {
@@ -72,13 +95,17 @@ EPWebItem::~EPWebItem() {
 
 ref<WebItem> EPWebItem::Resolve(const String& path) {
 	bool hasSlash = path.at(0)==L'/';
+	ref<EPPublication> pub = _publication;
+	if(!pub) {
+		return null;
+	}
 	
 	if(path.compare(hasSlash ? 1 : 0, path.length()-(hasSlash?1:0), GetDefinitionPath())==0) {
 		return this;
 	}
 	else if(path.compare(hasSlash ? 1 : 0, path.length()-(hasSlash?1:0), GetStatePath())==0) {
 		if(!_stateItem) {
-			_stateItem = GC::Hold(new EPStateWebItem(_endpoint, GetStatePath()));
+			_stateItem = GC::Hold(new EPStateWebItem(pub, GetStatePath()));
 		}
 		return _stateItem;
 	}
@@ -94,9 +121,14 @@ String EPWebItem::GetDefinitionPath() const {
 }
 
 Resolution EPWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
-	ref<EPEndpoint> endpoint = _endpoint;
+	ref<EPPublication> pub = _publication;
+	if(!pub) {
+		error = L"No publication in EPWebItem!";
+		return ResolutionNone;
+	}
+	ref<EPEndpoint> endpoint = pub->GetEndpoint();
 	if(!endpoint) {
-		error = L"No endpoint in EPDefinitionResolver!";
+		error = L"No endpoint in EPWebItem!";
 		return ResolutionNone;
 	}
 	

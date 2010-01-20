@@ -11,10 +11,12 @@ using namespace tj::np;
 	ref<EPMethod> _method;
 	ref<EPEndpoint> _endpoint;
 	ref<Connection> _connection;
+	NSMutableArray* _parameterItems;
 }
 
-- (id) initWithMethod:(ref<EPMethod>)method endpoint:(ref<EPEndpoint>)ep connection:(ref<Connection>)c;
+- (id) initWithMethod:(ref<EPMethod>)method endpoint:(ref<EPEndpoint>)ep connection:(ref<Connection>)c state:(ref<EPRemoteState>)rs;
 - (ref<EPEndpoint>) endpoint;
 - (ref<EPMethod>) method;
+- (void) update:(ref<EPRemoteState>)epr;
 
 @end

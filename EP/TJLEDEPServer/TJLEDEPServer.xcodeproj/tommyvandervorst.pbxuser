@@ -57,29 +57,31 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 285669565;
-			PBXWorkspaceStateSaveDate = 285669565;
+			PBXPerProjectTemplateStateSaveDate = 285690688;
+			PBXWorkspaceStateSaveDate = 285690688;
 		};
 		perUserProjectItems = {
-			B401A6751101085000B2B77A /* PBXTextBookmark */ = B401A6751101085000B2B77A /* PBXTextBookmark */;
-			B40F449F1107004400B7C049 /* PBXTextBookmark */ = B40F449F1107004400B7C049 /* PBXTextBookmark */;
 			B40F44A01107004400B7C049 /* PBXTextBookmark */ = B40F44A01107004400B7C049 /* PBXTextBookmark */;
 			B40F44A11107004400B7C049 /* PBXTextBookmark */ = B40F44A11107004400B7C049 /* PBXTextBookmark */;
-			B40F44A31107004400B7C049 /* PBXTextBookmark */ = B40F44A31107004400B7C049 /* PBXTextBookmark */;
-			B40F44A51107004400B7C049 /* PBXTextBookmark */ = B40F44A51107004400B7C049 /* PBXTextBookmark */;
-			B40F44A61107004400B7C049 /* PBXTextBookmark */ = B40F44A61107004400B7C049 /* PBXTextBookmark */;
 			B433172C10F7205000F77332 /* PBXTextBookmark */ = B433172C10F7205000F77332 /* PBXTextBookmark */;
 			B433172E10F7205000F77332 /* PBXTextBookmark */ = B433172E10F7205000F77332 /* PBXTextBookmark */;
 			B433173010F7205000F77332 /* PBXTextBookmark */ = B433173010F7205000F77332 /* PBXTextBookmark */;
 			B433173210F7205000F77332 /* PBXTextBookmark */ = B433173210F7205000F77332 /* PBXTextBookmark */;
-			B433173410F7205000F77332 /* PBXTextBookmark */ = B433173410F7205000F77332 /* PBXTextBookmark */;
 			B433175B10F7228200F77332 /* PBXTextBookmark */ = B433175B10F7228200F77332 /* PBXTextBookmark */;
 			B433175C10F7228200F77332 /* PBXTextBookmark */ = B433175C10F7228200F77332 /* PBXTextBookmark */;
 			B433175F10F7228200F77332 /* PBXTextBookmark */ = B433175F10F7228200F77332 /* PBXTextBookmark */;
 			B474BA4010D6D9D200FA7D4C /* PBXTextBookmark */ = B474BA4010D6D9D200FA7D4C /* PBXTextBookmark */;
 			B4900F2711032CDF00925122 /* PBXTextBookmark */ = B4900F2711032CDF00925122 /* PBXTextBookmark */;
-			B49010CB1103926E00925122 /* PBXTextBookmark */ = B49010CB1103926E00925122 /* PBXTextBookmark */;
 			B49010CC1103926E00925122 /* PBXTextBookmark */ = B49010CC1103926E00925122 /* PBXTextBookmark */;
+			B4E5AB5A11074FF3003AB425 /* PBXTextBookmark */ = B4E5AB5A11074FF3003AB425 /* PBXTextBookmark */;
+			B4E5AB5B11074FF3003AB425 /* PBXTextBookmark */ = B4E5AB5B11074FF3003AB425 /* PBXTextBookmark */;
+			B4E5AB5C11074FF3003AB425 /* PBXTextBookmark */ = B4E5AB5C11074FF3003AB425 /* PBXTextBookmark */;
+			B4E5AB5E11074FF3003AB425 /* PBXTextBookmark */ = B4E5AB5E11074FF3003AB425 /* PBXTextBookmark */;
+			B4E5AC8D110765AE003AB425 /* PBXTextBookmark */ = B4E5AC8D110765AE003AB425 /* PBXTextBookmark */;
+			B4E5AC8E110765AE003AB425 /* PBXTextBookmark */ = B4E5AC8E110765AE003AB425 /* PBXTextBookmark */;
+			B4E5AC90110765AE003AB425 /* PBXTextBookmark */ = B4E5AC90110765AE003AB425 /* PBXTextBookmark */;
+			B4E5AC93110765AE003AB425 /* PBXTextBookmark */ = B4E5AC93110765AE003AB425 /* PBXTextBookmark */;
+			B4E5AC9F110765D8003AB425 /* PBXTextBookmark */ = B4E5AC9F110765D8003AB425 /* PBXTextBookmark */;
 		};
 		sourceControlManager = B46CBC9510A45B2400CDE29F /* Source Control */;
 		userBuildSettings = {
@@ -90,26 +92,6 @@
 		executables = (
 			B46CBC8A10A45B2100CDE29F /* TJLEDEPServer */,
 		);
-	};
-	B401A6751101085000B2B77A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4FBE9F610BDC45400DDCE96 /* tubleds.cpp */;
-		name = "tubleds.cpp: 8";
-		rLen = 0;
-		rLoc = 151;
-		rType = 0;
-		vrLen = 1225;
-		vrLoc = 0;
-	};
-	B40F449F1107004400B7C049 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
-		name = "ledendpoint.cpp: 28";
-		rLen = 0;
-		rLoc = 1036;
-		rType = 0;
-		vrLen = 2243;
-		vrLoc = 439;
 	};
 	B40F44A01107004400B7C049 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -133,51 +115,16 @@
 	};
 	B40F44A21107004400B7C049 /* epservermanager.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = epservermanager.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/include/epservermanager.h;
 		sourceTree = "<absolute>";
 	};
-	B40F44A31107004400B7C049 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B40F44A41107004400B7C049 /* epservermanager.cpp */;
-		name = "epservermanager.cpp: 56";
-		rLen = 0;
-		rLoc = 1606;
-		rType = 0;
-		vrLen = 1147;
-		vrLoc = 1056;
-	};
-	B40F44A41107004400B7C049 /* epservermanager.cpp */ = {
-		isa = PBXFileReference;
-		name = epservermanager.cpp;
-		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/src/epservermanager.cpp;
-		sourceTree = "<absolute>";
-	};
-	B40F44A51107004400B7C049 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
-		name = "ledepmain.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 992;
-		vrLoc = 0;
-	};
-	B40F44A61107004400B7C049 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
-		name = "ledepmain.cpp: 6";
-		rLen = 0;
-		rLoc = 193;
-		rType = 0;
-		vrLen = 992;
-		vrLoc = 0;
-	};
 	B43316FC10F71B7F00F77332 /* ledendpoint.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1692, 1521}}";
-			sepNavSelRange = "{1036, 0}";
-			sepNavVisRange = "{439, 2243}";
+			sepNavIntBoundsRect = "{{0, 0}, {1692, 1469}}";
+			sepNavSelRange = "{2751, 0}";
+			sepNavVisRange = "{1035, 2379}";
 		};
 	};
 	B433172210F71DDC00F77332 /* leds.cpp */ = {
@@ -255,22 +202,17 @@
 		path = "/Developer/SDKs/MacOSX10.6.sdk/usr/include/c++/4.2.1/bits/stl_iterator_base_types.h";
 		sourceTree = "<absolute>";
 	};
-	B433173410F7205000F77332 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B433173510F7205000F77332 /* ependpointserver.h */;
-		name = "ependpointserver.h: 13";
-		rLen = 114;
-		rLoc = 236;
-		rType = 0;
-		vrLen = 2097;
-		vrLoc = 0;
-	};
 	B433173510F7205000F77332 /* ependpointserver.h */ = {
 		isa = PBXFileReference;
 		lastKnownFileType = sourcecode.c.h;
 		name = ependpointserver.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/build/Release/EP.framework/Versions/A/Headers/include/ependpointserver.h;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1741, 2561}}";
+			sepNavSelRange = "{4240, 0}";
+			sepNavVisRange = "{5487, 934}";
+		};
 	};
 	B433173710F7205000F77332 /* ledendpoint.h */ = {
 		isa = PBXFileReference;
@@ -278,6 +220,11 @@
 		name = ledendpoint.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/TJLEDEPServer/include/ledendpoint.h;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 520}}";
+			sepNavSelRange = "{1321, 0}";
+			sepNavVisRange = "{0, 1345}";
+		};
 	};
 	B433173910F7205000F77332 /* leds.h */ = {
 		isa = PBXFileReference;
@@ -353,6 +300,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -360,6 +308,8 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = TJLEDEPServer;
+		savedGlobals = {
+		};
 		showTypeColumn = 0;
 		sourceDirectories = (
 		);
@@ -405,16 +355,6 @@
 		vrLen = 75;
 		vrLoc = 0;
 	};
-	B49010CB1103926E00925122 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B433173710F7205000F77332 /* ledendpoint.h */;
-		name = "ledendpoint.h: 1";
-		rLen = 1354;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1354;
-		vrLoc = 0;
-	};
 	B49010CC1103926E00925122 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B49010CD1103926E00925122 /* eppublication.h */;
@@ -432,18 +372,135 @@
 		path = /Users/tommyvandervorst/Documents/Projecten/tj/build/Release/EP.framework/Versions/A/Headers/include/eppublication.h;
 		sourceTree = "<absolute>";
 	};
+	B4E5AB5A11074FF3003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4FBE9F610BDC45400DDCE96 /* tubleds.cpp */;
+		name = "tubleds.cpp: 8";
+		rLen = 0;
+		rLoc = 151;
+		rType = 0;
+		vrLen = 1137;
+		vrLoc = 0;
+	};
+	B4E5AB5B11074FF3003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B433173710F7205000F77332 /* ledendpoint.h */;
+		name = "ledendpoint.h: 33";
+		rLen = 0;
+		rLoc = 1321;
+		rType = 0;
+		vrLen = 1345;
+		vrLoc = 0;
+	};
+	B4E5AB5C11074FF3003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4E5AB5D11074FF3003AB425 /* stl_map.h */;
+		name = "stl_map.h: 362";
+		rLen = 0;
+		rLoc = 13250;
+		rType = 0;
+		vrLen = 1285;
+		vrLoc = 12508;
+	};
+	B4E5AB5D11074FF3003AB425 /* stl_map.h */ = {
+		isa = PBXFileReference;
+		name = stl_map.h;
+		path = "/Developer/SDKs/MacOSX10.6.sdk/usr/include/c++/4.2.1/bits/stl_map.h";
+		sourceTree = "<absolute>";
+	};
+	B4E5AB5E11074FF3003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B433173510F7205000F77332 /* ependpointserver.h */;
+		name = "ependpointserver.h: 112";
+		rLen = 0;
+		rLoc = 4240;
+		rType = 0;
+		vrLen = 934;
+		vrLoc = 5487;
+	};
+	B4E5AC8D110765AE003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */;
+		name = "ledepmain.cpp: 19";
+		rLen = 0;
+		rLoc = 547;
+		rType = 0;
+		vrLen = 992;
+		vrLoc = 0;
+	};
+	B4E5AC8E110765AE003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4E5AC8F110765AE003AB425 /* ependpoint.h */;
+		name = "ependpoint.h: 192";
+		rLen = 0;
+		rLoc = 7745;
+		rType = 0;
+		vrLen = 1936;
+		vrLoc = 6590;
+	};
+	B4E5AC8F110765AE003AB425 /* ependpoint.h */ = {
+		isa = PBXFileReference;
+		name = ependpoint.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/build/Release/EP.framework/Versions/A/Headers/include/ependpoint.h;
+		sourceTree = "<absolute>";
+	};
+	B4E5AC90110765AE003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
+		name = "ledendpoint.cpp: 52";
+		rLen = 0;
+		rLoc = 2751;
+		rType = 0;
+		vrLen = 2379;
+		vrLoc = 1035;
+	};
+	B4E5AC93110765AE003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4E5AC94110765AE003AB425 /* ependpoint.h */;
+		rLen = 0;
+		rLoc = 9223372036854775850;
+		rType = 0;
+	};
+	B4E5AC94110765AE003AB425 /* ependpoint.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = ependpoint.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/include/ependpoint.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {2196, 3133}}";
+			sepNavSelRange = "{8419, 0}";
+			sepNavVisRange = "{7786, 1597}";
+		};
+	};
+	B4E5AC9F110765D8003AB425 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B4E5ACA0110765D8003AB425 /* ependpoint.h */;
+		name = "ependpoint.h: 205";
+		rLen = 0;
+		rLoc = 8419;
+		rType = 0;
+		vrLen = 1597;
+		vrLoc = 7786;
+	};
+	B4E5ACA0110765D8003AB425 /* ependpoint.h */ = {
+		isa = PBXFileReference;
+		name = ependpoint.h;
+		path = /Users/tommyvandervorst/Documents/Projecten/tj/EP/EP/include/ependpoint.h;
+		sourceTree = "<absolute>";
+	};
 	B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 1547}}";
-			sepNavSelRange = "{193, 0}";
-			sepNavVisRange = "{0, 992}";
+			sepNavIntBoundsRect = "{{0, 0}, {1219, 1495}}";
+			sepNavSelRange = "{375, 0}";
+			sepNavVisRange = "{0, 548}";
 		};
 	};
 	B4FBE9F610BDC45400DDCE96 /* tubleds.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 598}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 624}}";
 			sepNavSelRange = "{151, 0}";
-			sepNavVisRange = "{0, 1225}";
+			sepNavVisRange = "{0, 1137}";
 		};
 	};
 }

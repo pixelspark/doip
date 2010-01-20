@@ -4,6 +4,7 @@
 #include "epinternal.h"
 #include "ependpoint.h"
 #include "epconnection.h"
+#include "eppublication.h"
 
 #pragma warning (push)
 #pragma warning (disable: 4251 4275)
@@ -18,25 +19,36 @@ namespace tj {
 				virtual ~EPEndpointServer();
 				virtual void AddMethod(tj::shared::strong<EPMethod> method, Member m);
 				virtual void AddTransport(tj::shared::strong<EPTransport> ept, tj::shared::ref<Connection> epc);
+				virtual void BindVariable(const tj::shared::String& key, tj::shared::Any* value);
 				virtual void Notify(tj::shared::ref<tj::shared::Object> src, const MessageNotification& data);
 				virtual tj::shared::String GetID() const;
 				virtual tj::shared::String GetNamespace() const;
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetVersion() const;
 				virtual bool IsDynamic() const;
+				virtual bool IsPublished() const;
+				virtual void Publish(bool t);
+				virtual void Publish(tj::shared::ref<EPPublication> ep);
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
 				virtual void RemoveAllMethods();
 				
 			protected:
+				virtual void UpdateStatePublication();
+			
 				typedef typename std::map<tj::shared::ref<EPMethod>, Member> MemberMap;
 				typedef typename std::map<tj::shared::ref<EPTransport>, tj::shared::ref<Connection> > TransportMap;
+				typedef typename std::map<tj::shared::String, tj::shared::Any* > StateMap;
+			
 				MemberMap _members;
 				TransportMap _transports;
+				StateMap _variables;
+			
 				tj::shared::String _id;
 				tj::shared::String _ns;
 				tj::shared::String _friendlyName;
 				bool _updateDefaultValuesToState;
+				tj::shared::ref<EPPublication> _publication;
 				mutable tj::shared::CriticalSection _lock;
 		};
 		
@@ -75,9 +87,36 @@ namespace tj {
 			tj::shared::ThreadLock lock(&_lock);
 			_transports[ept] = epc;
 		}
+		
+		template<class T> void EPEndpointServer<T>::BindVariable(const tj::shared::String& key, tj::shared::Any* value) {
+			tj::shared::ThreadLock lock(&_lock);
+			_variables[key] = value;
+			UpdateStatePublication();
+		}
 
 		template<class T> void EPEndpointServer<T>::RemoveAllMethods() {
 			_members.clear();
+		}
+		
+		template<class T> bool EPEndpointServer<T>::IsPublished() const {
+			return _publication;
+		}
+		
+		template<class T> void EPEndpointServer<T>::Publish(bool t) {
+			tj::shared::ThreadLock lock(&_lock);
+			if(t) {
+				_publication = tj::shared::GC::Hold(new EPPublication(tj::shared::ref<EPEndpoint>(this)));
+				UpdateStatePublication();
+			}
+			else {
+				_publication = tj::shared::null;
+			}
+		}
+		
+		template<class T> void EPEndpointServer<T>::Publish(tj::shared::ref<EPPublication> pub) {
+			tj::shared::ThreadLock lock(&_lock);
+			_publication = pub;
+			UpdateStatePublication();
 		}
 		
 		template<class T> void EPEndpointServer<T>::GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const {
@@ -120,13 +159,29 @@ namespace tj {
 						if(mem!=0) {
 							(static_cast<T*>(this)->*mem)(data.message, data.source, data.channel);
 						}
+						
+						// Update state variables that are published
+						UpdateStatePublication();
 
 						return;
 					}
 					++it;
 				}
 			}
-		}		
+		}
+		
+		template<class T> void EPEndpointServer<T>::UpdateStatePublication() {
+			tj::shared::ThreadLock lock(&_lock);
+			if(_publication) {
+				std::map< tj::shared::String, tj::shared::Any > values;
+				StateMap::const_iterator it = _variables.begin();
+				while(it!=_variables.end()) {
+					values[it->first] = *(it->second);
+					++it;
+				}
+				_publication->SetState(values);
+			}
+		}
 	}
 }
 

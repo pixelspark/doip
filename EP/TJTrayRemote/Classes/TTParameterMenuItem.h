@@ -13,6 +13,7 @@ using namespace tj::np;
 	NSTextField* _valueLabel;
 }
 
-- (id) initWithParameter:(ref<EPParameter>)method;
+- (void) update:(ref<EPRemoteState>)epr onlyState:(BOOL)t;
+- (id) initWithParameter:(ref<EPParameter>)method state:(ref<EPRemoteState>)rs;
 
 @end

@@ -11,6 +11,28 @@
 
 namespace tj {
 	namespace ep {
+		class EP_EXPORTED EPDownloadedState: public virtual tj::shared::Object, public tj::np::Download, public EPState {
+			public:
+				EPDownloadedState(tj::shared::strong<tj::scout::Service> service, const tj::shared::String& path);
+				virtual ~EPDownloadedState();
+				virtual tj::shared::strong<tj::scout::Service> GetService();
+				virtual void GetState(ValueMap& vals);
+				virtual tj::shared::Any GetValue(const tj::shared::String& key);
+				
+				struct EPStateDownloadNotification {
+				};
+				
+				tj::shared::Listenable<EPStateDownloadNotification> EventDownloaded;
+				
+			protected:
+				virtual void LoadState(TiXmlElement* me);
+				virtual void OnDownloadComplete(tj::shared::ref<tj::shared::DataWriter> cw);
+			
+				tj::shared::CriticalSection _lock;
+				tj::shared::strong<tj::scout::Service> _service;
+				EPState::ValueMap _state;
+		};
+		
 		class EP_EXPORTED EPDownloadedDefinition: public tj::np::Download {
 			public:
 				EPDownloadedDefinition(tj::shared::strong<tj::scout::Service> service, const tj::shared::String& path);

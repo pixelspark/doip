@@ -30,7 +30,7 @@ namespace tj {
 					
 				protected:
 					strong<LED> _device;
-					float _dim, _r, _g, _b;
+					Any _dim, _r, _g, _b;
 			};
 			
 		}

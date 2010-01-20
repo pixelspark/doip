@@ -556,13 +556,15 @@ void EPMethodDefinition::Clone() {
 EPParameterDefinition::EPParameterDefinition(): _nature(NatureUnknown), _minimumValue(L"0"), _maximumValue(L"-1") {
 }
 
-EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, Nature nature):
+EPParameterDefinition::EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, Nature nature, const String& valueBinding):
 	_friendlyName(friendlyName),
 	_type(type),
 	_minimumValue(minValue),
 	_maximumValue(maxValue),
 	_defaultValue(defaultValue),
-	_nature(nature) {
+	_nature(nature),
+	_valueBinding(valueBinding)
+{
 		
 	_runtimeDefaultValue = Any(_defaultValue).Force(GetValueType());
 }
@@ -628,6 +630,14 @@ void EPParameterDefinition::SetDefaultValue(const Any& val) {
 	_runtimeDefaultValue = val.Force(GetValueType());
 }
 
+void EPParameterDefinition::SetValueBinding(const String& i) {
+	_valueBinding = i;
+}
+
+String EPParameterDefinition::GetValueBinding() const {
+	return _valueBinding;
+}
+
 void EPParameterDefinition::Save(TiXmlElement* me) {
 	EPParameter::Save(me);
 }
@@ -639,6 +649,7 @@ void EPParameterDefinition::Load(TiXmlElement* me) {
 	_maximumValue = LoadAttributeSmall(me, "max", _maximumValue);
 	_defaultValue = LoadAttributeSmall(me, "default", _defaultValue);
 	_runtimeDefaultValue = Any(_defaultValue).Force(GetValueType());
+	_valueBinding = LoadAttributeSmall(me, "bind-value", _valueBinding);
 	
 	std::wstring natureString = LoadAttributeSmall<std::wstring>(me, "nature", L"");
 	if(natureString==L"discrete") {
@@ -669,6 +680,7 @@ void EPParameter::Save(TiXmlElement* me) {
 	SaveAttributeSmall(me, "min", GetMinimumValue().ToString());
 	SaveAttributeSmall(me, "max", GetMaximumValue().ToString());
 	SaveAttributeSmall(me, "default", GetDefaultValue().ToString());
+	SaveAttributeSmall(me, "bind-value", GetValueBinding());
 	
 	std::wstring natureString = L"default";
 	Nature nature = GetNature();
@@ -768,4 +780,21 @@ void EPReplyDefinition::Load(TiXmlElement* me) {
 
 void EPReplyDefinition::Save(TiXmlElement* me) {
 	EPReply::Save(me);	
+}
+
+/** EPState **/
+EPState::~EPState() {
+}
+
+void EPState::SaveState(TiXmlElement* root) {
+	std::map<String,Any> state;
+	GetState(state);
+	std::map< String, Any>::iterator it = state.begin();
+	while(it!=state.end()) {
+		TiXmlElement var("var");
+		SaveAttributeSmall(&var, "key", it->first);
+		it->second.Save(&var);
+		root->InsertEndChild(var);
+		++it;
+	}
 }

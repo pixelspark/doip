@@ -18,6 +18,15 @@ namespace tj {
 			EPMediationLevelIgnore = -1,
 		};
 		
+		class EP_EXPORTED EPState {
+			public:
+				typedef std::map< tj::shared::String, tj::shared::Any > ValueMap;
+				virtual ~EPState();
+				virtual void SaveState(TiXmlElement* root);
+				virtual void GetState(ValueMap& vals) = 0;
+				virtual tj::shared::Any GetValue(const tj::shared::String& key) = 0;
+		};
+		
 		typedef std::pair< tj::shared::String, tj::shared::Any > EPOption;
 
 		class EP_EXPORTED EPTransport: public virtual tj::shared::Object {
@@ -41,6 +50,7 @@ namespace tj {
 				virtual ~EPParameter();
 				virtual tj::shared::String GetFriendlyName() const = 0;
 				virtual tj::shared::String GetType() const = 0;
+				virtual tj::shared::String GetValueBinding() const = 0;
 				virtual tj::shared::Any GetMinimumValue() const = 0;
 				virtual tj::shared::Any GetMaximumValue() const = 0;
 				virtual tj::shared::Any GetDefaultValue() const = 0;
@@ -179,15 +189,17 @@ namespace tj {
 		class EP_EXPORTED EPParameterDefinition: public EPParameter, public tj::shared::Serializable {
 			public:
 				EPParameterDefinition();
-				EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, EPParameter::Nature = EPParameter::NatureUnknown);
+			EPParameterDefinition(const tj::shared::String& friendlyName, const tj::shared::String& type, const tj::shared::String& minValue, const tj::shared::String& maxValue, const tj::shared::String& defaultValue, EPParameter::Nature = EPParameter::NatureUnknown, const tj::shared::String& valueBinding=L"");
 				virtual ~EPParameterDefinition();
 				virtual tj::shared::String GetFriendlyName() const;
 				virtual tj::shared::String GetType() const;
 				virtual tj::shared::Any::Type GetValueType() const;
 				virtual tj::shared::Any GetMinimumValue() const;
 				virtual tj::shared::Any GetMaximumValue() const;
-				virtual tj::shared::Any GetDefaultValue() const;
+				virtual tj::shared::Any GetDefaultValue() const;;
 				virtual void SetDefaultValue(const tj::shared::Any& val);
+				virtual tj::shared::String GetValueBinding() const;
+				virtual void SetValueBinding(const tj::shared::String& i);
 				virtual EPParameter::Nature GetNature() const;
 				virtual void Load(TiXmlElement* me);
 				virtual void Save(TiXmlElement* me);
@@ -201,6 +213,7 @@ namespace tj {
 				tj::shared::String _minimumValue;
 				tj::shared::String _maximumValue;
 				tj::shared::String _defaultValue;
+				tj::shared::String _valueBinding;
 				tj::shared::Any _runtimeDefaultValue;
 				std::set< EPOption > _options;
 				EPParameter::Nature _nature;
