@@ -46,13 +46,54 @@ std::ostream& operator<< (std::ostream& out, const TiXmlNode& doc) {
 	return out;
 }
 
-EPDefinitionWebItem::EPDefinitionWebItem(ref<EPEndpoint> model): WebItemResource(L"", model->GetFriendlyName(), L"text/xml", 0), _endpoint(model) {
+/** EPStateWebItem **/
+EPStateWebItem::EPStateWebItem(ref<EPEndpoint> ep, const String& fn): WebItemResource(fn, fn, L"text/xml", 0), _endpoint(ep) {
 }
 
-EPDefinitionWebItem::~EPDefinitionWebItem() {
+EPStateWebItem::~EPStateWebItem() {
 }
 
-Resolution EPDefinitionWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
+Resolution EPStateWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
+	std::string message = "<?xml version=\"1.0\" ?>\r\n\r\n<state></state>";
+	*data = Util::CopyString(message.c_str());
+	dataLength = message.length();
+	return ResolutionData;
+}
+
+/** EPWebItem **/
+const wchar_t* EPWebItem::KDefinitionPath = L"definition.xml";
+const wchar_t* EPWebItem::KStatePath = L"state.xml";
+
+EPWebItem::EPWebItem(ref<EPEndpoint> model): WebItemResource(L"", model->GetFriendlyName(), L"text/xml", 0), _endpoint(model) {
+}
+
+EPWebItem::~EPWebItem() {
+}
+
+ref<WebItem> EPWebItem::Resolve(const String& path) {
+	bool hasSlash = path.at(0)==L'/';
+	
+	if(path.compare(hasSlash ? 1 : 0, path.length()-(hasSlash?1:0), GetDefinitionPath())==0) {
+		return this;
+	}
+	else if(path.compare(hasSlash ? 1 : 0, path.length()-(hasSlash?1:0), GetStatePath())==0) {
+		if(!_stateItem) {
+			_stateItem = GC::Hold(new EPStateWebItem(_endpoint, GetStatePath()));
+		}
+		return _stateItem;
+	}
+	return null;
+}
+
+String EPWebItem::GetStatePath() const {
+	return KStatePath;
+}
+
+String EPWebItem::GetDefinitionPath() const {
+	return KDefinitionPath;
+}
+
+Resolution EPWebItem::Get(ref<WebRequest> frq, std::wstring& error, char** data, Bytes& dataLength) {
 	ref<EPEndpoint> endpoint = _endpoint;
 	if(!endpoint) {
 		error = L"No endpoint in EPDefinitionResolver!";

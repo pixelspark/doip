@@ -23,63 +23,63 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScout.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
 		B44928C9110645870096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9887110C661C3001CF473 /* libTJScoutMobile.a */;
+			remoteGlobalIDString = B4A9887110C661C3001CF473;
 			remoteInfo = TJScoutMobile;
 		};
 		B44928D0110645900096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJNP.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJNP;
 		};
 		B44928D2110645900096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteGlobalIDString = B4A9883210C66144001CF473;
 			remoteInfo = TJNPMobile;
 		};
 		B44928D9110645990096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJShared;
 		};
 		B44928DB110645990096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
 			remoteInfo = TJSharedMobile;
 		};
 		B44928E0110645AC0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJShared */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJShared;
 		};
 		B44928E2110645AC0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJNP */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJNP;
 		};
 		B44928E4110645AC0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScoutFramework */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJScoutFramework;
 		};
 		B4CAAA8410AD68DB00385A5F /* PBXContainerItemProxy */ = {

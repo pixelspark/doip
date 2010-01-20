@@ -7,23 +7,27 @@ using namespace tj::scout;
 
 EPPublication::EPPublication(strong<EPEndpoint> ep, const std::wstring& magicPostfix) {
 	_ws = EPServerManager::Instance()->CreateServer(EPServerManager::KPortDontCare);
-	ref<EPDefinitionWebItem> resolver = GC::Hold(new EPDefinitionWebItem(ep));
-	std::wstring definitionPath = L"/ep/" + ep->GetFullIdentifier() + L"/definition.xml";
-	_ws->AddResolver(definitionPath,ref<WebItem>(resolver));
+	ref<EPWebItem> resolver = GC::Hold(new EPWebItem(ep));
+	std::wstring basePath = L"/ep/" + ep->GetFullIdentifier();
+	_ws->AddResolver(basePath,ref<WebItem>(resolver));
 	
-	// Advertise the service
+	// Create a list of service attributes
 	std::map<std::wstring, std::wstring> attributes;
-	attributes[L"EPDefinitionPath"] = definitionPath;
+	attributes[L"EPDefinitionPath"] = basePath + L"/" + resolver->GetDefinitionPath();
+	attributes[L"EPStatePath"] = basePath + L"/" + resolver->GetStatePath();
 	attributes[L"EPProtocol"] = L"HTTP";
 	
+	// Calculate magic number
 	std::wstring serverMagic = EPServerManager::Instance()->GetServerMagic();
 	if(magicPostfix.length()>0) {
 		serverMagic = serverMagic + L"-" + magicPostfix;
 	}
 	attributes[L"EPMagicNumber"] = serverMagic;
+	
+	// Get the port we're running on and publish the service
 	unsigned short actualPort = _ws->GetActualPort();
 	_reg = ServiceRegistrationFactory::Instance()->CreateServiceRegistration(ServiceDiscoveryDNSSD, L"_ep._tcp", ep->GetFriendlyName(), actualPort, attributes);
-	Log::Write(L"EPFramework/EPPublication", L"EP service active http://localhost:"+Stringify(actualPort)+definitionPath);
+	Log::Write(L"EPFramework/EPPublication", L"EP service active http://localhost:"+Stringify(actualPort)+basePath);
 }
 
 EPPublication::~EPPublication() {

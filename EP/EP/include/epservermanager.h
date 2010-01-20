@@ -31,14 +31,30 @@ namespace tj {
 				tj::shared::String _magic;
 		};
 		
-		/** Serves an XML-file containing the definitions of the messages this fabric will accept **/
-		class EP_EXPORTED EPDefinitionWebItem: public tj::np::WebItemResource {
+		class EP_EXPORTED EPStateWebItem: public tj::np::WebItemResource {
 			public:
-				EPDefinitionWebItem(tj::shared::ref<EPEndpoint> model);
-				virtual ~EPDefinitionWebItem();
+				EPStateWebItem(tj::shared::ref<EPEndpoint> model, const tj::shared::String& fn);
+				virtual ~EPStateWebItem();
 				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, tj::shared::Bytes& dataLength);
 				
 			protected:
+				tj::shared::weak<EPEndpoint> _endpoint;
+		};
+		
+		/** Serves an XML-file containing the definitions of the messages this fabric will accept **/
+		class EP_EXPORTED EPWebItem: public tj::np::WebItemResource {
+			public:
+				EPWebItem(tj::shared::ref<EPEndpoint> model);
+				virtual ~EPWebItem();
+				virtual tj::shared::ref<tj::np::WebItem> Resolve(const tj::shared::String& file);
+				virtual tj::np::Resolution Get(tj::shared::ref<tj::np::WebRequest> frq, std::wstring& error, char** data, tj::shared::Bytes& dataLength);
+				virtual tj::shared::String GetDefinitionPath() const;
+				virtual tj::shared::String GetStatePath() const;
+			
+			protected:
+				const static wchar_t* KDefinitionPath;
+				const static wchar_t* KStatePath;
+				tj::shared::ref<EPStateWebItem> _stateItem;
 				tj::shared::weak<EPEndpoint> _endpoint;
 		};
 	}
