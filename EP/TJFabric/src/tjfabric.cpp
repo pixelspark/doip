@@ -264,7 +264,7 @@ void Fabric::LoadRecursive(const std::string& path, strong<Fabric> f) {
 		Log::Write(L"TJFabric/Main", L"Loaded fabric '"+f->GetTitle()+L"' version="+f->GetVersion());
 	}
 	else {
-		Throw(L"Invalid fabric configuration file ", ExceptionTypeError);
+		Log::Write(L"TJFabric/Main", L"Invalid fabric: '"+path+L"' has no root element <fabric>");
 	}
 	delete doc;
 	
