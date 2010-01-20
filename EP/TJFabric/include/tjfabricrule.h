@@ -6,6 +6,21 @@
 
 namespace tj {
 	namespace fabric {
+		class Variable: public virtual tj::shared::Object, public tj::shared::Serializable {
+			public:
+				Variable();
+				virtual ~Variable();
+				virtual void Load(TiXmlElement* me);
+				virtual void Save(TiXmlElement* me);
+				virtual void Clone();
+				virtual tj::shared::String GetID() const;
+				virtual tj::shared::Any GetDefaultValue() const;
+			
+			protected:
+				tj::shared::String _id;
+				tj::shared::Any _defaultValue;
+		};
+		
 		class Rule: public virtual tj::shared::Object, public tj::ep::EPMethod, public tj::shared::Serializable {
 			public:
 				Rule();

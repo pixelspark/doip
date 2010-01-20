@@ -137,6 +137,18 @@ void QueueGlobalScriptable::Initialize() {
 	Bind(L"print", &QueueGlobalScriptable::SPrint);
 	Bind(L"send", &QueueGlobalScriptable::SSend);
 	Bind(L"schedule", &QueueGlobalScriptable::SSchedule);
+	Bind(L"state", &QueueGlobalScriptable::SState);
+}
+
+ref<Scriptable> QueueGlobalScriptable::SState(ref<ParameterList> p) {
+	ref<Queue> queue = _queue;
+	if(queue) {
+		ref<FabricEngine> fe = queue->_engine;
+		if(fe) {
+			return fe->GetState();
+		}
+	}
+	return null;
 }
 
 ref<Scriptable> QueueGlobalScriptable::SSchedule(ref<ParameterList> p) {

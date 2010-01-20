@@ -8,7 +8,6 @@ TTDiscovery::TTDiscovery() {
 }
 
 void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn) {
-	Log::Write(L"TTDiscovery", L"Received remote state update");
 	ref<EPRemoteState> epr = cn.remoteState;
 	if(epr && _methodMenuItems!=nil) {
 		for(TTMethodMenuItem* mi in _methodMenuItems) {

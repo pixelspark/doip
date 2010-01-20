@@ -7,6 +7,7 @@
 namespace tj {
 	namespace fabric {
 		class Rule;
+		class Variable;
 		class Group;
 		class FabricEngine;
 		
@@ -30,6 +31,7 @@ namespace tj {
 				virtual tj::shared::String GetPackage() const;
 				virtual tj::shared::String GetVersion() const;
 				virtual tj::ep::EPMediationLevel GetMediationLevel() const;
+				virtual tj::shared::ref<tj::ep::EPStateDefinition> CreateDefaultState() const;
 				virtual tj::shared::ref<Rule> GetFirstMatchingRule(const tj::shared::String& msg);
 				virtual void GetAllMatchingRules(tj::shared::strong<tj::ep::Message> message, std::deque< tj::shared::ref<Rule> >& results);
 				virtual void GetMethods(std::vector< tj::shared::ref<tj::ep::EPMethod> >& methodList) const;
@@ -47,6 +49,7 @@ namespace tj {
 				unsigned int _version;
 				tj::ep::EPMediationLevel _mediationLevel;
 				std::deque< tj::shared::ref<Rule> > _rules;
+				std::deque< tj::shared::ref<Variable> > _variables;
 				std::deque< tj::shared::ref<Group> > _groups;
 				std::set<tj::ep::EPTag> _tags;
 		};

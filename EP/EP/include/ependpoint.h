@@ -27,6 +27,19 @@ namespace tj {
 				virtual tj::shared::Any GetValue(const tj::shared::String& key) = 0;
 		};
 		
+		class EP_EXPORTED EPStateDefinition {
+			public:
+				EPStateDefinition();
+				virtual ~EPStateDefinition();
+				virtual void GetState(EPState::ValueMap& vals);
+				virtual tj::shared::Any GetValue(const tj::shared::String& key);
+				virtual void SetState(EPState::ValueMap& vals);
+				virtual void SetValue(const tj::shared::String& key, const tj::shared::Any& value);
+			
+			protected:
+				EPState::ValueMap _vals;
+		};
+		
 		typedef std::pair< tj::shared::String, tj::shared::Any > EPOption;
 
 		class EP_EXPORTED EPTransport: public virtual tj::shared::Object {

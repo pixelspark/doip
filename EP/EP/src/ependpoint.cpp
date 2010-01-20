@@ -798,3 +798,30 @@ void EPState::SaveState(TiXmlElement* root) {
 		++it;
 	}
 }
+
+/** EPStateDefinition **/
+EPStateDefinition::EPStateDefinition() {
+}
+	
+EPStateDefinition::~EPStateDefinition() {
+}
+
+void EPStateDefinition::GetState(EPState::ValueMap& vals) {
+	vals = _vals;
+}
+
+tj::shared::Any EPStateDefinition::GetValue(const tj::shared::String& key) {
+	EPState::ValueMap::const_iterator it = _vals.find(key);
+	if(it!=_vals.end()) {
+		return it->second;
+	}
+	return Any();
+}
+
+void EPStateDefinition::SetState(EPState::ValueMap& vals) {
+	_vals = vals;
+}
+
+void EPStateDefinition::SetValue(const tj::shared::String& key, const tj::shared::Any& value) {
+	_vals[key] = value;
+}

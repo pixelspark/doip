@@ -78,6 +78,7 @@ namespace tj {
 				virtual ref<Scriptable> SPrint(ref<ParameterList> p);
 				virtual ref<Scriptable> SSend(ref<ParameterList> p);
 				virtual ref<Scriptable> SSchedule(ref<ParameterList> p);
+				virtual ref<Scriptable> SState(ref<ParameterList> p);
 				
 			protected:
 				weak<Queue> _queue;

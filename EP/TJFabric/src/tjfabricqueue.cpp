@@ -353,6 +353,12 @@ void QueueThread::Run() {
 				}
 				q->_queue.clear();
 			}
+			
+			// Commit changed state variables
+			ref<FabricEngine> engine = q->_engine;
+			if(engine) {
+				engine->GetState()->Commit();
+			}
 		}
 		
 		if(hasNextTimer) {

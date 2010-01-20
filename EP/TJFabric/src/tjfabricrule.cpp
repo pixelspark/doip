@@ -4,6 +4,39 @@ using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;
 
+/** Variable **/
+Variable::Variable() {
+}
+
+Variable::~Variable() {
+}
+
+void Variable::Load(TiXmlElement* me) {
+	String type = LoadAttributeSmall<String>(me, "type", L"");
+	String value = LoadAttributeSmall<String>(me, "value", L"");
+	_id = LoadAttributeSmall<String>(me, "id", _id);
+	_defaultValue = Any(value).Force(Any::TypeFromString(type));
+}
+
+void Variable::Save(TiXmlElement* me) {
+	SaveAttributeSmall(me, "id", _id);
+	SaveAttributeSmall(me, "type", Any::StringFromType(_defaultValue.GetType()));
+	SaveAttributeSmall(me, "value", _defaultValue.ToString());
+}
+
+void Variable::Clone() {
+	_id = Util::RandomIdentifier(L'V');
+}
+
+String Variable::GetID() const {
+	return _id;
+}
+
+Any Variable::GetDefaultValue() const {
+	return _defaultValue;
+}
+
+/** Rule **/
 Rule::Rule(): _isEnabled(true), _isPublic(true) {
 	Clone();
 }

@@ -2,6 +2,7 @@
 #include "../include/tjfabricrule.h"
 #include "../include/tjfabricgroup.h"
 #include <EP/include/epconnection.h>
+#include <EP/include/ependpoint.h>
 using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;
@@ -34,54 +35,67 @@ void Fabric::GetTags(std::set<EPTag>& tagList) const {
 	}
 }
 
+ref<EPStateDefinition> Fabric::CreateDefaultState() const {
+	ref<EPStateDefinition> epd = GC::Hold(new EPStateDefinition());
+	std::deque< ref<Variable> >::const_iterator it = _variables.begin();
+	while(it!=_variables.end()) {
+		ref<Variable> var = *it;
+		if(var) {
+			epd->SetValue(var->GetID(), var->GetDefaultValue());
+		}
+		++it;
+	}
+	return epd;
+}
+
 void Fabric::Load(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	_id = LoadAttributeSmall(me, "id", _id);
 	_package = LoadAttributeSmall(me, "package", _package);
 	_mediationLevel = LoadAttributeSmall(me, "mediation-level", _mediationLevel);
-	
-	TiXmlElement* info = me->FirstChildElement("info");
-	if(info!=0) {
-		_author = LoadAttribute<std::wstring>(info, "author", L"");
-		_title = LoadAttribute<std::wstring>(info, "title", L"");
-		_version = LoadAttribute<unsigned int>(info, "version", 0);
+	_author = LoadAttributeSmall<std::wstring>(me, "author", L"");
+	_title = LoadAttributeSmall<std::wstring>(me, "title", L"???");
+	_version = LoadAttributeSmall<unsigned int>(me, "version", 0);
 		
-		TiXmlElement* tag = info->FirstChildElement("tag");
-		while(tag!=0) {
-			TiXmlNode* text = tag->FirstChild();
-			if(text!=0) {
-				_tags.insert(Wcs(text->Value() == 0 ? "" : std::string(text->Value())));
-			}
-			tag = tag->NextSiblingElement("tag");
+	TiXmlElement* tag = me->FirstChildElement("tag");
+	while(tag!=0) {
+		TiXmlNode* text = tag->FirstChild();
+		if(text!=0) {
+			_tags.insert(Wcs(text->Value() == 0 ? "" : std::string(text->Value())));
 		}
+		tag = tag->NextSiblingElement("tag");
 	}
 	
-	TiXmlElement* groups = me->FirstChildElement("groups");
-	if(groups!=0) {
-		TiXmlElement* group = groups->FirstChildElement("group");
-		while(group!=0) {
-			ref<Group> rr = GC::Hold(new Group());
-			rr->Load(group);
-			_groups.push_back(rr);
-			group = group->NextSiblingElement("group");
-		}
+	TiXmlElement* group = me->FirstChildElement("group");
+	while(group!=0) {
+		ref<Group> rr = GC::Hold(new Group());
+		rr->Load(group);
+		_groups.push_back(rr);
+		group = group->NextSiblingElement("group");
 	}
 	
-	TiXmlElement* rules = me->FirstChildElement("rules");
-	if(rules!=0) {
-		TiXmlElement* rule = rules->FirstChildElement("rule");
-		while(rule!=0) {
-			ref<Rule> rr = GC::Hold(new Rule());
-			rr->Load(rule);
-			_rules.push_back(rr);
-			rule = rule->NextSiblingElement("rule");
-		}
+	TiXmlElement* variable = me->FirstChildElement("variable");
+	while(variable!=0) {
+		ref<Variable> var = GC::Hold(new Variable());
+		var->Load(variable);
+		_variables.push_back(var);
+		variable = variable->NextSiblingElement("variable");
+	}
+		
+	TiXmlElement* rule = me->FirstChildElement("rule");
+	while(rule!=0) {
+		ref<Rule> rr = GC::Hold(new Rule());
+		rr->Load(rule);
+		_rules.push_back(rr);
+		rule = rule->NextSiblingElement("rule");
 	}
 }
 
 void Fabric::Save(TiXmlElement* me) {
 	ThreadLock lock(&_lock);
 	EPEndpoint::Save(me);
+	
+	// TODO save rule contents, variable tags, info block, etc.
 }
 
 EPMediationLevel Fabric::GetMediationLevel() const {

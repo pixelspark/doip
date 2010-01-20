@@ -64,21 +64,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B497766A1097776300FA1B69 /* TJSharedFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJShared */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJShared;
 		};
 		B4492B9B1106665E0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776641097776300FA1B69 /* TJNPFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJNP */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJNP;
 		};
 		B4492B9D1106665E0096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49776B0109778B200FA1B69 /* TJScriptFramework.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* TJScript */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = TJScript;
 		};
 		B49776771097776300FA1B69 /* PBXContainerItemProxy */ = {
