@@ -141,6 +141,10 @@ EPEndpointDefinition::EPEndpointDefinition(): _dynamic(true), _level(0) {
 EPEndpointDefinition::~EPEndpointDefinition() {
 }
 
+bool EPEndpoint::SortsAfter(const EPEndpoint& o) const {
+	return GetFriendlyName() > o.GetFriendlyName();
+}
+
 void EPEndpointDefinition::Save(TiXmlElement* me) {
 	EPEndpoint::Save(me);
 }

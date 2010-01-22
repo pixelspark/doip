@@ -48,6 +48,7 @@
 	if([[netService type] isEqualToString:@"_ep._tcp."]) {
 		MWEndpoint* ep = [[MWEndpoint alloc] initWithService:netService];
 		[resolvedEndpoints addObject:ep];
+		[resolvedEndpoints sortUsingSelector:@selector(compareToEndpoint:)];
 		[ep release];
 	}
 	[services removeObject:netService];

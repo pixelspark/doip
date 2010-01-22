@@ -36,6 +36,10 @@ using namespace osc;
 	return self;
 }
 
+- (NSComparisonResult) compareToEndpoint:(MWEndpoint*)mwe {
+	return [[self name] compare:[mwe name]];
+}
+
 - (bool) executeFavorite:(MWFavorite *)favorite {
 	// Find a method matching the path of the favorite
 	for (MWMethod* method in _methods) {

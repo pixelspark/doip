@@ -108,7 +108,7 @@ namespace tj {
 				virtual bool PersistDefaultValues(tj::shared::strong<Message> msg);
 		};
 		
-		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object {
+		class EP_EXPORTED EPEndpoint: public virtual tj::shared::Object, public tj::shared::Sortable<EPEndpoint> {
 			public:
 				virtual ~EPEndpoint();
 				virtual tj::shared::String GetID() const = 0;
@@ -123,6 +123,7 @@ namespace tj {
 			
 				virtual void Save(TiXmlElement* me);
 				virtual tj::shared::String GetFullIdentifier() const;
+				virtual bool SortsAfter(const EPEndpoint& o) const;
 		};		
 		
 		class EP_EXPORTED EPEndpointDefinition: public EPEndpoint, public tj::shared::Serializable {
