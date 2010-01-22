@@ -26,6 +26,7 @@
 		B4528CC210BA9AA1009605EC /* ep-dim.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CC010BA9AA1009605EC /* ep-dim.png */; };
 		B4528CC310BA9AA1009605EC /* ep-fade.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CC110BA9AA1009605EC /* ep-fade.png */; };
 		B4528CD010BA9B87009605EC /* ep-color.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CCF10BA9B87009605EC /* ep-color.png */; };
+		B4686E551109D88700BB010B /* MWParameterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4686E541109D88700BB010B /* MWParameterView.mm */; };
 		B468B07710C952A300EFA99B /* MWOptionView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B07610C952A300EFA99B /* MWOptionView.mm */; };
 		B468B07B10C9537D00EFA99B /* MWParameter.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B07A10C9537D00EFA99B /* MWParameter.mm */; };
 		B468B10F10C96A0B00EFA99B /* MWChooserController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B10E10C96A0B00EFA99B /* MWChooserController.mm */; };
@@ -36,7 +37,6 @@
 		B47F0A320FB6295700DB3BEE /* MWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = B47F0A310FB6295700DB3BEE /* MWClient.mm */; };
 		B48DC250108CC6B1002AB313 /* MWDownload.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48DC24F108CC6B1002AB313 /* MWDownload.mm */; };
 		B499D012108BA6F5002E1F92 /* MWParameterTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */; };
-		B4A98A6910C6E5EF001CF473 /* libEPMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A9897C10C6C99C001CF473 /* libEPMobile.a */; };
 		B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */; };
 		B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */; };
 		B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */; };
@@ -56,36 +56,15 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = TJShared;
 		};
 		B449289B110645070096384E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteGlobalIDString = B4A987C410C65F70001CF473;
 			remoteInfo = TJSharedMobile;
-		};
-		B4A9897910C6C99C001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = EP;
-		};
-		B4A9897B10C6C99C001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B4A988EE10C6622C001CF473;
-			remoteInfo = EPMobile;
-		};
-		B4A9897D10C6C9B5001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B4A988ED10C6622C001CF473;
-			remoteInfo = EPMobile;
 		};
 		B4A98A7310C6E614001CF473 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -155,6 +134,8 @@
 		B4528CC010BA9AA1009605EC /* ep-dim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ep-dim.png"; path = "Resources/Icons/ep-dim.png"; sourceTree = "<group>"; };
 		B4528CC110BA9AA1009605EC /* ep-fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ep-fade.png"; path = "Resources/Icons/ep-fade.png"; sourceTree = "<group>"; };
 		B4528CCF10BA9B87009605EC /* ep-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ep-color.png"; path = "Resources/Icons/ep-color.png"; sourceTree = "<group>"; };
+		B4686E531109D88700BB010B /* MWParameterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameterView.h; sourceTree = "<group>"; };
+		B4686E541109D88700BB010B /* MWParameterView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWParameterView.mm; sourceTree = "<group>"; };
 		B468B07510C952A300EFA99B /* MWOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWOptionView.h; sourceTree = "<group>"; };
 		B468B07610C952A300EFA99B /* MWOptionView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWOptionView.mm; sourceTree = "<group>"; };
 		B468B07910C9537D00EFA99B /* MWParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameter.h; sourceTree = "<group>"; };
@@ -173,7 +154,6 @@
 		B48DC24F108CC6B1002AB313 /* MWDownload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWDownload.mm; sourceTree = "<group>"; };
 		B499D010108BA6F5002E1F92 /* MWParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameterTableViewController.h; sourceTree = "<group>"; };
 		B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWParameterTableViewController.mm; sourceTree = "<group>"; };
-		B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EP/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -203,7 +183,6 @@
 			files = (
 				B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */,
 				B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */,
-				B4A98A6910C6E5EF001CF473 /* libEPMobile.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -248,6 +227,8 @@
 				B468B07A10C9537D00EFA99B /* MWParameter.mm */,
 				B468B10D10C96A0B00EFA99B /* MWChooserController.h */,
 				B468B10E10C96A0B00EFA99B /* MWChooserController.mm */,
+				B4686E531109D88700BB010B /* MWParameterView.h */,
+				B4686E541109D88700BB010B /* MWParameterView.mm */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -266,7 +247,6 @@
 				B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */,
 				B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */,
 				B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */,
-				B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -331,15 +311,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B4A9894A10C6C99C001CF473 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B4A9897A10C6C99C001CF473 /* EP.framework */,
-				B4A9897C10C6C99C001CF473 /* libEPMobile.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		B4A98A6F10C6E614001CF473 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,7 +343,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B4A9897E10C6C9B5001CF473 /* PBXTargetDependency */,
 				B4A98A8310C6E638001CF473 /* PBXTargetDependency */,
 				B4A98A8510C6E638001CF473 /* PBXTargetDependency */,
 			);
@@ -392,10 +362,6 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = B4A9894A10C6C99C001CF473 /* Products */;
-					ProjectRef = B4A9894910C6C99C001CF473 /* EPFramework.xcodeproj */;
-				},
 				{
 					ProductGroup = B4A98A7810C6E621001CF473 /* Products */;
 					ProjectRef = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
@@ -429,20 +395,6 @@
 			fileType = archive.ar;
 			path = libTJSharedMobile.a;
 			remoteRef = B449289B110645070096384E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B4A9897A10C6C99C001CF473 /* EP.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EP.framework;
-			remoteRef = B4A9897910C6C99C001CF473 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B4A9897C10C6C99C001CF473 /* libEPMobile.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libEPMobile.a;
-			remoteRef = B4A9897B10C6C99C001CF473 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B4A98A7410C6E614001CF473 /* TinyXML.framework */ = {
@@ -526,17 +478,13 @@
 				B468B07710C952A300EFA99B /* MWOptionView.mm in Sources */,
 				B468B07B10C9537D00EFA99B /* MWParameter.mm in Sources */,
 				B468B10F10C96A0B00EFA99B /* MWChooserController.mm in Sources */,
+				B4686E551109D88700BB010B /* MWParameterView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B4A9897E10C6C9B5001CF473 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EPMobile;
-			targetProxy = B4A9897D10C6C9B5001CF473 /* PBXContainerItemProxy */;
-		};
 		B4A98A8310C6E638001CF473 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OSCPackMobile;

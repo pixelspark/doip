@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "../../../Libraries/TinyXML/tinyxml.h"
 
 @class MWMethod;
 class TiXmlElement;
@@ -13,6 +14,7 @@ class TiXmlElement;
 	NSString* _value;
 	NSString* _nature;
 	MWMethod* _parent;
+	NSString* _bindValue;
 	NSMutableDictionary* _options;
 }
 
@@ -38,5 +40,6 @@ class TiXmlElement;
 @property (nonatomic, readonly) bool discrete;
 @property (nonatomic, retain) NSString* nature;
 @property (nonatomic, retain) NSDictionary* options;
+@property (nonatomic, retain) NSString* bindValue;
 
 @end

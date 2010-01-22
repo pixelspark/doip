@@ -1,7 +1,7 @@
 #import "MWParameter.h"
-#import "MWSliderView.h"
-#import "MWOptionView.h"
+#import "MWParameterView.h"
 #import "MWMethod.h"
+#import "MWEndpoint.h"
 #import "../../../Libraries/TinyXML/tinyxml.h"
 
 @implementation MWParameter
@@ -15,6 +15,7 @@
 @synthesize identifier = _id;
 @synthesize nature = _nature;
 @synthesize options = _options;
+@synthesize bindValue = _bindValue;
 @dynamic discrete;
 
 - (NSString*) attribute:(const char*)name fromElement:(TiXmlElement*)elm defaultsTo:(NSString*)def {
@@ -23,6 +24,17 @@
 		return def;
 	}
 	return [NSString stringWithUTF8String:value];
+}
+
+- (void) boundStateChanged:(NSNotification*)ns {
+	MWStateChange* change = [ns object];
+	if(change!=nil) {
+		if([_bindValue isEqualToString:[change key]]) {
+			self.value = [change value];
+			NSNotification* nt = [NSNotification notificationWithName:@"MWParameterValueChange" object:self];
+			[[NSNotificationCenter defaultCenter] postNotification:nt];
+		}
+	}
 }
 
 - (id) initFromDefinition:(TiXmlElement *)def inMethod:(MWMethod*)method {
@@ -38,6 +50,7 @@
 			self.maximumValue = [self attribute:"max" fromElement:def defaultsTo:@""];
 			self.identifier = [self attribute:"id" fromElement:def defaultsTo:@""];
 			self.nature = [self attribute:"nature" fromElement:def defaultsTo:@""];
+			self.bindValue = [self attribute:"bind-value" fromElement:def defaultsTo:@""];
 			
 			TiXmlElement* option = def->FirstChildElement("option");
 			while(option!=0) {
@@ -45,6 +58,10 @@
 				NSString* value = [self attribute:"value" fromElement:option defaultsTo:@""];
 				[_options setObject:value forKey:name];
 				option = option->NextSiblingElement("option");
+			}
+			
+			if([self.bindValue length]>0) {
+				[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundStateChanged:) name:@"MWStateChange" object:nil];
 			}
 		}
 		@catch (NSException * e) {
@@ -116,44 +133,18 @@
 }
 
 - (UIView*) createView: (CGRect)rect immediate:(BOOL)imm inController:(UIViewController*)cs {
-	if([_options count]>0) {
-		// The values are restricted; create an MWOptionsView
-		MWOptionView* mwo = [[MWOptionView alloc] initWithFrame:rect parameter:self immediate:imm];
-		mwo.parentViewController = cs;
-		[mwo autorelease];
-		return mwo;
+	@try {
+		return [[MWParameterView alloc] initWithParameter:self inRect:rect immediate:imm inController:cs];
 	}
-	else {
-		if([_type isEqualToString:@"int32"] || [_type isEqualToString:@"double"]) {
-			MWSliderView* sv = [[MWSliderView alloc] initWithFrame:rect parameter:self immediate:imm];
-			[sv autorelease];
-			return sv;
-		}
-		else if([_type isEqualToString:@"bool"]) {
-			UISwitch* sw = [[UISwitch alloc] initWithFrame:CGRectMake(rect.size.width+rect.origin.x-96, rect.origin.y, 96, rect.size.height)];
-			[sw setOn:[_default isEqualToString:@"yes"] || [_default isEqualToString:@"1"]];
-			[sw autorelease];
-			[sw addTarget:self action:@selector(switchValueChanged:event:) forControlEvents:UIControlEventValueChanged];
-			if(imm) {
-				[sw addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventValueChanged];
-			}
-			return sw;
-		}
-		else if([_type isEqualToString:@"string"]) {
-			UITextField* field = [[UITextField alloc] initWithFrame:rect];
-			[field setBorderStyle:UITextBorderStyleRoundedRect];
-			[field setDelegate:self];
-			if(imm) {
-				[field addTarget:self action:@selector(executeHandler:event:) forControlEvents:UIControlEventEditingDidEnd];
-			}
-			[field autorelease];
-			return field;
-		}
+	@catch (NSException * e) {
+	}
+	@finally {
 	}
 	return nil;
 }
 
 - (void) dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_friendly release];
 	[_min release];
 	[_max release];
@@ -162,6 +153,7 @@
 	[_nature release];
 	[_value release];
 	[_options release];
+	[_bindValue release];
 	[super dealloc];
 }
 

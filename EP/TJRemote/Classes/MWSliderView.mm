@@ -12,6 +12,17 @@
 	}
 };
 
+- (void) parameterValueChanged:(NSNotification*)nt {
+	float val = [_parameter.value floatValue];
+	
+	[UIView beginAnimations:NULL context:nil];
+	[UIView setAnimationDuration:0.8];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[_slider setValue:val];
+	[UIView commitAnimations];
+	[self updateLabel];
+}
+
 - (id) initWithFrame:(CGRect)rect parameter:(MWParameter*)parameter immediate:(bool)imm {
 	const static int KLabelWidth = 32;
 	const static int KButtonWidth = 32;
@@ -62,6 +73,8 @@
 		}
 		[_slider setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
 		[self addSubview:_slider];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parameterValueChanged:) name:@"MWParameterValueChange" object:parameter];
+		
 	}
 	return self;
 }
