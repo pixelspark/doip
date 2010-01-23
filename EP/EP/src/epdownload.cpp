@@ -57,7 +57,7 @@ void EPDownloadedState::OnDownloadComplete(ref<DataWriter> cw) {
 			return;
 		}
 		else {
-			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this definition file!");
+			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this definition file! (path="+_path+L")");
 		}
 	}
 	
