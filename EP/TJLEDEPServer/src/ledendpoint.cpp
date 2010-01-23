@@ -99,7 +99,7 @@ void LEDEndpoint::MReset(strong<Message> m, ref<Connection> c, ref<ConnectionCha
 
 void LEDEndpoint::MDim(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
 	PowerUp();
-	_dim = m->GetParameter(0);
+	_dim = m->GetParameter(0).Force(Any::TypeDouble);
 	UpdateColor(true);
 }
 

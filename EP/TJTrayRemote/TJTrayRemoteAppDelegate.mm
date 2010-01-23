@@ -8,15 +8,35 @@ TTDiscovery::TTDiscovery() {
 }
 
 void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn) {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	ref<EPRemoteState> epr = cn.remoteState;
+	
 	if(epr && _methodMenuItems!=nil) {
-		for(TTMethodMenuItem* mi in _methodMenuItems) {
-			[mi update:epr];
+		// Which endpoint was this for, again?
+		ref<EPEndpoint> forEndpoint;
+		std::map< ref<EPEndpoint>, ref<EPRemoteState> >::iterator it = _remoteStates.begin();
+		while(it!=_remoteStates.end()) {
+			if(it->second==epr) {
+				forEndpoint = it->first;
+				break;
+			}
+			++it;
+		}
+		
+		if(forEndpoint) {
+			for(TTMethodMenuItem* mi in _methodMenuItems) {
+				if([mi endpoint]==forEndpoint) {
+					[mi update:epr];
+				}
+			}
 		}
 	}
+	
+	[pool release];
 }
 
 void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	ThreadLock lock(&_lock);
 	
 	ref<EPEndpoint> enp = dn.endpoint;
@@ -60,6 +80,7 @@ void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 			}
 		}
 	}
+	[pool release];
 }
 
 void TTDiscovery::OnCreated() {

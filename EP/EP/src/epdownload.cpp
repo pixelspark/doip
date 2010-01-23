@@ -37,6 +37,7 @@ void EPDownloadedState::LoadState(TiXmlElement* root) {
 	TiXmlElement* var = root->FirstChildElement("var");
 	while(var!=0) {
 		String key = LoadAttributeSmall(var, "key", String(L""));
+		String val = LoadAttributeSmall(var, "value", String(L"???"));
 		Any value;
 		value.Load(var);
 		_state[key] = value;

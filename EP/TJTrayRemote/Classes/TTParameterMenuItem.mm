@@ -3,6 +3,9 @@
 @implementation TTParameterMenuItem
 
 - (void) update:(ref<EPRemoteState>)rs onlyState:(BOOL)stateOnly {
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:1.0f];
+	
 	String valueBinding = _parameter->GetValueBinding();
 	std::wstring type = _parameter->GetType();
 	
@@ -13,7 +16,8 @@
 			[(NSButton*)_dataView setState:(bool(boundValue) ? NSOnState: NSOffState)];
 		}
 		else if(type==EPParameter::KTypeDouble || type==EPParameter::KTypeInt32) {
-			[(NSSlider*)_dataView setDoubleValue:double(boundValue)];
+			NSSlider* slider = (NSSlider*)_dataView;
+			[[slider animator] setDoubleValue:double(boundValue)];
 		}
 		
 		if(_valueLabel!=nil) {
@@ -44,6 +48,8 @@
 			[_valueLabel setTitleWithMnemonic:[NSString stringWithUTF8String:value.c_str()]];
 		}
 	}
+	
+	[NSAnimationContext endGrouping];
 }
 
 - (void) onCheckboxClick: (id)sender {
@@ -54,6 +60,11 @@
 - (void) onSliderChange: (id)sender {
 	NSSlider* slider = (NSSlider*)sender;
 	_parameter->SetDefaultValue(Any([slider doubleValue]));
+	
+	if(_valueLabel!=nil) {
+		std::string value = Mbs(_parameter->GetDefaultValue().Force(_parameter->GetValueType()).ToString());
+		[_valueLabel setTitleWithMnemonic:[NSString stringWithUTF8String:value.c_str()]];
+	}
 }
 
 - (id) initWithParameter:(ref<EPParameter>)p state:(ref<EPRemoteState>)rs {
@@ -146,6 +157,7 @@
 			
 		}
 		[self setView:wrapper];
+		[wrapper setWantsLayer:YES];
 		[wrapper release];
 		[self update:rs onlyState:FALSE];
 	}
