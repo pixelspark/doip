@@ -35,6 +35,35 @@ void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn
 	[pool release];
 }
 
+bool TTDiscovery::GetTagInPreferences(const EPTag& tag, bool& enabled) {
+	NSMutableArray* dict = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"tags"];
+	NSString* tagName = [NSString stringWithUTF8String:Mbs(tag).c_str()];
+	for (NSMutableDictionary* row in dict) {
+		NSString* name = [row valueForKey:@"name"];
+		if(name!=nil && [name isEqualToString:tagName]) {
+			NSNumber* enabledNr = [row valueForKey:@"enabled"];
+			enabled = [enabledNr boolValue];
+			return true;
+		}
+	}
+	return false;
+}
+
+void TTDiscovery::AddTagToPreferences(const EPTag& tag) {
+	NSString* tagName = [NSString stringWithUTF8String:Mbs(tag).c_str()];
+	NSMutableArray* dict = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"tags"];
+	bool enabled = false;
+	if(!GetTagInPreferences(tag,enabled)) {
+		NSMutableDictionary* row = [[NSMutableDictionary alloc] init];
+		[row setValue:tagName forKey:@"name"];
+		[row setValue:[NSNumber numberWithBool:YES] forKey:@"enabled"];
+		[dict addObject:row];
+		[row release];
+	}
+	
+	[[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:dict forKey:@"tags"];
+}
+
 void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	ThreadLock lock(&_lock);
@@ -44,6 +73,21 @@ void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 		if(enp && dn.connection) {
 			_endpoints.insert(enp);
 			_connections.insert(std::pair<ref<EPEndpoint>, ref<Connection> >(enp, dn.connection));
+			
+			std::set<EPTag> tags;
+			enp->GetTags(tags);
+			
+			if(tags.size()==0) {
+				AddTagToPreferences(L"");
+			}
+			else {
+				// Add each tag to the set of tags for user defaults
+				std::set<EPTag>::const_iterator tit = tags.begin();
+				while(tit!=tags.end()) {
+					AddTagToPreferences(*tit);
+					++tit;
+				}
+			}
 		}
 		
 		if(enp && dn.remoteState) {
@@ -97,9 +141,25 @@ TTDiscovery::~TTDiscovery() {
 @implementation TJTrayRemoteAppDelegate
 
 @synthesize window;
+@synthesize prefsController = _prefsController;
+
++ (void)initialize {
+	// load the default values for the user defaults
+	NSString *userDefaultsValuesPath = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];
+	NSDictionary *userDefaultsValuesDict = [NSDictionary dictionaryWithContentsOfFile:userDefaultsValuesPath];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsValuesDict];
+	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsValuesDict];
+}
 
 - (void) quitApplication:(id)sender {
 	[NSApp terminate:nil];
+}
+
+- (void) showPreferences:(id)sender {
+	[NSApp activateIgnoringOtherApps:YES];
+	[_prefsController showWindow:sender];
+	[[_prefsController window] makeKeyAndOrderFront:sender];
+	[[_prefsController window] makeMainWindow];
 }
 
 - (ref<Connection>) connectionForEndpoint: (ref<EPEndpoint>) enp {
@@ -155,6 +215,11 @@ TTDiscovery::~TTDiscovery() {
 
 - (void) menuNeedsUpdate:(NSMenu *)menu {
 	[menu removeAllItems];
+	
+	// Do we have to show items without any methods?
+	NSNumber* val = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"hideEndpointsWithoutActions"];
+	bool hideEndpointsWithoutMethods = [val boolValue];
+	
 	[_discovery->_methodMenuItems release];
 	_discovery->_methodMenuItems = [[NSMutableArray alloc] init];
 	
@@ -165,48 +230,78 @@ TTDiscovery::~TTDiscovery() {
 			ref<EPEndpoint> enp = *it;
 			if(enp) {
 				std::string name = Mbs(enp->GetFriendlyName());
-				NSMenuItem* endpointItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithUTF8String:name.c_str()] action:nil keyEquivalent:@""];
 				
 				// Enumerate methods and add them
 				std::vector< ref<EPMethod> > methods;
 				enp->GetMethods(methods);
 				
-				if(methods.size()>0) {
-					NSMenu* methodsMenu = [[NSMenu alloc] initWithTitle:@""];
-					std::vector< ref<EPMethod> >::iterator mit = methods.begin();
-					while(mit!=methods.end()) {
-						ref<EPMethod> method = *mit;
-						if(method) {
-							ref<Connection> connection = [self connectionForEndpoint:enp];
-							ref<EPRemoteState> rs;
-							std::map< ref<EPEndpoint>, ref<EPRemoteState> >::iterator sit = _discovery->_remoteStates.find(enp);
-							if(sit!=_discovery->_remoteStates.end()) {
-								rs = sit->second;
-							}
-							
-							TTMethodMenuItem* methodItem = [[TTMethodMenuItem alloc] initWithMethod:method endpoint:enp connection:connection state:rs];
-							[methodItem setTarget:self];
-							[methodItem setAction:@selector(execute:)];
-							[methodsMenu addItem:methodItem];
-							[_discovery->_methodMenuItems addObject:methodItem];
-							[methodItem release];
-						}
-						++mit;
-					}
-					[endpointItem setSubmenu:methodsMenu];
-					[methodsMenu release];
+				bool show = false;
+				std::set<EPTag> tags;
+				enp->GetTags(tags);
+				if(tags.size()==0) {
+					_discovery->GetTagInPreferences(L"", show);
 				}
-					
-				[menu addItem:endpointItem];
-				[endpointItem release];
+				else {
+					std::set<EPTag>::const_iterator tagIt = tags.begin();
+					while(tagIt!=tags.end()) {
+						bool enabled = false;
+						if(_discovery->GetTagInPreferences(*tagIt, enabled)) {
+							show = enabled | show;
+							if(show) {
+								break;
+							}
+						}
+						
+						++tagIt;
+					}
+				}
 				
+				if(show) {
+					NSMenuItem* endpointItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithUTF8String:name.c_str()] action:nil keyEquivalent:@""];
+					if(methods.size()>0) {
+						NSMenu* methodsMenu = [[NSMenu alloc] initWithTitle:@""];
+						std::vector< ref<EPMethod> >::iterator mit = methods.begin();
+						while(mit!=methods.end()) {
+							ref<EPMethod> method = *mit;
+							if(method) {
+								ref<Connection> connection = [self connectionForEndpoint:enp];
+								ref<EPRemoteState> rs;
+								std::map< ref<EPEndpoint>, ref<EPRemoteState> >::iterator sit = _discovery->_remoteStates.find(enp);
+								if(sit!=_discovery->_remoteStates.end()) {
+									rs = sit->second;
+								}
+								
+								TTMethodMenuItem* methodItem = [[TTMethodMenuItem alloc] initWithMethod:method endpoint:enp connection:connection state:rs];
+								[methodItem setTarget:self];
+								[methodItem setAction:@selector(execute:)];
+								[methodsMenu addItem:methodItem];
+								[_discovery->_methodMenuItems addObject:methodItem];
+								[methodItem release];
+							}
+							++mit;
+						}
+						[endpointItem setSubmenu:methodsMenu];
+						[methodsMenu release];
+					}
+					
+					if(!hideEndpointsWithoutMethods || methods.size()>0) {
+						[menu addItem:endpointItem];
+					}
+					[endpointItem release];
+				}
 			}	
 			++it;
 		}
 	}
 	
-	/* Quit item*/
+	/* Quit/prefs item */
 	[menu addItem:[NSMenuItem separatorItem]];
+	
+	NSMenuItem* prefsItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(showPreferences:) keyEquivalent:@""];
+	[prefsItem setTarget:self];
+	[menu addItem:prefsItem];
+	[prefsItem release];
+	
 	NSMenuItem* quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quitApplication:) keyEquivalent:@""];
 	[quitItem setTarget:self];
 	[menu addItem:quitItem];

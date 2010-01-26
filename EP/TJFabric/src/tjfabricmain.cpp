@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 		Log::SetLogToConsole(true);
 		Log::Write(L"TJFabric/Main", std::wstring(L"Starting at ")+Date().ToFriendlyString());
 		
-		String userSettingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ",L"Fabric",L"appsettings");
+		String userSettingsPath = SettingsStorage::GetSystemSettingsPath(L"TJ",L"Fabricd",L"appsettings");
 		File::CreateDirectoryAtPath(File::GetDirectory(userSettingsPath), true);
 		strong<Daemon> daemon = Daemon::Instance();
 		

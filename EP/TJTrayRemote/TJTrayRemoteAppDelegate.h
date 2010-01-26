@@ -3,6 +3,8 @@
 #include <EP/include/epdiscovery.h>
 #include <TJNP/include/tjsocket.h>
 
+@class TTPreferencesWindowController;
+
 using namespace tj::ep;
 using namespace tj::shared;
 using namespace tj::np;
@@ -14,6 +16,8 @@ class TTDiscovery: public virtual Object, public Listener<DiscoveryNotification>
 		virtual void OnCreated();
 		virtual void Notify(ref<Object> source, const DiscoveryNotification& dn);
 		virtual void Notify(ref<Object> source, const EPStateChangeNotification& cn);
+		virtual bool GetTagInPreferences(const EPTag& tag, bool& enabled);
+		virtual void AddTagToPreferences(const EPTag& tag);
 	
 		CriticalSection _lock;
 		ref<Discovery> _discovery;
@@ -28,8 +32,10 @@ class TTDiscovery: public virtual Object, public Listener<DiscoveryNotification>
     NSWindow *window;
 	NSStatusItem* _item;
 	tj::shared::ref<TTDiscovery> _discovery;
+	TTPreferencesWindowController* _prefsController;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (nonatomic, retain) IBOutlet TTPreferencesWindowController* prefsController;
 
 @end

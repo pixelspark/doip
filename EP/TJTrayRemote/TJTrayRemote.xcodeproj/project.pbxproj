@@ -27,6 +27,8 @@
 		B44928F0110646030096384E /* TJScout.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4492842110644A60096384E /* TJScout.framework */; };
 		B44928F1110646030096384E /* TJNP.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B449284B110644B10096384E /* TJNP.framework */; };
 		B44928F2110646030096384E /* TJShared.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4492854110644BB0096384E /* TJShared.framework */; };
+		B46A2DEE110F7AF8005AAC35 /* TTPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */; };
+		B46A2E09110F7D9F005AAC35 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */; };
 		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
 /* End PBXBuildFile section */
@@ -203,6 +205,9 @@
 		B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTMethodMenuItem.mm; path = Classes/TTMethodMenuItem.mm; sourceTree = "<group>"; };
 		B40868E81101BFC000F1F103 /* TTParameterMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTParameterMenuItem.h; path = Classes/TTParameterMenuItem.h; sourceTree = "<group>"; };
 		B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTParameterMenuItem.mm; path = Classes/TTParameterMenuItem.mm; sourceTree = "<group>"; };
+		B46A2DEC110F7AF8005AAC35 /* TTPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTPreferencesWindowController.h; path = Classes/TTPreferencesWindowController.h; sourceTree = "<group>"; };
+		B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTPreferencesWindowController.m; path = Classes/TTPreferencesWindowController.m; sourceTree = "<group>"; };
+		B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -234,6 +239,8 @@
 				B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */,
 				B40868E81101BFC000F1F103 /* TTParameterMenuItem.h */,
 				B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */,
+				B46A2DEC110F7AF8005AAC35 /* TTPreferencesWindowController.h */,
+				B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -300,6 +307,7 @@
 				8D1107310486CEB800E47090 /* TJTrayRemote-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -535,6 +543,7 @@
 				B401A25F11009D1C00B2B77A /* icon.png in Resources */,
 				B401A27A11009F6600B2B77A /* icon-high.png in Resources */,
 				B401A64E110106F800B2B77A /* Fabric.icns in Resources */,
+				B46A2E09110F7D9F005AAC35 /* UserDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +558,7 @@
 				256AC3DA0F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm in Sources */,
 				B40868B71101BDA600F1F103 /* TTMethodMenuItem.mm in Sources */,
 				B40868EA1101BFC000F1F103 /* TTParameterMenuItem.mm in Sources */,
+				B46A2DEE110F7AF8005AAC35 /* TTPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
