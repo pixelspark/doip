@@ -225,6 +225,7 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 						}
 						DiscoveryNotification dn(Timestamp(true), connection, true, epe->GetMediationLevel());
 						dn.endpoint = epe;
+						dn.service = data.service;
 						
 						// If the remote service supports states, start a download and add a remote state to the notification
 						ref<Service> service = edd->GetService();

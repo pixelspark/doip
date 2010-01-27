@@ -29,6 +29,8 @@
 		B44928F2110646030096384E /* TJShared.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4492854110644BB0096384E /* TJShared.framework */; };
 		B46A2DEE110F7AF8005AAC35 /* TTPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */; };
 		B46A2E09110F7D9F005AAC35 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */; };
+		B48A1BE8111074180063D55F /* TTURLMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A1BE7111074180063D55F /* TTURLMenuItem.m */; };
+		B48A1C411110786B0063D55F /* TTDiscovery.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48A1C401110786B0063D55F /* TTDiscovery.mm */; };
 		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
 		B4FAEAAB1110306900EF3465 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEAAA1110306900EF3465 /* Localizable.strings */; };
@@ -211,6 +213,10 @@
 		B46A2DEC110F7AF8005AAC35 /* TTPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTPreferencesWindowController.h; path = Classes/TTPreferencesWindowController.h; sourceTree = "<group>"; };
 		B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTPreferencesWindowController.m; path = Classes/TTPreferencesWindowController.m; sourceTree = "<group>"; };
 		B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
+		B48A1BE6111074180063D55F /* TTURLMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTURLMenuItem.h; path = Classes/TTURLMenuItem.h; sourceTree = "<group>"; };
+		B48A1BE7111074180063D55F /* TTURLMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTURLMenuItem.m; path = Classes/TTURLMenuItem.m; sourceTree = "<group>"; };
+		B48A1C3F1110786B0063D55F /* TTDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTDiscovery.h; path = Classes/TTDiscovery.h; sourceTree = "<group>"; };
+		B48A1C401110786B0063D55F /* TTDiscovery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTDiscovery.mm; path = Classes/TTDiscovery.mm; sourceTree = "<group>"; };
 		B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4FAEAAC1110307400EF3465 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -249,6 +255,10 @@
 				B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */,
 				B46A2DEC110F7AF8005AAC35 /* TTPreferencesWindowController.h */,
 				B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */,
+				B48A1BE6111074180063D55F /* TTURLMenuItem.h */,
+				B48A1BE7111074180063D55F /* TTURLMenuItem.m */,
+				B48A1C3F1110786B0063D55F /* TTDiscovery.h */,
+				B48A1C401110786B0063D55F /* TTDiscovery.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -597,6 +607,8 @@
 				B40868B71101BDA600F1F103 /* TTMethodMenuItem.mm in Sources */,
 				B40868EA1101BFC000F1F103 /* TTParameterMenuItem.mm in Sources */,
 				B46A2DEE110F7AF8005AAC35 /* TTPreferencesWindowController.m in Sources */,
+				B48A1BE8111074180063D55F /* TTURLMenuItem.m in Sources */,
+				B48A1C411110786B0063D55F /* TTDiscovery.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

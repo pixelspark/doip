@@ -3,6 +3,7 @@
 
 #include "epinternal.h"
 #include "epconnection.h"
+#include <TJScout/include/tjservice.h>
 
 namespace tj {
 	namespace ep {
@@ -53,6 +54,7 @@ namespace tj {
 			tj::shared::ref<Connection> connection;
 			tj::shared::ref<EPEndpoint> endpoint;
 			tj::shared::ref<EPRemoteState> remoteState;
+			tj::shared::ref<tj::scout::Service> service;
 			bool added;
 			EPMediationLevel mediationLevel;
 		};
