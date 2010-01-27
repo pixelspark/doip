@@ -32,7 +32,9 @@ namespace tj {
 				virtual void GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const;
 				virtual void GetTransports(std::vector< tj::shared::ref<EPTransport> >& transportsList) const;
 				virtual void RemoveAllMethods();
-				
+				virtual void GetTags(std::set<EPTag>& tags) const;
+				virtual void SetTags(const tj::shared::String& tagList);
+			
 			protected:
 				virtual void UpdateStatePublication();
 			
@@ -49,6 +51,7 @@ namespace tj {
 				tj::shared::String _friendlyName;
 				bool _updateDefaultValuesToState;
 				tj::shared::ref<EPPublication> _publication;
+				std::set< EPTag > _tags;
 				mutable tj::shared::CriticalSection _lock;
 		};
 		
@@ -117,6 +120,23 @@ namespace tj {
 			tj::shared::ThreadLock lock(&_lock);
 			_publication = pub;
 			UpdateStatePublication();
+		}
+		
+		template<class T> void EPEndpointServer<T>::GetTags(std::set<EPTag>& tags) const {
+			tj::shared::ThreadLock lock(&_lock);
+			_tags = tags;
+		}
+		
+		template<class T> void EPEndpointServer<T>::SetTags(const tj::shared::String& tagList) {
+			std::vector< tj::shared::String > parts = tj::shared::Explode<tj::shared::String>(tagList, L" ");
+			
+			tj::shared::ThreadLock lock(&_lock);
+			_tags.clear();
+			std::vector< tj::shared::String >::const_iterator it = parts.begin();
+			while(it!=parts.end()) {
+				_tags.insert(*it);
+				++it;
+			}
 		}
 		
 		template<class T> void EPEndpointServer<T>::GetMethods(std::vector< tj::shared::ref<EPMethod> >& methodList) const {

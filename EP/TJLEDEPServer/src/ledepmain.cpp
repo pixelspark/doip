@@ -54,6 +54,7 @@ int main (int argc, char * const argv[]) {
 	st->SetValue(L"ep.friendly-name", L"LEDs");
 	st->SetValue(L"led.device-path", L"/dev/ttyUSB0");
 	st->SetValue(L"led.protocol", L"tubled");
+	st->SetValue(L"ep.tags", L"Lighting");
 	
 	try {
 		st->LoadFile(settingsPath);
@@ -83,6 +84,7 @@ int main (int argc, char * const argv[]) {
 		
 		if(leds) {
 			ref<LEDEndpoint> uspe = GC::Hold(new LEDEndpoint(idh, L"com.tjshow.leds", st->GetValue(L"ep.friendly-name"), leds));
+			uspe->SetTags(st->GetValue(L"ep.tags"));
 			ref<EPPublication> pub = GC::Hold(new EPPublication(ref<EPEndpoint>(uspe)));
 			uspe->Publish(pub);
 			Log::Write(L"TJLEDEPServer/Main", L"Running");

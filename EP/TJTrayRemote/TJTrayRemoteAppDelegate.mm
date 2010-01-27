@@ -297,12 +297,12 @@ TTDiscovery::~TTDiscovery() {
 	/* Quit/prefs item */
 	[menu addItem:[NSMenuItem separatorItem]];
 	
-	NSMenuItem* prefsItem = [[NSMenuItem alloc] initWithTitle:@"Preferences..." action:@selector(showPreferences:) keyEquivalent:@""];
+	NSMenuItem* prefsItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Preferences...", @"Show preferences window") action:@selector(showPreferences:) keyEquivalent:@""];
 	[prefsItem setTarget:self];
 	[menu addItem:prefsItem];
 	[prefsItem release];
 	
-	NSMenuItem* quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quitApplication:) keyEquivalent:@""];
+	NSMenuItem* quitItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit", @"Quit application") action:@selector(quitApplication:) keyEquivalent:@""];
 	[quitItem setTarget:self];
 	[menu addItem:quitItem];
 	[quitItem release];

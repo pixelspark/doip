@@ -94,6 +94,9 @@ EPWebItem::~EPWebItem() {
 }
 
 ref<WebItem> EPWebItem::Resolve(const String& path) {
+	if(path.length()<2) {
+		return null;
+	}
 	bool hasSlash = path.at(0)==L'/';
 	ref<EPPublication> pub = _publication;
 	if(!pub) {

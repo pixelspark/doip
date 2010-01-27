@@ -150,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				B43316F910F71B5600F77332 /* include */,
-				B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */,
 				B46CBCC010A45C2D00CDE29F /* src */,
+				B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */,
 				B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */,
 				B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */,
 				B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */,

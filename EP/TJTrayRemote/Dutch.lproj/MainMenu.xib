@@ -36,12 +36,12 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{482, 507}, {520, 359}}</string>
 				<int key="NSWTFlags">1685585920</int>
-				<string key="NSWindowTitle">Preferences</string>
+				<string key="NSWindowTitle">Voorkeuren</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="975159278">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSBox" id="721099691">
@@ -57,12 +57,11 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{16, 12}, {452, 38}}</string>
 											<reference key="NSSuperview" ref="270059249"/>
-											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="766342326">
 												<int key="NSCellFlags">67239424</int>
 												<int key="NSCellFlags2">0</int>
-												<string key="NSContents">Hide devices that have no available actions</string>
+												<string key="NSContents">Verberg apparaten die geen acties kunnen uitvoeren</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
@@ -87,17 +86,15 @@
 									</array>
 									<string key="NSFrame">{{1, 1}, {484, 58}}</string>
 									<reference key="NSSuperview" ref="721099691"/>
-									<reference key="NSWindow"/>
 								</object>
 							</array>
 							<string key="NSFrame">{{17, 265}, {486, 74}}</string>
 							<reference key="NSSuperview" ref="975159278"/>
-							<reference key="NSWindow"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">General</string>
+								<string key="NSContents">Algemeen</string>
 								<object class="NSFont" key="NSSupport" id="89965706">
 									<string key="NSName">LucidaGrande-Bold</string>
 									<double key="NSSize">11</double>
@@ -144,7 +141,6 @@
 															<int key="NSvFlags">256</int>
 															<string key="NSFrameSize">{454, 133}</string>
 															<reference key="NSSuperview" ref="870160379"/>
-															<reference key="NSWindow"/>
 															<bool key="NSEnabled">YES</bool>
 															<object class="_NSCornerView" key="NSCornerView">
 																<nil key="NSNextResponder"/>
@@ -214,7 +210,7 @@
 																			<double key="NSSize">12</double>
 																			<int key="NSfFlags">16</int>
 																		</object>
-																		<string key="NSPlaceholderString">[No tag]</string>
+																		<string key="NSPlaceholderString">[Zonder tags]</string>
 																		<reference key="NSControlView" ref="664328186"/>
 																		<object class="NSColor" key="NSBackgroundColor" id="367479708">
 																			<int key="NSColorSpace">6</int>
@@ -263,7 +259,6 @@
 													</array>
 													<string key="NSFrame">{{1, 1}, {446, 133}}</string>
 													<reference key="NSSuperview" ref="989121307"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="664328186"/>
 													<reference key="NSDocView" ref="664328186"/>
 													<reference key="NSBGColor" ref="367479708"/>
@@ -274,7 +269,6 @@
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{432, 1}, {15, 133}}</string>
 													<reference key="NSSuperview" ref="989121307"/>
-													<reference key="NSWindow"/>
 													<reference key="NSTarget" ref="989121307"/>
 													<string key="NSAction">_doScroller:</string>
 													<double key="NSCurValue">0.0075187969924812026</double>
@@ -285,7 +279,6 @@
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{-100, -100}, {127, 15}}</string>
 													<reference key="NSSuperview" ref="989121307"/>
-													<reference key="NSWindow"/>
 													<bool key="NSEnabled">YES</bool>
 													<int key="NSsFlags">1</int>
 													<reference key="NSTarget" ref="989121307"/>
@@ -296,7 +289,6 @@
 											</array>
 											<string key="NSFrame">{{18, 14}, {448, 135}}</string>
 											<reference key="NSSuperview" ref="355194085"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="870160379"/>
 											<int key="NSsFlags">658</int>
 											<reference key="NSVScroller" ref="241137309"/>
@@ -309,12 +301,11 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{15, 161}, {271, 14}}</string>
 											<reference key="NSSuperview" ref="355194085"/>
-											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="948885473">
 												<int key="NSCellFlags">68288064</int>
 												<int key="NSCellFlags2">272630784</int>
-												<string key="NSContents">Show only devices with the following tags:</string>
+												<string key="NSContents">Laat alleen apparaten zien die de volgende tags dragen:</string>
 												<reference key="NSSupport" ref="89965706"/>
 												<reference key="NSControlView" ref="952565224"/>
 												<object class="NSColor" key="NSBackgroundColor" id="105023980">
@@ -329,17 +320,15 @@
 									</array>
 									<string key="NSFrame">{{1, 1}, {484, 189}}</string>
 									<reference key="NSSuperview" ref="268704311"/>
-									<reference key="NSWindow"/>
 								</object>
 							</array>
 							<string key="NSFrame">{{17, 56}, {486, 205}}</string>
 							<reference key="NSSuperview" ref="975159278"/>
-							<reference key="NSWindow"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Devices</string>
+								<string key="NSContents">Apparaten</string>
 								<reference key="NSSupport" ref="89965706"/>
 								<reference key="NSBackgroundColor" ref="1015009531"/>
 								<object class="NSColor" key="NSTextColor">
@@ -358,7 +347,6 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{410, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="975159278"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="544523948">
 								<int key="NSCellFlags">67239424</int>
@@ -383,7 +371,6 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 16}, {25, 25}}</string>
 							<reference key="NSSuperview" ref="975159278"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="140970018">
 								<int key="NSCellFlags">67239424</int>
@@ -401,8 +388,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{520, 359}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 1002}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -431,11 +416,12 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{590, 675}, {272, 178}}</string>
 				<int key="NSWTFlags">1685585920</int>
-				<string key="NSWindowTitle">About</string>
+				<string key="NSWindowTitle">Over Remote</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
+				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="146629731">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSButton" id="985676622">
@@ -443,7 +429,6 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{84, 71}, {96, 98}}</string>
 							<reference key="NSSuperview" ref="146629731"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="198617361">
 								<int key="NSCellFlags">67239424</int>
@@ -468,12 +453,11 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 49}, {224, 14}}</string>
 							<reference key="NSSuperview" ref="146629731"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="402297881">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">138413056</int>
-								<string key="NSContents">HomeWeave Remote for Mac v1.0</string>
+								<string key="NSContents">HomeWeave Remote voor Mac v1.0</string>
 								<reference key="NSSupport" ref="89965706"/>
 								<reference key="NSControlView" ref="120023701"/>
 								<reference key="NSBackgroundColor" ref="105023980"/>
@@ -485,7 +469,6 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{33, 9}, {197, 14}}</string>
 							<reference key="NSSuperview" ref="146629731"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="55229284">
 								<int key="NSCellFlags">68288064</int>
@@ -506,7 +489,6 @@
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{33, 29}, {197, 14}}</string>
 							<reference key="NSSuperview" ref="146629731"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="228194124">
 								<int key="NSCellFlags">68288064</int>
@@ -520,8 +502,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{272, 178}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 1002}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -666,10 +646,10 @@
 							<string key="NSKeyPath">arrangedObjects.name</string>
 							<dictionary key="NSOptions">
 								<boolean value="YES" key="NSContinuouslyUpdatesValue"/>
-								<string key="NSMultipleValuesPlaceholder">[multiple]</string>
+								<string key="NSMultipleValuesPlaceholder">[meerdere]</string>
 								<string key="NSNoSelectionPlaceholder">??</string>
-								<string key="NSNotApplicablePlaceholder">[No tag]</string>
-								<string key="NSNullPlaceholder">[No tag]</string>
+								<string key="NSNotApplicablePlaceholder">[Zonder tags]</string>
+								<string key="NSNullPlaceholder">[Zonder tags]</string>
 							</dictionary>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
@@ -958,6 +938,8 @@
 				<string key="533.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="533.IBWindowTemplateEditedContentRect">{{318, 485}, {520, 359}}</string>
 				<boolean value="NO" key="533.NSWindowTemplate.visibleAtLaunch"/>
+				<string key="533.windowTemplate.maxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="533.windowTemplate.minSize">{0, 0}</string>
 				<string key="534.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="542.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="543.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -984,6 +966,8 @@
 				<string key="660.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="660.IBWindowTemplateEditedContentRect">{{590, 675}, {272, 178}}</string>
 				<boolean value="NO" key="660.NSWindowTemplate.visibleAtLaunch"/>
+				<string key="660.windowTemplate.maxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="660.windowTemplate.minSize">{0, 0}</string>
 				<string key="661.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="662.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="663.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

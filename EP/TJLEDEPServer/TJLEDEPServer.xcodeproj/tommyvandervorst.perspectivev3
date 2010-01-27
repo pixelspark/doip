@@ -269,8 +269,8 @@
 							<array>
 								<string>08FB7794FE84155DC02AAC07</string>
 								<string>B43316F910F71B5600F77332</string>
-								<string>B4CAAA8010AD68DB00385A5F</string>
 								<string>B46CBCC010A45C2D00CDE29F</string>
+								<string>B4CAAA8010AD68DB00385A5F</string>
 								<string>B46CBD3610A4683F00CDE29F</string>
 								<string>B46CBC9E10A45B6700CDE29F</string>
 								<string>B46CBCA110A45B6700CDE29F</string>
@@ -280,8 +280,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>13</integer>
-									<integer>9</integer>
+									<integer>11</integer>
+									<integer>6</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -321,7 +321,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>B46CBC8F10A45B2400CDE29F</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ledendpoint.cpp</string>
+								<string>ependpointserver.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B46CBC9010A45B2400CDE29F</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ledendpoint.cpp</string>
+										<string>ependpointserver.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B428B7FD110A05D9003E8323</string>
+										<string>B4FAEB5E11103C5A00EF3465</string>
 										<key>history</key>
 										<array>
 											<string>B474BA4010D6D9D200FA7D4C</string>
@@ -341,21 +341,21 @@
 											<string>B433172E10F7205000F77332</string>
 											<string>B433173010F7205000F77332</string>
 											<string>B433173210F7205000F77332</string>
-											<string>B433175B10F7228200F77332</string>
 											<string>B433175C10F7228200F77332</string>
 											<string>B433175F10F7228200F77332</string>
-											<string>B4900F2711032CDF00925122</string>
 											<string>B49010CC1103926E00925122</string>
 											<string>B40F44A01107004400B7C049</string>
 											<string>B40F44A11107004400B7C049</string>
 											<string>B4E5AB5A11074FF3003AB425</string>
 											<string>B4E5AB5B11074FF3003AB425</string>
 											<string>B4E5AB5C11074FF3003AB425</string>
-											<string>B4E5AB5E11074FF3003AB425</string>
-											<string>B4E5AC8D110765AE003AB425</string>
 											<string>B4E5AC8E110765AE003AB425</string>
 											<string>B428B7FB110A05D9003E8323</string>
-											<string>B428B7FC110A05D9003E8323</string>
+											<string>B4FAEB5911103C5A00EF3465</string>
+											<string>B4FAEB5A11103C5A00EF3465</string>
+											<string>B4FAEB5B11103C5A00EF3465</string>
+											<string>B4FAEB5C11103C5A00EF3465</string>
+											<string>B4FAEB5D11103C5A00EF3465</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -369,18 +369,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 534}}</string>
+								<string>{{0, 0}, {1073, 526}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 93 1280 909 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>534pt</string>
+							<string>526pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>329pt</string>
+							<string>337pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -394,9 +394,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 302}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 93 1280 909 0 0 1280 1002 </string>
+										<string>{{10, 27}, {1073, 310}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -450,7 +448,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 294}}</string>
+										<string>{{10, 27}, {1073, 310}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 93 1280 909 0 0 1280 1002 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -478,11 +478,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B428B7FE110A05D9003E8323</string>
+				<string>B4FAEB6011103C5A00EF3465</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B428B7FF110A05D9003E8323</string>
+				<string>B4FAEB6111103C5A00EF3465</string>
 				<string>B46CBC8F10A45B2400CDE29F</string>
-				<string>B428B800110A05D9003E8323</string>
+				<string>B4FAEB6211103C5A00EF3465</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -632,14 +632,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B428B801110A05D9003E8323</string>
+				<string>B4FAEB6311103C5A00EF3465</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>B428B802110A05D9003E8323</string>
-				<string>B428B803110A05D9003E8323</string>
-				<string>B428B804110A05D9003E8323</string>
-				<string>B428B805110A05D9003E8323</string>
-				<string>B46CBC8F10A45B2400CDE29F</string>
+				<string>B4FAEB6411103C5A00EF3465</string>
+				<string>B4FAEB6511103C5A00EF3465</string>
+				<string>B4FAEB6611103C5A00EF3465</string>
+				<string>B4FAEB6711103C5A00EF3465</string>
+				<string>B4FAEB6811103C5A00EF3465</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -673,6 +673,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>B4FAEB6911103C5A00EF3465</string>
+		<string>B4FAEB6A11103C5A00EF3465</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJLEDEPServer/TJLEDEPServer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

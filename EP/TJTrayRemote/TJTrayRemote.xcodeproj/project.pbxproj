@@ -31,6 +31,9 @@
 		B46A2E09110F7D9F005AAC35 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */; };
 		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
+		B4FAEAAB1110306900EF3465 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEAAA1110306900EF3465 /* Localizable.strings */; };
+		B4FAEB0C111033AB00EF3465 /* MainMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEB0A111033AB00EF3465 /* MainMenu.strings */; };
+		B4FAEB4611103C3000EF3465 /* Localize.sh in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEB4511103C3000EF3465 /* Localize.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +213,11 @@
 		B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4FAEAAC1110307400EF3465 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4FAEB0B111033AB00EF3465 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		B4FAEB0F111033E100EF3465 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		B4FAEB101110347E00EF3465 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Dutch; path = Dutch.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B4FAEB4511103C3000EF3465 /* Localize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Localize.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +282,7 @@
 		29B97314FDCFA39411CA2CEA /* TJTrayRemote */ = {
 			isa = PBXGroup;
 			children = (
+				B4FAEB4511103C3000EF3465 /* Localize.sh */,
 				B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */,
 				B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */,
 				B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */,
@@ -301,13 +310,15 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				B4FAEB0A111033AB00EF3465 /* MainMenu.strings */,
 				B401A64D110106F800B2B77A /* Fabric.icns */,
 				B401A27911009F6600B2B77A /* icon-high.png */,
 				B401A25E11009D1C00B2B77A /* icon.png */,
 				8D1107310486CEB800E47090 /* TJTrayRemote-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */,
+				B4FAEAAA1110306900EF3465 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -386,6 +397,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				B401A63B1101069D00B2B77A /* Copy Executables */,
+				B4FAEB4411103C1B00EF3465 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -411,6 +423,13 @@
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TJTrayRemote" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Dutch,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* TJTrayRemote */;
 			projectDirPath = "";
 			projectReferences = (
@@ -544,10 +563,29 @@
 				B401A27A11009F6600B2B77A /* icon-high.png in Resources */,
 				B401A64E110106F800B2B77A /* Fabric.icns in Resources */,
 				B46A2E09110F7D9F005AAC35 /* UserDefaults.plist in Resources */,
+				B4FAEAAB1110306900EF3465 /* Localizable.strings in Resources */,
+				B4FAEB0C111033AB00EF3465 /* MainMenu.strings in Resources */,
+				B4FAEB4611103C3000EF3465 /* Localize.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B4FAEB4411103C1B00EF3465 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
@@ -610,8 +648,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				1DDD58150DA1D0A300B32029 /* English */,
+				B4FAEB101110347E00EF3465 /* Dutch */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		B4FAEAAA1110306900EF3465 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4FAEAAC1110307400EF3465 /* Dutch */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B4FAEB0A111033AB00EF3465 /* MainMenu.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4FAEB0B111033AB00EF3465 /* English */,
+				B4FAEB0F111033E100EF3465 /* Dutch */,
+			);
+			name = MainMenu.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
