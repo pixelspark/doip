@@ -19,6 +19,9 @@ class TTDiscovery: public virtual Object, public Listener<DiscoveryNotification>
 		virtual bool GetTagInPreferences(const EPTag& tag, bool& enabled);
 		virtual void AddTagToPreferences(const EPTag& tag);
 		virtual ref<Service> GetServiceForEndpoint(ref<EPEndpoint> ep);
+		virtual ref<Connection> GetConnectionForEndpoint(ref<EPEndpoint> ep);
+		virtual ref<EPRemoteState> GetStateForEndpoint(ref<EPEndpoint> ep);
+		virtual void UpdateShownEndpoints();
 		
 		CriticalSection _lock;
 		ref<Discovery> _discovery;
@@ -26,6 +29,6 @@ class TTDiscovery: public virtual Object, public Listener<DiscoveryNotification>
 		std::multimap< ref<EPEndpoint>, ref<Connection> > _connections;
 		std::map< ref<EPEndpoint>, ref<EPRemoteState> > _remoteStates;
 		std::set< ref<EPEndpoint> > _endpoints;
+		std::set< ref<EPEndpoint> > _shownEndpoints;
 		std::map< ref<EPEndpoint>, ref<Service> > _services;
-		NSMutableArray* _methodMenuItems;
 };

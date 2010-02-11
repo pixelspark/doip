@@ -17,8 +17,8 @@
 		B401A646110106DC00B2B77A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A645110106DC00B2B77A /* Cocoa.framework */; };
 		B401A64E110106F800B2B77A /* Fabric.icns in Resources */ = {isa = PBXBuildFile; fileRef = B401A64D110106F800B2B77A /* Fabric.icns */; };
 		B401A6721101080700B2B77A /* EP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B401A5811101037800B2B77A /* EP.framework */; };
-		B40868B71101BDA600F1F103 /* TTMethodMenuItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */; };
 		B40868EA1101BFC000F1F103 /* TTParameterMenuItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */; };
+		B432C654111186C3007FCEF4 /* TTBrowserTree.mm in Sources */ = {isa = PBXBuildFile; fileRef = B432C653111186C3007FCEF4 /* TTBrowserTree.mm */; };
 		B449285B110644D70096384E /* OSCPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B449285C110644D70096384E /* TinyXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
 		B449285D110644D70096384E /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4492842110644A60096384E /* TJScout.framework */; };
@@ -29,10 +29,14 @@
 		B44928F2110646030096384E /* TJShared.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4492854110644BB0096384E /* TJShared.framework */; };
 		B46A2DEE110F7AF8005AAC35 /* TTPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */; };
 		B46A2E09110F7D9F005AAC35 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */; };
-		B48A1BE8111074180063D55F /* TTURLMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B48A1BE7111074180063D55F /* TTURLMenuItem.m */; };
 		B48A1C411110786B0063D55F /* TTDiscovery.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48A1C401110786B0063D55F /* TTDiscovery.mm */; };
+		B4A4EA811111CA3A00601463 /* TTBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A4EA801111CA3A00601463 /* TTBrowser.m */; };
+		B4A4EC501111F74B00601463 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A4EC4F1111F74B00601463 /* QuartzCore.framework */; };
 		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
+		B4E6F19F1123221100F3AAB3 /* TTHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6F19E1123221100F3AAB3 /* TTHeaderView.m */; };
+		B4E6F1D2112325EC00F3AAB3 /* TTFlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6F1D1112325EC00F3AAB3 /* TTFlipViewController.m */; };
+		B4E6F45F11236CBF00F3AAB3 /* TTMethodViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E6F45E11236CBF00F3AAB3 /* TTMethodViewController.mm */; };
 		B4FAEAAB1110306900EF3465 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEAAA1110306900EF3465 /* Localizable.strings */; };
 		B4FAEB0C111033AB00EF3465 /* MainMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEB0A111033AB00EF3465 /* MainMenu.strings */; };
 		B4FAEB4611103C3000EF3465 /* Localize.sh in Resources */ = {isa = PBXBuildFile; fileRef = B4FAEB4511103C3000EF3465 /* Localize.sh */; };
@@ -206,19 +210,26 @@
 		B401A64D110106F800B2B77A /* Fabric.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fabric.icns; sourceTree = "<group>"; };
 		B401A6FB11010A8300B2B77A /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../Core/TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B401A70511010A9800B2B77A /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../Core/TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B40868B51101BDA600F1F103 /* TTMethodMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTMethodMenuItem.h; path = Classes/TTMethodMenuItem.h; sourceTree = "<group>"; };
-		B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTMethodMenuItem.mm; path = Classes/TTMethodMenuItem.mm; sourceTree = "<group>"; };
 		B40868E81101BFC000F1F103 /* TTParameterMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTParameterMenuItem.h; path = Classes/TTParameterMenuItem.h; sourceTree = "<group>"; };
 		B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTParameterMenuItem.mm; path = Classes/TTParameterMenuItem.mm; sourceTree = "<group>"; };
+		B432C652111186C3007FCEF4 /* TTBrowserTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBrowserTree.h; path = Classes/TTBrowserTree.h; sourceTree = "<group>"; };
+		B432C653111186C3007FCEF4 /* TTBrowserTree.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTBrowserTree.mm; path = Classes/TTBrowserTree.mm; sourceTree = "<group>"; };
 		B46A2DEC110F7AF8005AAC35 /* TTPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTPreferencesWindowController.h; path = Classes/TTPreferencesWindowController.h; sourceTree = "<group>"; };
 		B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTPreferencesWindowController.m; path = Classes/TTPreferencesWindowController.m; sourceTree = "<group>"; };
 		B46A2E08110F7D9F005AAC35 /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
-		B48A1BE6111074180063D55F /* TTURLMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTURLMenuItem.h; path = Classes/TTURLMenuItem.h; sourceTree = "<group>"; };
-		B48A1BE7111074180063D55F /* TTURLMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTURLMenuItem.m; path = Classes/TTURLMenuItem.m; sourceTree = "<group>"; };
 		B48A1C3F1110786B0063D55F /* TTDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTDiscovery.h; path = Classes/TTDiscovery.h; sourceTree = "<group>"; };
 		B48A1C401110786B0063D55F /* TTDiscovery.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTDiscovery.mm; path = Classes/TTDiscovery.mm; sourceTree = "<group>"; };
+		B4A4EA7F1111CA3A00601463 /* TTBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBrowser.h; path = Classes/TTBrowser.h; sourceTree = "<group>"; };
+		B4A4EA801111CA3A00601463 /* TTBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTBrowser.m; path = Classes/TTBrowser.m; sourceTree = "<group>"; };
+		B4A4EC4F1111F74B00601463 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4E6F19D1123221100F3AAB3 /* TTHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTHeaderView.h; path = Classes/TTHeaderView.h; sourceTree = "<group>"; };
+		B4E6F19E1123221100F3AAB3 /* TTHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTHeaderView.m; path = Classes/TTHeaderView.m; sourceTree = "<group>"; };
+		B4E6F1D0112325EC00F3AAB3 /* TTFlipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTFlipViewController.h; path = Classes/TTFlipViewController.h; sourceTree = "<group>"; };
+		B4E6F1D1112325EC00F3AAB3 /* TTFlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTFlipViewController.m; path = Classes/TTFlipViewController.m; sourceTree = "<group>"; };
+		B4E6F45D11236CBF00F3AAB3 /* TTMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTMethodViewController.h; path = Classes/TTMethodViewController.h; sourceTree = "<group>"; };
+		B4E6F45E11236CBF00F3AAB3 /* TTMethodViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTMethodViewController.mm; path = Classes/TTMethodViewController.mm; sourceTree = "<group>"; };
 		B4FAEAAC1110307400EF3465 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4FAEB0B111033AB00EF3465 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		B4FAEB0F111033E100EF3465 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -238,6 +249,7 @@
 				B449285F110644D70096384E /* TJShared.framework in Frameworks */,
 				B401A6721101080700B2B77A /* EP.framework in Frameworks */,
 				B401A646110106DC00B2B77A /* Cocoa.framework in Frameworks */,
+				B4A4EC501111F74B00601463 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,16 +261,22 @@
 			children = (
 				256AC3D80F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm */,
-				B40868B51101BDA600F1F103 /* TTMethodMenuItem.h */,
-				B40868B61101BDA600F1F103 /* TTMethodMenuItem.mm */,
 				B40868E81101BFC000F1F103 /* TTParameterMenuItem.h */,
 				B40868E91101BFC000F1F103 /* TTParameterMenuItem.mm */,
 				B46A2DEC110F7AF8005AAC35 /* TTPreferencesWindowController.h */,
 				B46A2DED110F7AF8005AAC35 /* TTPreferencesWindowController.m */,
-				B48A1BE6111074180063D55F /* TTURLMenuItem.h */,
-				B48A1BE7111074180063D55F /* TTURLMenuItem.m */,
 				B48A1C3F1110786B0063D55F /* TTDiscovery.h */,
 				B48A1C401110786B0063D55F /* TTDiscovery.mm */,
+				B432C652111186C3007FCEF4 /* TTBrowserTree.h */,
+				B432C653111186C3007FCEF4 /* TTBrowserTree.mm */,
+				B4A4EA7F1111CA3A00601463 /* TTBrowser.h */,
+				B4A4EA801111CA3A00601463 /* TTBrowser.m */,
+				B4E6F19D1123221100F3AAB3 /* TTHeaderView.h */,
+				B4E6F19E1123221100F3AAB3 /* TTHeaderView.m */,
+				B4E6F1D0112325EC00F3AAB3 /* TTFlipViewController.h */,
+				B4E6F1D1112325EC00F3AAB3 /* TTFlipViewController.m */,
+				B4E6F45D11236CBF00F3AAB3 /* TTMethodViewController.h */,
+				B4E6F45E11236CBF00F3AAB3 /* TTMethodViewController.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -305,6 +323,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				B401A645110106DC00B2B77A /* Cocoa.framework */,
+				B4A4EC4F1111F74B00601463 /* QuartzCore.framework */,
 			);
 			name = TJTrayRemote;
 			sourceTree = "<group>";
@@ -604,11 +623,14 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm in Sources */,
-				B40868B71101BDA600F1F103 /* TTMethodMenuItem.mm in Sources */,
 				B40868EA1101BFC000F1F103 /* TTParameterMenuItem.mm in Sources */,
 				B46A2DEE110F7AF8005AAC35 /* TTPreferencesWindowController.m in Sources */,
-				B48A1BE8111074180063D55F /* TTURLMenuItem.m in Sources */,
 				B48A1C411110786B0063D55F /* TTDiscovery.mm in Sources */,
+				B432C654111186C3007FCEF4 /* TTBrowserTree.mm in Sources */,
+				B4A4EA811111CA3A00601463 /* TTBrowser.m in Sources */,
+				B4E6F19F1123221100F3AAB3 /* TTHeaderView.m in Sources */,
+				B4E6F1D2112325EC00F3AAB3 /* TTFlipViewController.m in Sources */,
+				B4E6F45F11236CBF00F3AAB3 /* TTMethodViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
