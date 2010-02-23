@@ -249,6 +249,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\ependpointserver.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\epmessage.h"
 				>
 			</File>
