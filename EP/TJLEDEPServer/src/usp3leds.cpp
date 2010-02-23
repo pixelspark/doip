@@ -28,6 +28,13 @@ void USP3LED::SetColorDirectly(unsigned char r, unsigned char g, unsigned char b
 
 void USP3LED::UpdateColor(bool fading) {
 	_device.WriteRegister(usp3::ChromoflexStripeDevice::KRegisterStatus, 0x01);
+	
+	// The Chromoflex fades by incrementing the 'level' value with the 'increment' value every 1/100*track seconds,
+	// until the level equals the 'set' value. So with an increment of 2 and track of 1, a fade from 0...255 will
+	// take 255/2 * 1/100 = 1.27s. The problem is that fades thus do not take equal time (i.e. the amBX driver interpolates
+	// a different way, and fades always take 1 second).
+	_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterIncR, 0x04, 0x04, 0x04, 0x00);
+	//_device.WriteRegister(usp3::ChromoflexStripeDevice::KRegisterTrack, 0x01);
 	_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterSetR, _r, _g, _b, 0x00);
 	if(!fading) {
 		_device.WriteRegisterInt(usp3::ChromoflexStripeDevice::KRegisterLevelR, _r, _g, _b, 0x00);

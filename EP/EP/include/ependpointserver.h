@@ -124,7 +124,7 @@ namespace tj {
 		
 		template<class T> void EPEndpointServer<T>::GetTags(std::set<EPTag>& tags) const {
 			tj::shared::ThreadLock lock(&_lock);
-			_tags = tags;
+			tags = _tags;
 		}
 		
 		template<class T> void EPEndpointServer<T>::SetTags(const tj::shared::String& tagList) {

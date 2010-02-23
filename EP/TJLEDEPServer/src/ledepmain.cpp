@@ -6,6 +6,7 @@
 #include "../include/ledendpoint.h"
 #include "../include/tubleds.h"
 #include "../include/usp3leds.h"
+#include "../include/ambxleds.h"
 #include <iomanip>
 #include <sstream>
 
@@ -80,6 +81,9 @@ int main (int argc, char * const argv[]) {
 		}
 		else if(serialProtocol==L"usp3") {
 			leds = GC::Hold(new USP3LED(Mbs(serialDevicePath).c_str()));
+		}
+		else if(serialProtocol==L"ambx") {
+			leds = GC::Hold(new AmbxLED());
 		}
 		
 		if(leds) {
