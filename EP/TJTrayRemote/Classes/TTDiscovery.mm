@@ -69,7 +69,6 @@ void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn
 							std::wstring bound = param->GetValueBinding();
 							if(bound!=L"") {
 								Any val = epr->GetValue(bound);
-								Log::Write(L"TTDiscovery", L"Set param value to "+val.ToString()+L" bound="+bound);
 								param->SetDefaultValue(val);
 							}
 						}
@@ -179,13 +178,15 @@ void TTDiscovery::Notify(ref<Object> source, const DiscoveryNotification& dn) {
 			}
 		}
 	}
-	[pool release];
 	
 	// Update the list of shown endpoints
 	UpdateShownEndpoints();
+	[pool release];
 }
 
 void TTDiscovery::UpdateShownEndpoints() {
+	bool hideEmpty = [[[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"hideEndpointsWithoutActions"] boolValue];
+	
 	ThreadLock lock(&_lock);
 	std::set< ref<EPEndpoint> > shownEndpoints;
 	std::set< ref<EPEndpoint> >::iterator it = _endpoints.begin();
@@ -210,6 +211,14 @@ void TTDiscovery::UpdateShownEndpoints() {
 					}
 					
 					++tagIt;
+				}
+			}
+			
+			if(hideEmpty) {
+				std::vector< ref<EPMethod> > methods;
+				enp->GetMethods(methods);
+				if(methods.size()==0) {
+					show = false;
 				}
 			}
 			

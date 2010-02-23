@@ -140,10 +140,10 @@
 }
 
 - (ref<EPEndpoint>) endpointWithIndex:(int)idx {
-	std::set< ref<EPEndpoint> >::iterator it = [_app discovery]->_endpoints.begin();
+	std::set< ref<EPEndpoint> >::iterator it = [_app discovery]->_shownEndpoints.begin();
 	for(int a=0;a<idx;a++) {
 		if(it==[_app discovery]->_shownEndpoints.end()) {
-			return nil;
+			return ref<Endpoint>(0);
 		}
 		++it;
 	}

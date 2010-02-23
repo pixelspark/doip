@@ -34,6 +34,9 @@ void BTEndpoint::OnCreated() {
 		AddTransport(ref<EPTransport>(udpd), inConnection);
 	}
 	
+	// TODO: allow configuration of additional tags (gateway-wide tag, for instance) and maybe specify more information about the services the device supports
+	SetTags(L"Mobile Wireless");
+	
 	_publication = GC::Hold(new EPPublication(ref<EPEndpoint>(this)));
 	
 	// TODO: add methods

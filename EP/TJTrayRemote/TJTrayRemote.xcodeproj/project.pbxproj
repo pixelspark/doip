@@ -34,6 +34,8 @@
 		B4A4EC501111F74B00601463 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A4EC4F1111F74B00601463 /* QuartzCore.framework */; };
 		B4D65D7E11011EA8008FD68C /* OSCPack.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7B11011EA4008FD68C /* OSCPack.framework */; };
 		B4D65D7F11011EA8008FD68C /* TinyXML.framework in Copy Executables */ = {isa = PBXBuildFile; fileRef = B4D65D7211011E97008FD68C /* TinyXML.framework */; };
+		B4D971B7113320410060471C /* TTStatusItemView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4D971B6113320410060471C /* TTStatusItemView.mm */; };
+		B4D97219113324080060471C /* MAAttachedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D97218113324080060471C /* MAAttachedWindow.m */; };
 		B4E6F19F1123221100F3AAB3 /* TTHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6F19E1123221100F3AAB3 /* TTHeaderView.m */; };
 		B4E6F1D2112325EC00F3AAB3 /* TTFlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6F1D1112325EC00F3AAB3 /* TTFlipViewController.m */; };
 		B4E6F45F11236CBF00F3AAB3 /* TTMethodViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E6F45E11236CBF00F3AAB3 /* TTMethodViewController.mm */; };
@@ -224,6 +226,10 @@
 		B4A4EC4F1111F74B00601463 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B4D65D6C11011E97008FD68C /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4D65D7511011EA4008FD68C /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4D971B5113320410060471C /* TTStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTStatusItemView.h; path = Classes/TTStatusItemView.h; sourceTree = "<group>"; };
+		B4D971B6113320410060471C /* TTStatusItemView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TTStatusItemView.mm; path = Classes/TTStatusItemView.mm; sourceTree = "<group>"; };
+		B4D97217113324080060471C /* MAAttachedWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAAttachedWindow.h; path = Classes/MAAttachedWindow.h; sourceTree = "<group>"; };
+		B4D97218113324080060471C /* MAAttachedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAAttachedWindow.m; path = Classes/MAAttachedWindow.m; sourceTree = "<group>"; };
 		B4E6F19D1123221100F3AAB3 /* TTHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTHeaderView.h; path = Classes/TTHeaderView.h; sourceTree = "<group>"; };
 		B4E6F19E1123221100F3AAB3 /* TTHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTHeaderView.m; path = Classes/TTHeaderView.m; sourceTree = "<group>"; };
 		B4E6F1D0112325EC00F3AAB3 /* TTFlipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTFlipViewController.h; path = Classes/TTFlipViewController.h; sourceTree = "<group>"; };
@@ -259,6 +265,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B4D97217113324080060471C /* MAAttachedWindow.h */,
+				B4D97218113324080060471C /* MAAttachedWindow.m */,
 				256AC3D80F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* TJTrayRemoteAppDelegate.mm */,
 				B40868E81101BFC000F1F103 /* TTParameterMenuItem.h */,
@@ -277,6 +285,8 @@
 				B4E6F1D1112325EC00F3AAB3 /* TTFlipViewController.m */,
 				B4E6F45D11236CBF00F3AAB3 /* TTMethodViewController.h */,
 				B4E6F45E11236CBF00F3AAB3 /* TTMethodViewController.mm */,
+				B4D971B5113320410060471C /* TTStatusItemView.h */,
+				B4D971B6113320410060471C /* TTStatusItemView.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -631,6 +641,8 @@
 				B4E6F19F1123221100F3AAB3 /* TTHeaderView.m in Sources */,
 				B4E6F1D2112325EC00F3AAB3 /* TTFlipViewController.m in Sources */,
 				B4E6F45F11236CBF00F3AAB3 /* TTMethodViewController.mm in Sources */,
+				B4D971B7113320410060471C /* TTStatusItemView.mm in Sources */,
+				B4D97219113324080060471C /* MAAttachedWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

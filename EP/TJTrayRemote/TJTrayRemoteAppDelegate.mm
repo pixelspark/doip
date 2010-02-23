@@ -1,5 +1,6 @@
 #import "TJTrayRemoteAppDelegate.h"
 #import "TTFlipViewController.h"
+#import "TTStatusItemView.h"
 
 @implementation TJTrayRemoteAppDelegate
 
@@ -16,7 +17,7 @@
 	[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsValuesDict];
 }
 
-- (void) quitApplication:(id)sender {
+- (IBAction) quitApplication:(id)sender {
 	[NSApp terminate:nil];
 }
 
@@ -72,22 +73,21 @@
 	}
 }
 
-- (void) menuNeedsUpdate:(NSMenu *)menu {
-	[menu removeAllItems];
-	[NSApp activateIgnoringOtherApps:YES];
-	_discovery->UpdateShownEndpoints();
-	
-	// Little experiment
-	NSMenuItem* mi = [[NSMenuItem alloc] initWithTitle:@"Endpoints" action:nil keyEquivalent:@""];
-	[mi setView:_browserView];
-	[menu setAutoenablesItems:NO];
-	[menu addItem:mi];
-	[_flipper flipToFront];
-	
-	NSMenuItem* quitItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit", @"Quit application") action:@selector(quitApplication:) keyEquivalent:@""];
-	[quitItem setTarget:self];
-	[menu addItem:quitItem];
-	[quitItem release];	
+- (void)toggleAttachedWindowAtPoint:(NSPoint)pt {
+    // Attach/detach window.
+    if (!_attachedWindow) {
+		_discovery->UpdateShownEndpoints();
+		
+        _attachedWindow = [[MAAttachedWindow alloc] initWithView:_browserView attachedToPoint:pt inWindow:nil onSide:MAPositionBottomRight atDistance:-5.0];
+		[NSApp activateIgnoringOtherApps:YES];
+		[_attachedWindow makeKeyAndOrderFront:self];
+		
+    } 
+	else {
+        [_attachedWindow orderOut:self];
+        [_attachedWindow release];
+        _attachedWindow = nil;
+    }    
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -95,16 +95,11 @@
 	
 	NSStatusBar* bar = [NSStatusBar systemStatusBar];
 	_item = [[bar statusItemWithLength:NSSquareStatusItemLength] retain];
+	_statusView = [[TTStatusItemView alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0,0,16,16))];
+	_statusView.app = self;
 	
-	NSBundle *bundle = [NSBundle mainBundle];
-	NSImage* statusImage = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"icon" ofType:@"png"]];
-	NSImage* statusImageHigh = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"icon-high" ofType:@"png"]];
-	
-	[_item setImage:statusImage];
-	[_item setAlternateImage:statusImageHigh];
+	[_item setView:_statusView];
 	[_item setToolTip:@"HomeWeave Remote"];
-	[_item setHighlightMode:TRUE];
-	[statusImage release];
 	
 	NSMenu* menu = [[NSMenu alloc] init];
 	[menu setDelegate:self];
@@ -118,6 +113,7 @@
 - (void) dealloc {
 	[_item release];
 	_discovery->~TTDiscovery();
+	[_statusView release];
 	[super dealloc];
 }
 
