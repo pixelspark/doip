@@ -58,7 +58,7 @@ void EPDownloadedState::OnDownloadComplete(ref<DataWriter> cw) {
 			return;
 		}
 		else {
-			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this definition file! (path="+_path+L")");
+			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this state file! (path="+_path+L")");
 		}
 	}
 	
@@ -73,7 +73,6 @@ EPDownloadedDefinition::EPDownloadNotification::EPDownloadNotification(ref<EPEnd
 EPDownloadedDefinition::EPDownloadedDefinition(strong<Service> service, const tj::shared::String& path):
 	Download(NetworkAddress(service->GetHostName()), path, service->GetPort()),
 	_service(service) {
-		
 }
 
 strong<Service> EPDownloadedDefinition::GetService() {
@@ -90,7 +89,6 @@ ref<EPEndpoint> EPDownloadedDefinition::GetEndpoint() {
 
 void EPDownloadedDefinition::OnCreated() {
 	Download::OnCreated();
-	Start();
 }
 
 void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
@@ -108,7 +106,7 @@ void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
 			return;
 		}
 		else {
-			Log::Write(L"TJEP/EPDownloadedDefinition", L"No root element in this definition file!");
+			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this definition file! (path="+_path+L")");
 		}
 	}
 

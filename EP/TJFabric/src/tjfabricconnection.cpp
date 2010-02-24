@@ -77,13 +77,12 @@ void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data)
 }
 
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
+	ThreadLock lock(&_lock);
 	if(bool(data.added) && bool(data.connection)) {
-		ThreadLock lock(&_lock);
+		
 		_discoveredConnections.push_back(std::pair<EPMediationLevel, ref<Connection> >(data.mediationLevel, data.connection));
 	}
 	else {
-		ThreadLock lock(&_lock);
-		
 		// remove connection from _discoveredConnections
 		std::deque< std::pair<EPMediationLevel, ref<Connection> > >::iterator it = _discoveredConnections.begin();
 		ref<Connection> removedConnection = ref<Connection>(data.connection);
@@ -102,7 +101,6 @@ void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& dat
 	
 	// Queue discovery scripts
 	if(source.IsCastableTo<Discovery>()) {
-		ThreadLock lock(&_lock);
 		String scriptSource;
 		
 		ref<Discovery> discovery = source;

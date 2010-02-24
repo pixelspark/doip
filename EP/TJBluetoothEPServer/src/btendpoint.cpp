@@ -38,6 +38,4 @@ void BTEndpoint::OnCreated() {
 	SetTags(L"Mobile Wireless");
 	
 	_publication = GC::Hold(new EPPublication(ref<EPEndpoint>(this)));
-	
-	// TODO: add methods
 }

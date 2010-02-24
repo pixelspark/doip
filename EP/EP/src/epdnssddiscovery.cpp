@@ -204,7 +204,6 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 			// Endpoint does not meet requirements, ignore
 		}
 		else {
-			Log::Write(L"TJFabric/EPDiscovery", L"Discovered endpoint '"+epe->GetFriendlyName()+L"' ["+epe->GetFullIdentifier()+L"]");
 			{
 				ThreadLock lock(&_lock);
 				_discoveredEndpoints.insert(std::pair< ref<Service>, weak<EPEndpoint> >(data.service, epe));
@@ -240,6 +239,9 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 						
 						EventDiscovered.Fire(this, dn);
 						break;
+					}
+					else {
+						Log::Write(L"EPFramework/EPDiscovery", L"Could not create connection to endpoint; not notifying upstream");
 					}
 				}
 				++it;
@@ -290,6 +292,7 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 			
 			epd->EventDownloaded.AddListener(this);
 			_downloading.insert(epd);
+			epd->Start();
 		}
 	}
 	else {
@@ -336,6 +339,11 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		// Both can be null if the definition file was still being downloaded.
 		DiscoveryNotification dn(Timestamp(true), removedConnection, false, EPMediationLevelIgnore);
 		dn.endpoint = removedEndpoint;
-		EventDiscovered.Fire(this, dn);
+		if(!removedEndpoint || (removedEndpoint && (!_condition || _condition->Matches(removedEndpoint)))) {
+			EventDiscovered.Fire(this, dn);
+		}
+		else {
+			Log::Write(L"EPFramework/EPDNSSDDiscovery", L"A service was removed, but it didn't match the condition for this discovery; remove notification not sent");
+		}
 	}
 }
