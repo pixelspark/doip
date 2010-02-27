@@ -61,6 +61,7 @@ int main (int argc, char * const argv[]) {
 	}
 	
 	strong<Daemon> daemon = Daemon::Instance();
+	SharedDispatcher sd;
 	
 	Log::Write(L"TJBluetoothEPServer/Main", L"Starting at "+Date().ToFriendlyString());
 	std::wstring settingsPath;

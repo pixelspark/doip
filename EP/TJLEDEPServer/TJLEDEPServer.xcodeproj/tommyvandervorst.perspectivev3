@@ -280,8 +280,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
-									<integer>6</integer>
+									<integer>8</integer>
+									<integer>7</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -321,7 +321,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>B46CBC8F10A45B2400CDE29F</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ependpointserver.h</string>
+								<string>ambxleds.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B46CBC9010A45B2400CDE29F</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ependpointserver.h</string>
+										<string>ambxleds.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4FAEB5E11103C5A00EF3465</string>
+										<string>B4537077113945E4002344F4</string>
 										<key>history</key>
 										<array>
 											<string>B474BA4010D6D9D200FA7D4C</string>
@@ -353,9 +353,11 @@
 											<string>B428B7FB110A05D9003E8323</string>
 											<string>B4FAEB5911103C5A00EF3465</string>
 											<string>B4FAEB5A11103C5A00EF3465</string>
-											<string>B4FAEB5B11103C5A00EF3465</string>
-											<string>B4FAEB5C11103C5A00EF3465</string>
-											<string>B4FAEB5D11103C5A00EF3465</string>
+											<string>B4536FE9113944BB002344F4</string>
+											<string>B4536FEA113944BB002344F4</string>
+											<string>B4537073113945E4002344F4</string>
+											<string>B4537074113945E4002344F4</string>
+											<string>B4537076113945E4002344F4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -369,18 +371,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1073, 526}}</string>
+								<string>{{0, 0}, {1073, 518}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 93 1280 909 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>526pt</string>
+							<string>518pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>337pt</string>
+							<string>345pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -394,7 +396,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 310}}</string>
+										<string>{{10, 27}, {1073, 318}}</string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -448,7 +450,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1073, 310}}</string>
+										<string>{{10, 27}, {1073, 318}}</string>
 										<key>RubberWindowFrame</key>
 										<string>0 93 1280 909 0 0 1280 1002 </string>
 									</dict>
@@ -478,11 +480,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B4FAEB6011103C5A00EF3465</string>
+				<string>B4536FEC113944BB002344F4</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>B4FAEB6111103C5A00EF3465</string>
+				<string>B4536FED113944BB002344F4</string>
 				<string>B46CBC8F10A45B2400CDE29F</string>
-				<string>B4FAEB6211103C5A00EF3465</string>
+				<string>B4536FEE113944BB002344F4</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -673,8 +675,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B4FAEB6911103C5A00EF3465</string>
-		<string>B4FAEB6A11103C5A00EF3465</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj/EP/TJLEDEPServer/TJLEDEPServer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

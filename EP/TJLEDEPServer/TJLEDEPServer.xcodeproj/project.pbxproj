@@ -13,6 +13,7 @@
 		B44928DD110645A30096384E /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44928C8110645870096384E /* TJScout.framework */; };
 		B44928DE110645A30096384E /* TJNP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44928D1110645900096384E /* TJNP.framework */; };
 		B44928DF110645A30096384E /* TJShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44928DA110645990096384E /* TJShared.framework */; };
+		B453700A113944F5002344F4 /* ambxleds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4537009113944F5002344F4 /* ambxleds.cpp */; };
 		B4CAAA8610AD68DF00385A5F /* EP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CAAA8510AD68DB00385A5F /* EP.framework */; };
 		B4FBE9F410BDC3F300DDCE96 /* ledepmain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */; };
 		B4FBE9F710BDC45400DDCE96 /* tubleds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4FBE9F610BDC45400DDCE96 /* tubleds.cpp */; };
@@ -123,6 +124,7 @@
 		B43316FC10F71B7F00F77332 /* ledendpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ledendpoint.cpp; path = src/ledendpoint.cpp; sourceTree = "<group>"; };
 		B433172210F71DDC00F77332 /* leds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = leds.cpp; path = src/leds.cpp; sourceTree = "<group>"; };
 		B433174210F720C800F77332 /* usp3leds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = usp3leds.cpp; path = src/usp3leds.cpp; sourceTree = "<group>"; };
+		B4537009113944F5002344F4 /* ambxleds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ambxleds.cpp; path = src/ambxleds.cpp; sourceTree = "<group>"; };
 		B46CBC9E10A45B6700CDE29F /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../Core/TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B46CBCA110A45B6700CDE29F /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B46CBD3610A4683F00CDE29F /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../Core/TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -198,6 +200,7 @@
 		B46CBCC010A45C2D00CDE29F /* src */ = {
 			isa = PBXGroup;
 			children = (
+				B4537009113944F5002344F4 /* ambxleds.cpp */,
 				B433174210F720C800F77332 /* usp3leds.cpp */,
 				B4FBE9F310BDC3F300DDCE96 /* ledepmain.cpp */,
 				B4FBE9F610BDC45400DDCE96 /* tubleds.cpp */,
@@ -345,6 +348,7 @@
 				B43316FD10F71B7F00F77332 /* ledendpoint.cpp in Sources */,
 				B433172310F71DDC00F77332 /* leds.cpp in Sources */,
 				B433174310F720C800F77332 /* usp3leds.cpp in Sources */,
+				B453700A113944F5002344F4 /* ambxleds.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

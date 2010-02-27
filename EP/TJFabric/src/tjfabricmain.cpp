@@ -19,6 +19,7 @@ using namespace tj::ep;
 
 int main(int argc, char** argv) {
 	try {
+		SharedDispatcher sd;
 		Log::SetLogToConsole(true);
 		Log::Write(L"TJFabric/Main", std::wstring(L"Starting at ")+Date().ToFriendlyString());
 		

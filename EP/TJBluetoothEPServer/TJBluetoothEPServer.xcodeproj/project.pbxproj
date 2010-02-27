@@ -118,7 +118,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8DD76F6C0486A84900D96B5E /* TJLEDEPServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TJLEDEPServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76F6C0486A84900D96B5E /* TJUSP3EPServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TJUSP3EPServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43316F910F71B5600F77332 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		B43316FC10F71B7F00F77332 /* ledendpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ledendpoint.cpp; path = src/ledendpoint.cpp; sourceTree = "<group>"; };
 		B433172210F71DDC00F77332 /* leds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = leds.cpp; path = src/leds.cpp; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76F6C0486A84900D96B5E /* TJLEDEPServer */,
+				8DD76F6C0486A84900D96B5E /* TJUSP3EPServer */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,7 +238,7 @@
 			name = TJLEDEPServer;
 			productInstallPath = "$(HOME)/bin";
 			productName = TJUSP3EPServer;
-			productReference = 8DD76F6C0486A84900D96B5E /* TJLEDEPServer */;
+			productReference = 8DD76F6C0486A84900D96B5E /* TJUSP3EPServer */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -246,7 +246,7 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "TJLEDEPServer" */;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "TJBluetoothEPServer" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* TJUSP3EPServer */;
@@ -442,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "TJLEDEPServer" */ = {
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "TJBluetoothEPServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB923608733DC60010E9CD /* Debug */,
