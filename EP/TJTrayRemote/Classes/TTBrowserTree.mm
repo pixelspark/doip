@@ -44,9 +44,18 @@
 	ref<EPMethod> method = [_methodsSource methodWithIndex:[_methodsTable selectedRow]];
 	ref<EPEndpoint> enp = [_endpointsSource endpointWithIndex:[_endpointsTable selectedRow]];
 	if(method && enp) {
+		std::vector< ref<EPParameter> > params;
+		method->GetParameters(params);
+		
 		TJTrayRemoteAppDelegate* app = (TJTrayRemoteAppDelegate*)[[NSApplication sharedApplication] delegate];
-		[_methodsView setMethod:method endpoint:enp connection:[app discovery]->GetConnectionForEndpoint(enp) state:[app discovery]->GetStateForEndpoint(enp)];
-		[_flipper flip:nil];
+		
+		if(params.size()>0) {
+			[_methodsView setMethod:method endpoint:enp connection:[app discovery]->GetConnectionForEndpoint(enp) state:[app discovery]->GetStateForEndpoint(enp)];
+			[_flipper flip:nil];
+		}
+		else {
+			[app executeMethod:method onEndpoint:enp];
+		}
 	}
 }
 
@@ -109,9 +118,19 @@
 - (NSCell *)tableView:(NSTableView *)tableView dataCellForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 	ref<EPMethod> ep = [self methodWithIndex:row];
 	if(ep) {
-		NSCell* cell = [[NSCell alloc] initTextCell:[NSString stringWithUTF8String:Mbs(ep->GetFriendlyName()).c_str()]];
-		[cell setFont:[NSFont systemFontOfSize:12.0f]];
-		return cell;
+		std::vector< ref<EPParameter> > params;
+		ep->GetParameters(params);
+		if(params.size()==0) {
+			NSActionCell* nsa = [[NSActionCell alloc] initTextCell:[NSString stringWithUTF8String:Mbs(ep->GetFriendlyName()).c_str()]];
+			[nsa setFont:[NSFont boldSystemFontOfSize:12.0f]];
+			return nsa;
+		}
+		else {
+			NSCell* cell = [[NSCell alloc] initTextCell:[NSString stringWithUTF8String:Mbs(ep->GetFriendlyName()).c_str()]];
+			[cell setFont:[NSFont systemFontOfSize:12.0f]];
+			return cell;
+		}
+		
 	}
 	return nil;
 }

@@ -5,6 +5,38 @@ using namespace tj::shared;
 using namespace tj::fabric;
 using namespace tj::ep;
 
+class SendMessageTask: public Task, public Recycleable {
+	public:
+		SendMessageTask(): i(0) {
+		}
+	
+		virtual ~SendMessageTask() {
+		}
+		
+		virtual void OnRecycle() {
+			_connection = null;
+			_rh = null;
+			_message = null;
+		}
+	
+		virtual void OnReuse() {
+			Task::OnReuse();
+		}
+		
+		virtual void Run() {
+			_connection->Send(_message, _rh);
+		}
+	
+		virtual void Dummy() {
+			++i;
+		}
+	
+		int i;
+		ref<Connection> _connection;
+		ref<ReplyHandler> _rh;
+		ref<Message> _message;
+};
+
 /** ConnectedGroup **/
 ConnectedGroup::ConnectedGroup(strong<Group> g): _group(g), _shouldStillConnectOutbound(false) {
 }
@@ -13,8 +45,10 @@ ConnectedGroup::~ConnectedGroup() {
 }
 
 void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyHandler> rh, EPMediationLevel ourOwnMediationLevel) {
+	
 	if((_group->GetDirection() & DirectionOutbound) != 0) {
 		if(_group->PassesFilter(m->GetPath())) {
+			strong<Dispatcher> dispatcher = Dispatcher::CurrentOrDefaultInstance();
 			ThreadLock lock(&_lock);
 			
 			// If we still haven't created our connections, do it now
@@ -27,7 +61,12 @@ void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyH
 			while(it!=_connections.end()) {
 				ref<Connection> conn = it->second;
 				if(conn) {
-					conn->Send(m, rh);
+					// Send asynchronously (the former blocking version just did conn->Send(m,rh)
+					ref<SendMessageTask> smt = Recycler<SendMessageTask>::Create();
+					smt->_connection = conn;
+					smt->_rh = rh;
+					smt->_message = m;
+					dispatcher->Dispatch(ref<Task>(smt));
 				}
 				++it;
 			}
@@ -53,7 +92,13 @@ void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyH
 				if(ignoreMediationLevel || cit->first==highestMediationLevel) {
 					ref<Connection> conn = cit->second;
 					if(conn) {
-						conn->Send(m, rh);
+						// Send asynchronously (the previous version simply did conn->Send(m,rh)
+						ref<SendMessageTask> smt = Recycler<SendMessageTask>::Create();
+						smt->_connection = conn;
+						smt->_rh = rh;
+						smt->_message = m;
+						dispatcher->Dispatch(ref<Task>(smt));
+						//conn->Send(m,rh);
 					}
 				}
 				

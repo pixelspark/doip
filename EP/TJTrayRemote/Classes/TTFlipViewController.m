@@ -44,7 +44,6 @@
 
 - (void)setView:(NSView *)view {
 	[super setView:view];
-	NSLog(@"f=%@ %@ b=%@ %@", _frontView, _frontView.layer, _backView, _backView.layer);
 	[view addSubview:_frontView];
 	[_frontView setWantsLayer:YES];
 	[_backView setWantsLayer:YES];

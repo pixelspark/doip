@@ -77,6 +77,7 @@
     // Attach/detach window.
     if (!_attachedWindow) {
 		_discovery->UpdateShownEndpoints();
+		[_flipper flipToFront];
 		
         _attachedWindow = [[MAAttachedWindow alloc] initWithView:_browserView attachedToPoint:pt inWindow:nil onSide:MAPositionBottomRight atDistance:-5.0];
 		[NSApp activateIgnoringOtherApps:YES];

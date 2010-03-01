@@ -775,6 +775,10 @@
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../Libraries,
+					../../Core,
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 				SYMROOT = ../../build;
