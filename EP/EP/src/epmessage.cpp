@@ -8,6 +8,14 @@ Message::Message(const tj::shared::String& path): _path(path) {
 Message::~Message() {
 }
 
+void Message::OnRecycle() {
+	_parameters.clear();
+	_path = L"";
+}
+
+void Message::OnReuse() {
+}
+
 const tj::shared::String& Message::GetPath() const {
 	return _path;
 }

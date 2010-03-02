@@ -29,6 +29,7 @@ namespace tj {
 				bool _cancelled;
 		};
 
+		// TODO: make this class Recycleable (what to do with the strong reference?)
 		class QueuedMessage: public virtual Object {
 			friend class Queue;
 			friend class QueueThread;
@@ -43,6 +44,7 @@ namespace tj {
 				ref<ConnectionChannel> _sourceChannel;
 		};
 
+		// TODO: make this class Recycleable (what to do with the strong references?)
 		class QueuedReply: public virtual Object {
 			friend class Queue;
 			friend class QueueThread;

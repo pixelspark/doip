@@ -329,7 +329,8 @@ void OSCOverIPConnection::StartInbound(NativeSocket inSocket, bool handleReplies
 }
 
 void OSCOverIPConnection::OnReceiveMessage(osc::ReceivedMessage rm, bool isReply, bool endReply, NativeSocket ns) {
-	ref<Message> msg = GC::Hold(new Message(Wcs(rm.AddressPattern())));
+	strong<Message> msg = Recycler<Message>::Create();
+	msg->SetPath(Wcs(rm.AddressPattern()));
 	
 	// Convert OSC arguments to Any values
 	osc::ReceivedMessageArgumentIterator ait = rm.ArgumentsBegin();
@@ -607,7 +608,6 @@ void OSCOverUDPConnection::Create(const tj::np::NetworkAddress& address, unsigne
 		
 		setsockopt(outSocket, SOL_SOCKET, SO_BROADCAST, (const char*)&on, sizeof(int));
 		setsockopt(outSocket, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(int));
-		Log::Write(L"EPFramework/OSCOverUDPConnection", std::wstring(L"Connected outbound OSC-over-UDP (")+address.ToString()+L":"+Stringify(port)+L")");
 		StartOutbound(networkAddress, port, outSocket, true);
 	}
 	

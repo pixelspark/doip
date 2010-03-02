@@ -5,10 +5,12 @@
 
 namespace tj {
 	namespace ep {
-		class EP_EXPORTED Message: public virtual tj::shared::Object {
+		class EP_EXPORTED Message: public virtual tj::shared::Object, public tj::shared::Recycleable {
 			public:
-				Message(const tj::shared::String& path);
+				Message(const tj::shared::String& path = L"");
 				virtual ~Message();
+				virtual void OnRecycle();
+				virtual void OnReuse();
 				virtual const tj::shared::String& GetPath() const;
 				virtual void SetPath(const tj::shared::String& m);
 				virtual void SetParameter(unsigned int i, const tj::shared::Any& d);
