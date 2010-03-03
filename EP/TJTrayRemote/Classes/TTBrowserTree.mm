@@ -159,15 +159,21 @@
 }
 
 - (ref<EPEndpoint>) endpointWithIndex:(int)idx {
-	std::set< ref<EPEndpoint> >::iterator it = [_app discovery]->_shownEndpoints.begin();
+	ref<TTDiscovery> disco = [_app discovery];
+	ThreadLock lock(&(disco->_lock));
+	
+	std::set< ref<EPEndpoint> >::iterator it = disco->_shownEndpoints.begin();
 	for(int a=0;a<idx;a++) {
-		if(it==[_app discovery]->_shownEndpoints.end()) {
+		if(it==disco->_shownEndpoints.end()) {
 			return ref<Endpoint>(0);
 		}
 		++it;
 	}
 	
-	return *it;
+	if(it!=disco->_shownEndpoints.end()) {
+		return *it;
+	}
+	return ref<Endpoint>(0);
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {

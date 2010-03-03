@@ -105,7 +105,7 @@ void LEDEndpoint::MDim(strong<Message> m, ref<Connection> c, ref<ConnectionChann
 
 
 void LEDEndpoint::MPowerSleep(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
-	_dim = -_dim;
+	_dim = 0.0f;
 	UpdateColor(true);
 }
 
@@ -113,8 +113,8 @@ void LEDEndpoint::MPowerOff(strong<Message> msg, ref<Connection> c, ref<Connecti
 	_r = 1.0;
 	_g = 1.0;
 	_b = 1.0;
-	_dim = -1.0f;
-	UpdateColor(false);
+	_dim = 0.0f;
+	UpdateColor(true);
 }
 
 void LEDEndpoint::MSetColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {

@@ -6,6 +6,7 @@ TTDiscovery::TTDiscovery() {
 }
 
 ref<Service> TTDiscovery::GetServiceForEndpoint(ref<EPEndpoint> enp) {
+	ThreadLock lock(&_lock);
 	std::map<ref<EPEndpoint>, ref<Service> >::iterator it = _services.find(enp);
 	if(it!=_services.end()) {
 		return it->second;
@@ -14,6 +15,7 @@ ref<Service> TTDiscovery::GetServiceForEndpoint(ref<EPEndpoint> enp) {
 }
 
 ref<EPRemoteState> TTDiscovery::GetStateForEndpoint(ref<EPEndpoint> enp) {
+	ThreadLock lock(&_lock);
 	std::map< ref<EPEndpoint>, ref<EPRemoteState> >::iterator sit = _remoteStates.find(enp);
 	if(sit!=_remoteStates.end()) {
 		return sit->second;
@@ -22,6 +24,7 @@ ref<EPRemoteState> TTDiscovery::GetStateForEndpoint(ref<EPEndpoint> enp) {
 }
 	
 ref<Connection> TTDiscovery::GetConnectionForEndpoint(ref<EPEndpoint> enp) {
+	ThreadLock lock(&_lock);
 	std::multimap< ref<EPEndpoint>, ref<Connection> >& cons = _connections;
 	if(enp) {
 		std::multimap< ref<EPEndpoint>, ref<Connection> >::iterator it = cons.find(enp);
@@ -37,6 +40,7 @@ ref<Connection> TTDiscovery::GetConnectionForEndpoint(ref<EPEndpoint> enp) {
 }
 
 void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn) {
+	ThreadLock lock(&_lock);
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	ref<EPRemoteState> epr = cn.remoteState;
 	
@@ -84,6 +88,7 @@ void TTDiscovery::Notify(ref<Object> source, const EPStateChangeNotification& cn
 }
 
 bool TTDiscovery::GetTagInPreferences(const EPTag& tag, bool& enabled) {
+	ThreadLock lock(&_lock);
 	NSMutableArray* dict = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"tags"];
 	NSString* tagName = [NSString stringWithUTF8String:Mbs(tag).c_str()];
 	for (NSMutableDictionary* row in dict) {
@@ -98,6 +103,7 @@ bool TTDiscovery::GetTagInPreferences(const EPTag& tag, bool& enabled) {
 }
 
 void TTDiscovery::AddTagToPreferences(const EPTag& tag) {
+	ThreadLock lock(&_lock);
 	NSString* tagName = [NSString stringWithUTF8String:Mbs(tag).c_str()];
 	NSMutableArray* dict = [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"tags"];
 	bool enabled = false;
