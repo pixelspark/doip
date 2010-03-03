@@ -98,7 +98,6 @@ void ConnectedGroup::Send(strong<Message> m, strong<FabricEngine> fe, ref<ReplyH
 						smt->_rh = rh;
 						smt->_message = m;
 						dispatcher->Dispatch(ref<Task>(smt));
-						//conn->Send(m,rh);
 					}
 				}
 				
@@ -123,8 +122,8 @@ void ConnectedGroup::Notify(ref<Object> source, const MessageNotification& data)
 
 void ConnectedGroup::Notify(ref<Object> source, const DiscoveryNotification& data) {
 	ThreadLock lock(&_lock);
+	
 	if(bool(data.added) && bool(data.connection)) {
-		
 		_discoveredConnections.push_back(std::pair<EPMediationLevel, ref<Connection> >(data.mediationLevel, data.connection));
 	}
 	else {

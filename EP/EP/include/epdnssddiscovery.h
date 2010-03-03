@@ -61,6 +61,7 @@ namespace tj {
 				std::set< tj::shared::ref<EPDownloadedDefinition> > _downloading;
 				std::map< tj::shared::ref<tj::scout::Service>, tj::shared::weak<Connection> > _discovered;
 				std::map< tj::shared::ref<tj::scout::Service>, tj::shared::weak<EPEndpoint> > _discoveredEndpoints;
+				std::set<tj::shared::String> _discoveredIDs;
 				tj::shared::ref<EPCondition> _condition;
 		};
 	}

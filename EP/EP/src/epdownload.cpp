@@ -59,9 +59,12 @@ void EPDownloadedState::OnDownloadComplete(ref<DataWriter> cw) {
 		}
 		else {
 			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this state file! (path="+_path+L")");
+			return;
 		}
 	}
-	
+	else {
+		Log::Write(L"TJEP/EPDownloadedState", L"No data, download failed!");
+	}
 	EventDownloaded.Fire(this, EPStateDownloadNotification());
 }
 
@@ -106,8 +109,11 @@ void EPDownloadedDefinition::OnDownloadComplete(ref<DataWriter> cw) {
 			return;
 		}
 		else {
-			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this definition file! (path="+_path+L")");
+			Log::Write(L"TJEP/EPDownloadedState", L"No root element in this definition file! (path="+_path+L"); ignoring!");
 		}
+	}
+	else {
+		Log::Write(L"TJEP/EPDownloadedState", L"No data, download failed!");
 	}
 
 	EventDownloaded.Fire(this, EPDownloadNotification(null, _service));

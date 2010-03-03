@@ -272,8 +272,6 @@ void QueueThread::Run() {
 	const static double KMaxWaitSeconds = 10;
 	const static double KTimerPrecisionSeconds = 0.001;
 	
-	Log::Write(L"TJFabric/QueueThread", L"Queue processing thread started");
-	
 	while(_running) {
 		_signal.Reset();
 		if(!_running) {
@@ -299,8 +297,6 @@ void QueueThread::Run() {
 				while(it!=q->_timerQueue.end()) {
 					if((it->first).ToAbsoluteDate() < (now.ToAbsoluteDate()+KTimerPrecisionSeconds)) {
 						// Run and delete
-						//Log::Write(L"TJFabric/Queue", L"Timer for "+Date(it->first.ToAbsoluteDate()).ToFriendlyString()+L" run at "+Date(now.ToAbsoluteDate()).ToFriendlyString());
-						
 						q->ProcessTimed(it->second);
 						q->_timerQueue.erase(it++);
 					}

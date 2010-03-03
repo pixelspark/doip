@@ -221,6 +221,7 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 						{
 							ThreadLock lock(&_lock);
 							_discovered.insert(std::pair< ref<Service>, weak<Connection> >(data.service, connection));
+							_discoveredIDs.insert(data.service->GetID());
 						}
 						DiscoveryNotification dn(Timestamp(true), connection, true, epe->GetMediationLevel());
 						dn.endpoint = epe;
@@ -260,7 +261,6 @@ void EPDiscovery::Notify(ref<Object> src, const EPDownloadedDefinition::EPDownlo
 }
 
 void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRequest::ServiceNotification& data) {
-	ThreadLock lock(&_lock);
 	ref<Service> service = data.service;
 	
 	if(!service) {
@@ -287,6 +287,7 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		}
 		
 		if(service->GetAttribute(L"EPDefinitionPath", defPath)) {
+			ThreadLock lock(&_lock);
 			Log::Write(L"TJFabric/EPDiscovery", L"Found EP endpoint; definition at http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
 			ref<EPDownloadedDefinition> epd = GC::Hold(new EPDownloadedDefinition(service, defPath));
 			
@@ -296,54 +297,67 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		}
 	}
 	else {
-		// Remove any pending download action
-		std::set< ref<EPDownloadedDefinition> >::iterator it = _downloading.begin();
-		while(it!=_downloading.end()) {
-			ref<EPDownloadedDefinition> edd = *it;
-			if(edd && edd->GetService()->GetID()==service->GetID()) {
-				_downloading.erase(it);
-				break;
-			}
-			++it;
-		}
-		
-		// Remove discovered endpoint
-		ref<EPEndpoint> removedEndpoint;
-		std::map< ref<Service>, weak<EPEndpoint> >::iterator deit = _discoveredEndpoints.begin();
-		while(deit!=_discoveredEndpoints.end()) {
-			ref<Service> s = deit->first;
-			if(s && s->GetID()==service->GetID()) {
-				removedEndpoint = deit->second;
-				_discoveredEndpoints.erase(deit);
-				break;
+		DiscoveryNotification dn;
+		bool sendNotification = false;
+		{
+			ThreadLock lock(&_lock);
+			// Remove any pending download action
+			std::set< ref<EPDownloadedDefinition> >::iterator it = _downloading.begin();
+			while(it!=_downloading.end()) {
+				ref<EPDownloadedDefinition> edd = *it;
+				if(edd && edd->GetService()->GetID()==service->GetID()) {
+					edd->Stop();
+					edd->EventDownloaded.RemoveListener(this);
+					_downloading.erase(it);
+					break;
+				}
+				++it;
 			}
 			
-			deit++;
-		}
-		
-		// Remove discovered connection
-		ref<Connection> removedConnection;
-		std::map< ref<Service>, weak<Connection> >::iterator dit = _discovered.begin();
-		while(dit!=_discovered.end()) {
-			ref<Service> s = dit->first;
-			if(s && s->GetID()==service->GetID()) {
-				removedConnection = dit->second;
-				_discovered.erase(dit);
-				break;
+			// Remove discovered endpoint
+			ref<EPEndpoint> removedEndpoint;
+			std::map< ref<Service>, weak<EPEndpoint> >::iterator deit = _discoveredEndpoints.begin();
+			while(deit!=_discoveredEndpoints.end()) {
+				ref<Service> s = deit->first;
+				if(s && s->GetID()==service->GetID()) {
+					removedEndpoint = deit->second;
+					_discoveredEndpoints.erase(deit);
+					break;
+				}
+				
+				deit++;
 			}
 			
-			dit++;
+			// Remove discovered connection
+			ref<Connection> removedConnection;
+			std::map< ref<Service>, weak<Connection> >::iterator dit = _discovered.begin();
+			while(dit!=_discovered.end()) {
+				ref<Service> s = dit->first;
+				if(s && s->GetID()==service->GetID()) {
+					removedConnection = dit->second;
+					_discovered.erase(dit);
+					break;
+				}
+				
+				dit++;
+			}
+			
+			// Fire a notification that contains the removed connection (if any) and/or the removed endpoint
+			// Both can be null if the definition file was still being downloaded.
+			dn = DiscoveryNotification(Timestamp(true), removedConnection, false, EPMediationLevelIgnore);
+			dn.endpoint = removedEndpoint;
+			std::set<String>::iterator idit = _discoveredIDs.find(service->GetID());
+			if(idit!=_discoveredIDs.end()) {
+				_discoveredIDs.erase(idit);
+				sendNotification = true;
+			}
+			else {
+				Log::Write(L"EPFramework/EPDNSSDDiscovery", L"A service (id="+service->GetID()+L") was removed, but it was never discovered at all; not sending notification");
+			}
 		}
 		
-		// Fire a notification that contains the removed connection (if any) and/or the removed endpoint
-		// Both can be null if the definition file was still being downloaded.
-		DiscoveryNotification dn(Timestamp(true), removedConnection, false, EPMediationLevelIgnore);
-		dn.endpoint = removedEndpoint;
-		if(!removedEndpoint || (removedEndpoint && (!_condition || _condition->Matches(removedEndpoint)))) {
+		if(sendNotification) {
 			EventDiscovered.Fire(this, dn);
-		}
-		else {
-			Log::Write(L"EPFramework/EPDNSSDDiscovery", L"A service was removed, but it didn't match the condition for this discovery; remove notification not sent");
 		}
 	}
 }
