@@ -9,6 +9,10 @@ static UIImage* favoriteAllImage;
 @implementation MWFavoritesTableViewController
 @synthesize favorites = _favorites;
 
++ (UIImage*) favoriteImage {
+	return favoriteImage;
+}
+
 + (void) initialize {
 	NSString* pngPath = [[NSBundle mainBundle] pathForResource:@"Favorite" ofType:@"png"];
 	favoriteImage = [[UIImage imageWithContentsOfFile:pngPath] retain];
@@ -46,7 +50,7 @@ static UIImage* favoriteAllImage;
 }
 
 - (void)viewDidLoad {
-	[self.navigationItem setLeftBarButtonItem:[self editButtonItem] animated:NO];
+	[self.navigationItem setRightBarButtonItem:[self editButtonItem] animated:NO];
 	
 	self.favorites = [NSKeyedUnarchiver unarchiveObjectWithFile:[self persistentPath]];
 	if(!self.favorites) {

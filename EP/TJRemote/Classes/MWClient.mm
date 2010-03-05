@@ -45,7 +45,7 @@
 
 - (void)netServiceDidResolveAddress:(NSNetService *)netService {
 	NSLog(@"Service resolved name=%@ host=%@ port=%d type=%@", [netService name], [netService hostName], [netService port], [netService type]);
-	if([[netService type] isEqualToString:@"_ep._tcp."]) {
+	if([[netService type] isEqualToString:@"_ep._tcp."] && [[netService name] length]>0) {
 		MWEndpoint* ep = [[MWEndpoint alloc] initWithService:netService];
 		[resolvedEndpoints addObject:ep];
 		[resolvedEndpoints sortUsingSelector:@selector(compareToEndpoint:)];

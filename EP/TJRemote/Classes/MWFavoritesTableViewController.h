@@ -6,6 +6,7 @@
 }
 
 - (void) addFavorite: (MWFavorite*)fav;
++ (UIImage*) favoriteImage;
 
 @property (nonatomic, retain) NSMutableArray* favorites;
 

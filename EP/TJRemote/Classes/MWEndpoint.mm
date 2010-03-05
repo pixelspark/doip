@@ -232,8 +232,10 @@ using namespace osc;
 					}
 					
 					transport->Attribute("port", &_transportPort);
-					[self createSocket];
-					break;
+					if(_transportPort!=0) {
+						[self createSocket];
+						break;
+					}
 				}
 				
 				transport = transport->NextSiblingElement("transport");

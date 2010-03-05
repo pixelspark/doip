@@ -5,6 +5,10 @@
 @dynamic endpoint;
 @synthesize _parameterViewController;
 
+#ifdef TARGET_IPAD
+	@synthesize popOverController = _popOverController;
+#endif
+
 - (MWEndpoint*) endpoint {
 	return _endpoint;
 }
@@ -15,6 +19,12 @@
 	[_endpoint retain];
 	[self.navigationItem setTitle:[[_endpoint service] name]];
 	[self.tableView reloadData];
+	
+	#ifdef TARGET_IPAD
+		if (_popOverController != nil) {
+			[_popOverController dismissPopoverAnimated:YES];
+		} 
+	#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +46,11 @@
 
 
 #pragma mark Table view methods
+
+// Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -88,9 +103,32 @@
 	}
 }
 
+#ifdef TARGET_IPAD
+- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc {
+    UINavigationBar* navigationBar = [[self navigationController] navigationBar];
+	barButtonItem.title = @"Master List";
+    [navigationBar.topItem setLeftBarButtonItem:barButtonItem animated:YES];
+	NSLog(@"willHide %@", navigationBar);
+    self.popOverController = pc;
+}
+
+
+// Called when the view is shown again in the split view, invalidating the button and popover controller.
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    UINavigationBar* navigationBar = [[self navigationController] navigationBar];
+	[navigationBar.topItem setLeftBarButtonItem:nil animated:YES];
+	NSLog(@"WillShow %@", navigationBar);
+    self.popOverController = nil;
+}
+#endif
+
 - (void)dealloc {
 	[_endpoint release];
 	[_parameterViewController release];
+	
+	#ifdef TARGET_IPAD
+		[_popOverController release];
+	#endif
     [super dealloc];
 }
 

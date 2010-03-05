@@ -13,12 +13,10 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		B413B95F1046C3F500587E77 /* Network.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B95E1046C3F500587E77 /* Network.png */; };
 		B413B9641046C5D900587E77 /* Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9601046C5D900587E77 /* Blue.png */; };
 		B413B9651046C5D900587E77 /* Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9611046C5D900587E77 /* Gray.png */; };
 		B413B9661046C5D900587E77 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9621046C5D900587E77 /* Green.png */; };
 		B413B9671046C5D900587E77 /* Red.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9631046C5D900587E77 /* Red.png */; };
-		B43BF8F31046BC68002F17E1 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B43BF8F21046BC68002F17E1 /* Background.png */; };
 		B4528C5210BA9583009605EC /* ep-icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4528C5110BA9583009605EC /* ep-icons.plist */; };
 		B4528C5A10BA96C5009605EC /* ep-power-off.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528C5910BA96C5009605EC /* ep-power-off.png */; };
 		B4528CB110BA9962009605EC /* ep-reset.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CB010BA9962009605EC /* ep-reset.png */; };
@@ -33,12 +31,54 @@
 		B46AC5F21083899A00EAE42C /* MWMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC5F11083899A00EAE42C /* MWMethod.mm */; };
 		B46AC61D10838C8C00EAE42C /* MWMethodTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */; };
 		B47F09D90FB625FB00DB3BEE /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B47F09D80FB625FB00DB3BEE /* Logo.png */; };
-		B47F09EA0FB627B300DB3BEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B47F09E90FB627B300DB3BEE /* Default.png */; };
 		B47F0A320FB6295700DB3BEE /* MWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = B47F0A310FB6295700DB3BEE /* MWClient.mm */; };
 		B48DC250108CC6B1002AB313 /* MWDownload.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48DC24F108CC6B1002AB313 /* MWDownload.mm */; };
 		B499D012108BA6F5002E1F92 /* MWParameterTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */; };
-		B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */; };
-		B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */; };
+		B49B4AF41141039900128F84 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B47F09D80FB625FB00DB3BEE /* Logo.png */; };
+		B49B4AF81141039900128F84 /* Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9601046C5D900587E77 /* Blue.png */; };
+		B49B4AF91141039900128F84 /* Gray.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9611046C5D900587E77 /* Gray.png */; };
+		B49B4AFA1141039900128F84 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9621046C5D900587E77 /* Green.png */; };
+		B49B4AFB1141039900128F84 /* Red.png in Resources */ = {isa = PBXBuildFile; fileRef = B413B9631046C5D900587E77 /* Red.png */; };
+		B49B4AFC1141039900128F84 /* ep-icons.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4528C5110BA9583009605EC /* ep-icons.plist */; };
+		B49B4AFD1141039900128F84 /* ep-power-off.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528C5910BA96C5009605EC /* ep-power-off.png */; };
+		B49B4AFE1141039900128F84 /* ep-reset.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CB010BA9962009605EC /* ep-reset.png */; };
+		B49B4AFF1141039900128F84 /* ep-sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CBA10BA9A12009605EC /* ep-sleep.png */; };
+		B49B4B001141039900128F84 /* ep-dim.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CC010BA9AA1009605EC /* ep-dim.png */; };
+		B49B4B011141039900128F84 /* ep-fade.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CC110BA9AA1009605EC /* ep-fade.png */; };
+		B49B4B021141039900128F84 /* ep-color.png in Resources */ = {isa = PBXBuildFile; fileRef = B4528CCF10BA9B87009605EC /* ep-color.png */; };
+		B49B4B031141039900128F84 /* Run.png in Resources */ = {isa = PBXBuildFile; fileRef = B4FF221310C702D8000D47B6 /* Run.png */; };
+		B49B4B041141039900128F84 /* FavoriteAll.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */; };
+		B49B4B051141039900128F84 /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9C10C7AFFC0048EC2D /* Favorite.png */; };
+		B49B4B071141039A00128F84 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
+		B49B4B081141039A00128F84 /* MWAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MWAppDelegate.mm */; };
+		B49B4B091141039A00128F84 /* MWClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = B47F0A310FB6295700DB3BEE /* MWClient.mm */; };
+		B49B4B0A1141039A00128F84 /* MWEndpointsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E617B2108270C8004D7C02 /* MWEndpointsTableViewController.mm */; };
+		B49B4B0B1141039A00128F84 /* MWEndpoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4E618831082779C004D7C02 /* MWEndpoint.mm */; };
+		B49B4B0C1141039A00128F84 /* MWMethod.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC5F11083899A00EAE42C /* MWMethod.mm */; };
+		B49B4B0D1141039A00128F84 /* MWMethodTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */; };
+		B49B4B0E1141039A00128F84 /* MWParameterTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */; };
+		B49B4B0F1141039A00128F84 /* MWDownload.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48DC24F108CC6B1002AB313 /* MWDownload.mm */; };
+		B49B4B101141039A00128F84 /* MWHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */; };
+		B49B4B111141039A00128F84 /* MWFavoritesTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4FF229A10C71B12000D47B6 /* MWFavoritesTableViewController.mm */; };
+		B49B4B121141039A00128F84 /* MWFavorite.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4FF22E410C71ED0000D47B6 /* MWFavorite.mm */; };
+		B49B4B131141039A00128F84 /* MWSliderView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4FF231410C721E2000D47B6 /* MWSliderView.mm */; };
+		B49B4B141141039A00128F84 /* MWInputAlertView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4B9A0D010C7BFCA0048EC2D /* MWInputAlertView.mm */; };
+		B49B4B151141039A00128F84 /* MWOptionView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B07610C952A300EFA99B /* MWOptionView.mm */; };
+		B49B4B161141039A00128F84 /* MWParameter.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B07A10C9537D00EFA99B /* MWParameter.mm */; };
+		B49B4B171141039A00128F84 /* MWChooserController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B468B10E10C96A0B00EFA99B /* MWChooserController.mm */; };
+		B49B4B181141039A00128F84 /* MWParameterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B4686E541109D88700BB010B /* MWParameterView.mm */; };
+		B49B4B1C1141039A00128F84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		B49B4B1D1141039A00128F84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		B49B4B1E1141039A00128F84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		B49B4B271141039B00128F84 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B49B4B261141039B00128F84 /* MainWindow.xib */; };
+		B49B4D95114135D600128F84 /* BackgroundLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = B49B4D7C1141351F00128F84 /* BackgroundLarge.png */; };
+		B49B4D96114135D600128F84 /* DefaultLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = B49B4D6C114134B600128F84 /* DefaultLarge.png */; };
+		B49B4DD9114137C300128F84 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B47F09E90FB627B300DB3BEE /* Default.png */; };
+		B49B4DDA114137CB00128F84 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B43BF8F21046BC68002F17E1 /* Background.png */; };
+		B49B4E51114139DB00128F84 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B49B4E41114139AA00128F84 /* libTinyXMLMobile.a */; };
+		B49B4E52114139DD00128F84 /* libTinyXMLMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B49B4E41114139AA00128F84 /* libTinyXMLMobile.a */; };
+		B49B4E6211413A0700128F84 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B49B4E60114139FE00128F84 /* libOSCPackMobile.a */; };
+		B49B4E6311413A0E00128F84 /* libOSCPackMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B49B4E60114139FE00128F84 /* libOSCPackMobile.a */; };
 		B4A98C5610C6FC3A001CF473 /* MWHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */; };
 		B4B99F9D10C7AFFC0048EC2D /* FavoriteAll.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */; };
 		B4B99F9E10C7AFFC0048EC2D /* Favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B99F9C10C7AFFC0048EC2D /* Favorite.png */; };
@@ -52,61 +92,47 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B4492899110645070096384E /* PBXContainerItemProxy */ = {
+		B49B4E3E114139AA00128F84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+			containerPortal = B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = TJShared;
-		};
-		B449289B110645070096384E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B4A987C410C65F70001CF473;
-			remoteInfo = TJSharedMobile;
-		};
-		B4A98A7310C6E614001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TinyXML.framework */;
 			remoteInfo = TinyXML;
 		};
-		B4A98A7510C6E614001CF473 /* PBXContainerItemProxy */ = {
+		B49B4E40114139AA00128F84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
+			containerPortal = B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A9875D10C65E8A001CF473;
+			remoteGlobalIDString = B4A9875D10C65E8A001CF473 /* libTinyXMLMobile.a */;
 			remoteInfo = TinyXMLMobile;
 		};
-		B4A98A7C10C6E621001CF473 /* PBXContainerItemProxy */ = {
+		B49B4E44114139B600128F84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+			containerPortal = B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B4A9875C10C65E8A001CF473 /* TinyXMLMobile */;
+			remoteInfo = TinyXMLMobile;
+		};
+		B49B4E46114139C100128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B4A9875C10C65E8A001CF473 /* TinyXMLMobile */;
+			remoteInfo = TinyXMLMobile;
+		};
+		B49B4E5D114139FE00128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4E55114139FE00128F84 /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OSCPack.framework */;
 			remoteInfo = OSCPack;
 		};
-		B4A98A7E10C6E621001CF473 /* PBXContainerItemProxy */ = {
+		B49B4E5F114139FE00128F84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+			containerPortal = B49B4E55114139FE00128F84 /* OSCPackFramework.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = B4A989AB10C6C9DA001CF473;
+			remoteGlobalIDString = B4A989AB10C6C9DA001CF473 /* libOSCPackMobile.a */;
 			remoteInfo = OSCPackMobile;
-		};
-		B4A98A8210C6E638001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B4A989AA10C6C9DA001CF473;
-			remoteInfo = OSCPackMobile;
-		};
-		B4A98A8410C6E638001CF473 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B4A9875C10C65E8A001CF473;
-			remoteInfo = TinyXMLMobile;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -121,7 +147,6 @@
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B413B95E1046C3F500587E77 /* Network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Network.png; path = Resources/Network.png; sourceTree = "<group>"; };
 		B413B9601046C5D900587E77 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Blue.png; path = Resources/Blue.png; sourceTree = "<group>"; };
 		B413B9611046C5D900587E77 /* Gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Gray.png; path = Resources/Gray.png; sourceTree = "<group>"; };
 		B413B9621046C5D900587E77 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Green.png; path = Resources/Green.png; sourceTree = "<group>"; };
@@ -154,9 +179,12 @@
 		B48DC24F108CC6B1002AB313 /* MWDownload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWDownload.mm; sourceTree = "<group>"; };
 		B499D010108BA6F5002E1F92 /* MWParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameterTableViewController.h; sourceTree = "<group>"; };
 		B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWParameterTableViewController.mm; sourceTree = "<group>"; };
-		B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
-		B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B49B4B231141039A00128F84 /* TJShowRemote-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TJShowRemote-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49B4B261141039B00128F84 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = "Resources-iPad/MainWindow.xib"; sourceTree = "<group>"; };
+		B49B4D6C114134B600128F84 /* DefaultLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultLarge.png; path = "Resources-iPad/DefaultLarge.png"; sourceTree = "<group>"; };
+		B49B4D7C1141351F00128F84 /* BackgroundLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundLarge.png; path = "Resources-iPad/BackgroundLarge.png"; sourceTree = "<group>"; };
+		B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TinyXMLFramework.xcodeproj; path = ../../Libraries/TinyXML/TinyXMLFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B49B4E55114139FE00128F84 /* OSCPackFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OSCPackFramework.xcodeproj; path = ../../Libraries/OSCPack/OSCPackFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHeaderView.h; sourceTree = "<group>"; };
 		B4A98C5510C6FC3A001CF473 /* MWHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWHeaderView.m; sourceTree = "<group>"; };
 		B4B99F9B10C7AFFC0048EC2D /* FavoriteAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FavoriteAll.png; path = Resources/FavoriteAll.png; sourceTree = "<group>"; };
@@ -181,11 +209,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4A98A8010C6E62C001CF473 /* libOSCPackMobile.a in Frameworks */,
-				B4A98A8110C6E62C001CF473 /* libTinyXMLMobile.a in Frameworks */,
+				B49B4E6211413A0700128F84 /* libOSCPackMobile.a in Frameworks */,
+				B49B4E52114139DD00128F84 /* libTinyXMLMobile.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49B4B191141039A00128F84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49B4E6311413A0E00128F84 /* libOSCPackMobile.a in Frameworks */,
+				B49B4E51114139DB00128F84 /* libTinyXMLMobile.a in Frameworks */,
+				B49B4B1C1141039A00128F84 /* Foundation.framework in Frameworks */,
+				B49B4B1D1141039A00128F84 /* UIKit.framework in Frameworks */,
+				B49B4B1E1141039A00128F84 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* TJShowRemote.app */,
+				B49B4B231141039A00128F84 /* TJShowRemote-iPad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,13 +285,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */,
-				B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */,
-				B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */,
+				B49B4E55114139FE00128F84 /* OSCPackFramework.xcodeproj */,
+				B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				B49B4B251141039A00128F84 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -282,7 +323,6 @@
 				B413B9611046C5D900587E77 /* Gray.png */,
 				B413B9621046C5D900587E77 /* Green.png */,
 				B413B9631046C5D900587E77 /* Red.png */,
-				B413B95E1046C3F500587E77 /* Network.png */,
 				B43BF8F21046BC68002F17E1 /* Background.png */,
 				B47F09E90FB627B300DB3BEE /* Default.png */,
 				B47F09D80FB625FB00DB3BEE /* Logo.png */,
@@ -302,29 +342,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B4492894110645070096384E /* Products */ = {
+		B49B4B251141039A00128F84 /* Resources-iPad */ = {
 			isa = PBXGroup;
 			children = (
-				B449289A110645070096384E /* TJShared.framework */,
-				B449289C110645070096384E /* libTJSharedMobile.a */,
+				B49B4D7C1141351F00128F84 /* BackgroundLarge.png */,
+				B49B4D6C114134B600128F84 /* DefaultLarge.png */,
+				B49B4B261141039B00128F84 /* MainWindow.xib */,
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
+		B49B4E37114139AA00128F84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49B4E3F114139AA00128F84 /* TinyXML.framework */,
+				B49B4E41114139AA00128F84 /* libTinyXMLMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B4A98A6F10C6E614001CF473 /* Products */ = {
+		B49B4E56114139FE00128F84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B4A98A7410C6E614001CF473 /* TinyXML.framework */,
-				B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B4A98A7810C6E621001CF473 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B4A98A7D10C6E621001CF473 /* OSCPack.framework */,
-				B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */,
+				B49B4E5E114139FE00128F84 /* OSCPack.framework */,
+				B49B4E60114139FE00128F84 /* libOSCPackMobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -343,12 +384,29 @@
 			buildRules = (
 			);
 			dependencies = (
-				B4A98A8310C6E638001CF473 /* PBXTargetDependency */,
-				B4A98A8510C6E638001CF473 /* PBXTargetDependency */,
+				B49B4E45114139B600128F84 /* PBXTargetDependency */,
 			);
 			name = TJShowRemote;
 			productName = TJShowConnect;
 			productReference = 1D6058910D05DD3D006BFB54 /* TJShowRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B49B4AED1141039900128F84 /* TJShowRemote-iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B49B4B1F1141039A00128F84 /* Build configuration list for PBXNativeTarget "TJShowRemote-iPad" */;
+			buildPhases = (
+				B49B4AF21141039900128F84 /* Resources */,
+				B49B4B061141039900128F84 /* Sources */,
+				B49B4B191141039A00128F84 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B49B4E47114139C100128F84 /* PBXTargetDependency */,
+			);
+			name = "TJShowRemote-iPad";
+			productName = TJShowConnect;
+			productReference = B49B4B231141039A00128F84 /* TJShowRemote-iPad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -363,66 +421,49 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = B4A98A7810C6E621001CF473 /* Products */;
-					ProjectRef = B4A98A7710C6E621001CF473 /* OSCPackFramework.xcodeproj */;
+					ProductGroup = B49B4E56114139FE00128F84 /* Products */;
+					ProjectRef = B49B4E55114139FE00128F84 /* OSCPackFramework.xcodeproj */;
 				},
 				{
-					ProductGroup = B4A98A6F10C6E614001CF473 /* Products */;
-					ProjectRef = B4A98A6E10C6E614001CF473 /* TinyXMLFramework.xcodeproj */;
-				},
-				{
-					ProductGroup = B4492894110645070096384E /* Products */;
-					ProjectRef = B4A98AAC10C6E702001CF473 /* TJSharedFramework.xcodeproj */;
+					ProductGroup = B49B4E37114139AA00128F84 /* Products */;
+					ProjectRef = B49B4E36114139AA00128F84 /* TinyXMLFramework.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* TJShowRemote */,
+				B49B4AED1141039900128F84 /* TJShowRemote-iPad */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		B449289A110645070096384E /* TJShared.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TJShared.framework;
-			remoteRef = B4492899110645070096384E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B449289C110645070096384E /* libTJSharedMobile.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTJSharedMobile.a;
-			remoteRef = B449289B110645070096384E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B4A98A7410C6E614001CF473 /* TinyXML.framework */ = {
+		B49B4E3F114139AA00128F84 /* TinyXML.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TinyXML.framework;
-			remoteRef = B4A98A7310C6E614001CF473 /* PBXContainerItemProxy */;
+			remoteRef = B49B4E3E114139AA00128F84 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B4A98A7610C6E614001CF473 /* libTinyXMLMobile.a */ = {
+		B49B4E41114139AA00128F84 /* libTinyXMLMobile.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libTinyXMLMobile.a;
-			remoteRef = B4A98A7510C6E614001CF473 /* PBXContainerItemProxy */;
+			remoteRef = B49B4E40114139AA00128F84 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B4A98A7D10C6E621001CF473 /* OSCPack.framework */ = {
+		B49B4E5E114139FE00128F84 /* OSCPack.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = OSCPack.framework;
-			remoteRef = B4A98A7C10C6E621001CF473 /* PBXContainerItemProxy */;
+			remoteRef = B49B4E5D114139FE00128F84 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B4A98A7F10C6E621001CF473 /* libOSCPackMobile.a */ = {
+		B49B4E60114139FE00128F84 /* libOSCPackMobile.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libOSCPackMobile.a;
-			remoteRef = B4A98A7E10C6E621001CF473 /* PBXContainerItemProxy */;
+			remoteRef = B49B4E5F114139FE00128F84 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -434,9 +475,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				B47F09D90FB625FB00DB3BEE /* Logo.png in Resources */,
-				B47F09EA0FB627B300DB3BEE /* Default.png in Resources */,
-				B43BF8F31046BC68002F17E1 /* Background.png in Resources */,
-				B413B95F1046C3F500587E77 /* Network.png in Resources */,
 				B413B9641046C5D900587E77 /* Blue.png in Resources */,
 				B413B9651046C5D900587E77 /* Gray.png in Resources */,
 				B413B9661046C5D900587E77 /* Green.png in Resources */,
@@ -451,6 +489,33 @@
 				B4FF221410C702D8000D47B6 /* Run.png in Resources */,
 				B4B99F9D10C7AFFC0048EC2D /* FavoriteAll.png in Resources */,
 				B4B99F9E10C7AFFC0048EC2D /* Favorite.png in Resources */,
+				B49B4DD9114137C300128F84 /* Default.png in Resources */,
+				B49B4DDA114137CB00128F84 /* Background.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49B4AF21141039900128F84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49B4AF41141039900128F84 /* Logo.png in Resources */,
+				B49B4AF81141039900128F84 /* Blue.png in Resources */,
+				B49B4AF91141039900128F84 /* Gray.png in Resources */,
+				B49B4AFA1141039900128F84 /* Green.png in Resources */,
+				B49B4AFB1141039900128F84 /* Red.png in Resources */,
+				B49B4AFC1141039900128F84 /* ep-icons.plist in Resources */,
+				B49B4AFD1141039900128F84 /* ep-power-off.png in Resources */,
+				B49B4AFE1141039900128F84 /* ep-reset.png in Resources */,
+				B49B4AFF1141039900128F84 /* ep-sleep.png in Resources */,
+				B49B4B001141039900128F84 /* ep-dim.png in Resources */,
+				B49B4B011141039900128F84 /* ep-fade.png in Resources */,
+				B49B4B021141039900128F84 /* ep-color.png in Resources */,
+				B49B4B031141039900128F84 /* Run.png in Resources */,
+				B49B4B041141039900128F84 /* FavoriteAll.png in Resources */,
+				B49B4B051141039900128F84 /* Favorite.png in Resources */,
+				B49B4B271141039B00128F84 /* MainWindow.xib in Resources */,
+				B49B4D95114135D600128F84 /* BackgroundLarge.png in Resources */,
+				B49B4D96114135D600128F84 /* DefaultLarge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,18 +547,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B49B4B061141039900128F84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49B4B071141039A00128F84 /* main.mm in Sources */,
+				B49B4B081141039A00128F84 /* MWAppDelegate.mm in Sources */,
+				B49B4B091141039A00128F84 /* MWClient.mm in Sources */,
+				B49B4B0A1141039A00128F84 /* MWEndpointsTableViewController.mm in Sources */,
+				B49B4B0B1141039A00128F84 /* MWEndpoint.mm in Sources */,
+				B49B4B0C1141039A00128F84 /* MWMethod.mm in Sources */,
+				B49B4B0D1141039A00128F84 /* MWMethodTableViewController.mm in Sources */,
+				B49B4B0E1141039A00128F84 /* MWParameterTableViewController.mm in Sources */,
+				B49B4B0F1141039A00128F84 /* MWDownload.mm in Sources */,
+				B49B4B101141039A00128F84 /* MWHeaderView.m in Sources */,
+				B49B4B111141039A00128F84 /* MWFavoritesTableViewController.mm in Sources */,
+				B49B4B121141039A00128F84 /* MWFavorite.mm in Sources */,
+				B49B4B131141039A00128F84 /* MWSliderView.mm in Sources */,
+				B49B4B141141039A00128F84 /* MWInputAlertView.mm in Sources */,
+				B49B4B151141039A00128F84 /* MWOptionView.mm in Sources */,
+				B49B4B161141039A00128F84 /* MWParameter.mm in Sources */,
+				B49B4B171141039A00128F84 /* MWChooserController.mm in Sources */,
+				B49B4B181141039A00128F84 /* MWParameterView.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B4A98A8310C6E638001CF473 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OSCPackMobile;
-			targetProxy = B4A98A8210C6E638001CF473 /* PBXContainerItemProxy */;
-		};
-		B4A98A8510C6E638001CF473 /* PBXTargetDependency */ = {
+		B49B4E45114139B600128F84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TinyXMLMobile;
-			targetProxy = B4A98A8410C6E638001CF473 /* PBXContainerItemProxy */;
+			targetProxy = B49B4E44114139B600128F84 /* PBXContainerItemProxy */;
+		};
+		B49B4E47114139C100128F84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TinyXMLMobile;
+			targetProxy = B49B4E46114139C100128F84 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -510,6 +600,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = TJShowConnect;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -523,6 +614,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = TJShowRemote;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -536,6 +628,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/c++/4.2.1/armv6-apple-darwin9/",
 					../../Libraries/,
 					../../,
 				);
@@ -556,6 +649,63 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = TJShowRemote;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Distribution;
+		};
+		B49B4B201141039A00128F84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_IPAD,
+					DEBUG,
+				);
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = "TJShowConnect-iPad";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		B49B4B211141039A00128F84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_IPAD,
+					DEBUG,
+				);
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = "TJShowRemote-iPad";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		B49B4B221141039A00128F84 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_IPAD,
+					DEBUG,
+				);
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = "TJShowRemote-iPad";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Distribution;
 		};
@@ -568,6 +718,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/c++/4.2.1/armv6-apple-darwin9/",
 					../../Libraries/,
 					../../,
 				);
@@ -587,6 +738,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/c++/4.2.1/armv6-apple-darwin9/",
 					../../Libraries/,
 					../../,
 				);
@@ -606,6 +758,16 @@
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 				B4161F4510A98AAB00B39D1A /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B49B4B1F1141039A00128F84 /* Build configuration list for PBXNativeTarget "TJShowRemote-iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49B4B201141039A00128F84 /* Debug */,
+				B49B4B211141039A00128F84 /* Release */,
+				B49B4B221141039A00128F84 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

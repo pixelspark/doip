@@ -1,12 +1,17 @@
 #import "MWAppDelegate.h"
 #import "MWClient.h"
 #import "MWEndpointsTableViewController.h"
+#import "MWFavoritesTableViewController.h"
 
 @implementation MWAppDelegate
 @synthesize window;
-@synthesize tabController, endpointsController;
+@synthesize endpointsController, favoritesController;
 @synthesize endpointsNavigationController, chooserController;
 @synthesize splashThrobber, splashBackground, regularBackground;
+
+#ifdef TARGET_IPAD
+	@synthesize splitViewController, splitViewDelegate;
+#endif
 
 - (void) timeoutTimer:(NSTimer*)timer {
 	if([[[MWClient sharedInstance] resolvedEndpoints] count]==0) {
@@ -22,6 +27,10 @@
     [window makeKeyAndVisible];
 	MWClient* client = [MWClient sharedInstance];
 	client.delegate = self;
+	
+	#ifdef TARGET_IPAD
+		[splitViewController setDelegate:splitViewDelegate];
+	#endif
 	
 	// Set time-out timer
 	NSTimer* timer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(timeoutTimer:) userInfo:nil repeats:NO];
@@ -43,10 +52,23 @@
 - (void)client:(MWClient*)c foundService:(NSNetService*)s {
 	if(startingUp) {
 		startingUp = NO;
-		[window addSubview:tabController.view];
-		[tabController.view setAlpha:0.0f];
+		#ifdef TARGET_IPAD
+			[splitViewController.view setOpaque:NO];
+			[splitViewController.view setBackgroundColor:[UIColor clearColor]];
+			[window addSubview:splitViewController.view];
+			[splitViewController.view setAlpha:0.0f];
+		#else 
+			[window addSubview:endpointsNavigationController.view];
+			[endpointsNavigationController.view setAlpha:0.0f];
+			[endpointsNavigationController pushViewController:favoritesController animated:NO];
+		#endif
+		
 		[UIView beginAnimations:nil context:nil];
-		[tabController.view setAlpha:1.0f];
+		#ifdef TARGET_IPAD
+			[splitViewController.view setAlpha:1.0f];
+		#else
+			[endpointsNavigationController.view setAlpha:1.0f];
+		#endif
 		[regularBackground setAlpha:1.0f];
 		[splashThrobber setAlpha:0.0f];
 		[splashBackground setAlpha:0.0f];
