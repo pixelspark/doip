@@ -74,6 +74,8 @@
 			B4AE006511525939007E194E /* PBXTextBookmark */ = B4AE006511525939007E194E /* PBXTextBookmark */;
 			B4AE006C115259BA007E194E /* PBXTextBookmark */ = B4AE006C115259BA007E194E /* PBXTextBookmark */;
 			B4AE006D115259BA007E194E /* PBXTextBookmark */ = B4AE006D115259BA007E194E /* PBXTextBookmark */;
+			B4AE006E11525A88007E194E /* PBXTextBookmark */ = B4AE006E11525A88007E194E /* PBXTextBookmark */;
+			B4AE006F11525A92007E194E /* PBXTextBookmark */ = B4AE006F11525A92007E194E /* PBXTextBookmark */;
 			B4B90D93113F18E300D14332 = B4B90D93113F18E300D14332 /* PBXTextBookmark */;
 			B4B90D94113F18E300D14332 = B4B90D94113F18E300D14332 /* PBXTextBookmark */;
 			B4B90D95113F18E300D14332 = B4B90D95113F18E300D14332 /* PBXTextBookmark */;
@@ -103,9 +105,9 @@
 	};
 	B43316FC10F71B7F00F77332 /* ledendpoint.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1012, 2080}}";
-			sepNavSelRange = "{5285, 0}";
-			sepNavVisRange = "{4369, 1207}";
+			sepNavIntBoundsRect = "{{0, 0}, {1012, 2145}}";
+			sepNavSelRange = "{4490, 0}";
+			sepNavVisRange = "{4347, 1232}";
 		};
 	};
 	B433172210F71DDC00F77332 /* leds.cpp */ = {
@@ -195,7 +197,7 @@
 		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
 		name = "ledendpoint.cpp: 134";
 		rLen = 2;
-		rLoc = 5805;
+		rLoc = 5811;
 		rType = 0;
 		vrLen = 918;
 		vrLoc = 4040;
@@ -282,7 +284,7 @@
 		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
 		name = "ledendpoint.cpp: 134";
 		rLen = 0;
-		rLoc = 5337;
+		rLoc = 5343;
 		rType = 0;
 		vrLen = 1189;
 		vrLoc = 4394;
@@ -338,10 +340,30 @@
 		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
 		name = "ledendpoint.cpp: 136";
 		rLen = 0;
-		rLoc = 5285;
+		rLoc = 5291;
 		rType = 0;
 		vrLen = 1207;
 		vrLoc = 4369;
+	};
+	B4AE006E11525A88007E194E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
+		name = "ledendpoint.cpp: 146";
+		rLen = 0;
+		rLoc = 5787;
+		rType = 0;
+		vrLen = 1323;
+		vrLoc = 4486;
+	};
+	B4AE006F11525A92007E194E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B43316FC10F71B7F00F77332 /* ledendpoint.cpp */;
+		name = "ledendpoint.cpp: 114";
+		rLen = 0;
+		rLoc = 4490;
+		rType = 0;
+		vrLen = 1232;
+		vrLoc = 4347;
 	};
 	B4B90D93113F18E300D14332 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

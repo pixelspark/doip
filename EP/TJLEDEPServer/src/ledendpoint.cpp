@@ -111,7 +111,7 @@ void LEDEndpoint::MPowerOff(strong<Message> msg, ref<Connection> c, ref<Connecti
 }
 
 void LEDEndpoint::SetColorNormalized(double r, double g, double b) {
-	Log::Write(L"TJLEDEPServer/LEDEndpoint", L"Set color "+Stringify(r)+L" "+Stringify(g)+L" "+Stringify(b));
+	///Log::Write(L"TJLEDEPServer/LEDEndpoint", L"Set color "+Stringify(r)+L" "+Stringify(g)+L" "+Stringify(b));
 	double maxComponent = Util::Max(r, Util::Max(g,b));
 	
 	if(maxComponent<=0.0 || r < 0.0 || g < 0.0 || b < 0.0) {
@@ -133,17 +133,17 @@ void LEDEndpoint::SetColorNormalized(double r, double g, double b) {
 		_r = r;
 		_g = g;
 		_b = b;
-		Log::Write(L"TJLEDEPServer/LEDEndpoint", L"Set color normalized:"+Stringify(r)+L" "+Stringify(g)+L" "+Stringify(b));
+		///Log::Write(L"TJLEDEPServer/LEDEndpoint", L"Set color normalized:"+Stringify(r)+L" "+Stringify(g)+L" "+Stringify(b));
 	}
 }
 
 void LEDEndpoint::MSetColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
-	SetColorNormalized(double(msg->GetParameter(0)), double(msg->GetParameter(1)), double(msg->GetParameter(0)));
+	SetColorNormalized(double(msg->GetParameter(0)), double(msg->GetParameter(1)), double(msg->GetParameter(2)));
 	UpdateColor(false);
 }
 
 void LEDEndpoint::MFadeColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
-	SetColorNormalized(double(msg->GetParameter(0)), double(msg->GetParameter(1)), double(msg->GetParameter(0)));
+	SetColorNormalized(double(msg->GetParameter(0)), double(msg->GetParameter(1)), double(msg->GetParameter(2)));
 	UpdateColor(true);
 	
 }
