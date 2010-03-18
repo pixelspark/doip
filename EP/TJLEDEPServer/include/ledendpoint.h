@@ -26,9 +26,9 @@ namespace tj {
 					virtual void MPowerOff(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
 					virtual void MPowerSleep(strong<Message> m, ref<Connection> src, ref<ConnectionChannel> cc);
 					virtual void UpdateColor(bool fade);
-					virtual void PowerUp();
 					
 				protected:
+					virtual void SetColorNormalized(double r, double g, double b);
 					strong<LED> _device;
 					Any _dim, _r, _g, _b;
 			};

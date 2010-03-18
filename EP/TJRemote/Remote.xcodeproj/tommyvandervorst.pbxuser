@@ -22,10 +22,10 @@
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeArchitecturePreference = armv6;
-		activeBuildConfigurationName = Distribution;
-		activeExecutable = B4D5CA841066DE1000D3D893 /* TJShowRemote */;
-		activeSDKPreference = iphoneos3.1.2;
-		activeTarget = 1D6058900D05DD3D006BFB54 /* TJShowRemote */;
+		activeBuildConfigurationName = Release;
+		activeExecutable = B49B4B241141039A00128F84 /* TJShowRemote-iPad */;
+		activeSDKPreference = iphonesimulator3.2;
+		activeTarget = B49B4AED1141039900128F84 /* TJShowRemote-iPad */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* TJShowRemote */,
 		);
@@ -194,8 +194,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 289472352;
-			PBXWorkspaceStateSaveDate = 289472352;
+			PBXPerProjectTemplateStateSaveDate = 289501294;
+			PBXWorkspaceStateSaveDate = 289501294;
 		};
 		perUserProjectItems = {
 			B408C6F2108A6FA6005AC842 /* PBXTextBookmark */ = B408C6F2108A6FA6005AC842 /* PBXTextBookmark */;
@@ -260,8 +260,10 @@
 			B49B4E4C114139C300128F84 /* PBXTextBookmark */ = B49B4E4C114139C300128F84 /* PBXTextBookmark */;
 			B49B4E4D114139C300128F84 /* PBXTextBookmark */ = B49B4E4D114139C300128F84 /* PBXTextBookmark */;
 			B49B4E4E114139C300128F84 /* PBXTextBookmark */ = B49B4E4E114139C300128F84 /* PBXTextBookmark */;
-			B49B4E4F114139C300128F84 /* XCBuildMessageTextBookmark */ = B49B4E4F114139C300128F84 /* XCBuildMessageTextBookmark */;
-			B49B4E9111413BA700128F84 /* PBXTextBookmark */ = B49B4E9111413BA700128F84 /* PBXTextBookmark */;
+			B49B4F5C1141520A00128F84 /* PBXTextBookmark */ = B49B4F5C1141520A00128F84 /* PBXTextBookmark */;
+			B49B4F5D1141520A00128F84 /* PBXTextBookmark */ = B49B4F5D1141520A00128F84 /* PBXTextBookmark */;
+			B49B4F611141520A00128F84 /* PBXTextBookmark */ = B49B4F611141520A00128F84 /* PBXTextBookmark */;
+			B49B51C61141AEA800128F84 /* PBXTextBookmark */ = B49B51C61141AEA800128F84 /* PBXTextBookmark */;
 			B4C9E25510CA8F0C00483BAC /* PBXTextBookmark */ = B4C9E25510CA8F0C00483BAC /* PBXTextBookmark */;
 			B4E617C110827203004D7C02 /* PBXTextBookmark */ = B4E617C110827203004D7C02 /* PBXTextBookmark */;
 			B4E617C710827203004D7C02 /* PBXTextBookmark */ = B4E617C710827203004D7C02 /* PBXTextBookmark */;
@@ -369,11 +371,6 @@
 		name = string;
 		path = "/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.2.sdk/usr/include/c++/4.2.1/string";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1010, 806}}";
-			sepNavSelRange = "{1712, 28}";
-			sepNavVisRange = "{960, 1225}";
-		};
 	};
 	B4686DDD1109CFA000BB010B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -538,7 +535,7 @@
 	};
 	B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1510, 1651}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1510, 1664}}";
 			sepNavSelRange = "{4450, 0}";
 			sepNavVisRange = "{3174, 1302}";
 		};
@@ -617,6 +614,7 @@
 	};
 	B49B4AC71141035000128F84 /* functexcept.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = functexcept.h;
 		path = "/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.2.sdk/usr/include/c++/4.2.1/bits/functexcept.h";
 		sourceTree = "<absolute>";
@@ -706,7 +704,7 @@
 		);
 		name = /Users/tommyvandervorst/Documents/Projecten/tj2/EP/TJRemote/Info.plist;
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
 	B49B4BA511410BC500128F84 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -903,7 +901,7 @@
 		);
 		name = "/Users/tommyvandervorst/Documents/Projecten/tj2/EP/TJRemote/ep-icons.plist";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
 	B49B4DE0114137D100128F84 /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -969,6 +967,7 @@
 	};
 	B49B4E091141383900128F84 /* cstdlib */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.h;
 		name = cstdlib;
 		path = "/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.2.sdk/usr/include/c++/4.2.1/cstdlib";
 		sourceTree = "<absolute>";
@@ -979,11 +978,6 @@
 		name = string;
 		path = "/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.sdk/usr/include/c++/4.2.1/string";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1010, 806}}";
-			sepNavSelRange = "{1730, 6}";
-			sepNavVisRange = "{960, 1225}";
-		};
 	};
 	B49B4E48114139C300128F84 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1007,6 +1001,7 @@
 	};
 	B49B4E4A114139C300128F84 /* tinyxml.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = tinyxml.h;
 		path = /Users/tommyvandervorst/Documents/Projecten/tj2/EP/TJRemote/Classes/../../../Libraries/TinyXML/tinyxml.h;
 		sourceTree = "<absolute>";
@@ -1051,16 +1046,7 @@
 		vrLen = 1381;
 		vrLoc = 0;
 	};
-	B49B4E4F114139C300128F84 /* XCBuildMessageTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "'_popOverController' was not declared in this scope";
-		fRef = B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */;
-		fallbackIsa = XCBuildMessageTextBookmark;
-		rLen = 1;
-		rLoc = 130;
-		rType = 1;
-	};
-	B49B4E9111413BA700128F84 /* PBXTextBookmark */ = {
+	B49B4F5C1141520A00128F84 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B46AC61C10838C8C00EAE42C /* MWMethodTableViewController.mm */;
 		name = "MWMethodTableViewController.mm: 131";
@@ -1069,6 +1055,61 @@
 		rType = 0;
 		vrLen = 1302;
 		vrLoc = 3174;
+	};
+	B49B4F5D1141520A00128F84 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B49B4F5E1141520A00128F84 /* stringfwd.h */;
+		name = "stringfwd.h: 49";
+		rLen = 21;
+		rLoc = 1750;
+		rType = 0;
+		vrLen = 958;
+		vrLoc = 1087;
+	};
+	B49B4F5E1141520A00128F84 /* stringfwd.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = stringfwd.h;
+		path = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/c++/4.2.1/bits/stringfwd.h";
+		sourceTree = "<absolute>";
+	};
+	B49B4F611141520A00128F84 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B49B4F621141520A00128F84 /* allocator.h */;
+		name = "allocator.h: 82";
+		rLen = 59;
+		rLoc = 2894;
+		rType = 0;
+		vrLen = 1015;
+		vrLoc = 2350;
+	};
+	B49B4F621141520A00128F84 /* allocator.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = allocator.h;
+		path = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/c++/4.2.1/bits/allocator.h";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1010, 1703}}";
+			sepNavSelRange = "{2894, 59}";
+			sepNavVisRange = "{2350, 985}";
+		};
+	};
+	B49B51C61141AEA800128F84 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B49B51C71141AEA800128F84 /* allocator.h */;
+		name = "allocator.h: 82";
+		rLen = 59;
+		rLoc = 2894;
+		rType = 0;
+		vrLen = 985;
+		vrLoc = 2350;
+	};
+	B49B51C71141AEA800128F84 /* allocator.h */ = {
+		isa = PBXFileReference;
+		name = allocator.h;
+		path = "/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/c++/4.2.1/bits/allocator.h";
+		sourceTree = "<absolute>";
 	};
 	B4A98C5410C6FC3A001CF473 /* MWHeaderView.h */ = {
 		uiCtxt = {
@@ -1114,7 +1155,7 @@
 		location = "TJShowRemote-iPad";
 		modificationTime = 289483985.456731;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	B4C9E24C10CA8F0000483BAC /* MWEndpoint.mm:354 */ = {
 		isa = PBXFileBreakpoint;
@@ -1230,7 +1271,7 @@
 		ignoreCount = 0;
 		lineNumber = 354;
 		location = "TJShowRemote-iPad";
-		modificationTime = 289483985.459655;
+		modificationTime = 289483985.4596549;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};

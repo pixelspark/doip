@@ -65,17 +65,12 @@ void LEDEndpoint::OnCreated() {
 	BindVariable(L"b", &_b);
 }
 
-void LEDEndpoint::PowerUp() {
-	if(double(_dim)<0.0) {
-		_dim = -double(_dim);
-	}
-}
-
 void LEDEndpoint::UpdateColor(bool fading) {
 	float dim = _dim;
 	if(dim<0.0f) {
 		dim = 0.0f;
 	}
+	
 	unsigned char rc = int(float(_r) * dim) & 0xFF;
 	unsigned char gc = int(float(_g) * dim) & 0xFF;
 	unsigned char bc = int(float(_b) * dim) & 0xFF;
@@ -89,16 +84,14 @@ void LEDEndpoint::UpdateColor(bool fading) {
 }
 
 void LEDEndpoint::MReset(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
-	PowerUp();
 	_device->SetColorDirectly(0,0,0);
-	_dim = 1.0f;
+	_dim = 0.0f;
 	_r = 1.0f;
 	_g = 1.0f;
 	_b = 1.0f;
 }
 
 void LEDEndpoint::MDim(strong<Message> m, ref<Connection> c, ref<ConnectionChannel> cc) {
-	PowerUp();
 	_dim = m->GetParameter(0).Force(Any::TypeDouble);
 	UpdateColor(true);
 }
@@ -117,19 +110,36 @@ void LEDEndpoint::MPowerOff(strong<Message> msg, ref<Connection> c, ref<Connecti
 	UpdateColor(true);
 }
 
+void LEDEndpoint::SetColorNormalized(double r, double g, double b) {
+	double maxComponent = Util::Max(r, Util::Max(g,b));
+	
+	if(maxComponent<=0.0 || r < 0.0 || g < 0.0 || b < 0.0) {
+		_r = 1.0f;
+		_g = 1.0f;
+		_b = 1.0f;
+		_dim = 0.0f;
+	}
+	else {
+		// Make the largest component 1.0 (so (0.25, 0.5, 0.3) becomes (0.5, 1.0, 0.6)
+		// Then calculate the average for both and set the dim level to that ratio
+		// A nice side-effect is that this also catches values >> 1.0
+		double average = (r + g + b)/3;
+		_r = double(r / maxComponent);
+		_g = double(g / maxComponent);
+		_b = double(b / maxComponent);
+		double newAverage = (r + g + b)/3;
+		_dim = average / newAverage;
+		
+	}
+}
+
 void LEDEndpoint::MSetColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
-	PowerUp();
-	_r = msg->GetParameter(0);
-	_g = msg->GetParameter(1);
-	_b = msg->GetParameter(2);
+	SetColorNormalized(double(msg->GetParameter(0)), double(msg->GetParameter(1)), double(msg->GetParameter(0)));
 	UpdateColor(false);
 }
 
 void LEDEndpoint::MFadeColor(strong<Message> msg, ref<Connection> c, ref<ConnectionChannel> cc) {
-	PowerUp();
-	_r = msg->GetParameter(0);
-	_g = msg->GetParameter(1);
-	_b = msg->GetParameter(2);
+	SetColorNormalized(double(msg->GetParameter(0)), double(msg->GetParameter(1)), double(msg->GetParameter(0)));
 	UpdateColor(true);
 	
 }

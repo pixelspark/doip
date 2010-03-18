@@ -298,7 +298,7 @@ String EPEndpointDefinition::GetFullIdentifier() const {
 }
 
 String EPEndpointDefinition::GetFriendlyName() const {
-	return _friendlyName;
+	return (_friendlyName.length() > 0) ? _friendlyName : _id;
 }
 
 String EPEndpointDefinition::GetVersion() const {
