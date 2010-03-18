@@ -111,25 +111,29 @@ void LEDEndpoint::MPowerOff(strong<Message> msg, ref<Connection> c, ref<Connecti
 }
 
 void LEDEndpoint::SetColorNormalized(double r, double g, double b) {
+	Log::Write(L"TJLEDEPServer/LEDEndpoint", L"Set color "+Stringify(r)+L" "+Stringify(g)+L" "+Stringify(b));
 	double maxComponent = Util::Max(r, Util::Max(g,b));
 	
 	if(maxComponent<=0.0 || r < 0.0 || g < 0.0 || b < 0.0) {
-		_r = 1.0f;
-		_g = 1.0f;
-		_b = 1.0f;
-		_dim = 0.0f;
+		_r = 1.0;
+		_g = 1.0;
+		_b = 1.0;
+		_dim = 0.0;
 	}
 	else {
 		// Make the largest component 1.0 (so (0.25, 0.5, 0.3) becomes (0.5, 1.0, 0.6)
 		// Then calculate the average for both and set the dim level to that ratio
 		// A nice side-effect is that this also catches values >> 1.0
-		double average = (r + g + b)/3;
-		_r = double(r / maxComponent);
-		_g = double(g / maxComponent);
-		_b = double(b / maxComponent);
+		double average = (r + g + b)/3.0;
+		r = double(r / maxComponent);
+		g = double(g / maxComponent);
+		b = double(b / maxComponent);
 		double newAverage = (r + g + b)/3;
 		_dim = average / newAverage;
-		
+		_r = r;
+		_g = g;
+		_b = b;
+		Log::Write(L"TJLEDEPServer/LEDEndpoint", L"Set color normalized:"+Stringify(r)+L" "+Stringify(g)+L" "+Stringify(b));
 	}
 }
 
