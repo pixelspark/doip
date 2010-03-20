@@ -149,7 +149,7 @@ using namespace osc;
 		// Need to download state; either now or after definition file download
 		self.needStateUpdate = true;
 		self.stateID = stateData;
-		NSLog(@"Update state (data=%@)", stateData);
+		//NSLog(@"Update state (data=%@)", stateData);
 	}
 	
 	if(self.definitionDownload==nil) {
@@ -252,7 +252,7 @@ using namespace osc;
 					TiXmlNode* firstPatternText = firstPattern->FirstChild();
 					
 					if(firstPatternText!=0) {
-						MWMethod* mt = [[MWMethod alloc] initWithPattern:[NSString stringWithUTF8String:firstPatternText->Value()] friendlyName:[NSString stringWithUTF8String:method->Attribute("friendly-name")] endpoint:self];
+						MWMethod* mt = [[MWMethod alloc] initWithPattern:[NSString stringWithUTF8String:firstPatternText->Value()] friendlyName:[NSString stringWithUTF8String:method->Attribute("friendly-name")] endpoint:self bindEnabledTo:[self loadAttribute:"bind-enabled" fromElement:method]];
 						[_methods addObject:mt];
 						
 						// Load description
@@ -301,7 +301,7 @@ using namespace osc;
 }
 
 - (void) downloadOfState:(MWDownload*)d completed:(NSData*)xmlData {
-	NSLog(@"State data download completed");
+	//NSLog(@"State data download completed");
 	
 	TiXmlDocument doc;
 	unsigned int xmlDataLength = [xmlData length];

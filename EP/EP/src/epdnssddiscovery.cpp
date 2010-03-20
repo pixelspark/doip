@@ -287,13 +287,18 @@ void EPDiscovery::Notify(tj::shared::ref<Object> src, const tj::scout::ResolveRe
 		}
 		
 		if(service->GetAttribute(L"EPDefinitionPath", defPath)) {
-			ThreadLock lock(&_lock);
-			Log::Write(L"TJFabric/EPDiscovery", L"Found EP endpoint; definition at http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
-			ref<EPDownloadedDefinition> epd = GC::Hold(new EPDownloadedDefinition(service, defPath));
-			
-			epd->EventDownloaded.AddListener(this);
-			_downloading.insert(epd);
-			epd->Start();
+			try {
+				ThreadLock lock(&_lock);
+				Log::Write(L"TJFabric/EPDiscovery", L"Found EP endpoint; definition at http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
+				ref<EPDownloadedDefinition> epd = GC::Hold(new EPDownloadedDefinition(service, defPath));
+				
+				epd->EventDownloaded.AddListener(this);
+				_downloading.insert(epd);
+				epd->Start();
+			}
+			catch(const Exception& e) {
+				Log::Write(L"EPFramework/Discovery", L"Could not start download after receiving notification of new service; reason: "+String(e.GetMsg())+L" url was http://"+service->GetHostName()+L":"+Stringify(service->GetPort())+defPath);
+			}
 		}
 	}
 	else {

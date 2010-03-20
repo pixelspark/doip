@@ -1,4 +1,5 @@
 #include "../include/epdownload.h"
+#include "../include/ependpointdefinition.h"
 using namespace tj::shared;
 using namespace tj::ep;
 using namespace tj::np;

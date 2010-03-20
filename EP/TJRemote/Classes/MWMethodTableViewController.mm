@@ -34,16 +34,26 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
+- (void) methodEnabledStateChanged:(NSNotification*)ns {
+	NSIndexSet* is = [[NSIndexSet alloc] initWithIndex:0];
+	[self.tableView reloadSections:is withRowAnimation:UITableViewRowAnimationFade];
+	[is dealloc];
+}
+
 - (void)viewWillAppear:(BOOL)a {
 	[self.tableView reloadData];
 	[self.tableView setSeparatorColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2f]];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(methodEnabledStateChanged:) name:@"MWMethodEnabledStateChange" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
-
 
 #pragma mark Table view methods
 
@@ -58,7 +68,28 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.endpoint methods] count];
+	int n = 0;
+	for(MWMethod* method in [self.endpoint methods]) {
+		if([method enabled]) {
+			n++;
+		}
+	}
+	return n;
+}
+
+- (MWMethod*) methodForRow:(int)row {
+	int n = 0;
+	for(MWMethod* m in [self.endpoint methods]) {
+		if([m enabled]) {
+			if(n==row) {
+				return m;
+			}
+			else {
+				++n;
+			}
+		}
+	}
+	return nil;
 }
 
 // Customize the appearance of table view cells.
@@ -70,22 +101,22 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 	
-	MWMethod* method = [[self.endpoint methods] objectAtIndex:indexPath.row];
+	MWMethod* method = [self methodForRow:indexPath.row];
 	[method setupCell:cell inController:self];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.row<[[self.endpoint methods] count]) {
-		MWMethod* method = [[self.endpoint methods] objectAtIndex:[indexPath row]];
+		MWMethod* method = [self methodForRow:indexPath.row];
 		_parameterViewController.method = method;
 		[self.navigationController pushViewController:_parameterViewController animated:YES];
 	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(indexPath.row<[[self.endpoint methods] count]) {
-		MWMethod* method = [[self.endpoint methods] objectAtIndex:[indexPath row]];
+	MWMethod* method = [self methodForRow:indexPath.row];
+	if(method!=nil) {
 		if([method.parameters count]==0) {
 			[self.endpoint executeMethod:method];
 		}
@@ -98,17 +129,13 @@
 		}
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
-	else {
-		[self.tableView reloadData];
-	}
 }
 
 #ifdef TARGET_IPAD
 - (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc {
     UINavigationBar* navigationBar = [[self navigationController] navigationBar];
-	barButtonItem.title = @"Master List";
+	barButtonItem.title = @"Remote";
     [navigationBar.topItem setLeftBarButtonItem:barButtonItem animated:YES];
-	NSLog(@"willHide %@", navigationBar);
     self.popOverController = pc;
 }
 
@@ -117,7 +144,6 @@
 - (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
     UINavigationBar* navigationBar = [[self navigationController] navigationBar];
 	[navigationBar.topItem setLeftBarButtonItem:nil animated:YES];
-	NSLog(@"WillShow %@", navigationBar);
     self.popOverController = nil;
 }
 #endif
@@ -125,6 +151,7 @@
 - (void)dealloc {
 	[_endpoint release];
 	[_parameterViewController release];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	#ifdef TARGET_IPAD
 		[_popOverController release];

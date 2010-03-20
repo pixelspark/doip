@@ -21,7 +21,7 @@
 	}
 }
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
 	startingUp = YES;
 	
     [window makeKeyAndVisible];
@@ -42,7 +42,7 @@
 }
 
 - (void)client:(MWClient*)c foundServiceRemoved:(NSNetService*)s {
-	[endpointsController.tableView reloadData];
+	[endpointsController reload];
 	
 	if([endpointsController.selected.service isEqual:s]) {
 		[endpointsNavigationController popToRootViewControllerAnimated:YES];
@@ -60,7 +60,10 @@
 		#else 
 			[window addSubview:endpointsNavigationController.view];
 			[endpointsNavigationController.view setAlpha:0.0f];
-			[endpointsNavigationController pushViewController:favoritesController animated:NO];
+		
+			if([[favoritesController favorites] count]>0) {
+				[endpointsNavigationController pushViewController:favoritesController animated:NO];
+			}
 		#endif
 		
 		[UIView beginAnimations:nil context:nil];
@@ -75,7 +78,7 @@
 		[UIView commitAnimations];
 	}
 	
-	[endpointsController.tableView reloadData];
+	[endpointsController reload];
 }
 
 - (void)dealloc {

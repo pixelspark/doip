@@ -13,21 +13,25 @@ class TiXmlElement;
 	NSString* _pattern;
 	NSString* _friendly;
 	NSString* _description;
+	NSString* _bindEnabled;
+	bool _enabled;
 	NSMutableArray* _parameters;
 	MWEndpoint* _parent;
 }
 
 @property (nonatomic, retain) NSString* pattern;
+@property (nonatomic, retain) NSString* bindEnabled;
 @property (nonatomic, retain) NSMutableArray* parameters;
 @property (nonatomic, retain) NSString* friendlyName;
 @property (nonatomic, retain) NSString* friendlyDescription;
 @property (nonatomic, assign) MWEndpoint* parent;
 
-- (id) initWithPattern: (NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)e;
+- (id) initWithPattern: (NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)e bindEnabledTo:(NSString*)bindEnabled ;
 - (void) setupCell: (UITableViewCell*)cell inController:(UIViewController*)cs;
 - (bool) parametersFitInCell;
 - (void) execute;
 - (MWFavorite*) createFavorite;
+- (bool) enabled;
 
 @end
 

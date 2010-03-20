@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,7 +282,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>12</integer>
+									<integer>10</integer>
 									<integer>7</integer>
 									<integer>0</integer>
 								</array>
@@ -314,14 +316,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>B46CBC8F10A45B2400CDE29F</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ledendpoint.cpp</string>
+								<string>ledepmain.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>B46CBC9010A45B2400CDE29F</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ledendpoint.cpp</string>
+										<string>ledepmain.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4AE006F11525A92007E194E</string>
+										<string>B4AE007211525C93007E194E</string>
 										<key>history</key>
 										<array>
 											<string>B433172C10F7205000F77332</string>
@@ -344,11 +344,11 @@
 											<string>B4E5AB5A11074FF3003AB425</string>
 											<string>B4E5AB5C11074FF3003AB425</string>
 											<string>B4FAEB5A11103C5A00EF3465</string>
-											<string>B4B90D93113F18E300D14332</string>
 											<string>B4AE005F11525939007E194E</string>
 											<string>B4AE006011525939007E194E</string>
 											<string>B4AE006C115259BA007E194E</string>
-											<string>B4AE006211525939007E194E</string>
+											<string>B4AE007011525C93007E194E</string>
+											<string>B4AE007111525C93007E194E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

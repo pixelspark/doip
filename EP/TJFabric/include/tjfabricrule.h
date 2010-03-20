@@ -3,6 +3,7 @@
 
 #include <TJShared/include/tjshared.h>
 #include <EP/include/ependpoint.h>
+#include <EP/include/ependpointdefinition.h>
 
 namespace tj {
 	namespace fabric {
@@ -39,9 +40,11 @@ namespace tj {
 				virtual void GetPaths(std::set<tj::ep::EPPath>& pathList) const;
 				virtual void GetParameters(std::vector< tj::shared::ref<tj::ep::EPParameter> >& parameterList) const;
 				virtual void GetReplies(std::vector< tj::shared::ref<tj::ep::EPReply> >& replyList) const;
+				virtual tj::shared::String GetEnabledBinding() const;
 			
 			protected:
 				tj::shared::String _id;
+				tj::shared::String _enabledBinding;
 				std::set<tj::shared::String> _patterns;
 				std::deque< tj::shared::ref<tj::ep::EPParameterDefinition> > _parameters;
 				std::vector< tj::shared::ref<tj::ep::EPReply> > _replies;

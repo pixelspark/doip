@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) MWEndpoint* endpoint;
 @property (nonatomic, retain) IBOutlet MWParameterTableViewController* _parameterViewController;
+		
 #ifdef TARGET_IPAD
 		@property (nonatomic, retain) UIPopoverController* popOverController;
 #endif

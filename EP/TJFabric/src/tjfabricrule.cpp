@@ -44,6 +44,10 @@ Rule::Rule(): _isEnabled(true), _isPublic(true) {
 Rule::~Rule() {
 }
 
+String Rule::GetEnabledBinding() const {
+	return _enabledBinding;
+}
+
 void Rule::GetReplies(std::vector< tj::shared::ref<tj::ep::EPReply> >& replyList) const {
 	std::vector< ref<EPReply> >::const_iterator it = _replies.begin();
 	while(it!=_replies.end()) {
@@ -57,6 +61,7 @@ void Rule::Load(TiXmlElement* me) {
 	_script = LoadAttribute<std::wstring>(me, "script", L"");
 	_name = LoadAttributeSmall<std::wstring>(me, "name", L"");
 	_description = LoadAttribute<std::wstring>(me,"description", L"");
+	_enabledBinding = LoadAttributeSmall(me, "bind-enabled", _enabledBinding);
 	_isEnabled = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "enabled", Bool::ToString(true)).c_str());
 	_isPublic = Bool::FromString(LoadAttributeSmall<std::wstring>(me, "public", Bool::ToString(true)).c_str());
 	

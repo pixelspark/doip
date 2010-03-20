@@ -9,6 +9,10 @@ static UIImage* favoriteAllImage;
 @implementation MWFavoritesTableViewController
 @synthesize favorites = _favorites;
 
+#ifdef TARGET_IPAD
+	@synthesize popOverController = _popOverController;
+#endif
+
 + (UIImage*) favoriteImage {
 	return favoriteImage;
 }
@@ -44,6 +48,11 @@ static UIImage* favoriteAllImage;
 	[_favorites addObject:fav];
 	[self.tableView reloadData];
 	[self persist];
+}
+
+// Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -151,6 +160,23 @@ static UIImage* favoriteAllImage;
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
+
+#ifdef TARGET_IPAD
+- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc {
+    UINavigationBar* navigationBar = [[self navigationController] navigationBar];
+	barButtonItem.title = @"Remote";
+    [navigationBar.topItem setLeftBarButtonItem:barButtonItem animated:YES];
+    self.popOverController = pc;
+}
+
+
+// Called when the view is shown again in the split view, invalidating the button and popover controller.
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    UINavigationBar* navigationBar = [[self navigationController] navigationBar];
+	[navigationBar.topItem setLeftBarButtonItem:nil animated:YES];
+    self.popOverController = nil;
+}
+#endif
 
 - (void)dealloc {
 	[_favorites release];

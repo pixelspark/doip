@@ -140,7 +140,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MWAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWAppDelegate.mm; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* TJShowRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJShowRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* TJShowConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJShowConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 		B48DC24F108CC6B1002AB313 /* MWDownload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWDownload.mm; sourceTree = "<group>"; };
 		B499D010108BA6F5002E1F92 /* MWParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWParameterTableViewController.h; sourceTree = "<group>"; };
 		B499D011108BA6F5002E1F92 /* MWParameterTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWParameterTableViewController.mm; sourceTree = "<group>"; };
-		B49B4B231141039A00128F84 /* TJShowRemote-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TJShowRemote-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49B4B231141039A00128F84 /* TJShowConnect-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TJShowConnect-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B49B4B261141039B00128F84 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = "Resources-iPad/MainWindow.xib"; sourceTree = "<group>"; };
 		B49B4D6C114134B600128F84 /* DefaultLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DefaultLarge.png; path = "Resources-iPad/DefaultLarge.png"; sourceTree = "<group>"; };
 		B49B4D7C1141351F00128F84 /* BackgroundLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundLarge.png; path = "Resources-iPad/BackgroundLarge.png"; sourceTree = "<group>"; };
@@ -276,8 +276,8 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* TJShowRemote.app */,
-				B49B4B231141039A00128F84 /* TJShowRemote-iPad.app */,
+				1D6058910D05DD3D006BFB54 /* TJShowConnect.app */,
+				B49B4B231141039A00128F84 /* TJShowConnect-iPad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -388,7 +388,7 @@
 			);
 			name = TJShowRemote;
 			productName = TJShowConnect;
-			productReference = 1D6058910D05DD3D006BFB54 /* TJShowRemote.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* TJShowConnect.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B49B4AED1141039900128F84 /* TJShowRemote-iPad */ = {
@@ -406,7 +406,7 @@
 			);
 			name = "TJShowRemote-iPad";
 			productName = TJShowConnect;
-			productReference = B49B4B231141039A00128F84 /* TJShowRemote-iPad.app */;
+			productReference = B49B4B231141039A00128F84 /* TJShowConnect-iPad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -712,7 +712,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -722,6 +722,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;

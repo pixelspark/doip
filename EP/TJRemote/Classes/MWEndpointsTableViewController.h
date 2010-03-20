@@ -8,6 +8,8 @@
 	UIViewController* _favoritesController;
 }
 
+- (void)reload;
+
 @property (nonatomic, retain) IBOutlet MWMethodTableViewController* methodViewController;
 @property (nonatomic, assign, readonly) MWEndpoint* selected;
 @property (nonatomic, retain) IBOutlet UINavigationController* rightNavigationController;

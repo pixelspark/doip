@@ -12,6 +12,18 @@ static NSMutableDictionary* _icons;
 @synthesize friendlyName = _friendly;
 @synthesize parent = _parent;
 @synthesize friendlyDescription = _description;
+@synthesize bindEnabled = _bindEnabled;
+
+- (void) boundStateChanged:(NSNotification*)ns {
+	MWStateChange* change = [ns object];
+	if(change!=nil) {
+		if([_bindEnabled isEqualToString:[change key]]) {
+			_enabled = [[change value] boolValue];
+			NSNotification* nt = [NSNotification notificationWithName:@"MWMethodEnabledStateChange" object:self];
+			[[NSNotificationCenter defaultCenter] postNotification:nt];
+		}
+	}
+}
 
 + (void) initialize {
 	NSDictionary* icons = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ep-icons" ofType:@"plist"]];
@@ -29,14 +41,24 @@ static NSMutableDictionary* _icons;
 	}
 }
 
-- (id) initWithPattern:(NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)endpoint {
+- (id) initWithPattern:(NSString*)pattern friendlyName:(NSString*)fn endpoint:(MWEndpoint*)endpoint bindEnabledTo:(NSString*)bindEnabled {
 	if(self = [super init]) {
+		_enabled = true;
 		self.parent = endpoint;
 		self.pattern = pattern;
 		self.parameters = [[NSMutableArray alloc] init];
 		self.friendlyName = fn;
+		self.bindEnabled = bindEnabled;
+		
+		if([self.bindEnabled length]>0) {
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundStateChanged:) name:@"MWStateChange" object:nil];
+		}
 	}
 	return self;
+}
+
+- (bool) enabled {
+	return _enabled;
 }
 
 - (void) execute {
@@ -98,6 +120,7 @@ static NSMutableDictionary* _icons;
 	[_pattern release];
 	[_parameters release];
 	[_friendly release];
+	[_bindEnabled release];
 	[_parameters release];
 	[super dealloc];
 }

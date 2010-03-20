@@ -3,6 +3,7 @@
 #import <UIKit/UITableViewController.h>
 #import <UIKit/UITableViewCell.h>
 #import "MWFavoritesTableViewController.h"
+#import "MWHeaderView.h"
 
 @implementation MWEndpointsTableViewController
 @synthesize methodViewController = _methodViewController;
@@ -18,12 +19,21 @@
 }
 
 - (void)viewWillAppear:(BOOL)a {
-	[self.tableView reloadData];
+	NSIndexSet* nsi = [[NSIndexSet alloc] initWithIndex:1];
+	[self.tableView reloadSections:nsi withRowAnimation:UITableViewRowAnimationNone];
+	[nsi dealloc];
 	[self.tableView setSeparatorColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.2f]];
 }
 
+- (void) reload {
+	NSIndexSet* nsi = [[NSIndexSet alloc] initWithIndex:1];
+	[self.tableView reloadSections:nsi withRowAnimation:UITableViewRowAnimationFade];
+	[nsi dealloc];
+	[self.tableView setNeedsDisplay];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 // Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.
@@ -33,8 +43,61 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if(section==0) {
+		return 1;
+	}
+	else if(section==1) {
+		MWClient* client = [MWClient sharedInstance];
+		
+		if(false) {
+			int n = 0;
+			for(MWEndpoint* ep in [client resolvedEndpoints]) {
+				if([[ep methods] count] > 0) {
+					++n;
+				}
+			}
+			return n;
+		}
+		else {
+			return [[client resolvedEndpoints] count];
+		}
+	}
+	return 0;
+}
+
+- (MWEndpoint*) endpointForRow:(int)i {
 	MWClient* client = [MWClient sharedInstance];
-    return [[client resolvedEndpoints] count]+1;
+	if(false) {
+		int n = 0;
+		for(MWEndpoint* ep in [client resolvedEndpoints]) {
+			if([[ep methods] count] > 0) {
+				if(n==i) {
+					return ep;
+				}
+				else {
+					++n;
+				}
+			}
+		}
+		return nil;
+	}
+	else {
+		return [[client resolvedEndpoints] objectAtIndex:i];
+	}
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	if(section==1) {
+		return 27.0;
+	}
+	return 0.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if(section==1) {
+		return [[MWHeaderView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 27.0) andTitle:@"Devices"];
+	}
+	return nil;
 }
 
 // Customize the appearance of table view cells.
@@ -46,9 +109,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	if(indexPath.row>0) {
-		MWClient* client = [MWClient sharedInstance];
-		MWEndpoint* ep = [[client resolvedEndpoints] objectAtIndex:indexPath.row-1];
+	if(indexPath.section==1) {
+		MWEndpoint* ep = [self endpointForRow:indexPath.row];
 		cell.textLabel.text = [ep name];
 		cell.imageView.image = nil;
 	}
@@ -61,7 +123,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(indexPath.row==0) {
+	if(indexPath.section==0) {
 		#ifdef TARGET_IPAD
 			[self.rightNavigationController popToViewController:_favoritesController animated:YES];
 		#else
@@ -73,10 +135,8 @@
 		#endif
 	}
 	else {
-		MWClient* client = [MWClient sharedInstance];
-		int r = indexPath.row-1;
-		if(r<[[client resolvedEndpoints] count]) {
-			MWEndpoint* endpoint = [[client resolvedEndpoints] objectAtIndex:r];
+		MWEndpoint* endpoint = [self endpointForRow:indexPath.row];
+		if(endpoint!=nil) {
 			[_methodViewController setEndpoint:endpoint];
 			_selected = endpoint;
 			
@@ -96,10 +156,8 @@
 				}
 			#endif
 		}
-		else {
-			[self.tableView reloadData];
-		}
 	}
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)dealloc {

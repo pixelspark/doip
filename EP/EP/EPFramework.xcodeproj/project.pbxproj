@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B40287741155594200700265 /* ependpointdefinition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40287731155594200700265 /* ependpointdefinition.cpp */; };
 		B419EE591099F5BF00FE1A72 /* epcondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B419EE581099F5BF00FE1A72 /* epcondition.cpp */; };
 		B449280E1106444A0096384E /* TJScout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44927DA1106439F0096384E /* TJScout.framework */; };
 		B449280F1106444A0096384E /* TJNP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B44927E5110643AE0096384E /* TJNP.framework */; };
@@ -184,6 +185,7 @@
 /* Begin PBXFileReference section */
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* EP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B40287731155594200700265 /* ependpointdefinition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ependpointdefinition.cpp; sourceTree = "<group>"; };
 		B419EE581099F5BF00FE1A72 /* epcondition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = epcondition.cpp; sourceTree = "<group>"; };
 		B462AEF11098E00E00484C29 /* ependpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ependpoint.cpp; sourceTree = "<group>"; };
 		B462AEFA1098E09B00484C29 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -316,6 +318,7 @@
 				B4CD450D109AFAAD004B3BBB /* epconnectionsregistry.cpp */,
 				B4CD4515109AFC5A004B3BBB /* epservermanager.cpp */,
 				B469547710A6CDF20045DB2D /* eppublication.cpp */,
+				B40287731155594200700265 /* ependpointdefinition.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				B4CD450E109AFAAD004B3BBB /* epconnectionsregistry.cpp in Sources */,
 				B4CD4516109AFC5A004B3BBB /* epservermanager.cpp in Sources */,
 				B469547810A6CDF20045DB2D /* eppublication.cpp in Sources */,
+				B40287741155594200700265 /* ependpointdefinition.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
