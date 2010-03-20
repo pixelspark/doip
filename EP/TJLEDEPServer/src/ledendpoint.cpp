@@ -1,5 +1,6 @@
 #include "../include/ledendpoint.h"
 #include <EP/include/eposcipconnection.h>
+#include <EP/include/ependpointdefinition.h>
 
 using namespace tj::ep::leds;
 using namespace tj::ep;
