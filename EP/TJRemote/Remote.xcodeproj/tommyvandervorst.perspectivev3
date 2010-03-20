@@ -335,7 +335,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>B4C998DE1155761A0097F64A</string>
+										<string>B4C99916115579CF0097F64A</string>
 										<key>history</key>
 										<array>
 											<string>B4E617C710827203004D7C02</string>
@@ -721,7 +721,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B4C998DB115575F10097F64A</string>
 		<string>B4C9984811556EE10097F64A</string>
 		<string>B4C9984911556EE10097F64A</string>
 		<string>/Users/tommyvandervorst/Documents/Projecten/tj2/EP/TJRemote/Remote.xcodeproj</string>
