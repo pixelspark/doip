@@ -101,12 +101,17 @@ void AmbxLED::SetColorFading(Light l, unsigned char r, unsigned char g, unsigned
 		data[3] = (delay & 0xFF00) >> 8;
 		data[4] = (delay & 0xFF);
 		
-		for(int a=0;a<16;a++) {
+		for(int a=0;a<15;a++) {
 			float fraction = float(a)/16.0f;
 			data[5+(a*3)] = (unsigned char)(float(r-_r)*fraction + _r);
 			data[6+(a*3)] = (unsigned char)(float(g-_g)*fraction + _g);
 			data[7+(a*3)] = (unsigned char)(float(b-_b)*fraction + _b);
 		}
+
+		// Set the last value explicitly to prevent rounding errors that leave the lights on even when fading to (0,0,0)
+		data[5+(15*3)] = r;
+		data[6+(15*3)] = g;
+		data[7+(15*3)] = b;
 		
 		int n = usb_bulk_write(handle, 0x02, (char*)data, 53, 10);
 		if(n<=0) {
