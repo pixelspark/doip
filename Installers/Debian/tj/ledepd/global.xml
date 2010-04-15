@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+
+<settings>
+	<pref key="ep.friendly-name">LEDs</pref>
+	<pref key="led.device-path">/dev/ttyUSB0</pref>
+</settings>
