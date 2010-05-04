@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B49B4F11114143A100128F84 /* tjpsmain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B49B4F10114143A100128F84 /* tjpsmain.cpp */; };
+		B4CAAA8610AD68DF00385A5F /* EP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CAAA8510AD68DB00385A5F /* EP.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B49B4F1A114143BE00128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4F12114143BE00128F84 /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJScout.framework */;
+			remoteInfo = TJScout;
+		};
+		B49B4F1C114143BE00128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4F12114143BE00128F84 /* TJScoutFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9887110C661C3001CF473 /* libTJScoutMobile.a */;
+			remoteInfo = TJScoutMobile;
+		};
+		B49B4F21114143BE00128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4F15114143BE00128F84 /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJShared.framework */;
+			remoteInfo = TJShared;
+		};
+		B49B4F23114143BE00128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4F15114143BE00128F84 /* TJSharedFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A987C410C65F70001CF473 /* libTJSharedMobile.a */;
+			remoteInfo = TJSharedMobile;
+		};
+		B49B4F2B114143C900128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4F25114143C900128F84 /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* TJNP.framework */;
+			remoteInfo = TJNP;
+		};
+		B49B4F2D114143C900128F84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49B4F25114143C900128F84 /* TJNPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A9883210C66144001CF473 /* libTJNPMobile.a */;
+			remoteInfo = TJNPMobile;
+		};
+		B4CAAA8410AD68DB00385A5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = EP;
+		};
+		B4CAAA8710AD68E700385A5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = EP;
+		};
+		B4E031B310CBC86B000A59A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B4A988EE10C6622C001CF473;
+			remoteInfo = EPMobile;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8DD76F6C0486A84900D96B5E /* TJUSP3EPServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TJUSP3EPServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		B43316F910F71B5600F77332 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		B49B4F10114143A100128F84 /* tjpsmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tjpsmain.cpp; path = src/tjpsmain.cpp; sourceTree = "<group>"; };
+		B49B4F12114143BE00128F84 /* TJScoutFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJScoutFramework.xcodeproj; path = ../../Core/TJScout/TJScoutFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B49B4F15114143BE00128F84 /* TJSharedFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJSharedFramework.xcodeproj; path = ../../Core/TJShared/TJSharedFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B49B4F25114143C900128F84 /* TJNPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TJNPFramework.xcodeproj; path = ../../Core/TJNP/TJNPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EPFramework.xcodeproj; path = ../EP/EPFramework.xcodeproj; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4CAAA8610AD68DF00385A5F /* EP.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* TJUSP3EPServer */ = {
+			isa = PBXGroup;
+			children = (
+				B49B4F25114143C900128F84 /* TJNPFramework.xcodeproj */,
+				B49B4F12114143BE00128F84 /* TJScoutFramework.xcodeproj */,
+				B49B4F15114143BE00128F84 /* TJSharedFramework.xcodeproj */,
+				B43316F910F71B5600F77332 /* include */,
+				B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */,
+				B46CBCC010A45C2D00CDE29F /* src */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = TJUSP3EPServer;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* TJUSP3EPServer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B46CBCC010A45C2D00CDE29F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				B49B4F10114143A100128F84 /* tjpsmain.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		B49B4F13114143BE00128F84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49B4F1B114143BE00128F84 /* TJScout.framework */,
+				B49B4F1D114143BE00128F84 /* libTJScoutMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B49B4F16114143BE00128F84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49B4F22114143BE00128F84 /* TJShared.framework */,
+				B49B4F24114143BE00128F84 /* libTJSharedMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B49B4F26114143C900128F84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49B4F2C114143C900128F84 /* TJNP.framework */,
+				B49B4F2E114143C900128F84 /* libTJNPMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4CAAA8110AD68DB00385A5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4CAAA8510AD68DB00385A5F /* EP.framework */,
+				B4E031B410CBC86B000A59A5 /* libEPMobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* TJLEDEPServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "TJLEDEPServer" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B4CAAA8810AD68E700385A5F /* PBXTargetDependency */,
+			);
+			name = TJLEDEPServer;
+			productInstallPath = "$(HOME)/bin";
+			productName = TJUSP3EPServer;
+			productReference = 8DD76F6C0486A84900D96B5E /* TJUSP3EPServer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "TJPlugServer" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* TJUSP3EPServer */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B4CAAA8110AD68DB00385A5F /* Products */;
+					ProjectRef = B4CAAA8010AD68DB00385A5F /* EPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B49B4F26114143C900128F84 /* Products */;
+					ProjectRef = B49B4F25114143C900128F84 /* TJNPFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B49B4F13114143BE00128F84 /* Products */;
+					ProjectRef = B49B4F12114143BE00128F84 /* TJScoutFramework.xcodeproj */;
+				},
+				{
+					ProductGroup = B49B4F16114143BE00128F84 /* Products */;
+					ProjectRef = B49B4F15114143BE00128F84 /* TJSharedFramework.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* TJLEDEPServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B49B4F1B114143BE00128F84 /* TJScout.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJScout.framework;
+			remoteRef = B49B4F1A114143BE00128F84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49B4F1D114143BE00128F84 /* libTJScoutMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJScoutMobile.a;
+			remoteRef = B49B4F1C114143BE00128F84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49B4F22114143BE00128F84 /* TJShared.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJShared.framework;
+			remoteRef = B49B4F21114143BE00128F84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49B4F24114143BE00128F84 /* libTJSharedMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJSharedMobile.a;
+			remoteRef = B49B4F23114143BE00128F84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49B4F2C114143C900128F84 /* TJNP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TJNP.framework;
+			remoteRef = B49B4F2B114143C900128F84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49B4F2E114143C900128F84 /* libTJNPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTJNPMobile.a;
+			remoteRef = B49B4F2D114143C900128F84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4CAAA8510AD68DB00385A5F /* EP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EP.framework;
+			remoteRef = B4CAAA8410AD68DB00385A5F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4E031B410CBC86B000A59A5 /* libEPMobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEPMobile.a;
+			remoteRef = B4E031B310CBC86B000A59A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49B4F11114143A100128F84 /* tjpsmain.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B4CAAA8810AD68E700385A5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EP;
+			targetProxy = B4CAAA8710AD68E700385A5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = TJUSP3EPServer;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = TJLEDEPServer;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+				SYMROOT = ../../build;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "TJLEDEPServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "TJPlugServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

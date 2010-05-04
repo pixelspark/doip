@@ -1,0 +1,64 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          tjplugd
+# Required-Start:    $network
+# Required-Stop:     $network
+# Should-Start:
+# Should-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts the TJ Plug Server daemon
+# Description:       TJ Plug EP server daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/share/tjplugserver
+DAEMON=/usr/share/tjplugserver/tjplugd
+DESC="plug server daemon"
+NAME=tjplugd
+
+OPTIONS="--daemon"
+PIDFILE=/var/run/tjplugd.pid
+
+test -x $DAEMON || exit 0
+set -e
+
+case "$1" in
+	start)
+		echo "Starting $DESC: "
+		start-stop-daemon -S -m -q -p $PIDFILE -x $DAEMON -- $OPTIONS
+		echo "done."
+		;;
+
+	stop)
+		echo -n "Stopping $DESC... "
+
+		if ps ax | grep "$(cat $PIDFILE)" | grep -qv grep
+		then
+			start-stop-daemon -K -q -s 2 -p $PIDFILE -x $DAEMON
+		fi
+
+		echo "done."
+		;;
+
+	restart)
+		echo -n "Stopping $DESC... "
+
+		if ps ax | grep "$(cat $PIDFILE)" | grep -qv grep
+		then
+			start-stop-daemon -K -q -s 2 -p $PIDFILE -x $DAEMON
+		fi
+		echo "done."
+		echo "Starting $DESC..."
+		start-stop-daemon -S -m -q -p $PIDFILE -x $DAEMON -- $OPTIONS
+		echo "done."
+		;;
+
+	*)
+		N=/etc/init.d/$NAME
+		echo "Usage: $N {start|stop|force-stop|restart|force-reload}" >&2
+		exit 1
+		;;
+esac
+
+exit 0

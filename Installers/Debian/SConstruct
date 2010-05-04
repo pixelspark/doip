@@ -2,4 +2,4 @@ SConscript("SConstruct-tjfabricserver");
 SConscript("SConstruct-mdnsd");
 SConscript("SConstruct-tjledepserver");
 SConscript("SConstruct-tjbluetoothepserver");
-SConscript("SConstruct-tjplugserver");
+SConscript("SConstruct-epplugserver");
