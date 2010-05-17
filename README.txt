@@ -7,7 +7,7 @@ This is the DoIP (Domotics-over-IP) reference implementation by Pixelspark. It i
 - TJRemote: iPhone remote for DoIP
 - TJTrayRemote: OS X remote for DoIP
 
-More information on the libraries can be found at http://developer.pixelspark.nl
+More information on DoIP and the libraries can be found at http://doip.org/
 
 The libraries can be built on OS X through the XCode project files. Under Linux, the scons build system is used. Note that you should either
 modify these scripts to be independent or create a top-level SConstruct file to work. On Windows, you need to create a Visual Studio (2008, express
